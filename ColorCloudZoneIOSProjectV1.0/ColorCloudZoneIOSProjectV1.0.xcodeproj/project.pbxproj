@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
+		2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */; };
+		2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */; };
+		2A12CD3C1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD3B1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png */; };
+		2A12CD3E1B5A1F9800A4AC04 /* moreBarIcon_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD3D1B5A1F9800A4AC04 /* moreBarIcon_black.png */; };
 		2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6BC4AA1B58DBC600401B06 /* MLNavigationController.m */; };
 		2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6BC4B11B58DC3D00401B06 /* MLTabBarViewController.m */; };
 		2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A6BC4ED1B58F5FF00401B06 /* tab1.png */; };
@@ -34,6 +39,7 @@
 		2A6BC51B1B58F5FF00401B06 /* tab4_unshoot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A6BC5031B58F5FF00401B06 /* tab4_unshoot@2x.png */; };
 		2A6BC51C1B58F5FF00401B06 /* tab4_unshoot@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A6BC5041B58F5FF00401B06 /* tab4_unshoot@3x.png */; };
 		2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6BC5221B59006B00401B06 /* MLShopViewController.m */; };
+		2A6BC5251B59182F00401B06 /* chatIcon_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A6BC5241B59182F00401B06 /* chatIcon_black.png */; };
 		2A85DAD31B53F5CD008386B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85DAD21B53F5CD008386B0 /* main.m */; };
 		2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85DAD51B53F5CD008386B0 /* AppDelegate.m */; };
 		2A85DAD91B53F5CD008386B0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85DAD81B53F5CD008386B0 /* ViewController.m */; };
@@ -41,6 +47,11 @@
 		2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A85DADD1B53F5CD008386B0 /* Images.xcassets */; };
 		2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A85DADF1B53F5CD008386B0 /* LaunchScreen.xib */; };
 		2A85DAED1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85DAEC1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m */; };
+		2ABFC8CD1B5E311C009D64E1 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */; };
+		2ABFC8D01B5E316F009D64E1 /* CustomSelectionBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8CF1B5E316F009D64E1 /* CustomSelectionBarView.m */; };
+		2ABFC8D31B5E392C009D64E1 /* CustomSelectionBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ABFC8D21B5E392C009D64E1 /* CustomSelectionBarView.xib */; };
+		2ABFC8D61B5E64B9009D64E1 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8D51B5E64B9009D64E1 /* CollectionViewController.m */; };
+		2ABFC8D91B5E6506009D64E1 /* MLShopContainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8D81B5E6506009D64E1 /* MLShopContainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +65,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@2x.png"; sourceTree = "<group>"; };
+		2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@3x.png"; sourceTree = "<group>"; };
+		2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moreBarIcon_black@3x.png"; sourceTree = "<group>"; };
+		2A12CD3B1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moreBarIcon_black@2x.png"; sourceTree = "<group>"; };
+		2A12CD3D1B5A1F9800A4AC04 /* moreBarIcon_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreBarIcon_black.png; sourceTree = "<group>"; };
 		2A6BC4A91B58DBC600401B06 /* MLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLNavigationController.h; path = MLNavi/MLNavigationController.h; sourceTree = "<group>"; };
 		2A6BC4AA1B58DBC600401B06 /* MLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLNavigationController.m; path = MLNavi/MLNavigationController.m; sourceTree = "<group>"; };
 		2A6BC4B01B58DC3D00401B06 /* MLTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTabBarViewController.h; path = MLTabBar/MLTabBarViewController.h; sourceTree = "<group>"; };
@@ -85,6 +101,7 @@
 		2A6BC5041B58F5FF00401B06 /* tab4_unshoot@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab4_unshoot@3x.png"; sourceTree = "<group>"; };
 		2A6BC5211B59006B00401B06 /* MLShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLShopViewController.h; path = MLShop/MLShopViewController.h; sourceTree = "<group>"; };
 		2A6BC5221B59006B00401B06 /* MLShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLShopViewController.m; path = MLShop/MLShopViewController.m; sourceTree = "<group>"; };
+		2A6BC5241B59182F00401B06 /* chatIcon_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatIcon_black.png; sourceTree = "<group>"; };
 		2A85DACD1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorCloudZoneIOSProjectV1.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A85DAD11B53F5CD008386B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A85DAD21B53F5CD008386B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -98,6 +115,14 @@
 		2A85DAE61B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorCloudZoneIOSProjectV1.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A85DAEB1B53F5CD008386B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A85DAEC1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorCloudZoneIOSProjectV1_0Tests.m; sourceTree = "<group>"; };
+		2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = uialq.jpg; path = "../../../../Desktop/gybDocuments/彩云间/uialq.jpg"; sourceTree = "<group>"; };
+		2ABFC8CE1B5E316F009D64E1 /* CustomSelectionBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSelectionBarView.h; path = MLShop/CustomSelectionBarView.h; sourceTree = "<group>"; };
+		2ABFC8CF1B5E316F009D64E1 /* CustomSelectionBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSelectionBarView.m; path = MLShop/CustomSelectionBarView.m; sourceTree = "<group>"; };
+		2ABFC8D21B5E392C009D64E1 /* CustomSelectionBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSelectionBarView.xib; sourceTree = "<group>"; };
+		2ABFC8D41B5E64B9009D64E1 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		2ABFC8D51B5E64B9009D64E1 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		2ABFC8D71B5E6506009D64E1 /* MLShopContainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLShopContainViewController.h; sourceTree = "<group>"; };
+		2ABFC8D81B5E6506009D64E1 /* MLShopContainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLShopContainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +174,13 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				2A12CD3D1B5A1F9800A4AC04 /* moreBarIcon_black.png */,
+				2A12CD3B1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png */,
+				2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */,
+				2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */,
+				2A6BC5241B59182F00401B06 /* chatIcon_black.png */,
+				2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */,
+				2ABFC8CB1B5E30F9009D64E1 /* imagePlaceHolder */,
 				2A6BC4EC1B58F5FF00401B06 /* TabbarIcon */,
 			);
 			path = IconImage;
@@ -188,8 +220,11 @@
 		2A6BC5201B59003B00401B06 /* MLShopVC */ = {
 			isa = PBXGroup;
 			children = (
+				2ABFC8D41B5E64B9009D64E1 /* CollectionViewController.h */,
+				2ABFC8D51B5E64B9009D64E1 /* CollectionViewController.m */,
 				2A6BC5211B59006B00401B06 /* MLShopViewController.h */,
 				2A6BC5221B59006B00401B06 /* MLShopViewController.m */,
+				2ABFC8D11B5E317C009D64E1 /* CustomView */,
 			);
 			name = MLShopVC;
 			sourceTree = "<group>";
@@ -254,6 +289,27 @@
 				2A85DAEB1B53F5CD008386B0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2ABFC8CB1B5E30F9009D64E1 /* imagePlaceHolder */ = {
+			isa = PBXGroup;
+			children = (
+				2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */,
+			);
+			name = imagePlaceHolder;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		2ABFC8D11B5E317C009D64E1 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				2ABFC8CE1B5E316F009D64E1 /* CustomSelectionBarView.h */,
+				2ABFC8CF1B5E316F009D64E1 /* CustomSelectionBarView.m */,
+				2ABFC8D21B5E392C009D64E1 /* CustomSelectionBarView.xib */,
+				2ABFC8D71B5E6506009D64E1 /* MLShopContainViewController.h */,
+				2ABFC8D81B5E6506009D64E1 /* MLShopContainViewController.m */,
+			);
+			name = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,10 +393,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */,
+				2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */,
+				2ABFC8CD1B5E311C009D64E1 /* uialq.jpg in Resources */,
+				2A12CD3C1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png in Resources */,
 				2A85DADC1B53F5CD008386B0 /* Main.storyboard in Resources */,
 				2A6BC5151B58F5FF00401B06 /* tab3_unshoot@2x.png in Resources */,
 				2A6BC5171B58F5FF00401B06 /* tab4.png in Resources */,
 				2A6BC5121B58F5FF00401B06 /* tab3@2x.png in Resources */,
+				2A12CD3E1B5A1F9800A4AC04 /* moreBarIcon_black.png in Resources */,
 				2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */,
 				2A6BC50A1B58F5FF00401B06 /* tab1_unshoot@3x.png in Resources */,
 				2A6BC5101B58F5FF00401B06 /* tab2_unshoot@3x.png in Resources */,
@@ -351,10 +412,13 @@
 				2A6BC50E1B58F5FF00401B06 /* tab2_unshoot.png in Resources */,
 				2A6BC5141B58F5FF00401B06 /* tab3_unshoot.png in Resources */,
 				2A6BC5071B58F5FF00401B06 /* tab1@3x.png in Resources */,
+				2ABFC8D31B5E392C009D64E1 /* CustomSelectionBarView.xib in Resources */,
 				2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */,
+				2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */,
 				2A6BC50D1B58F5FF00401B06 /* tab2@3x.png in Resources */,
 				2A6BC5131B58F5FF00401B06 /* tab3@3x.png in Resources */,
 				2A6BC5161B58F5FF00401B06 /* tab3_unshoot@3x.png in Resources */,
+				2A6BC5251B59182F00401B06 /* chatIcon_black.png in Resources */,
 				2A6BC50B1B58F5FF00401B06 /* tab2.png in Resources */,
 				2A6BC5181B58F5FF00401B06 /* tab4@2x.png in Resources */,
 				2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */,
@@ -381,11 +445,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ABFC8D61B5E64B9009D64E1 /* CollectionViewController.m in Sources */,
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
+				2ABFC8D91B5E6506009D64E1 /* MLShopContainViewController.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
 				2A85DAD91B53F5CD008386B0 /* ViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
+				2ABFC8D01B5E316F009D64E1 /* CustomSelectionBarView.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

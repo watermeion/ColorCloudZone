@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--店铺-->
@@ -34,7 +36,40 @@
                     <view key="view" contentMode="scaleToFill" id="SdZ-tE-4bg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uialq.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="9fn-rP-NTT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                            </imageView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85W-I8-dTO" customClass="CustomSelectionBarView">
+                                <rect key="frame" x="0.0" y="166" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="g5h-9h-SdH"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSr-Dh-71P">
+                                <rect key="frame" x="0.0" y="213" width="375" height="349"/>
+                                <connections>
+                                    <segue destination="LqG-Si-pUY" kind="embed" id="OZz-CG-aV7"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="85W-I8-dTO" firstAttribute="width" secondItem="9fn-rP-NTT" secondAttribute="height" multiplier="25:14" id="4Np-zl-S5n"/>
+                            <constraint firstItem="85W-I8-dTO" firstAttribute="centerX" secondItem="9fn-rP-NTT" secondAttribute="centerX" id="55m-U2-5sy"/>
+                            <constraint firstItem="85W-I8-dTO" firstAttribute="width" secondItem="9fn-rP-NTT" secondAttribute="width" id="7zE-4x-aJV"/>
+                            <constraint firstItem="85W-I8-dTO" firstAttribute="bottom" secondItem="9fn-rP-NTT" secondAttribute="bottom" id="NLr-8U-Sys"/>
+                            <constraint firstAttribute="width" secondItem="9fn-rP-NTT" secondAttribute="height" multiplier="25:14" id="PJB-or-FN2"/>
+                            <constraint firstAttribute="centerX" secondItem="9fn-rP-NTT" secondAttribute="centerX" id="kN5-xb-JLT"/>
+                            <constraint firstItem="9fn-rP-NTT" firstAttribute="top" secondItem="bI3-eY-PaW" secondAttribute="bottom" id="liK-jX-Pht"/>
+                            <constraint firstItem="9fn-rP-NTT" firstAttribute="leading" secondItem="SdZ-tE-4bg" secondAttribute="leadingMargin" constant="-16" id="qUy-Tk-8G1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9fn-rP-NTT" secondAttribute="trailing" constant="-16" id="u71-Xj-HFR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4Np-zl-S5n"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="9iJ-Gx-cjf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -42,6 +77,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Q6-Pf-qg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1389.5" y="-246.5"/>
+        </scene>
+        <!--Shop Contain View Controller-->
+        <scene sceneID="wLQ-hZ-Kcj">
+            <objects>
+                <viewController id="LqG-Si-pUY" customClass="MLShopContainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZFM-Lt-JYj"/>
+                        <viewControllerLayoutGuide type="bottom" id="gGT-qJ-G4u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xlt-bl-1rv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jDy-QR-W8M">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="349"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eQo-HS-IzG">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2lF-bA-rRc">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="jDy-QR-W8M" id="UQU-bJ-XA3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0cc-TI-3Tq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933.5" y="-440.5"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="2li-Y0-1lM">
@@ -115,5 +193,6 @@
         <image name="tab1.png" width="40" height="40"/>
         <image name="tab1_unshoot.png" width="40" height="40"/>
         <image name="tab2.png" width="40" height="40"/>
+        <image name="uialq.jpg" width="450" height="299"/>
     </resources>
 </document>
