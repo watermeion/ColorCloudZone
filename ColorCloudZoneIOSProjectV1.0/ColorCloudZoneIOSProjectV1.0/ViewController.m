@@ -14,9 +14,17 @@
 
 @implementation ViewController
 
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
+    backItem.image=[UIImage imageNamed:@"moreBarIcon_black@3x"];
+    self.navigationItem.backBarButtonItem=backItem;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -14,4 +14,14 @@
 
 
 
+#define MainScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
+
+//DEBUG  模式下打印日志,当前行
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
 #endif
