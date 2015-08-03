@@ -25,7 +25,7 @@
     chatFeaturesLeftBarItem.tintColor = [UIColor blackColor];
     
     self.navigationItem.rightBarButtonItems = @[moreFeaturesLeftBarItem,chatFeaturesLeftBarItem];
-    
+
     
     self.navigationItem.title=@"我的店铺";
     

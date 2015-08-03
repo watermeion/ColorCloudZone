@@ -15,6 +15,13 @@
 		2A33B6371B665F7400535FE4 /* ShopLastTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A33B6361B665F7400535FE4 /* ShopLastTableViewController.m */; };
 		2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A33B6391B665FA800535FE4 /* ShopListTableViewCell.m */; };
 		2A33B63C1B66639A00535FE4 /* manModel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A33B63B1B66639A00535FE4 /* manModel.jpg */; };
+		2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A56CA011B6FAE7E00C8E3DC /* PersonProfileViewController.m */; };
+		2A56CA091B6FB0B600C8E3DC /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA081B6FB0B600C8E3DC /* camera@3x.png */; };
+		2A56CA0B1B6FB0BE00C8E3DC /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA0A1B6FB0BE00C8E3DC /* camera@2x.png */; };
+		2A56CA0D1B6FB0C500C8E3DC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA0C1B6FB0C500C8E3DC /* camera.png */; };
+		2A56CA0F1B6FB26400C8E3DC /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA0E1B6FB26400C8E3DC /* home@3x.png */; };
+		2A56CA111B6FB27400C8E3DC /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA101B6FB27400C8E3DC /* home@2x.png */; };
+		2A56CA131B6FB27C00C8E3DC /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A56CA121B6FB27C00C8E3DC /* home.png */; };
 		2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6BC4AA1B58DBC600401B06 /* MLNavigationController.m */; };
 		2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6BC4B11B58DC3D00401B06 /* MLTabBarViewController.m */; };
 		2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A6BC4ED1B58F5FF00401B06 /* tab1.png */; };
@@ -81,6 +88,14 @@
 		2A33B6381B665FA800535FE4 /* ShopListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListTableViewCell.h; sourceTree = "<group>"; };
 		2A33B6391B665FA800535FE4 /* ShopListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListTableViewCell.m; sourceTree = "<group>"; };
 		2A33B63B1B66639A00535FE4 /* manModel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manModel.jpg; sourceTree = "<group>"; };
+		2A56CA001B6FAE7E00C8E3DC /* PersonProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonProfileViewController.h; path = PersonProfileVC/PersonProfileViewController.h; sourceTree = "<group>"; };
+		2A56CA011B6FAE7E00C8E3DC /* PersonProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonProfileViewController.m; path = PersonProfileVC/PersonProfileViewController.m; sourceTree = "<group>"; };
+		2A56CA081B6FB0B600C8E3DC /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
+		2A56CA0A1B6FB0BE00C8E3DC /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		2A56CA0C1B6FB0C500C8E3DC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		2A56CA0E1B6FB26400C8E3DC /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
+		2A56CA101B6FB27400C8E3DC /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		2A56CA121B6FB27C00C8E3DC /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		2A6BC4A91B58DBC600401B06 /* MLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLNavigationController.h; path = MLNavi/MLNavigationController.h; sourceTree = "<group>"; };
 		2A6BC4AA1B58DBC600401B06 /* MLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLNavigationController.m; path = MLNavi/MLNavigationController.m; sourceTree = "<group>"; };
 		2A6BC4B01B58DC3D00401B06 /* MLTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLTabBarViewController.h; path = MLTabBar/MLTabBarViewController.h; sourceTree = "<group>"; };
@@ -176,6 +191,22 @@
 			name = ContainerVC2;
 			sourceTree = "<group>";
 		};
+		2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				2A56CA001B6FAE7E00C8E3DC /* PersonProfileViewController.h */,
+				2A56CA011B6FAE7E00C8E3DC /* PersonProfileViewController.m */,
+			);
+			name = PersonProfileVC;
+			sourceTree = "<group>";
+		};
+		2A56CA071B6FAEF400C8E3DC /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BaseUI;
+			sourceTree = "<group>";
+		};
 		2A6BC4A81B58DB9100401B06 /* Common Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +238,12 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				2A56CA121B6FB27C00C8E3DC /* home.png */,
+				2A56CA101B6FB27400C8E3DC /* home@2x.png */,
+				2A56CA0E1B6FB26400C8E3DC /* home@3x.png */,
+				2A56CA0C1B6FB0C500C8E3DC /* camera.png */,
+				2A56CA0A1B6FB0BE00C8E3DC /* camera@2x.png */,
+				2A56CA081B6FB0B600C8E3DC /* camera@3x.png */,
 				2AFEDEF01B60CFFA00268332 /* heart@2x.png */,
 				2AFEDEEE1B60CFF100268332 /* heart.png */,
 				2AFEDEF21B60D00800268332 /* heart@3x.png */,
@@ -287,6 +324,7 @@
 		2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */ = {
 			isa = PBXGroup;
 			children = (
+				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
 				2A85DAD41B53F5CD008386B0 /* AppDelegate.h */,
 				2A85DAD51B53F5CD008386B0 /* AppDelegate.m */,
@@ -295,6 +333,7 @@
 				2A85DADF1B53F5CD008386B0 /* LaunchScreen.xib */,
 				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
 				2A6BC5201B59003B00401B06 /* MLShopVC */,
+				2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
 			sourceTree = "<group>";
@@ -447,14 +486,17 @@
 			files = (
 				2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */,
 				2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */,
+				2A56CA0F1B6FB26400C8E3DC /* home@3x.png in Resources */,
 				2ABFC8CD1B5E311C009D64E1 /* uialq.jpg in Resources */,
 				2A12CD3C1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png in Resources */,
 				2A85DADC1B53F5CD008386B0 /* Main.storyboard in Resources */,
 				2A6BC5151B58F5FF00401B06 /* tab3_unshoot@2x.png in Resources */,
 				2A6BC5171B58F5FF00401B06 /* tab4.png in Resources */,
+				2A56CA091B6FB0B600C8E3DC /* camera@3x.png in Resources */,
 				2A6BC5121B58F5FF00401B06 /* tab3@2x.png in Resources */,
 				2AFEDEEF1B60CFF100268332 /* heart.png in Resources */,
 				2A12CD3E1B5A1F9800A4AC04 /* moreBarIcon_black.png in Resources */,
+				2A56CA0B1B6FB0BE00C8E3DC /* camera@2x.png in Resources */,
 				2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */,
 				2A6BC50A1B58F5FF00401B06 /* tab1_unshoot@3x.png in Resources */,
 				2A6BC5101B58F5FF00401B06 /* tab2_unshoot@3x.png in Resources */,
@@ -467,6 +509,7 @@
 				2A6BC5141B58F5FF00401B06 /* tab3_unshoot.png in Resources */,
 				2A6BC5071B58F5FF00401B06 /* tab1@3x.png in Resources */,
 				2ABFC8EF1B5E7AE5009D64E1 /* placeholderForCell.jpg in Resources */,
+				2A56CA0D1B6FB0C500C8E3DC /* camera.png in Resources */,
 				2ABFC8EB1B5E7744009D64E1 /* CustomSelectionBarView.xib in Resources */,
 				2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */,
 				2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */,
@@ -476,12 +519,14 @@
 				2A6BC5251B59182F00401B06 /* chatIcon_black.png in Resources */,
 				2A6BC50B1B58F5FF00401B06 /* tab2.png in Resources */,
 				2A6BC5181B58F5FF00401B06 /* tab4@2x.png in Resources */,
+				2A56CA111B6FB27400C8E3DC /* home@2x.png in Resources */,
 				2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */,
 				2A33B63C1B66639A00535FE4 /* manModel.jpg in Resources */,
 				2A6BC51B1B58F5FF00401B06 /* tab4_unshoot@2x.png in Resources */,
 				2A6BC50F1B58F5FF00401B06 /* tab2_unshoot@2x.png in Resources */,
 				2A6BC5191B58F5FF00401B06 /* tab4@3x.png in Resources */,
 				2A6BC50C1B58F5FF00401B06 /* tab2@2x.png in Resources */,
+				2A56CA131B6FB27C00C8E3DC /* home.png in Resources */,
 				2A6BC5081B58F5FF00401B06 /* tab1_unshoot.png in Resources */,
 				2A6BC5091B58F5FF00401B06 /* tab1_unshoot@2x.png in Resources */,
 				2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */,
@@ -505,6 +550,7 @@
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
+				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2ABFC8EC1B5E7744009D64E1 /* ShopContentCollectionViewCell.m in Sources */,
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
