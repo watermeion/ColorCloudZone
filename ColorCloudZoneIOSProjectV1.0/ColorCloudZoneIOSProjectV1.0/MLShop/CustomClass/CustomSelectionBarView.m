@@ -7,6 +7,7 @@
 //
 
 #import "CustomSelectionBarView.h"
+
 @interface CustomSelectionBarView ()
 @property (weak, nonatomic) IBOutlet UIView *buttomView;
 - (IBAction)btn1Action:(id)sender;
@@ -14,23 +15,25 @@
 
 @end
 
-
 @implementation CustomSelectionBarView
 
 
-- (id)initWithCoder:(NSCoder *)aDecoder{
-    self=[super initWithCoder:aDecoder];
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
     if (self) {
         //初始化选择
-        _selectedAt=BtnSelectedAt_1;
+        _selectedAt = BtnSelectedAt_1;
     }
     return self;
+
 }
 
 - (void)awakeFromNib
 {
     [[NSBundle mainBundle] loadNibNamed:@"CustomSelectionBarView" owner:self options:nil];
     [self addSubview:self.view];
+
 }
 /*
  // Only override drawRect: if you perform custom drawing.
@@ -53,23 +56,25 @@
 //}
 
 
-- (IBAction)btn1Action:(id)sender {
-    if (self.selectedAt==BtnSelectedAt_1) {
+- (IBAction)btn1Action:(id)sender
+{
+    if (self.selectedAt == BtnSelectedAt_1) {
         return;
     }
-    self.selectedAt=BtnSelectedAt_1;
-    
+    self.selectedAt = BtnSelectedAt_1;
+
     [self changeButtonViewPositionWithAnnimation:BtnSelectedAt_1];
 }
 
-- (IBAction)btn2Action:(id)sender {
+- (IBAction)btn2Action:(id)sender
+{
     if (self.selectedAt==BtnSelectedAt_2) {
         return;
     }
-    self.selectedAt=BtnSelectedAt_2;
-    
+    self.selectedAt = BtnSelectedAt_2;
+
     [self changeButtonViewPositionWithAnnimation:BtnSelectedAt_2];
-    
+
 }
 
 
@@ -78,31 +83,33 @@
     if (self.buttomView == nil) {
         return;
     }
+
     switch (newSelectAt) {
         case BtnSelectedAt_1:
             //
-            self.buttomView.center=CGPointMake(self.button1.center.x, self.buttomView.center.y);
-            
-//            newframe=CGRectMake(self.buttomView.frame.origin.x, self.buttomView.frame.origin.y, self.buttomView.frame.size.width, self.buttomView.frame.size.height);
+            self.buttomView.center = CGPointMake(self.button1.center.x, self.buttomView.center.y);
+
+            //            newframe=CGRectMake(self.buttomView.frame.origin.x, self.buttomView.frame.origin.y, self.buttomView.frame.size.width, self.buttomView.frame.size.height);
             break;
-            
+
         case BtnSelectedAt_2:
-            self.buttomView.center=CGPointMake(self.button2.center.x, self.buttomView.center.y);            break;
+            self.buttomView.center = CGPointMake(self.button2.center.x, self.buttomView.center.y);            break;
     }
-    
-//    self.buttomView.transform = CGAffineTransformIdentity;
-//    
-//    
-//    [UIView beginAnimations:@"Move"context:self.buttomView];
-//    
-//    [UIView setAnimationDelegate:self];
-//    
-////    [UIView setAnimationDidStopSelector:@selector(enablebutton)];
-//    self.buttomView.frame=newframe;
-////    imageView.frame=CGRectMake(34, 0, 320, 320);
-//    
-//    [UIView commitAnimations];
+
+    //    self.buttomView.transform = CGAffineTransformIdentity;
+    //
+    //
+    //    [UIView beginAnimations:@"Move"context:self.buttomView];
+    //
+    //    [UIView setAnimationDelegate:self];
+    //
+    ////    [UIView setAnimationDidStopSelector:@selector(enablebutton)];
+    //    self.buttomView.frame=newframe;
+    ////    imageView.frame=CGRectMake(34, 0, 320, 320);
+    //
+    //    [UIView commitAnimations];
     [self setNeedsDisplay];
+    
 }
 
 

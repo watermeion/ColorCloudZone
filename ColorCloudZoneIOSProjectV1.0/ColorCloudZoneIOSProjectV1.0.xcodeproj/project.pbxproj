@@ -56,12 +56,27 @@
 		2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A85DADD1B53F5CD008386B0 /* Images.xcassets */; };
 		2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A85DADF1B53F5CD008386B0 /* LaunchScreen.xib */; };
 		2A85DAED1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85DAEC1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m */; };
-		2ABFC8CD1B5E311C009D64E1 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */; };
+		2AACC6FE1B7641640065216C /* SelectedColorAndSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AACC6FC1B7641640065216C /* SelectedColorAndSizeViewController.m */; };
+		2AACC6FF1B7641640065216C /* SelectedColorAndSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC6FD1B7641640065216C /* SelectedColorAndSizeViewController.xib */; };
+		2AACC7011B7645A70065216C /* arrowUpsideDown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC7001B7645A70065216C /* arrowUpsideDown@3x.png */; };
+		2AACC7031B7645AE0065216C /* arrowUpsideDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC7021B7645AE0065216C /* arrowUpsideDown@2x.png */; };
+		2AACC7051B7645B50065216C /* arrowUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC7041B7645B50065216C /* arrowUpsideDown.png */; };
+		2AACC7071B764F230065216C /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC7061B764F230065216C /* phone.png */; };
+		2AACC7091B764F300065216C /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC7081B764F300065216C /* phone@2x.png */; };
+		2AACC70B1B764F440065216C /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AACC70A1B764F440065216C /* phone@3x.png */; };
+		2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABBB1151B7250C700DA2A9A /* GoodDetailViewController.m */; };
 		2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8E21B5E7737009D64E1 /* MLShopContainViewController.m */; };
 		2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8E51B5E7744009D64E1 /* CustomSelectionBarView.m */; };
 		2ABFC8EB1B5E7744009D64E1 /* CustomSelectionBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ABFC8E61B5E7744009D64E1 /* CustomSelectionBarView.xib */; };
 		2ABFC8EC1B5E7744009D64E1 /* ShopContentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFC8E81B5E7744009D64E1 /* ShopContentCollectionViewCell.m */; };
 		2ABFC8EF1B5E7AE5009D64E1 /* placeholderForCell.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2ABFC8EE1B5E7AE5009D64E1 /* placeholderForCell.jpg */; };
+		2AD3E8C61B80233500B2264B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3E8C51B80233500B2264B /* LoginViewController.m */; };
+		2AD3E8CA1B80252300B2264B /* ViewWithBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3E8C91B80252300B2264B /* ViewWithBorder.m */; };
+		2AD3E8CD1B802B5500B2264B /* CompanyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD3E8CC1B802B5500B2264B /* CompanyProfileViewController.m */; };
+		2AD3E8D01B802C4E00B2264B /* pwdIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3E8CF1B802C4E00B2264B /* pwdIcon@3x.png */; };
+		2AD3E8D21B802C5700B2264B /* pwdIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3E8D11B802C5700B2264B /* pwdIcon@2x.png */; };
+		2AD3E8D41B802C6100B2264B /* pwdIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3E8D31B802C6100B2264B /* pwdIcon.png */; };
+		2ADC6FB91B70EADD003121E9 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADC6FB81B70EADD003121E9 /* location.png */; };
 		2AFEDEEF1B60CFF100268332 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEEE1B60CFF100268332 /* heart.png */; };
 		2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF01B60CFFA00268332 /* heart@2x.png */; };
 		2AFEDEF31B60D00800268332 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF21B60D00800268332 /* heart@3x.png */; };
@@ -139,7 +154,17 @@
 		2A85DAE61B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorCloudZoneIOSProjectV1.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A85DAEB1B53F5CD008386B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A85DAEC1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorCloudZoneIOSProjectV1_0Tests.m; sourceTree = "<group>"; };
-		2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = uialq.jpg; path = "../../../../Desktop/gybDocuments/彩云间/uialq.jpg"; sourceTree = "<group>"; };
+		2AACC6FB1B7641640065216C /* SelectedColorAndSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectedColorAndSizeViewController.h; path = GoodDetailVC/SelectedColorAndSizeViewController.h; sourceTree = "<group>"; };
+		2AACC6FC1B7641640065216C /* SelectedColorAndSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectedColorAndSizeViewController.m; path = GoodDetailVC/SelectedColorAndSizeViewController.m; sourceTree = "<group>"; };
+		2AACC6FD1B7641640065216C /* SelectedColorAndSizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SelectedColorAndSizeViewController.xib; path = GoodDetailVC/SelectedColorAndSizeViewController.xib; sourceTree = "<group>"; };
+		2AACC7001B7645A70065216C /* arrowUpsideDown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowUpsideDown@3x.png"; sourceTree = "<group>"; };
+		2AACC7021B7645AE0065216C /* arrowUpsideDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowUpsideDown@2x.png"; sourceTree = "<group>"; };
+		2AACC7041B7645B50065216C /* arrowUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowUpsideDown.png; sourceTree = "<group>"; };
+		2AACC7061B764F230065216C /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		2AACC7081B764F300065216C /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		2AACC70A1B764F440065216C /* phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@3x.png"; sourceTree = "<group>"; };
+		2ABBB1141B7250C700DA2A9A /* GoodDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoodDetailViewController.h; path = GoodDetailVC/GoodDetailViewController.h; sourceTree = "<group>"; };
+		2ABBB1151B7250C700DA2A9A /* GoodDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoodDetailViewController.m; path = GoodDetailVC/GoodDetailViewController.m; sourceTree = "<group>"; };
 		2ABFC8E11B5E7737009D64E1 /* MLShopContainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLShopContainViewController.h; path = MLShop/MLShopContainViewController.h; sourceTree = "<group>"; };
 		2ABFC8E21B5E7737009D64E1 /* MLShopContainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLShopContainViewController.m; path = MLShop/MLShopContainViewController.m; sourceTree = "<group>"; };
 		2ABFC8E41B5E7744009D64E1 /* CustomSelectionBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSelectionBarView.h; path = MLShop/CustomClass/CustomSelectionBarView.h; sourceTree = "<group>"; };
@@ -148,6 +173,16 @@
 		2ABFC8E71B5E7744009D64E1 /* ShopContentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopContentCollectionViewCell.h; path = MLShop/CustomClass/ShopContentCollectionViewCell.h; sourceTree = "<group>"; };
 		2ABFC8E81B5E7744009D64E1 /* ShopContentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopContentCollectionViewCell.m; path = MLShop/CustomClass/ShopContentCollectionViewCell.m; sourceTree = "<group>"; };
 		2ABFC8EE1B5E7AE5009D64E1 /* placeholderForCell.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholderForCell.jpg; sourceTree = "<group>"; };
+		2AD3E8C41B80233500B2264B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = LoginVC/LoginViewController.h; sourceTree = "<group>"; };
+		2AD3E8C51B80233500B2264B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = LoginVC/LoginViewController.m; sourceTree = "<group>"; };
+		2AD3E8C81B80252300B2264B /* ViewWithBorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewWithBorder.h; sourceTree = "<group>"; };
+		2AD3E8C91B80252300B2264B /* ViewWithBorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewWithBorder.m; sourceTree = "<group>"; };
+		2AD3E8CB1B802B5500B2264B /* CompanyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyProfileViewController.h; sourceTree = "<group>"; };
+		2AD3E8CC1B802B5500B2264B /* CompanyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyProfileViewController.m; sourceTree = "<group>"; };
+		2AD3E8CF1B802C4E00B2264B /* pwdIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pwdIcon@3x.png"; sourceTree = "<group>"; };
+		2AD3E8D11B802C5700B2264B /* pwdIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pwdIcon@2x.png"; sourceTree = "<group>"; };
+		2AD3E8D31B802C6100B2264B /* pwdIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pwdIcon.png; sourceTree = "<group>"; };
+		2ADC6FB81B70EADD003121E9 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		2AFEDEEE1B60CFF100268332 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		2AFEDEF01B60CFFA00268332 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		2AFEDEF21B60D00800268332 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
@@ -238,6 +273,16 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				2AD3E8D31B802C6100B2264B /* pwdIcon.png */,
+				2AD3E8D11B802C5700B2264B /* pwdIcon@2x.png */,
+				2AD3E8CF1B802C4E00B2264B /* pwdIcon@3x.png */,
+				2AACC70A1B764F440065216C /* phone@3x.png */,
+				2AACC7081B764F300065216C /* phone@2x.png */,
+				2AACC7061B764F230065216C /* phone.png */,
+				2AACC7041B7645B50065216C /* arrowUpsideDown.png */,
+				2AACC7021B7645AE0065216C /* arrowUpsideDown@2x.png */,
+				2AACC7001B7645A70065216C /* arrowUpsideDown@3x.png */,
+				2ADC6FB81B70EADD003121E9 /* location.png */,
 				2A56CA121B6FB27C00C8E3DC /* home.png */,
 				2A56CA101B6FB27400C8E3DC /* home@2x.png */,
 				2A56CA0E1B6FB26400C8E3DC /* home@3x.png */,
@@ -326,14 +371,12 @@
 			children = (
 				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
-				2A85DAD41B53F5CD008386B0 /* AppDelegate.h */,
-				2A85DAD51B53F5CD008386B0 /* AppDelegate.m */,
-				2A85DADA1B53F5CD008386B0 /* Main.storyboard */,
-				2A85DADD1B53F5CD008386B0 /* Images.xcassets */,
-				2A85DADF1B53F5CD008386B0 /* LaunchScreen.xib */,
 				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
+				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
 				2A6BC5201B59003B00401B06 /* MLShopVC */,
 				2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */,
+				2AD3E8C71B80233F00B2264B /* LoginVC */,
+				2AD3E8CE1B802B5800B2264B /* CompanyProfileVC */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
 			sourceTree = "<group>";
@@ -341,6 +384,13 @@
 		2A85DAD01B53F5CD008386B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2AD3E8C81B80252300B2264B /* ViewWithBorder.h */,
+				2AD3E8C91B80252300B2264B /* ViewWithBorder.m */,
+				2A85DAD41B53F5CD008386B0 /* AppDelegate.h */,
+				2A85DAD51B53F5CD008386B0 /* AppDelegate.m */,
+				2A85DADD1B53F5CD008386B0 /* Images.xcassets */,
+				2A85DADF1B53F5CD008386B0 /* LaunchScreen.xib */,
+				2A85DADA1B53F5CD008386B0 /* Main.storyboard */,
 				2A85DAD11B53F5CD008386B0 /* Info.plist */,
 				2A85DAD21B53F5CD008386B0 /* main.m */,
 			);
@@ -364,12 +414,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2AACC6F51B7640A30065216C /* SubViewClass */ = {
+			isa = PBXGroup;
+			children = (
+				2AACC6FB1B7641640065216C /* SelectedColorAndSizeViewController.h */,
+				2AACC6FC1B7641640065216C /* SelectedColorAndSizeViewController.m */,
+				2AACC6FD1B7641640065216C /* SelectedColorAndSizeViewController.xib */,
+			);
+			name = SubViewClass;
+			sourceTree = "<group>";
+		};
+		2ABBB1171B7250D300DA2A9A /* GoodDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				2AACC6F51B7640A30065216C /* SubViewClass */,
+				2ABBB1141B7250C700DA2A9A /* GoodDetailViewController.h */,
+				2ABBB1151B7250C700DA2A9A /* GoodDetailViewController.m */,
+			);
+			name = GoodDetailVC;
+			sourceTree = "<group>";
+		};
 		2ABFC8CB1B5E30F9009D64E1 /* imagePlaceHolder */ = {
 			isa = PBXGroup;
 			children = (
 				2A33B63B1B66639A00535FE4 /* manModel.jpg */,
 				2ABFC8EE1B5E7AE5009D64E1 /* placeholderForCell.jpg */,
-				2ABFC8CC1B5E311C009D64E1 /* uialq.jpg */,
 			);
 			name = imagePlaceHolder;
 			path = ..;
@@ -403,6 +472,24 @@
 			name = CustomSelectBar;
 			sourceTree = "<group>";
 		};
+		2AD3E8C71B80233F00B2264B /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3E8C41B80233500B2264B /* LoginViewController.h */,
+				2AD3E8C51B80233500B2264B /* LoginViewController.m */,
+			);
+			name = LoginVC;
+			sourceTree = "<group>";
+		};
+		2AD3E8CE1B802B5800B2264B /* CompanyProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				2AD3E8CB1B802B5500B2264B /* CompanyProfileViewController.h */,
+				2AD3E8CC1B802B5500B2264B /* CompanyProfileViewController.m */,
+			);
+			name = CompanyProfileVC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -413,6 +500,7 @@
 				2A85DAC91B53F5CD008386B0 /* Sources */,
 				2A85DACA1B53F5CD008386B0 /* Frameworks */,
 				2A85DACB1B53F5CD008386B0 /* Resources */,
+				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 			);
 			buildRules = (
 			);
@@ -484,11 +572,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AACC6FF1B7641640065216C /* SelectedColorAndSizeViewController.xib in Resources */,
+				2AACC7011B7645A70065216C /* arrowUpsideDown@3x.png in Resources */,
+				2AD3E8D41B802C6100B2264B /* pwdIcon.png in Resources */,
 				2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */,
+				2AACC7051B7645B50065216C /* arrowUpsideDown.png in Resources */,
 				2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */,
 				2A56CA0F1B6FB26400C8E3DC /* home@3x.png in Resources */,
-				2ABFC8CD1B5E311C009D64E1 /* uialq.jpg in Resources */,
 				2A12CD3C1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png in Resources */,
+				2AACC7091B764F300065216C /* phone@2x.png in Resources */,
 				2A85DADC1B53F5CD008386B0 /* Main.storyboard in Resources */,
 				2A6BC5151B58F5FF00401B06 /* tab3_unshoot@2x.png in Resources */,
 				2A6BC5171B58F5FF00401B06 /* tab4.png in Resources */,
@@ -500,6 +592,7 @@
 				2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */,
 				2A6BC50A1B58F5FF00401B06 /* tab1_unshoot@3x.png in Resources */,
 				2A6BC5101B58F5FF00401B06 /* tab2_unshoot@3x.png in Resources */,
+				2ADC6FB91B70EADD003121E9 /* location.png in Resources */,
 				2A6BC5061B58F5FF00401B06 /* tab1@2x.png in Resources */,
 				2A6BC51A1B58F5FF00401B06 /* tab4_unshoot.png in Resources */,
 				2AFEDEF31B60D00800268332 /* heart@3x.png in Resources */,
@@ -512,10 +605,12 @@
 				2A56CA0D1B6FB0C500C8E3DC /* camera.png in Resources */,
 				2ABFC8EB1B5E7744009D64E1 /* CustomSelectionBarView.xib in Resources */,
 				2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */,
+				2AD3E8D21B802C5700B2264B /* pwdIcon@2x.png in Resources */,
 				2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */,
 				2A6BC50D1B58F5FF00401B06 /* tab2@3x.png in Resources */,
 				2A6BC5131B58F5FF00401B06 /* tab3@3x.png in Resources */,
 				2A6BC5161B58F5FF00401B06 /* tab3_unshoot@3x.png in Resources */,
+				2AACC7071B764F230065216C /* phone.png in Resources */,
 				2A6BC5251B59182F00401B06 /* chatIcon_black.png in Resources */,
 				2A6BC50B1B58F5FF00401B06 /* tab2.png in Resources */,
 				2A6BC5181B58F5FF00401B06 /* tab4@2x.png in Resources */,
@@ -527,8 +622,11 @@
 				2A6BC5191B58F5FF00401B06 /* tab4@3x.png in Resources */,
 				2A6BC50C1B58F5FF00401B06 /* tab2@2x.png in Resources */,
 				2A56CA131B6FB27C00C8E3DC /* home.png in Resources */,
+				2AD3E8D01B802C4E00B2264B /* pwdIcon@3x.png in Resources */,
+				2AACC7031B7645AE0065216C /* arrowUpsideDown@2x.png in Resources */,
 				2A6BC5081B58F5FF00401B06 /* tab1_unshoot.png in Resources */,
 				2A6BC5091B58F5FF00401B06 /* tab1_unshoot@2x.png in Resources */,
+				2AACC70B1B764F440065216C /* phone@3x.png in Resources */,
 				2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,11 +640,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Objective-Clean Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then \n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\" \nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\" \nfi\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2A85DAC91B53F5CD008386B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AD3E8CD1B802B5500B2264B /* CompanyProfileViewController.m in Sources */,
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
@@ -556,8 +672,12 @@
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
 				2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
+				2AD3E8CA1B80252300B2264B /* ViewWithBorder.m in Sources */,
+				2AACC6FE1B7641640065216C /* SelectedColorAndSizeViewController.m in Sources */,
 				2A33B6371B665F7400535FE4 /* ShopLastTableViewController.m in Sources */,
+				2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */,
 				2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */,
+				2AD3E8C61B80233500B2264B /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,14 +1,13 @@
 //
-//  ViewController.h
+//  GoodDetailViewController.h
 //  ColorCloudZoneIOSProjectV1.0
 //
-//  Created by hzguoyubao on 15/7/13.
+//  Created by hzguoyubao on 15/8/5.
 //  Copyright (c) 2015年 SHS. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface GoodDetailViewController : UIViewController
 
 @end
-

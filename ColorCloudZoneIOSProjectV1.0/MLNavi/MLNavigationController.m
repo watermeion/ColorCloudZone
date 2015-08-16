@@ -8,46 +8,38 @@
 
 #import "MLNavigationController.h"
 
-
-
-
-
-
 @interface MLNavigationController ()
 
 @end
 
 @implementation MLNavigationController
 
-
-
 #pragma mark  override Init method
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
+
     if (self) {
-     self.navigationBar.barTintColor=BASEBARCOLOR;
-        
+     self.navigationBar.barTintColor = BASEBARCOLOR;
     }
+
     return self;
 }
 
-
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //   self.navigationBar.barTintColor=BASEBARCOLOR;
-   
 }
 
 
 
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

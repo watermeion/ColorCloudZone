@@ -7,30 +7,31 @@
 //
 
 #import "MLShopViewController.h"
+
 @implementation MLShopViewController
 
-- (void)viewDidLoad{
-    
+- (void)viewDidLoad
+{
+
     //设置NavigationBar
     UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
                                                 initWithImage:[UIImage imageNamed:@"moreBarIcon_black.png"]
                                                 style:UIBarButtonItemStylePlain
                                                 target:self
                                                 action:@selector(moreFeaturesLeftBarAction)];
-    
-    moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
-    
-    UIBarButtonItem *chatFeaturesLeftBarItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"chatIcon_black.png"] style:UIBarButtonItemStylePlain target:self action:@selector(chatFeaturesBarAction)];
-    
-    chatFeaturesLeftBarItem.tintColor = [UIColor blackColor];
-    
-    self.navigationItem.rightBarButtonItems = @[moreFeaturesLeftBarItem,chatFeaturesLeftBarItem];
 
-    
-    self.navigationItem.title=@"我的店铺";
-    
-    
-    
+    moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+
+    UIBarButtonItem *chatFeaturesLeftBarItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"chatIcon_black.png"] style:UIBarButtonItemStylePlain target:self action:@selector(chatFeaturesBarAction)];
+
+    chatFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+
+    self.navigationItem.rightBarButtonItems = @[ moreFeaturesLeftBarItem,chatFeaturesLeftBarItem ];
+
+    self.navigationItem.title = @"我的店铺";
+
+
+
 }
 
 - (void)back
@@ -39,9 +40,13 @@
 
 }
 
-- (void)moreFeaturesLeftBarAction{}
+- (void)moreFeaturesLeftBarAction
+{
+}
 
-- (void)chatFeaturesBarAction{}
+- (void)chatFeaturesBarAction
+{
+}
 
 
 

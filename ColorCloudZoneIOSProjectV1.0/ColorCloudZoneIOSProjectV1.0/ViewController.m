@@ -18,16 +18,19 @@
 
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
-    backItem.image=[UIImage imageNamed:@"moreBarIcon_black@3x"];
-    self.navigationItem.backBarButtonItem=backItem;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
+    backItem.image = [UIImage imageNamed:@"moreBarIcon_black@3x"];
+    self.navigationItem.backBarButtonItem = backItem;
+    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

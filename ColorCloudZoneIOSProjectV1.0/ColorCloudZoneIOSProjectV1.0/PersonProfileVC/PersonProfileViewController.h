@@ -10,4 +10,17 @@
 
 @interface PersonProfileViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *shopNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIButton *doneBtn;
+- (IBAction)doneAction:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *uploadAvatarBtn;
+- (IBAction)uploadAvatarAction:(id)sender;
+
 @end

@@ -10,7 +10,8 @@
 
 @implementation ShopContentCollectionViewCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // Initialization code
 //    
 //    [[NSBundle mainBundle] loadNibNamed:@"ShopContentCollectionViewCell" owner:self options:nil];

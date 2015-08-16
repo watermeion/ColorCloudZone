@@ -10,4 +10,8 @@
 
 @implementation PersonProfileViewController
 
+- (IBAction)doneAction:(id)sender {
+}
+- (IBAction)uploadAvatarAction:(id)sender {
+}
 @end
