@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MemerShipViewController : UIViewController
+typedef  NS_ENUM(NSUInteger, MemerShipViewControllerState){
+    MemerShipViewControllerStateUnknown = 0,
+    MemerShipViewControllerStateDisplay,
+    MemerShipViewControllerStateEdit
+};
+
+
+@interface MemerShipViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic) MemerShipViewControllerState state;
 
 @end

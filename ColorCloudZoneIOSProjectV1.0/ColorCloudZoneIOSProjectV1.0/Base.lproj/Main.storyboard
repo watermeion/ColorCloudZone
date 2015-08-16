@@ -987,7 +987,7 @@
                                         </constraints>
                                         <size key="customSize" width="115" height="160"/>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="aka-9Z-0OK">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemberCommonCollectionViewCell" id="aka-9Z-0OK" customClass="MemberCommonCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1051,6 +1051,11 @@
                                             <constraint firstItem="qIH-DX-ACQ" firstAttribute="leading" secondItem="aka-9Z-0OK" secondAttribute="leadingMargin" constant="-8" id="ls8-Ul-gPS"/>
                                         </constraints>
                                         <size key="customSize" width="115" height="160"/>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="inF-Wj-EHu" id="zHq-vd-Pi6"/>
+                                            <outlet property="nameLabel" destination="wMh-rV-vU4" id="01l-VZ-pmM"/>
+                                            <outlet property="phoneLabel" destination="3ce-0T-eb0" id="Oqh-wQ-IG0"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -1062,6 +1067,9 @@
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="collectionView" destination="P8F-fv-8gw" id="f3Z-qt-n0C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ch2-uu-dAp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
