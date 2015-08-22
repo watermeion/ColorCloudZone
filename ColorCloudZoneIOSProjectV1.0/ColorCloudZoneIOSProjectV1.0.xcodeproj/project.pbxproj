@@ -84,9 +84,12 @@
 		2AD3E8EA1B803F2300B2264B /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3E8E91B803F2300B2264B /* add@2x.png */; };
 		2AD3E8EC1B803F2A00B2264B /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD3E8EB1B803F2A00B2264B /* add.png */; };
 		2ADC6FB91B70EADD003121E9 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADC6FB81B70EADD003121E9 /* location.png */; };
+		2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE53701B88CA1E00E80AD5 /* ForgetPwdViewController.m */; };
+		2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE537C1B88D76700E80AD5 /* MySettingsTableViewController.m */; };
 		2AFEDEEF1B60CFF100268332 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEEE1B60CFF100268332 /* heart.png */; };
 		2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF01B60CFFA00268332 /* heart@2x.png */; };
 		2AFEDEF31B60D00800268332 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF21B60D00800268332 /* heart@3x.png */; };
+		92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; sourceTree = "<group>"; };
 		2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@2x.png"; sourceTree = "<group>"; };
 		2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@3x.png"; sourceTree = "<group>"; };
 		2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "moreBarIcon_black@3x.png"; sourceTree = "<group>"; };
@@ -201,9 +205,15 @@
 		2AD3E8E91B803F2300B2264B /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		2AD3E8EB1B803F2A00B2264B /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		2ADC6FB81B70EADD003121E9 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		2ADE536F1B88CA1E00E80AD5 /* ForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdViewController.h; sourceTree = "<group>"; };
+		2ADE53701B88CA1E00E80AD5 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
+		2ADE537B1B88D76700E80AD5 /* MySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingsTableViewController.h; sourceTree = "<group>"; };
+		2ADE537C1B88D76700E80AD5 /* MySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingsTableViewController.m; sourceTree = "<group>"; };
 		2AFEDEEE1B60CFF100268332 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		2AFEDEF01B60CFFA00268332 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		2AFEDEF21B60D00800268332 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
+		6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorCloudZoneIOSProjectV1.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +235,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		215161158651BAC8E5B0089D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */,
+				26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2A33B6301B665F0A00535FE4 /* ContanerVC1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +395,8 @@
 				2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */,
 				2A85DAE91B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0Tests */,
 				2A85DACE1B53F5CD008386B0 /* Products */,
+				215161158651BAC8E5B0089D /* Pods */,
+				BA618B0CDACB3AC85B0582E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -390,16 +412,10 @@
 		2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */ = {
 			isa = PBXGroup;
 			children = (
+				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
 				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
-				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
-				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
-				2A6BC5201B59003B00401B06 /* MLShopVC */,
-				2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */,
-				2AD3E8C71B80233F00B2264B /* LoginVC */,
-				2AD3E8CE1B802B5800B2264B /* CompanyProfileVC */,
-				2AD3E8D81B80311900B2264B /* AddMemberVC */,
-				2AD3E8DF1B80396800B2264B /* MemberShipVC */,
+				2ADE537A1B88CE2600E80AD5 /* UI */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
 			sourceTree = "<group>";
@@ -535,6 +551,48 @@
 			name = MemberShipVC;
 			sourceTree = "<group>";
 		};
+		2ADE53741B88CA2200E80AD5 /* ForgetPwdVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ADE536F1B88CA1E00E80AD5 /* ForgetPwdViewController.h */,
+				2ADE53701B88CA1E00E80AD5 /* ForgetPwdViewController.m */,
+			);
+			name = ForgetPwdVC;
+			sourceTree = "<group>";
+		};
+		2ADE53781B88CE0800E80AD5 /* MySettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ADE537B1B88D76700E80AD5 /* MySettingsTableViewController.h */,
+				2ADE537C1B88D76700E80AD5 /* MySettingsTableViewController.m */,
+			);
+			name = MySettingsVC;
+			sourceTree = "<group>";
+		};
+		2ADE537A1B88CE2600E80AD5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
+				2A6BC5201B59003B00401B06 /* MLShopVC */,
+				2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */,
+				2AD3E8C71B80233F00B2264B /* LoginVC */,
+				2AD3E8CE1B802B5800B2264B /* CompanyProfileVC */,
+				2AD3E8D81B80311900B2264B /* AddMemberVC */,
+				2AD3E8DF1B80396800B2264B /* MemberShipVC */,
+				2ADE53741B88CA2200E80AD5 /* ForgetPwdVC */,
+				2ADE53781B88CE0800E80AD5 /* MySettingsVC */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -542,10 +600,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A85DAF01B53F5CD008386B0 /* Build configuration list for PBXNativeTarget "ColorCloudZoneIOSProjectV1.0" */;
 			buildPhases = (
+				8E0D8510B5C4B6A4856AAA6F /* Check Pods Manifest.lock */,
 				2A85DAC91B53F5CD008386B0 /* Sources */,
 				2A85DACA1B53F5CD008386B0 /* Frameworks */,
 				2A85DACB1B53F5CD008386B0 /* Resources */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
+				432A2ABBFDF76FAC433A6731 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -689,6 +749,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		432A2ABBFDF76FAC433A6731 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E0D8510B5C4B6A4856AAA6F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,9 +806,11 @@
 				2AD3E8E21B803EBC00B2264B /* MemberCommonCollectionViewCell.m in Sources */,
 				2AD3E8E61B803EED00B2264B /* AddMemberCollectionViewCell.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
+				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
+				2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */,
 				2ABFC8EC1B5E7744009D64E1 /* ShopContentCollectionViewCell.m in Sources */,
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
 				2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */,
@@ -855,6 +947,7 @@
 		};
 		2A85DAF11B53F5CD008386B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -868,6 +961,7 @@
 		};
 		2A85DAF21B53F5CD008386B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
