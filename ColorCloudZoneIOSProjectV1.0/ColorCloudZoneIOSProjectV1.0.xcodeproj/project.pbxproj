@@ -86,6 +86,13 @@
 		2ADC6FB91B70EADD003121E9 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADC6FB81B70EADD003121E9 /* location.png */; };
 		2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE53701B88CA1E00E80AD5 /* ForgetPwdViewController.m */; };
 		2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE537C1B88D76700E80AD5 /* MySettingsTableViewController.m */; };
+		2ADE53811B8968F000E80AD5 /* ComSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE53801B8968F000E80AD5 /* ComSettingsTableViewController.m */; };
+		2ADE53831B8969DA00E80AD5 /* shoppingcart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADE53821B8969DA00E80AD5 /* shoppingcart@2x.png */; };
+		2ADE53851B8969E300E80AD5 /* folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADE53841B8969E300E80AD5 /* folder@2x.png */; };
+		2ADE53871B8969F100E80AD5 /* shoppingcart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADE53861B8969F100E80AD5 /* shoppingcart@3x.png */; };
+		2ADE53891B896A0300E80AD5 /* folder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADE53881B896A0300E80AD5 /* folder@3x.png */; };
+		2ADE538C1B896AA300E80AD5 /* MyFolloweeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE538B1B896AA300E80AD5 /* MyFolloweeViewController.m */; };
+		2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE538F1B896D7C00E80AD5 /* FolloweeTableViewCell.m */; };
 		2AFEDEEF1B60CFF100268332 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEEE1B60CFF100268332 /* heart.png */; };
 		2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF01B60CFFA00268332 /* heart@2x.png */; };
 		2AFEDEF31B60D00800268332 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF21B60D00800268332 /* heart@3x.png */; };
@@ -209,6 +216,16 @@
 		2ADE53701B88CA1E00E80AD5 /* ForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdViewController.m; sourceTree = "<group>"; };
 		2ADE537B1B88D76700E80AD5 /* MySettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingsTableViewController.h; sourceTree = "<group>"; };
 		2ADE537C1B88D76700E80AD5 /* MySettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingsTableViewController.m; sourceTree = "<group>"; };
+		2ADE537F1B8968F000E80AD5 /* ComSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComSettingsTableViewController.h; sourceTree = "<group>"; };
+		2ADE53801B8968F000E80AD5 /* ComSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComSettingsTableViewController.m; sourceTree = "<group>"; };
+		2ADE53821B8969DA00E80AD5 /* shoppingcart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoppingcart@2x.png"; sourceTree = "<group>"; };
+		2ADE53841B8969E300E80AD5 /* folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@2x.png"; sourceTree = "<group>"; };
+		2ADE53861B8969F100E80AD5 /* shoppingcart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoppingcart@3x.png"; sourceTree = "<group>"; };
+		2ADE53881B896A0300E80AD5 /* folder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@3x.png"; sourceTree = "<group>"; };
+		2ADE538A1B896AA300E80AD5 /* MyFolloweeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFolloweeViewController.h; sourceTree = "<group>"; };
+		2ADE538B1B896AA300E80AD5 /* MyFolloweeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFolloweeViewController.m; sourceTree = "<group>"; };
+		2ADE538E1B896D7C00E80AD5 /* FolloweeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolloweeTableViewCell.h; sourceTree = "<group>"; };
+		2ADE538F1B896D7C00E80AD5 /* FolloweeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolloweeTableViewCell.m; sourceTree = "<group>"; };
 		2AFEDEEE1B60CFF100268332 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		2AFEDEF01B60CFFA00268332 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		2AFEDEF21B60D00800268332 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
@@ -311,6 +328,10 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				2ADE53881B896A0300E80AD5 /* folder@3x.png */,
+				2ADE53841B8969E300E80AD5 /* folder@2x.png */,
+				2ADE53861B8969F100E80AD5 /* shoppingcart@3x.png */,
+				2ADE53821B8969DA00E80AD5 /* shoppingcart@2x.png */,
 				2AD3E8EB1B803F2A00B2264B /* add.png */,
 				2AD3E8E91B803F2300B2264B /* add@2x.png */,
 				2AD3E8E71B803F1900B2264B /* add@3x.png */,
@@ -416,6 +437,7 @@
 				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
 				2ADE537A1B88CE2600E80AD5 /* UI */,
+				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
 			sourceTree = "<group>";
@@ -572,6 +594,7 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2ADE537E1B8968D100E80AD5 /* ComSettingsVC */,
 				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
 				2A6BC5201B59003B00401B06 /* MLShopVC */,
 				2A56CA031B6FAE8300C8E3DC /* PersonProfileVC */,
@@ -583,6 +606,26 @@
 				2ADE53781B88CE0800E80AD5 /* MySettingsVC */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		2ADE537E1B8968D100E80AD5 /* ComSettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ADE537F1B8968F000E80AD5 /* ComSettingsTableViewController.h */,
+				2ADE53801B8968F000E80AD5 /* ComSettingsTableViewController.m */,
+			);
+			name = ComSettingsVC;
+			sourceTree = "<group>";
+		};
+		2ADE538D1B896AA700E80AD5 /* MyFolloweVC */ = {
+			isa = PBXGroup;
+			children = (
+				2ADE538A1B896AA300E80AD5 /* MyFolloweeViewController.h */,
+				2ADE538B1B896AA300E80AD5 /* MyFolloweeViewController.m */,
+				2ADE538E1B896D7C00E80AD5 /* FolloweeTableViewCell.h */,
+				2ADE538F1B896D7C00E80AD5 /* FolloweeTableViewCell.m */,
+			);
+			name = MyFolloweVC;
 			sourceTree = "<group>";
 		};
 		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
@@ -677,6 +720,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ADE53891B896A0300E80AD5 /* folder@3x.png in Resources */,
 				2AACC6FF1B7641640065216C /* SelectedColorAndSizeViewController.xib in Resources */,
 				2AACC7011B7645A70065216C /* arrowUpsideDown@3x.png in Resources */,
 				2AD3E8D41B802C6100B2264B /* pwdIcon.png in Resources */,
@@ -719,9 +763,12 @@
 				2A6BC5131B58F5FF00401B06 /* tab3@3x.png in Resources */,
 				2A6BC5161B58F5FF00401B06 /* tab3_unshoot@3x.png in Resources */,
 				2AACC7071B764F230065216C /* phone.png in Resources */,
+				2ADE53831B8969DA00E80AD5 /* shoppingcart@2x.png in Resources */,
 				2A6BC5251B59182F00401B06 /* chatIcon_black.png in Resources */,
 				2A6BC50B1B58F5FF00401B06 /* tab2.png in Resources */,
 				2A6BC5181B58F5FF00401B06 /* tab4@2x.png in Resources */,
+				2ADE53851B8969E300E80AD5 /* folder@2x.png in Resources */,
+				2ADE53871B8969F100E80AD5 /* shoppingcart@3x.png in Resources */,
 				2A56CA111B6FB27400C8E3DC /* home@2x.png in Resources */,
 				2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */,
 				2A33B63C1B66639A00535FE4 /* manModel.jpg in Resources */,
@@ -807,7 +854,9 @@
 				2AD3E8E61B803EED00B2264B /* AddMemberCollectionViewCell.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
+				2ADE538C1B896AA300E80AD5 /* MyFolloweeViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
+				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */,
@@ -818,6 +867,7 @@
 				2AD3E8CA1B80252300B2264B /* ViewWithBorder.m in Sources */,
 				2AACC6FE1B7641640065216C /* SelectedColorAndSizeViewController.m in Sources */,
 				2AD3E8DB1B80313E00B2264B /* AddMemberShipViewController.m in Sources */,
+				2ADE53811B8968F000E80AD5 /* ComSettingsTableViewController.m in Sources */,
 				2A33B6371B665F7400535FE4 /* ShopLastTableViewController.m in Sources */,
 				2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */,
 				2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */,
