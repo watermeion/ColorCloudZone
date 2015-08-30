@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterAfterViewController : UIViewController
+- (IBAction)selectSupplierAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *supplierBtn;
+@property (strong, nonatomic) IBOutlet UIButton *sellerBtn;
+- (IBAction)selectedSellerAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *nextStepBtn;
+- (IBAction)nextStepAction:(id)sender;
 
 @end

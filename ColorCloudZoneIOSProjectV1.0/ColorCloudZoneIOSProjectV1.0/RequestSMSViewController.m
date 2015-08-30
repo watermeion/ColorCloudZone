@@ -1,18 +1,18 @@
 //
-//  RegisterAfterViewController.m
+//  RequestSMSViewController.m
 //  ColorCloudZoneIOSProjectV1.0
 //
 //  Created by RAY on 15/8/30.
 //  Copyright (c) 2015年 SHS. All rights reserved.
 //
 
-#import "RegisterAfterViewController.h"
+#import "RequestSMSViewController.h"
 
-@interface RegisterAfterViewController ()
+@interface RequestSMSViewController ()
 
 @end
 
-@implementation RegisterAfterViewController
+@implementation RequestSMSViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,10 +34,4 @@
 }
 */
 
-- (IBAction)selectedSellerAction:(id)sender {
-}
-- (IBAction)selectSupplierAction:(id)sender {
-}
-- (IBAction)nextStepAction:(id)sender {
-}
 @end

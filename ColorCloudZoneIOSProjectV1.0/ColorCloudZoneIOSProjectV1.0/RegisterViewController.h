@@ -15,10 +15,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *registBtn;
 
 
-- (IBAction)requestSMSCode:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *codeSMSTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (strong, nonatomic) IBOutlet UIButton *requestSMSCodeBtn;
+
 @end

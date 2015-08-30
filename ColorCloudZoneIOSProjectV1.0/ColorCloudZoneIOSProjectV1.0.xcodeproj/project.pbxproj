@@ -99,6 +99,7 @@
 		3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD341B92D5E10048A0A3 /* RegisterViewController.m */; };
 		3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */; };
 		3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */; };
+		3BD9AD401B92F02C0048A0A3 /* RequestSMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */; };
 		92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */; };
 /* End PBXBuildFile section */
 
@@ -238,6 +239,8 @@
 		3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAfterViewController.m; sourceTree = "<group>"; };
 		3BD9AD3B1B92EA640048A0A3 /* CALayer+GYBAddtion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+GYBAddtion.h"; sourceTree = "<group>"; };
 		3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+GYBAddtion.m"; sourceTree = "<group>"; };
+		3BD9AD3E1B92F02C0048A0A3 /* RequestSMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestSMSViewController.h; sourceTree = "<group>"; };
+		3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestSMSViewController.m; sourceTree = "<group>"; };
 		6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorCloudZoneIOSProjectV1.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -617,6 +620,7 @@
 				2ADE53781B88CE0800E80AD5 /* MySettingsVC */,
 				3BD9AD361B92D5F20048A0A3 /* RegisterVC */,
 				3BD9AD3A1B92E2DC0048A0A3 /* RegisterAfterVC */,
+				3BD9AD411B92F0310048A0A3 /* RequestSMSVC */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -657,6 +661,15 @@
 				3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */,
 			);
 			name = RegisterAfterVC;
+			sourceTree = "<group>";
+		};
+		3BD9AD411B92F0310048A0A3 /* RequestSMSVC */ = {
+			isa = PBXGroup;
+			children = (
+				3BD9AD3E1B92F02C0048A0A3 /* RequestSMSViewController.h */,
+				3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */,
+			);
+			name = RequestSMSVC;
 			sourceTree = "<group>";
 		};
 		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
@@ -882,6 +895,7 @@
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
 				2AD3E8E21B803EBC00B2264B /* MemberCommonCollectionViewCell.m in Sources */,
+				3BD9AD401B92F02C0048A0A3 /* RequestSMSViewController.m in Sources */,
 				2AD3E8E61B803EED00B2264B /* AddMemberCollectionViewCell.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
