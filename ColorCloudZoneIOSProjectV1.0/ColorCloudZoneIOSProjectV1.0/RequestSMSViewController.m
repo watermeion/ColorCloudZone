@@ -34,4 +34,9 @@
 }
 */
 
+- (IBAction)nextStepAction:(id)sender {
+}
+
+- (IBAction)requestFailedAction:(id)sender {
+}
 @end

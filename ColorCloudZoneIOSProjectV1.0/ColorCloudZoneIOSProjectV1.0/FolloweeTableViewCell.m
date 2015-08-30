@@ -10,7 +10,8 @@
 
 @implementation FolloweeTableViewCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // Initialization code
 }
 
@@ -20,11 +21,19 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)phoneCallAction:(id)sender {
+- (IBAction)phoneCallAction:(id)sender
+{
+
 }
 
-- (IBAction)enterAction:(id)sender {
+- (IBAction)enterAction:(id)sender
+{
+
 }
-- (IBAction)cancelFollowingActon:(id)sender {
+
+- (IBAction)cancelFollowingActon:(id)sender
+{
+
 }
+
 @end

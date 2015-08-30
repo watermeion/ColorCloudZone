@@ -2301,6 +2301,9 @@
                                 <state key="normal" title="收不到验证码？">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="requestFailedAction:" destination="yb4-Cy-OxL" eventType="touchUpInside" id="TOX-My-93x"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8Q-fF-MUV">
                                 <rect key="frame" x="16" y="238" width="343" height="48"/>
@@ -2319,6 +2322,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextStepAction:" destination="yb4-Cy-OxL" eventType="touchUpInside" id="AeG-5j-Qig"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -2340,6 +2346,11 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="SMSCodeTextField" destination="MNF-Pt-dXA" id="9O0-l4-noM"/>
+                        <outlet property="nextStepBtn" destination="d8Q-fF-MUV" id="80F-tm-M2M"/>
+                        <outlet property="phoneNumLabel" destination="moG-Mh-5fR" id="gyp-sY-1Q6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9eW-LA-v3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
