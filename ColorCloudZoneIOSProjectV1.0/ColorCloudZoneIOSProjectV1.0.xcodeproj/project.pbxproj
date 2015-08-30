@@ -96,6 +96,9 @@
 		2AFEDEEF1B60CFF100268332 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEEE1B60CFF100268332 /* heart.png */; };
 		2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF01B60CFFA00268332 /* heart@2x.png */; };
 		2AFEDEF31B60D00800268332 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AFEDEF21B60D00800268332 /* heart@3x.png */; };
+		3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD341B92D5E10048A0A3 /* RegisterViewController.m */; };
+		3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */; };
+		3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */; };
 		92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */; };
 /* End PBXBuildFile section */
 
@@ -229,6 +232,12 @@
 		2AFEDEEE1B60CFF100268332 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
 		2AFEDEF01B60CFFA00268332 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		2AFEDEF21B60D00800268332 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
+		3BD9AD331B92D5E10048A0A3 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		3BD9AD341B92D5E10048A0A3 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		3BD9AD371B92E2D70048A0A3 /* RegisterAfterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterAfterViewController.h; sourceTree = "<group>"; };
+		3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAfterViewController.m; sourceTree = "<group>"; };
+		3BD9AD3B1B92EA640048A0A3 /* CALayer+GYBAddtion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+GYBAddtion.h"; sourceTree = "<group>"; };
+		3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+GYBAddtion.m"; sourceTree = "<group>"; };
 		6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorCloudZoneIOSProjectV1.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,6 +302,8 @@
 		2A56CA071B6FAEF400C8E3DC /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
+				3BD9AD3B1B92EA640048A0A3 /* CALayer+GYBAddtion.h */,
+				3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */,
 			);
 			name = BaseUI;
 			sourceTree = "<group>";
@@ -437,7 +448,6 @@
 				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
 				2ADE537A1B88CE2600E80AD5 /* UI */,
-				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
 			sourceTree = "<group>";
@@ -594,6 +604,7 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
 				2ADE537E1B8968D100E80AD5 /* ComSettingsVC */,
 				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
 				2A6BC5201B59003B00401B06 /* MLShopVC */,
@@ -604,6 +615,8 @@
 				2AD3E8DF1B80396800B2264B /* MemberShipVC */,
 				2ADE53741B88CA2200E80AD5 /* ForgetPwdVC */,
 				2ADE53781B88CE0800E80AD5 /* MySettingsVC */,
+				3BD9AD361B92D5F20048A0A3 /* RegisterVC */,
+				3BD9AD3A1B92E2DC0048A0A3 /* RegisterAfterVC */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -626,6 +639,24 @@
 				2ADE538F1B896D7C00E80AD5 /* FolloweeTableViewCell.m */,
 			);
 			name = MyFolloweVC;
+			sourceTree = "<group>";
+		};
+		3BD9AD361B92D5F20048A0A3 /* RegisterVC */ = {
+			isa = PBXGroup;
+			children = (
+				3BD9AD331B92D5E10048A0A3 /* RegisterViewController.h */,
+				3BD9AD341B92D5E10048A0A3 /* RegisterViewController.m */,
+			);
+			name = RegisterVC;
+			sourceTree = "<group>";
+		};
+		3BD9AD3A1B92E2DC0048A0A3 /* RegisterAfterVC */ = {
+			isa = PBXGroup;
+			children = (
+				3BD9AD371B92E2D70048A0A3 /* RegisterAfterViewController.h */,
+				3BD9AD381B92E2D70048A0A3 /* RegisterAfterViewController.m */,
+			);
+			name = RegisterAfterVC;
 			sourceTree = "<group>";
 		};
 		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
@@ -856,7 +887,10 @@
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
 				2ADE538C1B896AA300E80AD5 /* MyFolloweeViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
+				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
+				3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
+				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */,
