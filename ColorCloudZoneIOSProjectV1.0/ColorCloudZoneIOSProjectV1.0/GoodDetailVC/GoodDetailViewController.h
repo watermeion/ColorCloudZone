@@ -10,4 +10,8 @@
 
 @interface GoodDetailViewController : UIViewController
 
+
+//Constraint
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTextHeightConstraint;
+
 @end
