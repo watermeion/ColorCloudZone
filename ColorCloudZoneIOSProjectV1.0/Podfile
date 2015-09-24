@@ -3,9 +3,10 @@
 
 target 'ColorCloudZoneIOSProjectV1.0' do
 pod 'AVOSCloud'
+pod 'SVProgressHUD'
+pod 'IQKeyboardManager'
 end
 
 target 'ColorCloudZoneIOSProjectV1.0Tests' do
 
 end
-
