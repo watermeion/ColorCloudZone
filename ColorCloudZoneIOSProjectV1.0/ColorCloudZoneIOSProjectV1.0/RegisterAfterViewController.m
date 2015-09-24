@@ -7,7 +7,7 @@
 //
 
 #import "RegisterAfterViewController.h"
-
+#import <AVOSCloud/AVOSCloud.h>
 @interface RegisterAfterViewController ()
 
 @end
@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,8 +37,13 @@
 */
 
 - (IBAction)selectedSellerAction:(id)sender {
+    
+    
+    
 }
 - (IBAction)selectSupplierAction:(id)sender {
+    
+    
 }
 - (IBAction)nextStepAction:(id)sender {
 }

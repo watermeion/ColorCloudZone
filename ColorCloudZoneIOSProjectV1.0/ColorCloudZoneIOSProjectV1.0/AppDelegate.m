@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import <AVCloud.h>
+
+#import <AVOSCloud/AVOSCloud.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 @interface AppDelegate ()
 
 @end
@@ -17,15 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Override point for customization after application
+    [AVOSCloud setApplicationId:@"ipyoirkh7rdk3e7e6uxu7fwib7wbteoy0bgfc0mj9upi3shi"
+                      clientKey:@"a4bid0onrnho8kfdw9qyqwxm972pbk20wbgvz6kgz16r1w8a"];
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
-    
-    
-    
-    
-    
-    
+    [IQKeyboardManager sharedManager].enable = YES;
+
     return YES;
 }
 
