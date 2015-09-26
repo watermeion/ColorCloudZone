@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
 		2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */; };
 		2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */; };
@@ -115,6 +117,10 @@
 
 /* Begin PBXFileReference section */
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendItemsCollectionViewCell.h; sourceTree = "<group>"; };
+		019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItemsCollectionViewCell.m; sourceTree = "<group>"; };
+		019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItemsCollectionViewCell.h; sourceTree = "<group>"; };
+		019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreItemsCollectionViewCell.m; sourceTree = "<group>"; };
 		26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; sourceTree = "<group>"; };
 		2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@2x.png"; sourceTree = "<group>"; };
 		2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@3x.png"; sourceTree = "<group>"; };
@@ -279,6 +285,17 @@
 				2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		019215931BB6858900D6D324 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */,
+				019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */,
+				019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */,
+				019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */,
+			);
+			name = CollectionView;
 			sourceTree = "<group>";
 		};
 		215161158651BAC8E5B0089D /* Pods */ = {
@@ -510,6 +527,7 @@
 		2AACC6F51B7640A30065216C /* SubViewClass */ = {
 			isa = PBXGroup;
 			children = (
+				019215931BB6858900D6D324 /* CollectionView */,
 				2AACC6FB1B7641640065216C /* SelectedColorAndSizeViewController.h */,
 				2AACC6FC1B7641640065216C /* SelectedColorAndSizeViewController.m */,
 				2AACC6FD1B7641640065216C /* SelectedColorAndSizeViewController.xib */,
@@ -920,8 +938,10 @@
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
 				2ADE538C1B896AA300E80AD5 /* MyFolloweeViewController.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
+				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
 				3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */,
+				019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
