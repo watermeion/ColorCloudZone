@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
@@ -117,6 +118,8 @@
 
 /* Begin PBXFileReference section */
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
+		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
 		019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendItemsCollectionViewCell.h; sourceTree = "<group>"; };
 		019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItemsCollectionViewCell.m; sourceTree = "<group>"; };
 		019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItemsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 		019215931BB6858900D6D324 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */,
+				016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */,
 				019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */,
 				019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */,
 				019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */,
@@ -929,6 +934,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AD3E8CD1B802B5500B2264B /* CompanyProfileViewController.m in Sources */,
+				016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */,
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
 				2AD3E8E21B803EBC00B2264B /* MemberCommonCollectionViewCell.m in Sources */,

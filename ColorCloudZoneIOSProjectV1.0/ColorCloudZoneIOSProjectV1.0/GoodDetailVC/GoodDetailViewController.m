@@ -9,7 +9,7 @@
 #import "GoodDetailViewController.h"
 #import "RecommendItemsCollectionViewCell.h"
 #import "MoreItemsCollectionViewCell.h"
-
+#import "DetailImageCollectionViewController.h"
 
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
@@ -28,6 +28,12 @@ static const CGFloat CellWidth = 220;
 @interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+
+
+
+//View Part 3
+@property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
+
 @end
 
 
@@ -41,6 +47,9 @@ static const CGFloat CellWidth = 220;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
       [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
