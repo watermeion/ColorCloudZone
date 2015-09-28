@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
@@ -120,6 +121,7 @@
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
+		016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadItemsViewController.swift; sourceTree = "<group>"; };
 		019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendItemsCollectionViewCell.h; sourceTree = "<group>"; };
 		019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItemsCollectionViewCell.m; sourceTree = "<group>"; };
 		019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItemsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -288,6 +290,14 @@
 				2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		016871BF1BB79A6E0060ADAD /* UpLoadVC */ = {
+			isa = PBXGroup;
+			children = (
+				016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */,
+			);
+			name = UpLoadVC;
 			sourceTree = "<group>";
 		};
 		019215931BB6858900D6D324 /* CollectionView */ = {
@@ -649,6 +659,7 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				016871BF1BB79A6E0060ADAD /* UpLoadVC */,
 				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
 				2ADE537E1B8968D100E80AD5 /* ComSettingsVC */,
 				2ABBB1171B7250D300DA2A9A /* GoodDetailVC */,
@@ -953,6 +964,7 @@
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */,
+				016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */,
 				2ABFC8EC1B5E7744009D64E1 /* ShopContentCollectionViewCell.m in Sources */,
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
 				2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */,

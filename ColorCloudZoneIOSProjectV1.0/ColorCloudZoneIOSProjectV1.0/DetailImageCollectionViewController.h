@@ -10,5 +10,6 @@
 
 @interface DetailImageCollectionViewController : UICollectionViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *CustomCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *CustomCollectionHeightConstraint;
 
 @end
