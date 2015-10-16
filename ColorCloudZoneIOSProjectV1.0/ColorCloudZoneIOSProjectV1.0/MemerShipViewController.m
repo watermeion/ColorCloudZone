@@ -7,6 +7,11 @@
 //
 
 #import "MemerShipViewController.h"
+#import "MemberCommonCollectionViewCell.h"
+#import "AddMemberCollectionViewCell.h"
+static NSString *const kAddMemberCollectonCellIdentifier = @"AddMemberCollectionViewCell";
+static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollectionViewCell";
+
 
 @interface MemerShipViewController ()
 
@@ -39,9 +44,29 @@
 
 
 
+#pragma mark - UICOllectionView delegate
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+
+    return 2;
+}
 
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
+    
+    if (indexPath.item == 0) {
+        AddMemberCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kAddMemberCollectonCellIdentifier forIndexPath:indexPath];
+        return cell;
+    }
+    MemberCommonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMemberCollectonCellIdentifier forIndexPath:indexPath];
+    return cell;
+}
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
 
 
 

@@ -8,6 +8,7 @@
 
 #import "MLTabBarViewController.h"
 
+static NSString *const kMainPresentedLoginAndRegistSegue = @"MainPresentedLoginAndRegistSegue";
 @interface MLTabBarViewController ()
 
 @end
@@ -47,7 +48,7 @@
     
     tabBarItem3.title=@"会员";
     
-    tabBarItem3.title=@"我";
+    tabBarItem4.title=@"我";
     
     tabBarItem1.selectedImage=[[UIImage imageNamed:@"tab1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     tabBarItem1.image=[[UIImage imageNamed:@"tab1_unshoot"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -60,7 +61,7 @@
     
     tabBarItem4.selectedImage=[[UIImage imageNamed:@"tab4"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     tabBarItem4.image=[[UIImage imageNamed:@"tab4_unshoot"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
+//
 }
 
 

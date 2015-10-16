@@ -8,6 +8,12 @@
 
 #import "MLShopViewController.h"
 
+static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
+
+
+
+
+
 @implementation MLShopViewController
 
 - (void)viewDidLoad

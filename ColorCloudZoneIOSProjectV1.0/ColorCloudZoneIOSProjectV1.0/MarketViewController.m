@@ -1,38 +1,31 @@
 //
-//  AddMemberShipViewController.m
+//  MarketViewController.m
 //  ColorCloudZoneIOSProjectV1.0
 //
-//  Created by hzguoyubao on 15/8/16.
-//  Copyright (c) 2015年 SHS. All rights reserved.
+//  Created by GYB on 15/10/16.
+//  Copyright © 2015年 SHS. All rights reserved.
 //
 
-#import "AddMemberShipViewController.h"
+#import "MarketViewController.h"
 
-@interface AddMemberShipViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
 
-@property (nonatomic) BOOL isActiveDoneBtn;
+
+@interface MarketViewController ()
+
 @end
 
-@implementation AddMemberShipViewController
+@implementation MarketViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;Ømai
-    
-    
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    
-    
-    
-    
 }
 
 /*
@@ -44,27 +37,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)uploadAvatarAction:(id)sender {
-    
-    
-    
-    
-}
-
-
-- (IBAction)doneAction:(id)sender {
-    
-    
-}
-
-
-
-
-
-
-
-
-
 
 @end

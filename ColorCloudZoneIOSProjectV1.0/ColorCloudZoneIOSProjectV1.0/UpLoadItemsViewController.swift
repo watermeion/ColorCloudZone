@@ -56,8 +56,12 @@ class UpLoadItemsViewController: UIViewController,UICollectionViewDataSource,UIC
         super.viewDidLoad()
         
         pictureNum = 2
-        
+        self.edgesForExtendedLayout = UIRectEdge.None;
        
+        
+        
+        
+        
         
 
         // Do any additional setup after loading the view.

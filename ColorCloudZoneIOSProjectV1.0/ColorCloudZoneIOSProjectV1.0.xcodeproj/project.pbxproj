@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011DBDD61BD10EEE00B19231 /* MemberCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011DBDD51BD10EEE00B19231 /* MemberCenter.swift */; settings = {ASSET_TAGS = (); }; };
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 017E5F6A1BD1272700C55992 /* uialq.jpg */; settings = {ASSET_TAGS = (); }; };
+		017E5F6F1BD1280B00C55992 /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E5F6E1BD1280B00C55992 /* MarketViewController.m */; settings = {ASSET_TAGS = (); }; };
 		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		01BDD5431BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDD5421BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -120,10 +123,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011DBDD51BD10EEE00B19231 /* MemberCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCenter.swift; sourceTree = "<group>"; };
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
 		016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadItemsViewController.swift; sourceTree = "<group>"; };
+		017E5F6A1BD1272700C55992 /* uialq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uialq.jpg; sourceTree = "<group>"; };
+		017E5F6D1BD1280B00C55992 /* MarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketViewController.h; sourceTree = "<group>"; };
+		017E5F6E1BD1280B00C55992 /* MarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketViewController.m; sourceTree = "<group>"; };
 		019215941BB685E200D6D324 /* RecommendItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendItemsCollectionViewCell.h; sourceTree = "<group>"; };
 		019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItemsCollectionViewCell.m; sourceTree = "<group>"; };
 		019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItemsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -280,9 +287,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		011DBDD11BD10CB700B19231 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		011DBDD21BD10E7A00B19231 /* MemberCenterManager */ = {
+			isa = PBXGroup;
+			children = (
+				011DBDD51BD10EEE00B19231 /* MemberCenter.swift */,
+			);
+			name = MemberCenterManager;
+			sourceTree = "<group>";
+		};
 		014574371BAEA38100EC8CD1 /* Mangers */ = {
 			isa = PBXGroup;
 			children = (
+				011DBDD21BD10E7A00B19231 /* MemberCenterManager */,
 				014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */,
 			);
 			name = Mangers;
@@ -304,6 +327,15 @@
 				01BDD5441BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift */,
 			);
 			name = UpLoadVC;
+			sourceTree = "<group>";
+		};
+		017E5F6C1BD127BB00C55992 /* MarketVC */ = {
+			isa = PBXGroup;
+			children = (
+				017E5F6D1BD1280B00C55992 /* MarketViewController.h */,
+				017E5F6E1BD1280B00C55992 /* MarketViewController.m */,
+			);
+			name = MarketVC;
 			sourceTree = "<group>";
 		};
 		019215931BB6858900D6D324 /* CollectionView */ = {
@@ -398,6 +430,7 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				017E5F6A1BD1272700C55992 /* uialq.jpg */,
 				2ADE53881B896A0300E80AD5 /* folder@3x.png */,
 				2ADE53841B8969E300E80AD5 /* folder@2x.png */,
 				2ADE53861B8969F100E80AD5 /* shoppingcart@3x.png */,
@@ -507,6 +540,7 @@
 				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
 				2A56CA071B6FAEF400C8E3DC /* BaseUI */,
 				2A6BC4EB1B58F5FF00401B06 /* IconImage */,
+				011DBDD11BD10CB700B19231 /* Model */,
 				2ADE537A1B88CE2600E80AD5 /* UI */,
 			);
 			path = ColorCloudZoneIOSProjectV1.0;
@@ -665,6 +699,7 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				017E5F6C1BD127BB00C55992 /* MarketVC */,
 				016871BF1BB79A6E0060ADAD /* UpLoadVC */,
 				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
 				2ADE537E1B8968D100E80AD5 /* ComSettingsVC */,
@@ -844,6 +879,7 @@
 				2A12CD3E1B5A1F9800A4AC04 /* moreBarIcon_black.png in Resources */,
 				2A56CA0B1B6FB0BE00C8E3DC /* camera@2x.png in Resources */,
 				2A85DAE11B53F5CD008386B0 /* LaunchScreen.xib in Resources */,
+				017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */,
 				2A6BC50A1B58F5FF00401B06 /* tab1_unshoot@3x.png in Resources */,
 				2A6BC5101B58F5FF00401B06 /* tab2_unshoot@3x.png in Resources */,
 				2ADC6FB91B70EADD003121E9 /* location.png in Resources */,
@@ -950,6 +986,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017E5F6F1BD1280B00C55992 /* MarketViewController.m in Sources */,
 				2AD3E8CD1B802B5500B2264B /* CompanyProfileViewController.m in Sources */,
 				016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */,
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
@@ -964,6 +1001,7 @@
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
 				01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
+				011DBDD61BD10EEE00B19231 /* MemberCenter.swift in Sources */,
 				3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */,
 				019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,

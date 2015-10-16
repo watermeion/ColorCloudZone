@@ -16,7 +16,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
+
+
+
 - (IBAction)doneAction:(id)sender;
 
 @end

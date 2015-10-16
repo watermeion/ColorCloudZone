@@ -24,6 +24,10 @@
                       clientKey:@"a4bid0onrnho8kfdw9qyqwxm972pbk20wbgvz6kgz16r1w8a"];
     [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    //
+    AVObject *launchRecordObject = [AVObject objectWithClassName:@"LaunchRecordObject"];
+    [launchRecordObject setObject:@"bar" forKey:@"foo"];
+    [launchRecordObject setObject:launchOptions forKey:@"LaunchOption"];    [launchRecordObject save];
     
     [IQKeyboardManager sharedManager].enable = YES;
 
