@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
 typedef  NS_ENUM(NSUInteger, MemerShipViewControllerState){
     MemerShipViewControllerStateUnknown = 0,
@@ -15,7 +16,7 @@ typedef  NS_ENUM(NSUInteger, MemerShipViewControllerState){
 };
 
 
-@interface MemerShipViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface MemerShipViewController : GBCustomViewController <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) MemerShipViewControllerState state;

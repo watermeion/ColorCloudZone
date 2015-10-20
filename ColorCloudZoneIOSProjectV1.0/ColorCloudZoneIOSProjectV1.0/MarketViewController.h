@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
-@interface MarketViewController : UIViewController
+@interface MarketViewController : GBCustomViewController
 
 @end

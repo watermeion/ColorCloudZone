@@ -10,6 +10,7 @@
 
 #import <AVOSCloud/AVOSCloud.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "MemberCenterManager.h"
 @interface AppDelegate ()
 
 @end
@@ -30,6 +31,7 @@
     [launchRecordObject setObject:launchOptions forKey:@"LaunchOption"];    [launchRecordObject save];
     
     [IQKeyboardManager sharedManager].enable = YES;
+    
 
     return YES;
 }

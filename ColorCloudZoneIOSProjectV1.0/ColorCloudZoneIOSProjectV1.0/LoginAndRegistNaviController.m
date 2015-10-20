@@ -1,38 +1,28 @@
 //
-//  AddMemberShipViewController.m
+//  LoginAndRegistNaviController.m
 //  ColorCloudZoneIOSProjectV1.0
 //
-//  Created by hzguoyubao on 15/8/16.
-//  Copyright (c) 2015年 SHS. All rights reserved.
+//  Created by GYB on 15/10/20.
+//  Copyright © 2015年 SHS. All rights reserved.
 //
 
-#import "AddMemberShipViewController.h"
+#import "LoginAndRegistNaviController.h"
 
-@interface AddMemberShipViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface LoginAndRegistNaviController ()
 
-@property (nonatomic) BOOL isActiveDoneBtn;
 @end
 
-@implementation AddMemberShipViewController
+@implementation LoginAndRegistNaviController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    
-    
-    
-    
 }
 
 /*
@@ -44,26 +34,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)uploadAvatarAction:(id)sender {
-    
-    
-    
-    
-}
-
-
-- (IBAction)doneAction:(id)sender {
-    
-    
-}
-
-
-
-
-
-
-
 
 
 

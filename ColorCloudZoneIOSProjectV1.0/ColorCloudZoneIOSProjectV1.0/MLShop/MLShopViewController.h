@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
-@interface MLShopViewController : UIViewController
+@interface MLShopViewController : GBCustomViewController
 
 
 

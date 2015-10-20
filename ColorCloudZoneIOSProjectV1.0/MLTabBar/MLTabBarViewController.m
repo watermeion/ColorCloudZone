@@ -7,15 +7,19 @@
 //
 
 #import "MLTabBarViewController.h"
+#import "AVUser.h"
+#import "MemberCenterManager.h"
 
-static NSString *const kMainPresentedLoginAndRegistSegue = @"MainPresentedLoginAndRegistSegue";
+
 @interface MLTabBarViewController ()
 
 @end
 
 @implementation MLTabBarViewController
 
+static MLTabBarViewController *sharedInstance = nil;
 - (void)viewDidLoad {
+    sharedInstance = self;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -23,11 +27,11 @@ static NSString *const kMainPresentedLoginAndRegistSegue = @"MainPresentedLoginA
     self.tabBar.translucent=NO;
     [self setTabBarImage];
     
-    
 }
 
-
-
++ (instancetype)sharedInstance{
+    return sharedInstance;
+}
 
 - (void)setTabBarImage
 {
@@ -79,5 +83,10 @@ static NSString *const kMainPresentedLoginAndRegistSegue = @"MainPresentedLoginA
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)presentLoginAndRegistProcedure{
+   [self performSegueWithIdentifier:kMainPresentedLoginAndRegistSegue sender:self];
+}
+
 
 @end

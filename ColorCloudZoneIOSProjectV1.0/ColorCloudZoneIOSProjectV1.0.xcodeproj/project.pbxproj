@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		011DBDD61BD10EEE00B19231 /* MemberCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011DBDD51BD10EEE00B19231 /* MemberCenter.swift */; settings = {ASSET_TAGS = (); }; };
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 017E5F6A1BD1272700C55992 /* uialq.jpg */; settings = {ASSET_TAGS = (); }; };
 		017E5F6F1BD1280B00C55992 /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E5F6E1BD1280B00C55992 /* MarketViewController.m */; settings = {ASSET_TAGS = (); }; };
 		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		01A441891BD67763003CF3FD /* LoginAndRegistNaviController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A441881BD67763003CF3FD /* LoginAndRegistNaviController.m */; settings = {ASSET_TAGS = (); }; };
+		01A4418C1BD67CAA003CF3FD /* MemberCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4418B1BD67CAA003CF3FD /* MemberCenterManager.m */; settings = {ASSET_TAGS = (); }; };
+		01A4418D1BD67CAA003CF3FD /* MemberCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4418B1BD67CAA003CF3FD /* MemberCenterManager.m */; settings = {ASSET_TAGS = (); }; };
+		01A441911BD68290003CF3FD /* GBCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A441901BD68290003CF3FD /* GBCustomViewController.m */; settings = {ASSET_TAGS = (); }; };
+		01A441921BD68290003CF3FD /* GBCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A441901BD68290003CF3FD /* GBCustomViewController.m */; settings = {ASSET_TAGS = (); }; };
 		01BDD5431BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDD5421BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDD5441BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
@@ -123,7 +127,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		011DBDD51BD10EEE00B19231 /* MemberCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCenter.swift; sourceTree = "<group>"; };
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
@@ -135,6 +138,12 @@
 		019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendItemsCollectionViewCell.m; sourceTree = "<group>"; };
 		019215971BB6860500D6D324 /* MoreItemsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItemsCollectionViewCell.h; sourceTree = "<group>"; };
 		019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreItemsCollectionViewCell.m; sourceTree = "<group>"; };
+		01A441871BD67763003CF3FD /* LoginAndRegistNaviController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAndRegistNaviController.h; sourceTree = "<group>"; };
+		01A441881BD67763003CF3FD /* LoginAndRegistNaviController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAndRegistNaviController.m; sourceTree = "<group>"; };
+		01A4418A1BD67CAA003CF3FD /* MemberCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCenterManager.h; sourceTree = "<group>"; };
+		01A4418B1BD67CAA003CF3FD /* MemberCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberCenterManager.m; sourceTree = "<group>"; };
+		01A4418F1BD68290003CF3FD /* GBCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBCustomViewController.h; sourceTree = "<group>"; };
+		01A441901BD68290003CF3FD /* GBCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBCustomViewController.m; sourceTree = "<group>"; };
 		01BDD5421BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadPictureBtnCollectionViewCell.swift; sourceTree = "<group>"; };
 		01BDD5441BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadPicCollectionViewCell.swift; sourceTree = "<group>"; };
 		26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; sourceTree = "<group>"; };
@@ -297,7 +306,9 @@
 		011DBDD21BD10E7A00B19231 /* MemberCenterManager */ = {
 			isa = PBXGroup;
 			children = (
-				011DBDD51BD10EEE00B19231 /* MemberCenter.swift */,
+				01A4418E1BD68259003CF3FD /* SuperClass */,
+				01A4418A1BD67CAA003CF3FD /* MemberCenterManager.h */,
+				01A4418B1BD67CAA003CF3FD /* MemberCenterManager.m */,
 			);
 			name = MemberCenterManager;
 			sourceTree = "<group>";
@@ -349,6 +360,24 @@
 				019215981BB6860500D6D324 /* MoreItemsCollectionViewCell.m */,
 			);
 			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		01A441861BD67739003CF3FD /* LoginAndRegistNavi */ = {
+			isa = PBXGroup;
+			children = (
+				01A441871BD67763003CF3FD /* LoginAndRegistNaviController.h */,
+				01A441881BD67763003CF3FD /* LoginAndRegistNaviController.m */,
+			);
+			name = LoginAndRegistNavi;
+			sourceTree = "<group>";
+		};
+		01A4418E1BD68259003CF3FD /* SuperClass */ = {
+			isa = PBXGroup;
+			children = (
+				01A4418F1BD68290003CF3FD /* GBCustomViewController.h */,
+				01A441901BD68290003CF3FD /* GBCustomViewController.m */,
+			);
+			name = SuperClass;
 			sourceTree = "<group>";
 		};
 		215161158651BAC8E5B0089D /* Pods */ = {
@@ -699,6 +728,7 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				01A441861BD67739003CF3FD /* LoginAndRegistNavi */,
 				017E5F6C1BD127BB00C55992 /* MarketVC */,
 				016871BF1BB79A6E0060ADAD /* UpLoadVC */,
 				2ADE538D1B896AA700E80AD5 /* MyFolloweVC */,
@@ -1001,8 +1031,8 @@
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
 				01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
-				011DBDD61BD10EEE00B19231 /* MemberCenter.swift in Sources */,
 				3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */,
+				01A4418C1BD67CAA003CF3FD /* MemberCenterManager.m in Sources */,
 				019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
@@ -1015,6 +1045,7 @@
 				2A85DAD31B53F5CD008386B0 /* main.m in Sources */,
 				2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
+				01A441911BD68290003CF3FD /* GBCustomViewController.m in Sources */,
 				2AD3E8CA1B80252300B2264B /* ViewWithBorder.m in Sources */,
 				2AACC6FE1B7641640065216C /* SelectedColorAndSizeViewController.m in Sources */,
 				2AD3E8DB1B80313E00B2264B /* AddMemberShipViewController.m in Sources */,
@@ -1023,6 +1054,7 @@
 				2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */,
 				2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */,
 				2AD3E8C61B80233500B2264B /* LoginViewController.m in Sources */,
+				01A441891BD67763003CF3FD /* LoginAndRegistNaviController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,7 +1062,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A4418D1BD67CAA003CF3FD /* MemberCenterManager.m in Sources */,
 				2A85DAED1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m in Sources */,
+				01A441921BD68290003CF3FD /* GBCustomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

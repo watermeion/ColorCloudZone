@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
-@interface GoodDetailViewController : UIViewController
+@interface GoodDetailViewController : GBCustomViewController
 
 
 //Constraint

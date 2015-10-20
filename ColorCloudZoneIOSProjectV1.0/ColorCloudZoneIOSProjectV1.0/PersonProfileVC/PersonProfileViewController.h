@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
-@interface PersonProfileViewController : UIViewController
+@interface PersonProfileViewController : GBCustomViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *shopNameTextField;

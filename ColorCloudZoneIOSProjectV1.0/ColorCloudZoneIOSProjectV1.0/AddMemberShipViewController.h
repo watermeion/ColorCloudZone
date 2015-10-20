@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GBCustomViewController.h"
 
-@interface AddMemberShipViewController : UIViewController
+@interface AddMemberShipViewController : GBCustomViewController
 @property (weak, nonatomic) IBOutlet UIButton *uploadAvatarBtn;
 - (IBAction)uploadAvatarAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;

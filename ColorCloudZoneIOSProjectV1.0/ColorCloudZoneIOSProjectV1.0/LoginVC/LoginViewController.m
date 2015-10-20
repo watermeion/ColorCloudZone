@@ -7,8 +7,18 @@
 //
 
 #import "LoginViewController.h"
+#import "AVCloud.h"
+#import "SVProgressHUD.h"
+#import "AVUser.h"
 
-@interface LoginViewController ()
+typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
+    LoginViewTextFieldPhone = 9977,
+    LoginViewTextFieldPassword,
+};
+
+@interface LoginViewController ()<UITextFieldDelegate>
+@property (nonatomic, strong) NSString *phoneNum;
+@property (nonatomic, strong) NSString *pwd;
 
 @end
 
@@ -17,12 +27,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.phoneNunTextField.delegate = self;
+    self.phoneNunTextField.tag = LoginViewTextFieldPhone;
+    self.passwordTextField.delegate = self;
+    self.passwordTextField.tag = LoginViewTextFieldPassword;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
@@ -34,10 +49,65 @@
 }
 */
 
+
+#pragma UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.tag == LoginViewTextFieldPassword) {
+        self.pwd = textField.text;
+    }
+    if (textField.tag == LoginViewTextFieldPhone) {
+        self.phoneNum = textField.text;
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
+}
+
+- (BOOL)isPhoneNumCorrect{
+    return self.phoneNum.length == 11 ? YES : NO;
+}
+
+
+- (BOOL)isPwdSafe{
+    return self.pwd.length >= 6 ? YES : NO;
+}
+
+
+- (BOOL)checkInputValiable{
+
+    if (![self isPhoneNumCorrect] ) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
+        return NO;
+    }
+    if (![self isPwdSafe]) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位以上密码"];
+        return NO;
+    }
+    return YES;
+}
+
+
+
 - (IBAction)loginAction:(id)sender {
+    if ([self checkInputValiable]) {
+        [SVProgressHUD showWithStatus:@"正在登陆"];
+        [AVUser logInWithUsernameInBackground:self.phoneNum password:self.pwd block:^(AVUser *user, NSError *error) {
+                if (user != nil) {
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        [SVProgressHUD showInfoWithStatus:@"欢迎回来"];
+                    }];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"登陆失败，请重新尝试"];
+                }
+        }];
+    }
 }
-- (IBAction)registAction:(id)sender {
-}
+
 - (IBAction)forgetPwdAction:(id)sender {
+    
+    
+    
 }
 @end

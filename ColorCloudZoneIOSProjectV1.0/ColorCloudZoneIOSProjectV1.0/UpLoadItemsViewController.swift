@@ -19,7 +19,7 @@ let kUpLoadPicBtnCellIdentifier = "UpLoadPictureBtnCollectionViewCell";
 let kUpLoadPicCellIdentifier = "UpLoadPicCollectionViewCell"
 
 
-class UpLoadItemsViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate {
+class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate {
     //IBOutlet
     @IBOutlet weak var newItemName: UITextField!
     @IBOutlet weak var newItemSerialNum: UITextField!

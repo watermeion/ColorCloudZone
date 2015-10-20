@@ -1,38 +1,30 @@
 //
-//  AddMemberShipViewController.m
+//  GBCustomViewController.m
 //  ColorCloudZoneIOSProjectV1.0
 //
-//  Created by hzguoyubao on 15/8/16.
-//  Copyright (c) 2015年 SHS. All rights reserved.
+//  Created by GYB on 15/10/20.
+//  Copyright © 2015年 SHS. All rights reserved.
 //
 
-#import "AddMemberShipViewController.h"
+#import "GBCustomViewController.h"
+#import "MemberCenterManager.h"
 
-@interface AddMemberShipViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface GBCustomViewController ()
 
-@property (nonatomic) BOOL isActiveDoneBtn;
 @end
 
-@implementation AddMemberShipViewController
+@implementation GBCustomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    
+    [self checkUserStatus];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    
-    
-    
-    
 }
 
 /*
@@ -45,26 +37,12 @@
 }
 */
 
-- (IBAction)uploadAvatarAction:(id)sender {
-    
-    
-    
-    
+
+- (void)checkUserStatus{
+    if (![MemberCenterManager islogin]) {
+        [[MemberCenterManager singletonInstance] startLoginAndRegistProcedure];
+    }
 }
-
-
-- (IBAction)doneAction:(id)sender {
-    
-    
-}
-
-
-
-
-
-
-
-
 
 
 @end
