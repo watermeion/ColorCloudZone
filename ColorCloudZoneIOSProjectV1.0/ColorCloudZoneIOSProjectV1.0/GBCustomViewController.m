@@ -22,6 +22,10 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self checkUserStatus];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -40,7 +44,7 @@
 
 - (void)checkUserStatus{
     if (![MemberCenterManager islogin]) {
-        [[MemberCenterManager singletonInstance] startLoginAndRegistProcedure];
+        [MemberCenterManager startLoginAndRegistProcedure];
     }
 }
 

@@ -1111,7 +1111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kE-RA-Btv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1352.5" y="2877.5"/>
+            <point key="canvasLocation" x="1028.5" y="2880.5"/>
         </scene>
         <!--Up Load Items View Controller-->
         <scene sceneID="vco-3G-cHN">
@@ -3278,7 +3278,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="regisBtnAction:" destination="pWC-f9-95e" eventType="touchUpInside" id="tXt-5J-zL9"/>
-                                    <segue destination="yb4-Cy-OxL" kind="show" id="2dU-BU-JTM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="轻触上面的“注册”按钮，即表示您同意" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-gW-zza">
@@ -3418,6 +3417,7 @@
                         <outlet property="passwordTextField" destination="qfg-mb-eiJ" id="XI7-ps-49o"/>
                         <outlet property="phoneTextField" destination="76x-NU-Y1O" id="GNc-HU-rFl"/>
                         <outlet property="registBtn" destination="eOk-sS-MB6" id="sdi-5f-DBF"/>
+                        <segue destination="Ma1-Pn-M6N" kind="show" identifier="PushSelectUserTypeVCSegue" id="l7j-cz-QRD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hhw-BE-QzN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3739,7 +3739,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCy-KV-rRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-576.5" y="2157.5"/>
+            <point key="canvasLocation" x="-544.5" y="2112.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="IM7-LW-VYx">
@@ -4810,5 +4810,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OZz-CG-aV7"/>
+        <segue reference="sg4-tW-NNn"/>
     </inferredMetricsTieBreakers>
 </document>

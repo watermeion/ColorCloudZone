@@ -8,7 +8,10 @@
 
 #import "RegisterAfterViewController.h"
 #import <AVOSCloud/AVOSCloud.h>
+#import "MemberCenterManager.h"
+#import "SVProgressHUD.h"
 @interface RegisterAfterViewController ()
+@property (nonatomic) MEMBERCENTERUSERTYPE userType;
 
 @end
 
@@ -37,14 +40,43 @@
 */
 
 - (IBAction)selectedSellerAction:(id)sender {
-    
-    
-    
+    self.userType = MemberCenterUserTypeSeller;
+    [self switchhighlightedBtn];
 }
 - (IBAction)selectSupplierAction:(id)sender {
-    
-    
+    self.userType = MemberCenterUserTypeSupplier;
+    [self switchhighlightedBtn];
 }
+
+
+
+- (void)switchhighlightedBtn{
+
+    switch (self.userType) {
+        case MemberCenterUserTypeSeller:
+            self.sellerBtn.backgroundColor = [UIColor lightGrayColor];
+            self.supplierBtn.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            break;
+        case MemberCenterUserTypeSupplier:
+            self.supplierBtn.backgroundColor = [UIColor lightGrayColor];
+            self.sellerBtn.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            break;
+        case MemberCenterUserTypeUnKnown:
+            
+            break;
+    }
+
+}
+
+
 - (IBAction)nextStepAction:(id)sender {
+    [SVProgressHUD showWithStatus:@"第一次登陆，请稍后！"];
+    [[MemberCenterManager singletonInstance] setCurrentUserType:self.userType withCompletion:^(BOOL success, NSError *error) {
+        if(success && !error ){
+           [self dismissViewControllerAnimated:YES completion:^{
+               [SVProgressHUD showSuccessWithStatus:@"欢迎进入彩云间"];
+           }];
+        }
+    }];
 }
 @end

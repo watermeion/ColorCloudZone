@@ -7,14 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AVUser.h"
+
+typedef NS_ENUM(NSUInteger, MEMBERCENTERUSERTYPE) {
+    MemberCenterUserTypeUnKnown = 0,
+    MemberCenterUserTypeSeller,
+    MemberCenterUserTypeSupplier,
+};
 
 @interface MemberCenterManager : NSObject
 
+@property (nonatomic, strong) AVUser *currentUser;
+@property (nonatomic) MEMBERCENTERUSERTYPE currentUserType;
 + (instancetype) singletonInstance;
 + (BOOL) islogin;
 
-- (void)startLoginAndRegistProcedure;
++ (void)startLoginAndRegistProcedure;
 
 + (void)logout;
+
+- (void)setCurrentUserType:(MEMBERCENTERUSERTYPE) userType withCompletion:(void(^)(BOOL success, NSError *error))handler;
 
 @end
