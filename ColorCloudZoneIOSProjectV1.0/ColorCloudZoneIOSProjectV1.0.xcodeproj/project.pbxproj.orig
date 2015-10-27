@@ -71,6 +71,11 @@
 		2A2E3E4D1BDF994E0021B3FC /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DD61BDF994E0021B3FC /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
 		2A2E3E4E1BDF994E0021B3FC /* UIButton+SD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DD81BDF994E0021B3FC /* UIButton+SD.m */; settings = {ASSET_TAGS = (); }; };
 		2A2E3E4F1BDF994E0021B3FC /* UIImageView+SD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DDA1BDF994E0021B3FC /* UIImageView+SD.m */; settings = {ASSET_TAGS = (); }; };
+		2A2E3E501BDF994E0021B3FC /* CoreSVP.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A2E3DDC1BDF994E0021B3FC /* CoreSVP.bundle */; settings = {ASSET_TAGS = (); }; };
+		2A2E3E511BDF994E0021B3FC /* CoreSVP.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DDE1BDF994E0021B3FC /* CoreSVP.m */; settings = {ASSET_TAGS = (); }; };
+		2A2E3E521BDF994E0021B3FC /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DE11BDF994E0021B3FC /* SVIndefiniteAnimatedView.m */; settings = {ASSET_TAGS = (); }; };
+		2A2E3E531BDF994E0021B3FC /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2A2E3DE31BDF994E0021B3FC /* SVProgressHUD.bundle */; settings = {ASSET_TAGS = (); }; };
+		2A2E3E541BDF994E0021B3FC /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DE51BDF994E0021B3FC /* SVProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
 		2A2E3E551BDF994E0021B3FC /* LFRoundProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DE81BDF994E0021B3FC /* LFRoundProgressView.m */; settings = {ASSET_TAGS = (); }; };
 		2A2E3E561BDF994E0021B3FC /* PhotoBroswerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DEB1BDF994E0021B3FC /* PhotoBroswerLayout.m */; settings = {ASSET_TAGS = (); }; };
 		2A2E3E571BDF994E0021B3FC /* PhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2E3DEE1BDF994E0021B3FC /* PhotoModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -325,6 +330,15 @@
 		2A2E3DD81BDF994E0021B3FC /* UIButton+SD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SD.m"; sourceTree = "<group>"; };
 		2A2E3DD91BDF994E0021B3FC /* UIImageView+SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SD.h"; sourceTree = "<group>"; };
 		2A2E3DDA1BDF994E0021B3FC /* UIImageView+SD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SD.m"; sourceTree = "<group>"; };
+		2A2E3DDC1BDF994E0021B3FC /* CoreSVP.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CoreSVP.bundle; sourceTree = "<group>"; };
+		2A2E3DDD1BDF994E0021B3FC /* CoreSVP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSVP.h; sourceTree = "<group>"; };
+		2A2E3DDE1BDF994E0021B3FC /* CoreSVP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreSVP.m; sourceTree = "<group>"; };
+		2A2E3DE01BDF994E0021B3FC /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		2A2E3DE11BDF994E0021B3FC /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		2A2E3DE21BDF994E0021B3FC /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		2A2E3DE31BDF994E0021B3FC /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		2A2E3DE41BDF994E0021B3FC /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		2A2E3DE51BDF994E0021B3FC /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		2A2E3DE71BDF994E0021B3FC /* LFRoundProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFRoundProgressView.h; sourceTree = "<group>"; };
 		2A2E3DE81BDF994E0021B3FC /* LFRoundProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFRoundProgressView.m; sourceTree = "<group>"; };
 		2A2E3DEA1BDF994E0021B3FC /* PhotoBroswerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBroswerLayout.h; sourceTree = "<group>"; };
@@ -745,6 +759,7 @@
 				2A2E3D7B1BDF994E0021B3FC /* CoreCategory */,
 				2A2E3DAC1BDF994E0021B3FC /* CoreExtend */,
 				2A2E3DAE1BDF994E0021B3FC /* CoreSDWebImage */,
+				2A2E3DDB1BDF994E0021B3FC /* CoreSVP */,
 				2A2E3DE61BDF994E0021B3FC /* LFRoundProgressView */,
 			);
 			path = FrameWorks;
@@ -993,6 +1008,30 @@
 				2A2E3DD61BDF994E0021B3FC /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		2A2E3DDB1BDF994E0021B3FC /* CoreSVP */ = {
+			isa = PBXGroup;
+			children = (
+				2A2E3DDC1BDF994E0021B3FC /* CoreSVP.bundle */,
+				2A2E3DDD1BDF994E0021B3FC /* CoreSVP.h */,
+				2A2E3DDE1BDF994E0021B3FC /* CoreSVP.m */,
+				2A2E3DDF1BDF994E0021B3FC /* SVProgressHUD */,
+			);
+			path = CoreSVP;
+			sourceTree = "<group>";
+		};
+		2A2E3DDF1BDF994E0021B3FC /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				2A2E3DE01BDF994E0021B3FC /* SVIndefiniteAnimatedView.h */,
+				2A2E3DE11BDF994E0021B3FC /* SVIndefiniteAnimatedView.m */,
+				2A2E3DE21BDF994E0021B3FC /* SVProgressHUD-Prefix.pch */,
+				2A2E3DE31BDF994E0021B3FC /* SVProgressHUD.bundle */,
+				2A2E3DE41BDF994E0021B3FC /* SVProgressHUD.h */,
+				2A2E3DE51BDF994E0021B3FC /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		2A2E3DE61BDF994E0021B3FC /* LFRoundProgressView */ = {
@@ -1260,9 +1299,13 @@
 		2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				2A2E3D6A1BDF99050021B3FC /* CommonModule */,
+||||||| merged common ancestors
+=======
 				014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */,
 				01D048841BDC79FB003C6D33 /* PrefixHeader.pch */,
+>>>>>>> 开始写上传逻辑
 				2A6BC4A81B58DB9100401B06 /* Common Class */,
 				014574371BAEA38100EC8CD1 /* Mangers */,
 				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
@@ -1518,7 +1561,6 @@
 				2A85DACB1B53F5CD008386B0 /* Resources */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 				432A2ABBFDF76FAC433A6731 /* Copy Pods Resources */,
-				5A7BA8BE566827295AC3DD16 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1610,6 +1652,7 @@
 				2A6BC5171B58F5FF00401B06 /* tab4.png in Resources */,
 				2A56CA091B6FB0B600C8E3DC /* camera@3x.png in Resources */,
 				2A6BC5121B58F5FF00401B06 /* tab3@2x.png in Resources */,
+				2A2E3E501BDF994E0021B3FC /* CoreSVP.bundle in Resources */,
 				2AFEDEEF1B60CFF100268332 /* heart.png in Resources */,
 				2A12CD3E1B5A1F9800A4AC04 /* moreBarIcon_black.png in Resources */,
 				2A56CA0B1B6FB0BE00C8E3DC /* camera@2x.png in Resources */,
@@ -1651,6 +1694,7 @@
 				2ADE53871B8969F100E80AD5 /* shoppingcart@3x.png in Resources */,
 				2A56CA111B6FB27400C8E3DC /* home@2x.png in Resources */,
 				2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */,
+				2A2E3E531BDF994E0021B3FC /* SVProgressHUD.bundle in Resources */,
 				2A33B63C1B66639A00535FE4 /* manModel.jpg in Resources */,
 				2A6BC51B1B58F5FF00401B06 /* tab4_unshoot@2x.png in Resources */,
 				2A6BC50F1B58F5FF00401B06 /* tab2_unshoot@2x.png in Resources */,
@@ -1694,21 +1738,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5A7BA8BE566827295AC3DD16 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8E0D8510B5C4B6A4856AAA6F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1745,6 +1774,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A2E3E2D1BDF994E0021B3FC /* NSDate+Extend.m in Sources */,
+				2A2E3E541BDF994E0021B3FC /* SVProgressHUD.m in Sources */,
 				2A2E3E2C1BDF994E0021B3FC /* NSArray+Extend.m in Sources */,
 				2A2E3E691BDF994E0021B3FC /* GBALbumPickerCollectionViewCell.m in Sources */,
 				2A2E3E591BDF994E0021B3FC /* PBBlurImageView.m in Sources */,
@@ -1752,8 +1782,12 @@
 				2AD3E8CD1B802B5500B2264B /* CompanyProfileViewController.m in Sources */,
 				2A2E3E351BDF994E0021B3FC /* UIImage+Cut.m in Sources */,
 				016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */,
+<<<<<<< HEAD
 				2A2E3E681BDF994E0021B3FC /* ELCOverlayImageView.m in Sources */,
+||||||| merged common ancestors
+=======
 				01D048821BDC7369003C6D33 /* GBMarketVCViewModel.m in Sources */,
+>>>>>>> 开始写上传逻辑
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
 				2A2E3E5A1BDF994E0021B3FC /* PBPGView.m in Sources */,
 				2A2E3E571BDF994E0021B3FC /* PhotoModel.m in Sources */,
@@ -1764,10 +1798,15 @@
 				2A2E3E4C1BDF994E0021B3FC /* UIImageView+WebCache.m in Sources */,
 				2AD3E8E61B803EED00B2264B /* AddMemberCollectionViewCell.m in Sources */,
 				2A6BC5231B59006B00401B06 /* MLShopViewController.m in Sources */,
+<<<<<<< HEAD
 				2A2E3E431BDF994E0021B3FC /* SDWebImageDownloader.m in Sources */,
 				2A2E3E3C1BDF994E0021B3FC /* UIImage+ReMake.m in Sources */,
+				2A2E3E511BDF994E0021B3FC /* CoreSVP.m in Sources */,
 				2A2E3E5C1BDF994E0021B3FC /* PBScrollView.m in Sources */,
+||||||| merged common ancestors
+=======
 				01D048CB1BDC8A5F003C6D33 /* GBSubClass.m in Sources */,
+>>>>>>> 开始写上传逻辑
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
 				2A2E3E371BDF994E0021B3FC /* UIImage+FixOrientation.m in Sources */,
 				2A2E3E4E1BDF994E0021B3FC /* UIButton+SD.m in Sources */,
@@ -1779,8 +1818,12 @@
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
 				2A2E3E491BDF994E0021B3FC /* UIImage+MultiFormat.m in Sources */,
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
+<<<<<<< HEAD
 				2A2E3E2A1BDF994E0021B3FC /* CALayer+Anim.m in Sources */,
+||||||| merged common ancestors
+=======
 				01D0487F1BDC730A003C6D33 /* GBViewModel.m in Sources */,
+>>>>>>> 开始写上传逻辑
 				01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */,
 				2A2E3E551BDF994E0021B3FC /* LFRoundProgressView.m in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
@@ -1793,6 +1836,7 @@
 				2A2E3E721BDF994E0021B3FC /* GBBehavior.m in Sources */,
 				019215991BB6860500D6D324 /* MoreItemsCollectionViewCell.m in Sources */,
 				2A2E3E621BDF994E0021B3FC /* ELCAlbumPickerController.m in Sources */,
+				2A2E3E521BDF994E0021B3FC /* SVIndefiniteAnimatedView.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				01D048C81BDC89E5003C6D33 /* Product.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,

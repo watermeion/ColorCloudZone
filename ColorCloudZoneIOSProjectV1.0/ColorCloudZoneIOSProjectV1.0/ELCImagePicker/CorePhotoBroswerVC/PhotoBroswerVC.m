@@ -12,12 +12,12 @@
 #import "UIView+Extend.h"
 #import "UIImage+Extend.h"
 #import "PBConst.h"
-#import "CoreSVP.h"
+
 #import "CoreArchive.h"
 #import "PBScrollView.h"
 #import "CALayer+Transition.h"
 
-
+#import <SVProgressHUD.h>
 
 @interface PhotoBroswerVC ()<UIScrollViewDelegate>
 
@@ -526,25 +526,28 @@
     PhotoModel *itemModel = (PhotoModel *)self.photoModels[self.page];
     
     if(!itemView.hasImage){
-        [CoreSVP showSVPWithType:CoreSVPTypeError Msg:@"无图片数据" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+//        [CoreSVP showSVPWithType:CoreSVPTypeError Msg:@"无图片数据" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+        [SVProgressHUD showErrorWithStatus:@"无图片数据"];
         return;
     }
     
     //读取缓存
     if([itemModel read]){//已经保存过本地
         
-        [CoreSVP showSVPWithType:CoreSVPTypeInfo Msg:@"图片已存" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+//        [CoreSVP showSVPWithType:CoreSVPTypeInfo Msg:@"图片已存" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+        
+        [SVProgressHUD showInfoWithStatus:@"图片已存"];
     }else{
         
         //展示提示框
-        [CoreSVP showSVPWithType:CoreSVPTypeLoadingInterface Msg:@"保存中" duration:0 allowEdit:NO beginBlock:nil completeBlock:nil];
-        
+//        [CoreSVP showSVPWithType:CoreSVPTypeLoadingInterface Msg:@"保存中" duration:0 allowEdit:NO beginBlock:nil completeBlock:nil];
+        [SVProgressHUD showInfoWithStatus:@"保存中"];
         [itemView save:^{
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
-                [CoreSVP showSVPWithType:CoreSVPTypeSuccess Msg:@"保存成功" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
-                
+//                [CoreSVP showSVPWithType:CoreSVPTypeSuccess Msg:@"保存成功" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+                 [SVProgressHUD showSuccessWithStatus:@"保存中"];
                 //保存记录
                 [itemModel save];
             });
@@ -552,7 +555,8 @@
             
         } failBlock:^{
             
-            [CoreSVP showSVPWithType:CoreSVPTypeError Msg:@"保存失败" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+//            [CoreSVP showSVPWithType:CoreSVPTypeError Msg:@"保存失败" duration:1.0f allowEdit:NO beginBlock:nil completeBlock:nil];
+            [SVProgressHUD showErrorWithStatus:@"保存失败"];
         }];
     }
 }
