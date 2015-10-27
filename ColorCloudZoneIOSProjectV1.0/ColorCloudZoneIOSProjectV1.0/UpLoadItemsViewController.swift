@@ -91,6 +91,11 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         return cell
     }
     
+    
+    
+    
+    
+    
     // MARK: UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -100,6 +105,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pictureNum < kMaxPicturesNum ? pictureNum : kMaxPicturesNum
     }
+    
     
     
 }
