@@ -57,13 +57,6 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         
         pictureNum = 2
         self.edgesForExtendedLayout = UIRectEdge.None;
-       
-        
-        
-        
-        
-        
-
         // Do any additional setup after loading the view.
     }
 
