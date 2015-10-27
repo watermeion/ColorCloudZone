@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
+#import "GBMarketVCViewModel.h"
+#import "GBViewControllerViewModelProtocol.h"
 
-@interface MarketViewController : GBCustomViewController
+@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol>
+@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
+@property (nonatomic, strong) GBMarketVCViewModel *viewModel;
 
 @end

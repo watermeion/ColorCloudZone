@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GBViewModel.h"
 
 @protocol GBViewControllerViewModelProtocol <NSObject>
+
+/**
+ *  ViewController who wants to get Data from ViewModel,And set data to specific UI Items
+ *
+ *  @param viewModel GBViewModel
+ */
+- (void)mapViewWithViewModel:(GBViewModel *) viewModel;
+
 
 @end

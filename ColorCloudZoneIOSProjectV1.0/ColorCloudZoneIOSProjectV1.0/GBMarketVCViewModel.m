@@ -8,6 +8,23 @@
 
 #import "GBMarketVCViewModel.h"
 
+/**
+ *  include data and operations
+ */
+static NSString *xTableName = @"";
+
+@interface GBMarketVCViewModel ()
+
+- (void) fetchLoadDataFromAVOS;
+
+@end
+
 @implementation GBMarketVCViewModel
+
+
+
+
+
+
 
 @end

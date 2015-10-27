@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  ViewModel Super Class 
+ *  Common Methodß
+ */
 @interface GBViewModel : NSObject
 
 @end

@@ -20,6 +20,10 @@
 		01A441921BD68290003CF3FD /* GBCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A441901BD68290003CF3FD /* GBCustomViewController.m */; settings = {ASSET_TAGS = (); }; };
 		01BDD5431BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDD5421BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDD5441BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		01D0487F1BDC730A003C6D33 /* GBViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D0487E1BDC730A003C6D33 /* GBViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		01D048821BDC7369003C6D33 /* GBMarketVCViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D048811BDC7369003C6D33 /* GBMarketVCViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		01D048C81BDC89E5003C6D33 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D048C71BDC89E5003C6D33 /* Product.m */; settings = {ASSET_TAGS = (); }; };
+		01D048CB1BDC8A5F003C6D33 /* GBSubClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D048CA1BDC8A5F003C6D33 /* GBSubClass.m */; settings = {ASSET_TAGS = (); }; };
 		2A12CD361B5A1F1100A4AC04 /* chatIcon_black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */; };
 		2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */; };
 		2A12CD3A1B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A12CD391B5A1F5E00A4AC04 /* moreBarIcon_black@3x.png */; };
@@ -224,6 +228,17 @@
 		01A441901BD68290003CF3FD /* GBCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBCustomViewController.m; sourceTree = "<group>"; };
 		01BDD5421BC7F4AD0061ACDA /* UpLoadPictureBtnCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadPictureBtnCollectionViewCell.swift; sourceTree = "<group>"; };
 		01BDD5441BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadPicCollectionViewCell.swift; sourceTree = "<group>"; };
+		01D0487D1BDC730A003C6D33 /* GBViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBViewModel.h; sourceTree = "<group>"; };
+		01D0487E1BDC730A003C6D33 /* GBViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBViewModel.m; sourceTree = "<group>"; };
+		01D048801BDC7369003C6D33 /* GBMarketVCViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBMarketVCViewModel.h; sourceTree = "<group>"; };
+		01D048811BDC7369003C6D33 /* GBMarketVCViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBMarketVCViewModel.m; sourceTree = "<group>"; };
+		01D048831BDC79A9003C6D33 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		01D048841BDC79FB003C6D33 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		01D048851BDC7BEE003C6D33 /* GBViewControllerViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBViewControllerViewModelProtocol.h; sourceTree = "<group>"; };
+		01D048C61BDC89E5003C6D33 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		01D048C71BDC89E5003C6D33 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		01D048C91BDC8A5F003C6D33 /* GBSubClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSubClass.h; sourceTree = "<group>"; };
+		01D048CA1BDC8A5F003C6D33 /* GBSubClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBSubClass.m; sourceTree = "<group>"; };
 		26C06B7E4B329A7DF1078E2B /* Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.release.xcconfig"; sourceTree = "<group>"; };
 		2A12CD351B5A1F1100A4AC04 /* chatIcon_black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@2x.png"; sourceTree = "<group>"; };
 		2A12CD371B5A1F2500A4AC04 /* chatIcon_black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatIcon_black@3x.png"; sourceTree = "<group>"; };
@@ -527,6 +542,7 @@
 		011DBDD11BD10CB700B19231 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01D048C51BDC89A6003C6D33 /* SubClasses */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -545,7 +561,6 @@
 			isa = PBXGroup;
 			children = (
 				011DBDD21BD10E7A00B19231 /* MemberCenterManager */,
-				014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */,
 			);
 			name = Mangers;
 			sourceTree = "<group>";
@@ -556,6 +571,20 @@
 				2A85DACF1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1.0 */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		0155AB731BDB13D80057E659 /* SupplierUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SupplierUI;
+			sourceTree = "<group>";
+		};
+		0155AB741BDB13EB0057E659 /* SellerUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SellerUI;
 			sourceTree = "<group>";
 		};
 		016871BF1BB79A6E0060ADAD /* UpLoadVC */ = {
@@ -571,6 +600,7 @@
 		017E5F6C1BD127BB00C55992 /* MarketVC */ = {
 			isa = PBXGroup;
 			children = (
+				01D0487C1BDC72DA003C6D33 /* ViewModel */,
 				017E5F6D1BD1280B00C55992 /* MarketViewController.h */,
 				017E5F6E1BD1280B00C55992 /* MarketViewController.m */,
 			);
@@ -606,6 +636,26 @@
 				01A441901BD68290003CF3FD /* GBCustomViewController.m */,
 			);
 			name = SuperClass;
+			sourceTree = "<group>";
+		};
+		01D0487C1BDC72DA003C6D33 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				01D048801BDC7369003C6D33 /* GBMarketVCViewModel.h */,
+				01D048811BDC7369003C6D33 /* GBMarketVCViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		01D048C51BDC89A6003C6D33 /* SubClasses */ = {
+			isa = PBXGroup;
+			children = (
+				01D048C91BDC8A5F003C6D33 /* GBSubClass.h */,
+				01D048CA1BDC8A5F003C6D33 /* GBSubClass.m */,
+				01D048C61BDC89E5003C6D33 /* Product.h */,
+				01D048C71BDC89E5003C6D33 /* Product.m */,
+			);
+			name = SubClasses;
 			sourceTree = "<group>";
 		};
 		215161158651BAC8E5B0089D /* Pods */ = {
@@ -1114,6 +1164,10 @@
 				2A6BC4B41B58E8D800401B06 /* marcoHeader.h */,
 				2A6BC4B31B58DC4800401B06 /* MLTabBar */,
 				2A6BC4AC1B58DC0E00401B06 /* MLNavi */,
+				01D0487D1BDC730A003C6D33 /* GBViewModel.h */,
+				01D0487E1BDC730A003C6D33 /* GBViewModel.m */,
+				01D048831BDC79A9003C6D33 /* Constants.h */,
+				01D048851BDC7BEE003C6D33 /* GBViewControllerViewModelProtocol.h */,
 			);
 			name = "Common Class";
 			path = ..;
@@ -1246,6 +1300,8 @@
 			isa = PBXGroup;
 			children = (
 				2A2E3D6A1BDF99050021B3FC /* CommonModule */,
+				014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */,
+				01D048841BDC79FB003C6D33 /* PrefixHeader.pch */,
 				2A6BC4A81B58DB9100401B06 /* Common Class */,
 				014574371BAEA38100EC8CD1 /* Mangers */,
 				2A85DAD01B53F5CD008386B0 /* Supporting Files */,
@@ -1410,6 +1466,8 @@
 		2ADE537A1B88CE2600E80AD5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0155AB741BDB13EB0057E659 /* SellerUI */,
+				0155AB731BDB13D80057E659 /* SupplierUI */,
 				01A441861BD67739003CF3FD /* LoginAndRegistNavi */,
 				017E5F6C1BD127BB00C55992 /* MarketVC */,
 				016871BF1BB79A6E0060ADAD /* UpLoadVC */,
@@ -1721,6 +1779,7 @@
 				2A2E3E351BDF994E0021B3FC /* UIImage+Cut.m in Sources */,
 				016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */,
 				2A2E3E681BDF994E0021B3FC /* ELCOverlayImageView.m in Sources */,
+				01D048821BDC7369003C6D33 /* GBMarketVCViewModel.m in Sources */,
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
 				2A2E3E5A1BDF994E0021B3FC /* PBPGView.m in Sources */,
 				2A2E3E571BDF994E0021B3FC /* PhotoModel.m in Sources */,
@@ -1735,6 +1794,7 @@
 				2A2E3E3C1BDF994E0021B3FC /* UIImage+ReMake.m in Sources */,
 				2A2E3E511BDF994E0021B3FC /* CoreSVP.m in Sources */,
 				2A2E3E5C1BDF994E0021B3FC /* PBScrollView.m in Sources */,
+				01D048CB1BDC8A5F003C6D33 /* GBSubClass.m in Sources */,
 				2ADE537D1B88D76700E80AD5 /* MySettingsTableViewController.m in Sources */,
 				2A2E3E371BDF994E0021B3FC /* UIImage+FixOrientation.m in Sources */,
 				2A2E3E4E1BDF994E0021B3FC /* UIButton+SD.m in Sources */,
@@ -1747,6 +1807,7 @@
 				2A2E3E491BDF994E0021B3FC /* UIImage+MultiFormat.m in Sources */,
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
 				2A2E3E2A1BDF994E0021B3FC /* CALayer+Anim.m in Sources */,
+				01D0487F1BDC730A003C6D33 /* GBViewModel.m in Sources */,
 				01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */,
 				2A2E3E551BDF994E0021B3FC /* LFRoundProgressView.m in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
@@ -1761,6 +1822,7 @@
 				2A2E3E621BDF994E0021B3FC /* ELCAlbumPickerController.m in Sources */,
 				2A2E3E521BDF994E0021B3FC /* SVIndefiniteAnimatedView.m in Sources */,
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
+				01D048C81BDC89E5003C6D33 /* Product.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
 				2A2E3E601BDF994E0021B3FC /* PhotoBroswerVC.m in Sources */,
 				2A2E3E731BDF994E0021B3FC /* GBImagePickerBehavior.m in Sources */,
@@ -1947,6 +2009,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ColorCloudZoneIOSProjectV1.0/PrefixHeader.pch";
 				INFOPLIST_FILE = ColorCloudZoneIOSProjectV1.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1965,6 +2030,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/ColorCloudZoneIOSProjectV1.0/PrefixHeader.pch";
 				INFOPLIST_FILE = ColorCloudZoneIOSProjectV1.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

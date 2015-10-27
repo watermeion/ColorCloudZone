@@ -11,6 +11,7 @@
 #import <AVOSCloud/AVOSCloud.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "MemberCenterManager.h"
+#import "GBSubClass.h"
 @interface AppDelegate ()
 
 @end
@@ -28,9 +29,13 @@
     //
     AVObject *launchRecordObject = [AVObject objectWithClassName:@"LaunchRecordObject"];
     [launchRecordObject setObject:@"bar" forKey:@"foo"];
-    [launchRecordObject setObject:launchOptions forKey:@"LaunchOption"];    [launchRecordObject save];
+    [launchRecordObject setObject:launchOptions forKey:@"LaunchOption"];
+    [launchRecordObject save];
     
     [IQKeyboardManager sharedManager].enable = YES;
+    
+    //
+    [GBSubClass registerSubclasses];
     
 
     return YES;

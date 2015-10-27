@@ -7,7 +7,21 @@
 //
 
 #import "AVObject.h"
+#import "AVObject+Subclass.h"
+#import <AVOSCloud/AVSubclassing.h>
 
-@interface GBSubClass : AVObject
+/**
+ *  base class for subclassing
+ *  this class has basic properties for AVSubClass
+ */
+@interface GBSubClass : AVObject <AVSubclassing>
+
+@property (nonatomic, strong) NSString *objectId;
+@property (nonatomic, strong) NSDate *updateAt;
+@property (nonatomic, strong) NSDate *createdAt;
+
+
+
++ (void)registerSubclasses;
 
 @end

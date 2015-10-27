@@ -19,7 +19,15 @@ let kUpLoadPicBtnCellIdentifier = "UpLoadPictureBtnCollectionViewCell";
 let kUpLoadPicCellIdentifier = "UpLoadPicCollectionViewCell"
 
 
+class UpLoadItemsViewControllerViewModel: GBViewModel {
+    
+    //properties
+    
+}
+
 class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate,GBImagePickerBehaviorDataTargetDelegate {
+
+
     //IBOutlet
     @IBOutlet weak var newItemName: UITextField!
     @IBOutlet weak var newItemSerialNum: UITextField!
@@ -33,14 +41,25 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     @IBOutlet weak var newItemDetailInputView: UITextView!
     
     
+    var newItemCategory: String?
+    var newItemMaterial: String?
+    var newItemSurfaceMaterial: String?
     
-    var imagesForUpload: Array?;
     
+    
+    @IBAction func donebtnAction(sender: AnyObject) {
+        
+        if self.checkUserInputDataIntegrity() {
+        
+         NSLog("newItemDoneBtnAction hit!")
+         return
+        }
+         NSLog("newItemDoneBtnAction Data imcomplete !")
+    }
     @IBAction func newItemCategoryBtnAction(sender: AnyObject) {
         //
         NSLog("newItemCategoryBtnAction hit!")
-        
-        
+    
     }
     @IBAction func newItemMateralBtnAction(sender: AnyObject) {
         
@@ -51,21 +70,26 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     //Property
     var pictureNum: Int = 0
-    
+     // MARK: ViewController LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         pictureNum = 2
         self.edgesForExtendedLayout = UIRectEdge.None;
+
         // Do any additional setup after loading the view.
     }
 
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-
+    
     /*
     // MARK: - Navigation
 
@@ -114,12 +138,69 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     
+
     // MARK： GBImagePickerBehaviorDataTargetDelegate
     func imagePickerBehaviorSelectedImages(imageArray: [AnyObject]!) {
       
-        if imageArray.count > 0 {
-           imagesForUpload! = imageArray
+       
+    }
+
+    // MARK: Internal Helper
+    
+    
+    func checkUserInputDataIntegrity() -> Bool {
+       
+        if self.newItemName.text!.isEmpty  {
+         return false
         }
+        
+        
+        if self.newItemName.text!.isEmpty {
+           return false
+        }
+        
+        
+        
+        
+        if self.newItemSerialNum.text!.isEmpty {
+         return false
+        }
+        
+        if  self.newItemWholeSalePrice.text!.isEmpty {
+         return false
+        }
+        
+        if  self.newItemColor.text!.isEmpty  {
+         return false
+        }
+        
+        if self.newItemSizeInput.text!.isEmpty  {
+         return false
+        }
+        
+        if self.newItemDetailInputView.text!.isEmpty  {
+         return false
+        }
+        
+        //Btn selected
+        
+        if let category = newItemCategory {
+          
+        }else { return false }
+        
+        if let material = newItemMaterial {
+            
+        }else { return false }
+        
+        if let surfaceMaterial = newItemSurfaceMaterial {
+            
+        }else { return false }
+        
+        return true
     }
     
+    
+    
+    // MARK: UI Interface
+
 }
