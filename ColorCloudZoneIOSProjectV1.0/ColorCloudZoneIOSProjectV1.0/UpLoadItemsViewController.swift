@@ -19,7 +19,7 @@ let kUpLoadPicBtnCellIdentifier = "UpLoadPictureBtnCollectionViewCell";
 let kUpLoadPicCellIdentifier = "UpLoadPicCollectionViewCell"
 
 
-class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate {
+class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate,GBImagePickerBehaviorDataTargetDelegate {
     //IBOutlet
     @IBOutlet weak var newItemName: UITextField!
     @IBOutlet weak var newItemSerialNum: UITextField!
@@ -34,7 +34,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     
     
-    
+    var imagesForUpload: Array?;
     
     @IBAction func newItemCategoryBtnAction(sender: AnyObject) {
         //
@@ -94,6 +94,11 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+       
+        
+    }
+    
     
     
     
@@ -109,5 +114,12 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     
+    // MARK： GBImagePickerBehaviorDataTargetDelegate
+    func imagePickerBehaviorSelectedImages(imageArray: [AnyObject]!) {
+      
+        if imageArray.count > 0 {
+           imagesForUpload! = imageArray
+        }
+    }
     
 }
