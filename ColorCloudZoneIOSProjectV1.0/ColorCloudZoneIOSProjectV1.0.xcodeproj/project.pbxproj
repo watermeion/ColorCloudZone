@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014052DB1BE4686600E5C1F2 /* ic_check_state@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */; settings = {ASSET_TAGS = (); }; };
+		014052DC1BE4686600E5C1F2 /* ic_check_state@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D61BE4686600E5C1F2 /* ic_check_state@3x.png */; settings = {ASSET_TAGS = (); }; };
+		014052DD1BE4686600E5C1F2 /* ic_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D71BE4686600E5C1F2 /* ic_check@2x.png */; settings = {ASSET_TAGS = (); }; };
+		014052DE1BE4686600E5C1F2 /* ic_check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D81BE4686600E5C1F2 /* ic_check@3x.png */; settings = {ASSET_TAGS = (); }; };
+		014052DF1BE4686600E5C1F2 /* ic_deletephoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D91BE4686600E5C1F2 /* ic_deletephoto@2x.png */; settings = {ASSET_TAGS = (); }; };
+		014052E01BE4686600E5C1F2 /* ic_deletephoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052DA1BE4686600E5C1F2 /* ic_deletephoto@3x.png */; settings = {ASSET_TAGS = (); }; };
+		014052EB1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 014052EA1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m */; settings = {ASSET_TAGS = (); }; };
+		014052EF1BE46DA800E5C1F2 /* GBTableViewSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */; settings = {ASSET_TAGS = (); }; };
+		014052F01BE46DA800E5C1F2 /* GBTableViewSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */; settings = {ASSET_TAGS = (); }; };
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 017E5F6A1BD1272700C55992 /* uialq.jpg */; settings = {ASSET_TAGS = (); }; };
@@ -204,6 +213,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_state@2x.png"; sourceTree = "<group>"; };
+		014052D61BE4686600E5C1F2 /* ic_check_state@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_state@3x.png"; sourceTree = "<group>"; };
+		014052D71BE4686600E5C1F2 /* ic_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check@2x.png"; sourceTree = "<group>"; };
+		014052D81BE4686600E5C1F2 /* ic_check@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check@3x.png"; sourceTree = "<group>"; };
+		014052D91BE4686600E5C1F2 /* ic_deletephoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_deletephoto@2x.png"; sourceTree = "<group>"; };
+		014052DA1BE4686600E5C1F2 /* ic_deletephoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_deletephoto@3x.png"; sourceTree = "<group>"; };
+		014052E91BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTableViewSelectorBehavior.h; sourceTree = "<group>"; };
+		014052EA1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTableViewSelectorBehavior.m; sourceTree = "<group>"; };
+		014052EC1BE46DA800E5C1F2 /* GBTableViewSelectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBTableViewSelectorController.h; sourceTree = "<group>"; };
+		014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTableViewSelectorController.m; sourceTree = "<group>"; };
+		014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GBTableViewSelectorController.xib; sourceTree = "<group>"; };
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
@@ -543,6 +563,16 @@
 			name = MemberCenterManager;
 			sourceTree = "<group>";
 		};
+		014052E21BE4694500E5C1F2 /* TableViewSelecter */ = {
+			isa = PBXGroup;
+			children = (
+				014052EC1BE46DA800E5C1F2 /* GBTableViewSelectorController.h */,
+				014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */,
+				014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */,
+			);
+			name = TableViewSelecter;
+			sourceTree = "<group>";
+		};
 		014574371BAEA38100EC8CD1 /* Mangers */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,6 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				2A2E3D6B1BDF994E0021B3FC /* ELCImagePicker */,
+				014052E21BE4694500E5C1F2 /* TableViewSelecter */,
 				2A2E3E211BDF994E0021B3FC /* GBBehavior */,
 			);
 			name = CommonModule;
@@ -1061,6 +1092,12 @@
 		2A2E3E1B1BDF994E0021B3FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */,
+				014052D61BE4686600E5C1F2 /* ic_check_state@3x.png */,
+				014052D71BE4686600E5C1F2 /* ic_check@2x.png */,
+				014052D81BE4686600E5C1F2 /* ic_check@3x.png */,
+				014052D91BE4686600E5C1F2 /* ic_deletephoto@2x.png */,
+				014052DA1BE4686600E5C1F2 /* ic_deletephoto@3x.png */,
 				2A2E3E1C1BDF994E0021B3FC /* ELCAlbumPickerController.xib */,
 				2A2E3E1D1BDF994E0021B3FC /* ELCAssetPicker.xib */,
 				2A2E3E1E1BDF994E0021B3FC /* ELCAssetTablePicker.xib */,
@@ -1077,6 +1114,8 @@
 				2A2E3E231BDF994E0021B3FC /* GBBehavior.m */,
 				2A2E3E241BDF994E0021B3FC /* GBImagePickerBehavior.h */,
 				2A2E3E251BDF994E0021B3FC /* GBImagePickerBehavior.m */,
+				014052E91BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.h */,
+				014052EA1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m */,
 			);
 			path = GBBehavior;
 			sourceTree = "<group>";
@@ -1602,6 +1641,7 @@
 				2AD3E8E81B803F1900B2264B /* add@3x.png in Resources */,
 				2A56CA0F1B6FB26400C8E3DC /* home@3x.png in Resources */,
 				2A12CD3C1B5A1F7800A4AC04 /* moreBarIcon_black@2x.png in Resources */,
+				014052DB1BE4686600E5C1F2 /* ic_check_state@2x.png in Resources */,
 				2A2E3E6E1BDF994E0021B3FC /* ELCAssetPicker.xib in Resources */,
 				2A2E3E6F1BDF994E0021B3FC /* ELCAssetTablePicker.xib in Resources */,
 				2AACC7091B764F300065216C /* phone@2x.png in Resources */,
@@ -1627,15 +1667,18 @@
 				2A6BC51C1B58F5FF00401B06 /* tab4_unshoot@3x.png in Resources */,
 				2A2E3E6D1BDF994E0021B3FC /* ELCAlbumPickerController.xib in Resources */,
 				2A6BC50E1B58F5FF00401B06 /* tab2_unshoot.png in Resources */,
+				014052E01BE4686600E5C1F2 /* ic_deletephoto@3x.png in Resources */,
 				2A6BC5141B58F5FF00401B06 /* tab3_unshoot.png in Resources */,
 				2A6BC5071B58F5FF00401B06 /* tab1@3x.png in Resources */,
 				2ABFC8EF1B5E7AE5009D64E1 /* placeholderForCell.jpg in Resources */,
 				2A2E3E701BDF994E0021B3FC /* Overlay.png in Resources */,
 				2A2E3E6C1BDF994E0021B3FC /* GBALbumPickerCollectionViewController.xib in Resources */,
+				014052F01BE46DA800E5C1F2 /* GBTableViewSelectorController.xib in Resources */,
 				2A56CA0D1B6FB0C500C8E3DC /* camera.png in Resources */,
 				2AD3E8EA1B803F2300B2264B /* add@2x.png in Resources */,
 				2ABFC8EB1B5E7744009D64E1 /* CustomSelectionBarView.xib in Resources */,
 				2A85DADE1B53F5CD008386B0 /* Images.xcassets in Resources */,
+				014052DE1BE4686600E5C1F2 /* ic_check@3x.png in Resources */,
 				2AD3E8D21B802C5700B2264B /* pwdIcon@2x.png in Resources */,
 				2A12CD381B5A1F2500A4AC04 /* chatIcon_black@3x.png in Resources */,
 				2A6BC50D1B58F5FF00401B06 /* tab2@3x.png in Resources */,
@@ -1655,6 +1698,7 @@
 				2A6BC51B1B58F5FF00401B06 /* tab4_unshoot@2x.png in Resources */,
 				2A6BC50F1B58F5FF00401B06 /* tab2_unshoot@2x.png in Resources */,
 				2A6BC5191B58F5FF00401B06 /* tab4@3x.png in Resources */,
+				014052DC1BE4686600E5C1F2 /* ic_check_state@3x.png in Resources */,
 				2A6BC50C1B58F5FF00401B06 /* tab2@2x.png in Resources */,
 				2A56CA131B6FB27C00C8E3DC /* home.png in Resources */,
 				2A2E3E711BDF994E0021B3FC /* Overlay@2x.png in Resources */,
@@ -1662,8 +1706,10 @@
 				2AD3E8D01B802C4E00B2264B /* pwdIcon@3x.png in Resources */,
 				2AACC7031B7645AE0065216C /* arrowUpsideDown@2x.png in Resources */,
 				2A6BC5081B58F5FF00401B06 /* tab1_unshoot.png in Resources */,
+				014052DF1BE4686600E5C1F2 /* ic_deletephoto@2x.png in Resources */,
 				2A6BC5091B58F5FF00401B06 /* tab1_unshoot@2x.png in Resources */,
 				2AACC70B1B764F440065216C /* phone@3x.png in Resources */,
+				014052DD1BE4686600E5C1F2 /* ic_check@2x.png in Resources */,
 				2AFEDEF11B60CFFA00268332 /* heart@2x.png in Resources */,
 				2A2E3E5F1BDF994E0021B3FC /* PhotoItemView.xib in Resources */,
 			);
@@ -1744,6 +1790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				014052EF1BE46DA800E5C1F2 /* GBTableViewSelectorController.m in Sources */,
 				2A2E3E2D1BDF994E0021B3FC /* NSDate+Extend.m in Sources */,
 				2A2E3E2C1BDF994E0021B3FC /* NSArray+Extend.m in Sources */,
 				2A2E3E691BDF994E0021B3FC /* GBALbumPickerCollectionViewCell.m in Sources */,
@@ -1753,6 +1800,7 @@
 				2A2E3E351BDF994E0021B3FC /* UIImage+Cut.m in Sources */,
 				016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */,
 				2A2E3E681BDF994E0021B3FC /* ELCOverlayImageView.m in Sources */,
+				014052EB1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m in Sources */,
 				01D048821BDC7369003C6D33 /* GBMarketVCViewModel.m in Sources */,
 				2AD3E8DE1B80395E00B2264B /* MemerShipViewController.m in Sources */,
 				2A2E3E5A1BDF994E0021B3FC /* PBPGView.m in Sources */,

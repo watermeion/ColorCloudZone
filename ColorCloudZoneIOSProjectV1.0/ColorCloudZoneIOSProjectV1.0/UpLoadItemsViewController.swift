@@ -45,13 +45,14 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     var newItemMaterial: String?
     var newItemSurfaceMaterial: String?
     
-    
+    var newItemImagesArray: Array <AnyObject> = []
     
     @IBAction func donebtnAction(sender: AnyObject) {
         
         if self.checkUserInputDataIntegrity() {
         
          NSLog("newItemDoneBtnAction hit!")
+         self.doDataUpload()
          return
         }
          NSLog("newItemDoneBtnAction Data imcomplete !")
@@ -74,16 +75,11 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pictureNum = 2
+        
         self.edgesForExtendedLayout = UIRectEdge.None;
-
         // Do any additional setup after loading the view.
     }
 
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -113,7 +109,8 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         
         let cell:UpLoadPicCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(kUpLoadPicCellIdentifier, forIndexPath: indexPath) as! UpLoadPicCollectionViewCell
         
-        cell.contentImageView.image = UIImage.init(named: "placeholderForCell.jpg");
+        
+        cell.contentImageView.image = newItemImagesArray[indexPath.item-1] as! UIImage;
         return cell
     }
     
@@ -134,6 +131,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        pictureNum = 1+newItemImagesArray.count
         return pictureNum < kMaxPicturesNum ? pictureNum : kMaxPicturesNum
     }
     
@@ -142,7 +140,9 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     // MARK： GBImagePickerBehaviorDataTargetDelegate
     func imagePickerBehaviorSelectedImages(imageArray: [AnyObject]!) {
       
-       
+        newItemImagesArray.appendContentsOf(imageArray);
+        newItemPicCollectionView.reloadData()
+        
     }
 
     // MARK: Internal Helper
@@ -153,13 +153,6 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         if self.newItemName.text!.isEmpty  {
          return false
         }
-        
-        
-        if self.newItemName.text!.isEmpty {
-           return false
-        }
-        
-        
         
         
         if self.newItemSerialNum.text!.isEmpty {
@@ -201,6 +194,42 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     
     
+    
+    
+    func doDataUpload(){
+    
+        //step 1 上传 图片
+    
+        var product = Product();
+        product.productName = self.newItemName.text
+        product.productNum = self.newItemSerialNum.text
+        
+        product.productPrice = NSNumber(integer: Int(self.newItemWholeSalePrice.text!)!)
+        product.productColor = self.newItemColor.text
+        product.productSize = self.newItemSizeInput.text
+        product.productDescri = self.newItemDetailInputView.text;
+        
+    }
+    
     // MARK: UI Interface
 
+    
+    // MARK: Private Helper
+    func uploadImages() ->[AnyObject]{
+        var fileArray :[AnyObject] = []
+        for image in newItemImagesArray{
+         let file = self.uploadSingeImage(image)
+            fileArray.append(file)
+        }
+        
+        return fileArray;
+    }
+    
+    func uploadSingeImage(image:AnyObject) -> AVFile{
+    
+        let data = UIImagePNGRepresentation(image as! UIImage);
+        let file =  AVFile(name: "ImageFile.png",data:data);
+        file.saveInBackground();
+        return file
+    }
 }

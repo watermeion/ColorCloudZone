@@ -69,7 +69,7 @@
             overlayView.labIndex.text = [NSString stringWithFormat:@"%d", asset.index + 1];
         } else {
             if (overlayImage == nil) {
-                overlayImage = [UIImage imageNamed:@"mask.png"];
+                overlayImage = [UIImage imageNamed:@"Overlay"] ;
             }
             ELCOverlayImageView *overlayView = [[ELCOverlayImageView alloc] initWithImage:overlayImage];
             [_overlayViewArray addObject:overlayView];

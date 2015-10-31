@@ -9,7 +9,11 @@
 #import "GBViewModel.h"
 
 
+//UI
+#import <SVProgressHUD/SVProgressHUD.h>
+
 ///model
 #import "Product.h"
 
-
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVFile.h>

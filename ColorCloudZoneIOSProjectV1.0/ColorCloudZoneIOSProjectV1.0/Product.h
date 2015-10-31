@@ -14,7 +14,7 @@
 
 //lazy Model,
 @property (nonatomic,strong) NSString *productFactory;
-@property (nonatomic,strong) NSString *ProductColor;
+@property (nonatomic,strong) NSString *productColor;
 
 @property (nonatomic,strong) NSNumber *like;
 @property (nonatomic,strong) NSString *productDescri;

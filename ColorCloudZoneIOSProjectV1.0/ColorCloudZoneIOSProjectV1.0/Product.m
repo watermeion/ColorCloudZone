@@ -11,7 +11,7 @@
 @implementation Product
 
 @dynamic productFactory;
-@dynamic ProductColor;
+@dynamic productColor;
 @dynamic like;
 @dynamic productDescri;
 @dynamic productImage;
