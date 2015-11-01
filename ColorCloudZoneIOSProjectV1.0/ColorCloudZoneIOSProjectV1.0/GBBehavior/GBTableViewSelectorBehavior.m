@@ -9,6 +9,12 @@
 #import "GBTableViewSelectorBehavior.h"
 
 #import "MLNavigationController.h"
+
+@interface GBTableViewSelectorBehavior()
+{
+    id _sender;
+}
+@end
 @implementation GBTableViewSelectorBehavior 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -20,6 +26,7 @@
 
 - (void)callSelectAction:(id)sender{
    //自定义
+    _sender = sender;
     [self pushSelector:sender];
 }
 
@@ -28,29 +35,29 @@
 
 - (void)pushSelector:(id)sender{
    
-    
+    [self showSelectorView:(id)sender];
 
 }
 
-- (void)showSelectorView{
+- (void)showSelectorView:(id)sender{
     if (self.delegate && self.owner) {
     
-        GBTableViewSelectorController *selector = [[GBTableViewSelectorController alloc]init];
-        selector.delegate = self;
-        if ([self.delegate respondsToSelector:@selector(arrayforGBTableViewSelectorBehavior)]) {
+        GBTableViewSelectorController *selectorVC = [[GBTableViewSelectorController alloc]init];
+        selectorVC.delegate = self;
+        if ([self.delegate respondsToSelector:@selector(arrayforGBTableViewSelectorBehaviorWith:)]) {
             
-            NSArray *dataArray = [self.delegate arrayforGBTableViewSelectorBehavior];
-            selector.datasource = [dataArray copy];
+            NSArray *dataArray = [self.delegate arrayforGBTableViewSelectorBehaviorWith:sender];
+            selectorVC.datasource = [dataArray copy];
             if ([self.owner isKindOfClass:[UIViewController class]]) {
                 UIViewController *superViewController = self.owner;
                 
                 if(superViewController.navigationController){
-                    [superViewController.navigationController pushViewController:selector animated:YES];
+                    [superViewController.navigationController pushViewController:selectorVC animated:YES];
                 }else{
                  
-                    MLNavigationController *navigation = [[MLNavigationController alloc]initWithRootViewController:selector];
-                    [superViewController presentViewController:selector animated:YES completion:^{
-
+                    MLNavigationController *navigation = [[MLNavigationController alloc]initWithRootViewController:selectorVC];
+                    [superViewController presentViewController:navigation animated:YES completion:^{
+                        [selectorVC setBackBtnWhilePresented];
                     }];
                 }
             }
@@ -84,8 +91,8 @@
 #pragma mark - Delegate
 
 - (void)tableViewSelectorSelectedResults:(NSArray *)results{
-    if ([self.delegate respondsToSelector:@selector(tableViewSelectorSelectedResults:)]) {
-        [self.delegate tableViewSelectorSelectedResults:results];
+    if ([self.delegate respondsToSelector:@selector(tableViewSelectorSelectedResults:fromSender:)]) {
+        [self.delegate tableViewSelectorSelectedResults:results fromSender:_sender];
     }
 }
 

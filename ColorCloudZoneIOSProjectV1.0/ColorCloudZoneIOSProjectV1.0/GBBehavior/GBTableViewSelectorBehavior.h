@@ -12,9 +12,9 @@
 
 @protocol GBTableViewSelectorBehaviorDelegate <NSObject>
 
-- (NSArray *)arrayforGBTableViewSelectorBehavior;
+- (NSArray *)arrayforGBTableViewSelectorBehaviorWith:(id)sender;
 
-- (void)tableViewSelectorSelectedResults:(NSArray*) results;
+- (void)tableViewSelectorSelectedResults:(NSArray*) results fromSender:(id)sender;
 
 @end
 

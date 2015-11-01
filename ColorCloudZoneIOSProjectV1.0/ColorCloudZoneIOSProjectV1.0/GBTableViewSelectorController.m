@@ -11,9 +11,12 @@
 @interface GBTableViewSelectorController ()
 {
     NSMutableArray *_selectedArray;
+   
 }
 
 @end
+
+static NSString* const kUITableViewCellIdentifer = @"kUITableViewCellIdentifer";
 
 @implementation GBTableViewSelectorController
 
@@ -25,7 +28,20 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //注册cell
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kUITableViewCellIdentifer];
+    //table style
+//    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+    
+    
 }
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -52,13 +68,19 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStateDefaultMask reuseIdentifier:@"reuseIdentifier"];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUITableViewCellIdentifer forIndexPath:indexPath];
+    //清空所有数据
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.textLabel.text = nil;
+    
     
     cell.textLabel.text = [self.datasource objectAtIndex:indexPath.row];
- 
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if ([_selectedArray containsObject:cell.textLabel.text]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
     return cell;
 }
 
@@ -67,28 +89,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+    if ([_selectedArray containsObject:cell.textLabel.text]) {
         //修改UI
         NSString *selectString = [self.datasource objectAtIndex:indexPath.row];
         [_selectedArray removeObject:selectString];
         cell.accessoryType = UITableViewCellAccessoryNone;
         //修改数据
-        
     }else {
-        
         //修改数据
         [_selectedArray addObject:[self.datasource objectAtIndex:indexPath.row]];
         //修改UI
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
     }
-    
-    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)setBackBtnWhilePresented{
   
-    UIBarButtonItem *presentedBackBtn = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss:)];
+    UIBarButtonItem *presentedBackBtn = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
     self.navigationItem.leftBarButtonItem = presentedBackBtn;
 }
 

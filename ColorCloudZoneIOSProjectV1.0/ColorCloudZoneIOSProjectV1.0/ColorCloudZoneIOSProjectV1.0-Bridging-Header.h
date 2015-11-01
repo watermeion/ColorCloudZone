@@ -8,6 +8,7 @@
 #import "GBViewControllerViewModelProtocol.h"
 #import "GBViewModel.h"
 
+#import "GBTableViewSelectorBehavior.h"
 
 //UI
 #import <SVProgressHUD/SVProgressHUD.h>

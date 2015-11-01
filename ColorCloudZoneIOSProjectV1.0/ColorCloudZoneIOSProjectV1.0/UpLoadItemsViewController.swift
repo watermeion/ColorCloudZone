@@ -25,7 +25,7 @@ class UpLoadItemsViewControllerViewModel: GBViewModel {
     
 }
 
-class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate,GBImagePickerBehaviorDataTargetDelegate {
+class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate,GBImagePickerBehaviorDataTargetDelegate,GBTableViewSelectorBehaviorDelegate {
 
 
     //IBOutlet
@@ -47,35 +47,24 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     var newItemImagesArray: Array <AnyObject> = []
     
-    @IBAction func donebtnAction(sender: AnyObject) {
-        
-        if self.checkUserInputDataIntegrity() {
-        
-         NSLog("newItemDoneBtnAction hit!")
-         self.doDataUpload()
-         return
-        }
-         NSLog("newItemDoneBtnAction Data imcomplete !")
-    }
-    @IBAction func newItemCategoryBtnAction(sender: AnyObject) {
-        //
-        NSLog("newItemCategoryBtnAction hit!")
     
-    }
-    @IBAction func newItemMateralBtnAction(sender: AnyObject) {
-        
-    }
+    var selector = GBTableViewSelectorBehavior()
     
-    @IBAction func newItemSurfaceMateralBtnAction(sender: AnyObject) {
-        
-    }
     //Property
     var pictureNum: Int = 0
+    
+    
+    
+
      // MARK: ViewController LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        selector.delegate = self
+        selector.owner = self
+        
+
         self.edgesForExtendedLayout = UIRectEdge.None;
         // Do any additional setup after loading the view.
     }
@@ -121,9 +110,6 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     
-    
-    
-    
     // MARK: UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -144,7 +130,67 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         newItemPicCollectionView.reloadData()
         
     }
+    
+    
+    
+    // MARK: GBTableViewSelectorBehaviorDelegate
 
+    
+    func callSelectorAction (sender: AnyObject!) {
+      selector.callSelectAction(sender)
+    }
+    
+    
+    func arrayforGBTableViewSelectorBehaviorWith(sender: AnyObject!) -> [AnyObject]! {
+        
+        
+        let newItemCategoryData: [String] = ["上衣","裤子","西服","西装","外套"]
+        
+        let newItemMaterialData: [String] = ["棉","麻","混纺"]
+        
+        let newItemSurfaceMaterialData: [String] = ["光","哑光","非光"]
+        if sender.isEqual(self.newItemCategoryBtn){
+         return newItemCategoryData
+        }
+        
+        if sender.isEqual(self.newItemMateralBtn){
+        return newItemMaterialData
+        }
+        
+        if sender.isEqual(self.newItemSurfaceMateralBtn){
+          return newItemSurfaceMaterialData
+        }
+        return [];
+    }
+    
+    func tableViewSelectorSelectedResults(results: [AnyObject]!, fromSender sender: AnyObject!) {
+    
+        if sender.isEqual(self.newItemCategoryBtn){
+            newItemCategory = ""
+            for item in results{
+             newItemCategory?.appendContentsOf(item as! String)
+            }
+            
+        }
+        
+        if sender.isEqual(self.newItemMateralBtn){
+            newItemMaterial = ""
+            for item in results{
+                newItemMaterial?.appendContentsOf(item as! String)
+            }
+        }
+        
+        if sender.isEqual(self.newItemSurfaceMateralBtn){
+            newItemSurfaceMaterial = ""
+            for item in results{
+                newItemSurfaceMaterial?.appendContentsOf(item as! String)
+            }
+            
+        }
+    }
+        
+    
+   
     // MARK: Internal Helper
     
     
@@ -195,41 +241,94 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     
     
-    
+    var imageFiles: [AVFile] = []
     func doDataUpload(){
     
-        //step 1 上传 图片
-    
-        var product = Product();
+        guard self.imageUploadSuccess && newItemImagesArray.count>0 else{
+            SVProgressHUD.showInfoWithStatus("请先上传照片")
+            return
+        }
+        let product = Product();
         product.productName = self.newItemName.text
         product.productNum = self.newItemSerialNum.text
         
-        product.productPrice = NSNumber(integer: Int(self.newItemWholeSalePrice.text!)!)
+        product.productPrice = (integer: Int(self.newItemWholeSalePrice.text!))
         product.productColor = self.newItemColor.text
         product.productSize = self.newItemSizeInput.text
         product.productDescri = self.newItemDetailInputView.text;
+        product.productImage = self.imageFiles.first
         
+        product.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                SVProgressHUD.showSuccessWithStatus("上传成功")
+            }
+            else
+            {
+               SVProgressHUD.showErrorWithStatus("失败")
+                print(error.description)
+            }
+        }
     }
     
     // MARK: UI Interface
+    
+    @IBOutlet weak var upLoadAction: UIButton!
+    var imageUploadSuccess:Bool = false
+    @IBAction func uploadImageAction(sender: AnyObject) {
+        self.uploadImages()
+    }
+    
+    @IBAction func donebtnAction(sender: AnyObject) {
+        
+        if self.checkUserInputDataIntegrity() {
+            
+            NSLog("newItemDoneBtnAction hit!")
+            self.doDataUpload()
+            return
+        }
+        NSLog("newItemDoneBtnAction Data imcomplete !")
+    }
+    @IBAction func newItemCategoryBtnAction(sender: AnyObject) {
+        //
+        NSLog("newItemCategoryBtnAction hit!")
+        self .callSelectorAction(sender);
+    }
+    @IBAction func newItemMateralBtnAction(sender: AnyObject) {
+        self .callSelectorAction(sender);
+    }
+    
+    @IBAction func newItemSurfaceMateralBtnAction(sender: AnyObject) {
+        self .callSelectorAction(sender);
+    }
+    
 
     
     // MARK: Private Helper
-    func uploadImages() ->[AnyObject]{
-        var fileArray :[AnyObject] = []
+    func uploadImages(){
+    
         for image in newItemImagesArray{
-         let file = self.uploadSingeImage(image)
-            fileArray.append(file)
+          self.uploadSingeImageAsync(image)
         }
-        
-        return fileArray;
     }
     
-    func uploadSingeImage(image:AnyObject) -> AVFile{
-    
+    func uploadSingeImageAsync(image:AnyObject) {
+        var count = newItemImagesArray.count
+         SVProgressHUD.showWithStatus("正在上传照片");
         let data = UIImagePNGRepresentation(image as! UIImage);
         let file =  AVFile(name: "ImageFile.png",data:data);
-        file.saveInBackground();
-        return file
+        file.saveInBackgroundWithBlock { (success, error) -> Void in
+            if success {
+                self.imageFiles.append(file)
+                var productImageFileobject = AVObject.init(className: "ProductImageFile")
+                productImageFileobject.setObject(file, forKey: "productImageFile")
+                productImageFileobject.saveInBackground();
+                --count
+            }
+            if count == 0 {
+              SVProgressHUD.showSuccessWithStatus("上传照片成功");
+                self.imageUploadSuccess = true
+            }
+        }
+        
     }
 }
