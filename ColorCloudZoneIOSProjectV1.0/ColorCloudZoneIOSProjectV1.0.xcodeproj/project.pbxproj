@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0107B36E1BE6E75B0062F315 /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107B36D1BE6E75B0062F315 /* Shop.m */; settings = {ASSET_TAGS = (); }; };
 		014052DB1BE4686600E5C1F2 /* ic_check_state@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */; settings = {ASSET_TAGS = (); }; };
 		014052DC1BE4686600E5C1F2 /* ic_check_state@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D61BE4686600E5C1F2 /* ic_check_state@3x.png */; settings = {ASSET_TAGS = (); }; };
 		014052DD1BE4686600E5C1F2 /* ic_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D71BE4686600E5C1F2 /* ic_check@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -213,6 +214,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0107B36C1BE6E75B0062F315 /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
+		0107B36D1BE6E75B0062F315 /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
 		014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_state@2x.png"; sourceTree = "<group>"; };
 		014052D61BE4686600E5C1F2 /* ic_check_state@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check_state@3x.png"; sourceTree = "<group>"; };
 		014052D71BE4686600E5C1F2 /* ic_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_check@2x.png"; sourceTree = "<group>"; };
@@ -670,6 +673,8 @@
 				01D048CA1BDC8A5F003C6D33 /* GBSubClass.m */,
 				01D048C61BDC89E5003C6D33 /* Product.h */,
 				01D048C71BDC89E5003C6D33 /* Product.m */,
+				0107B36C1BE6E75B0062F315 /* Shop.h */,
+				0107B36D1BE6E75B0062F315 /* Shop.m */,
 			);
 			name = SubClasses;
 			sourceTree = "<group>";
@@ -1873,6 +1878,7 @@
 				2A2E3E6B1BDF994E0021B3FC /* GBALbumPickerCollectionViewController.m in Sources */,
 				2A2E3E401BDF994E0021B3FC /* SDImageCache.m in Sources */,
 				2AD3E8DB1B80313E00B2264B /* AddMemberShipViewController.m in Sources */,
+				0107B36E1BE6E75B0062F315 /* Shop.m in Sources */,
 				2A2E3E5B1BDF994E0021B3FC /* PBSaveBtn.m in Sources */,
 				2A2E3E271BDF994E0021B3FC /* PBConst.m in Sources */,
 				2A2E3E2E1BDF994E0021B3FC /* NSObject+Extend.m in Sources */,
