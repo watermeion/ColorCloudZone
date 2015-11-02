@@ -17,6 +17,7 @@
 @interface GBTableViewSelectorController : UITableViewController
 
 @property (nonatomic,strong) NSArray<NSString*> *datasource;
+@property (nonatomic, strong) NSArray *selectedDatasource;
 
 @property (nonatomic,strong) NSArray *results;
 @property (nonatomic, weak) id<GBTableViewSelectorResultDelegate> delegate;

@@ -16,6 +16,8 @@
 
 - (void)tableViewSelectorSelectedResults:(NSArray*) results fromSender:(id)sender;
 
+- (NSArray *) checkedArrayforGBTableViewSelectorBehaviorWith:(id)sender;
+
 @end
 
 @interface GBTableViewSelectorBehavior : GBBehavior<GBTableViewSelectorResultDelegate>

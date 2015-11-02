@@ -11,4 +11,5 @@ import UIKit
 class UpLoadPicCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var contentImageView: UIImageView!
+    
 }

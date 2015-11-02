@@ -34,13 +34,10 @@ static NSString* const kUITableViewCellIdentifer = @"kUITableViewCellIdentifer";
     //table style
 //    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     
-    
+    if( self.selectedDatasource ){
+        _selectedArray = self.selectedDatasource;
+    }
 }
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -10,9 +10,6 @@
 
 import UIKit
 
-
-
-
 let kMaxInputWordNum = 50
 let kMaxPicturesNum = 5
 let kUpLoadPicBtnCellIdentifier = "UpLoadPictureBtnCollectionViewCell";
@@ -39,32 +36,28 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     @IBOutlet weak var newItemMateralBtn: UIButton!
     @IBOutlet weak var newItemSurfaceMateralBtn: UIButton!
     @IBOutlet weak var newItemDetailInputView: UITextView!
+    @IBOutlet weak var surfaceMaterialLabel: UILabel!
+    @IBOutlet weak var materialLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     
     var newItemCategory: String?
     var newItemMaterial: String?
     var newItemSurfaceMaterial: String?
-    
     var newItemImagesArray: Array <AnyObject> = []
-    
-    
     var selector = GBTableViewSelectorBehavior()
-    
     //Property
     var pictureNum: Int = 0
-    
-    
+    var imageFiles: [AVFile] = []
     
 
      // MARK: ViewController LifeCircle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         selector.delegate = self
         selector.owner = self
         
-
         self.edgesForExtendedLayout = UIRectEdge.None;
         // Do any additional setup after loading the view.
     }
@@ -143,12 +136,11 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     func arrayforGBTableViewSelectorBehaviorWith(sender: AnyObject!) -> [AnyObject]! {
         
-        
         let newItemCategoryData: [String] = ["上衣","裤子","西服","西装","外套"]
-        
         let newItemMaterialData: [String] = ["棉","麻","混纺"]
-        
         let newItemSurfaceMaterialData: [String] = ["光","哑光","非光"]
+        
+        
         if sender.isEqual(self.newItemCategoryBtn){
          return newItemCategoryData
         }
@@ -163,38 +155,56 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         return [];
     }
     
-    func tableViewSelectorSelectedResults(results: [AnyObject]!, fromSender sender: AnyObject!) {
     
+    var selectedCateory = []
+    var selectedMaterial = []
+    var selectedSurfaceMaterial = []
+    
+    func checkedArrayforGBTableViewSelectorBehaviorWith(sender: AnyObject!) -> [AnyObject]! {
+        
         if sender.isEqual(self.newItemCategoryBtn){
-            newItemCategory = ""
-            for item in results{
-             newItemCategory?.appendContentsOf(item as! String)
-            }
-            
+            return selectedCateory as [AnyObject]
         }
         
         if sender.isEqual(self.newItemMateralBtn){
-            newItemMaterial = ""
-            for item in results{
-                newItemMaterial?.appendContentsOf(item as! String)
-            }
+            return selectedMaterial as [AnyObject]
         }
         
         if sender.isEqual(self.newItemSurfaceMateralBtn){
-            newItemSurfaceMaterial = ""
-            for item in results{
-                newItemSurfaceMaterial?.appendContentsOf(item as! String)
-            }
-            
+            return selectedSurfaceMaterial as [AnyObject]
+        }
+        return [];
+    }
+    
+    func tableViewSelectorSelectedResults(results: [AnyObject]!, fromSender sender: AnyObject!) {
+    
+        let resultString = self.mapStringWithArray(results as! [String!])
+        
+        if sender.isEqual(self.newItemCategoryBtn){
+            newItemCategory = resultString
+            self.categoryLabel.text = newItemCategory
+            selectedCateory = results
+        }
+        
+        if sender.isEqual(self.newItemMateralBtn){
+            newItemMaterial = resultString
+            self.materialLabel.text = newItemMaterial
+            selectedMaterial = results
+        }
+        
+        if sender.isEqual(self.newItemSurfaceMateralBtn){
+            newItemSurfaceMaterial = resultString
+            self.surfaceMaterialLabel.text = newItemSurfaceMaterial
+            selectedSurfaceMaterial = results
         }
     }
         
     
    
     // MARK: Internal Helper
-    
-    
+
     func checkUserInputDataIntegrity() -> Bool {
+      
        
         if self.newItemName.text!.isEmpty  {
          return false
@@ -223,15 +233,15 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         
         //Btn selected
         
-        if let category = newItemCategory {
+        if let _ = newItemCategory {
           
         }else { return false }
         
-        if let material = newItemMaterial {
+        if let _ = newItemMaterial {
             
         }else { return false }
         
-        if let surfaceMaterial = newItemSurfaceMaterial {
+        if let _ = newItemSurfaceMaterial {
             
         }else { return false }
         
@@ -239,9 +249,6 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     }
     
     
-    
-    
-    var imageFiles: [AVFile] = []
     func doDataUpload(){
     
         guard self.imageUploadSuccess && newItemImagesArray.count>0 else{
@@ -252,11 +259,21 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         product.productName = self.newItemName.text
         product.productNum = self.newItemSerialNum.text
         
+        guard let _ = Int(self.newItemWholeSalePrice.text!) else{
+           SVProgressHUD.showErrorWithStatus("请输入正确的价格")
+           return
+        }
         product.productPrice = (integer: Int(self.newItemWholeSalePrice.text!))
         product.productColor = self.newItemColor.text
         product.productSize = self.newItemSizeInput.text
         product.productDescri = self.newItemDetailInputView.text;
         product.productImage = self.imageFiles.first
+        
+        product.productMaterial = newItemMaterial
+        product.productStyle = newItemCategory
+        
+        product.userId = AVUser.currentUser().objectId
+        
         
         product.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
@@ -301,11 +318,9 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         self .callSelectorAction(sender);
     }
     
-
     
     // MARK: Private Helper
     func uploadImages(){
-    
         for image in newItemImagesArray{
           self.uploadSingeImageAsync(image)
         }
@@ -329,6 +344,16 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
                 self.imageUploadSuccess = true
             }
         }
-        
+    }
+    
+    func mapStringWithArray (array:[String!]) -> String{
+        var string = ""
+        for item in array{
+          string.appendContentsOf(item)
+            if array.count > 1 {
+            string.appendContentsOf(",")
+            }
+        }
+        return string
     }
 }
