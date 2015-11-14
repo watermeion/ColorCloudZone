@@ -10,7 +10,9 @@
 #import "AVCloud.h"
 #import "SVProgressHUD.h"
 #import "AVUser.h"
+#import "MemberCenterManager.h"
 
+#import "GBMainEntranceViewController.h"
 typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
     LoginViewTextFieldPhone = 9977,
     LoginViewTextFieldPassword,
@@ -94,7 +96,24 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
     if ([self checkInputValiable]) {
         [SVProgressHUD showWithStatus:@"正在登陆"];
         [AVUser logInWithUsernameInBackground:self.phoneNum password:self.pwd block:^(AVUser *user, NSError *error) {
+            [SVProgressHUD dismiss];
                 if (user != nil) {
+                    
+                    MEMBERCENTERUSERTYPE userType = [[user objectForKey:@"userType"] integerValue];
+                    if (userType == MemberCenterUserTypeSupplier) {
+                        //如果是供应商
+                        
+                        GBMainEntranceViewController *shareInstance = [GBMainEntranceViewController sharedInstance];
+                        [shareInstance changeToMainWorkFlow];
+                        
+                        
+                    }else if (userType == MemberCenterUserTypeSeller){
+                        //如果是店铺
+                    
+                        
+                    }
+                    GBMainEntranceViewController *shareInstance = [GBMainEntranceViewController sharedInstance];
+                    [shareInstance changeToMainWorkFlow];
                     [self dismissViewControllerAnimated:YES completion:^{
                         [SVProgressHUD showInfoWithStatus:@"欢迎回来"];
                     }];

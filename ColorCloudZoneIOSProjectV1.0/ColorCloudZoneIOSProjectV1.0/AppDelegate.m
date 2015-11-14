@@ -12,6 +12,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "MemberCenterManager.h"
 #import "GBSubClass.h"
+#import "GBMainEntranceViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -37,7 +38,12 @@
     //
     [GBSubClass registerSubclasses];
     
-
+    
+    self.window = [[UIWindow alloc]init];
+    GBMainEntranceViewController *mainEntranceViewController = [[GBMainEntranceViewController alloc] init];
+    self.window.rootViewController = mainEntranceViewController;
+    [self.window addSubview:mainEntranceViewController.view];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

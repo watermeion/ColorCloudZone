@@ -41,6 +41,11 @@ static MLTabBarViewController *sharedInstance = nil;
     
     UITabBar *tabBar=self.tabBar;
     
+    if (tabBar.items.count !=4) {
+        return;
+    }
+    
+    
     UITabBarItem *tabBarItem1=[tabBar.items objectAtIndex:0];
     UITabBarItem *tabBarItem2=[tabBar.items objectAtIndex:1];
     UITabBarItem *tabBarItem3=[tabBar.items objectAtIndex:2];
@@ -85,7 +90,7 @@ static MLTabBarViewController *sharedInstance = nil;
  */
 
 - (void)presentLoginAndRegistProcedure{
-   [self performSegueWithIdentifier:kMainPresentedLoginAndRegistSegue sender:self];
+    [self performSegueWithIdentifier:kMainPresentedLoginAndRegistSegue sender:self];
 }
 
 

@@ -30,7 +30,6 @@
 
 @dynamic userId;
 
-
 + (NSString *)parseClassName {
     return @"Shop";
 }

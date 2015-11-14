@@ -15,6 +15,8 @@
 
 @end
 
+static NSString *const kShowSupllierSegueIdentifier = @"ShowSupplierProfileEditSegue";
+static NSString *const kShowShopProfileSegueIdentifier = @"ShowShopProfileSegue";
 @implementation RegisterAfterViewController
 
 - (void)viewDidLoad {
@@ -72,8 +74,27 @@
     [SVProgressHUD showWithStatus:@"第一次登陆，请稍后！"];
     [[MemberCenterManager singletonInstance] setCurrentUserType:self.userType withCompletion:^(BOOL success, NSError *error) {
         if(success && !error ){
+            //first load 
+            
+            
+            
+            
+            
+            
+            
            [self dismissViewControllerAnimated:YES completion:^{
                [SVProgressHUD showSuccessWithStatus:@"欢迎进入彩云间"];
+               
+               if (self.userType == MemberCenterUserTypeSupplier) {
+                   //跳转到供应商界面 ， 补充资料
+                   
+                   [self performSegueWithIdentifier:kShowSupllierSegueIdentifier sender:self];
+                   
+                   
+               }else if (self.userType == MemberCenterUserTypeSeller){
+                  //跳转到店铺界面
+                   [self performSegueWithIdentifier:kShowShopProfileSegueIdentifier sender:self];
+               }
            }];
         }
     }];

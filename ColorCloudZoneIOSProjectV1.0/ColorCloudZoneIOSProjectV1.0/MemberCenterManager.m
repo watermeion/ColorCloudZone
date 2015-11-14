@@ -9,7 +9,7 @@
 #import "MemberCenterManager.h"
 #import "AVUser.h"
 #import "MLTabBarViewController.h"
-
+#import "MLNavigationController.h"
 @implementation MemberCenterManager
 
 static MemberCenterManager *singletonInstance;
@@ -64,6 +64,10 @@ static MemberCenterManager *singletonInstance;
     }
 }
 
-
-
++ (void)presentLoginWorkflowWithVC:(UIViewController *)viewController{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    MLNavigationController *navi = [[MLNavigationController alloc]initWithRootViewController:loginVC];
+    [viewController presentViewController:loginVC animated:YES completion:nil];
+}
 @end

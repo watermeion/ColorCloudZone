@@ -11,8 +11,8 @@
 
 typedef NS_ENUM(NSUInteger, MEMBERCENTERUSERTYPE) {
     MemberCenterUserTypeUnKnown = 0,
-    MemberCenterUserTypeSeller,
-    MemberCenterUserTypeSupplier,
+    MemberCenterUserTypeSeller = 1,
+    MemberCenterUserTypeSupplier = 2,
 };
 
 @interface MemberCenterManager : NSObject
@@ -27,5 +27,9 @@ typedef NS_ENUM(NSUInteger, MEMBERCENTERUSERTYPE) {
 + (void)logout;
 
 - (void)setCurrentUserType:(MEMBERCENTERUSERTYPE) userType withCompletion:(void(^)(BOOL success, NSError *error))handler;
+
+
++ (void)presentLoginWorkflowWithVC:(UIViewController *) viewController;
+
 
 @end
