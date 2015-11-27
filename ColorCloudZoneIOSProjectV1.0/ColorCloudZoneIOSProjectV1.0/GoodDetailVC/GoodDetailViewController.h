@@ -15,4 +15,9 @@
 //Constraint
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTextHeightConstraint;
 
+
+
+
+
+
 @end

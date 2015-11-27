@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface GBCustomViewController : UIViewController
+#import "GBBaseStoryboardViewController.h"
+@interface GBCustomViewController : GBBaseStoryboardViewController
 
 @end

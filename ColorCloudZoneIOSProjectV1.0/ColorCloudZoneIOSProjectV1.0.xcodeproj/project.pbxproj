@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010500D31C018BB000520EFC /* GBBaseStoryboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010500D21C018BB000520EFC /* GBBaseStoryboardViewController.m */; };
+		010500D41C018BB000520EFC /* GBBaseStoryboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010500D21C018BB000520EFC /* GBBaseStoryboardViewController.m */; };
 		0107B36E1BE6E75B0062F315 /* Shop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0107B36D1BE6E75B0062F315 /* Shop.m */; };
 		01187BD41BF2277900CF8FB9 /* GBMainEntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01187BD31BF2277900CF8FB9 /* GBMainEntranceViewController.m */; };
 		014052DB1BE4686600E5C1F2 /* ic_check_state@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014052D51BE4686600E5C1F2 /* ic_check_state@2x.png */; };
@@ -215,6 +217,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010500D11C018BB000520EFC /* GBBaseStoryboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBBaseStoryboardViewController.h; sourceTree = "<group>"; };
+		010500D21C018BB000520EFC /* GBBaseStoryboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBBaseStoryboardViewController.m; sourceTree = "<group>"; };
 		0107B36C1BE6E75B0062F315 /* Shop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shop.h; sourceTree = "<group>"; };
 		0107B36D1BE6E75B0062F315 /* Shop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shop.m; sourceTree = "<group>"; };
 		01187BD21BF2277900CF8FB9 /* GBMainEntranceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBMainEntranceViewController.h; sourceTree = "<group>"; };
@@ -551,6 +555,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010500D01C018B4900520EFC /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				010500D11C018BB000520EFC /* GBBaseStoryboardViewController.h */,
+				010500D21C018BB000520EFC /* GBBaseStoryboardViewController.m */,
+			);
+			name = BaseClass;
+			sourceTree = "<group>";
+		};
 		011DBDD11BD10CB700B19231 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1169,6 +1182,7 @@
 		2A6BC4A81B58DB9100401B06 /* Common Class */ = {
 			isa = PBXGroup;
 			children = (
+				010500D01C018B4900520EFC /* BaseClass */,
 				2A6BC4B41B58E8D800401B06 /* marcoHeader.h */,
 				2A6BC4B31B58DC4800401B06 /* MLTabBar */,
 				2A6BC4AC1B58DC0E00401B06 /* MLNavi */,
@@ -1884,6 +1898,7 @@
 				2A2E3E6B1BDF994E0021B3FC /* GBALbumPickerCollectionViewController.m in Sources */,
 				2A2E3E401BDF994E0021B3FC /* SDImageCache.m in Sources */,
 				2AD3E8DB1B80313E00B2264B /* AddMemberShipViewController.m in Sources */,
+				010500D31C018BB000520EFC /* GBBaseStoryboardViewController.m in Sources */,
 				0107B36E1BE6E75B0062F315 /* Shop.m in Sources */,
 				2A2E3E5B1BDF994E0021B3FC /* PBSaveBtn.m in Sources */,
 				2A2E3E271BDF994E0021B3FC /* PBConst.m in Sources */,
@@ -1918,6 +1933,7 @@
 			files = (
 				01A4418D1BD67CAA003CF3FD /* MemberCenterManager.m in Sources */,
 				2A85DAED1B53F5CD008386B0 /* ColorCloudZoneIOSProjectV1_0Tests.m in Sources */,
+				010500D41C018BB000520EFC /* GBBaseStoryboardViewController.m in Sources */,
 				01A441921BD68290003CF3FD /* GBCustomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

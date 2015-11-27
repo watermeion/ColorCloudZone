@@ -43,13 +43,13 @@ static const CGFloat CellWidth = 220;
 
 @implementation GoodDetailViewController
 
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
       [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
