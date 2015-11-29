@@ -712,6 +712,7 @@
 				2A85DACB1B53F5CD008386B0 /* Resources */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 				432A2ABBFDF76FAC433A6731 /* Copy Pods Resources */,
+				844B9AC8F884A17BD5193141 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -873,6 +874,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		844B9AC8F884A17BD5193141 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8E0D8510B5C4B6A4856AAA6F /* Check Pods Manifest.lock */ = {
