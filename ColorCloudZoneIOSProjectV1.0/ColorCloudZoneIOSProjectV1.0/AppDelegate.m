@@ -13,6 +13,8 @@
 #import "MemberCenterManager.h"
 #import "GBSubClass.h"
 #import "GBMainEntranceViewController.h"
+#import "LoginAndRegistNaviController.h"
+#import "MLTabBarViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -38,12 +40,31 @@
     //
     [GBSubClass registerSubclasses];
     
-    
     self.window = [[UIWindow alloc]init];
-    GBMainEntranceViewController *mainEntranceViewController = [[GBMainEntranceViewController alloc] init];
-    self.window.rootViewController = mainEntranceViewController;
-    [self.window addSubview:mainEntranceViewController.view];
-    [self.window makeKeyAndVisible];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"  bundle:nil];
+    MemberCenterManager *memberManager = [MemberCenterManager singletonInstance];
+    if ([memberManager currentUser]) {
+        MLTabBarViewController *tabbar;
+        if (memberManager.currentUserType == MemberCenterUserTypeSupplier) {
+            tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
+        }else if(memberManager.currentUserType == MemberCenterUserTypeSeller){
+            tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+        }
+        self.window.rootViewController = tabbar;
+    }
+    else {
+        LoginAndRegistNaviController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
+        self.window.rootViewController = vc;
+
+    }
+    
+//    self.window = [[UIWindow alloc]init];
+//    GBMainEntranceViewController *mainEntranceViewController = [[GBMainEntranceViewController alloc] init];
+//    self.window.rootViewController = mainEntranceViewController;
+//    [self.window addSubview:mainEntranceViewController.view];
+//    [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 

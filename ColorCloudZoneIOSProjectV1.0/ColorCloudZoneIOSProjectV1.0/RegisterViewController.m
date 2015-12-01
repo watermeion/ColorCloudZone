@@ -78,9 +78,6 @@ typedef void(^GBCompletionBlock)(BOOL success, NSError *error);
                             
                             if (success) {
                                 //注册成功
-//                                [self dismissViewControllerAnimated:YES completion:^{
-//                                     [SVProgressHUD showInfoWithStatus:@"注册成功"];
-//                                }];
                                   [SVProgressHUD showInfoWithStatus:@"注册成功"];
                                 [self performSegueWithIdentifier:kPushSelectUserTypeVCSegueIdentifier sender:self];
                             }else {

@@ -54,9 +54,9 @@ static MemberCenterManager *singletonInstance;
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error && succeeded) {
                 self.currentUserType = userType;
-                if (handler) {
-                    handler(succeeded,error);
-                }
+            }
+            if (handler) {
+                handler(succeeded,error);
             }
         }];
     }else{

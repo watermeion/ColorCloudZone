@@ -7,7 +7,7 @@
 //
 
 #import "CompanyProfileViewController.h"
-
+#import "MLTabBarViewController.h"
 @interface CompanyProfileViewController ()
 
 @end
@@ -35,5 +35,9 @@
 */
 
 - (IBAction)doneAction:(id)sender {
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"  bundle:nil];
+    MLTabBarViewController *tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
+    [UIApplication sharedApplication].delegate.window.rootViewController = tabbar;
 }
 @end

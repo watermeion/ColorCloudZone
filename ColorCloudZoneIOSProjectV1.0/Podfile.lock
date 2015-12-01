@@ -1,5 +1,5 @@
 PODS:
-  - AVOSCloud (3.1.6.5)
+  - AVOSCloud (3.1.6.7)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -27,7 +27,7 @@ DEPENDENCIES:
   - UITableView+FDTemplateLayoutCell (~> 1.4.beta)
 
 SPEC CHECKSUMS:
-  AVOSCloud: 9a53886a394727e0cf6c2180eea416f82c1493a8
+  AVOSCloud: 7af6267747894eadfd14560db08ea99a51b57fc0
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
