@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *registBtn;
 
-
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;

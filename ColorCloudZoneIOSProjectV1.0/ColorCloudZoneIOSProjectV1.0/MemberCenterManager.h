@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, MEMBERCENTERUSERTYPE) {
 @interface MemberCenterManager : NSObject
 
 @property (nonatomic, strong) AVUser *currentUser;
-@property (nonatomic) MEMBERCENTERUSERTYPE currentUserType;
+- (MEMBERCENTERUSERTYPE)currentUserType;
 + (instancetype) singletonInstance;
 + (BOOL) islogin;
 

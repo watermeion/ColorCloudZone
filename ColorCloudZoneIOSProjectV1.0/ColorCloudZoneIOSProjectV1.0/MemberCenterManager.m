@@ -19,6 +19,9 @@ static MemberCenterManager *singletonInstance;
     return [AVUser currentUser];
 }
 
+- (MEMBERCENTERUSERTYPE)currentUserType {
+    return ((NSNumber *)[[AVUser currentUser] objectForKey:@"userType"]).integerValue;
+}
 
 
 + (instancetype)singletonInstance{
@@ -53,7 +56,7 @@ static MemberCenterManager *singletonInstance;
         [currentUser setObject:@(userType) forKey:@"userType"];
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error && succeeded) {
-                self.currentUserType = userType;
+                
             }
             if (handler) {
                 handler(succeeded,error);

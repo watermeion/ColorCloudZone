@@ -57,9 +57,9 @@ static GBMainEntranceViewController * shareInstance = nil;
 - (void)switchWorkFlow{
     MemberCenterManager *memberManager = [MemberCenterManager singletonInstance];
     if ([memberManager currentUser]) {
-        if (memberManager.currentUserType == MemberCenterUserTypeSupplier) {
+        if ([memberManager currentUserType] == MemberCenterUserTypeSupplier) {
             self.isSeller = NO;
-        }else if(memberManager.currentUserType == MemberCenterUserTypeSeller){
+        }else if([memberManager currentUserType] == MemberCenterUserTypeSeller){
             self.isSeller = YES;
         }
         [self setUpInitialView];

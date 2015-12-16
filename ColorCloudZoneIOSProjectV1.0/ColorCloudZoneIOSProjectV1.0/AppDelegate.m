@@ -15,6 +15,7 @@
 #import "GBMainEntranceViewController.h"
 #import "LoginAndRegistNaviController.h"
 #import "MLTabBarViewController.h"
+#import "RegisterAfterViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -47,10 +48,15 @@
         MLTabBarViewController *tabbar;
         if (memberManager.currentUserType == MemberCenterUserTypeSupplier) {
             tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
+            self.window.rootViewController = tabbar;
         }else if(memberManager.currentUserType == MemberCenterUserTypeSeller){
             tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+            self.window.rootViewController = tabbar;
+        } else {
+            RegisterAfterViewController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
+            LoginAndRegistNaviController * nav = [[LoginAndRegistNaviController alloc]initWithRootViewController:vc];
+            self.window.rootViewController = nav;
         }
-        self.window.rootViewController = tabbar;
     }
     else {
         LoginAndRegistNaviController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];

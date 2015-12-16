@@ -3634,7 +3634,7 @@
         <!--Register After View Controller-->
         <scene sceneID="Yks-sw-loB">
             <objects>
-                <viewController id="Ma1-Pn-M6N" customClass="RegisterAfterViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterAfterViewController" id="Ma1-Pn-M6N" customClass="RegisterAfterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7sP-O5-57n"/>
                         <viewControllerLayoutGuide type="bottom" id="MPo-KL-1WL"/>
