@@ -64,6 +64,9 @@
     self.selectedAt = BtnSelectedAt_1;
 
     [self changeButtonViewPositionWithAnnimation:BtnSelectedAt_1];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(btn1Selected:)]) {
+        [self.delegate btn1Selected:self];
+    }
 }
 
 - (IBAction)btn2Action:(id)sender
@@ -74,6 +77,9 @@
     self.selectedAt = BtnSelectedAt_2;
 
     [self changeButtonViewPositionWithAnnimation:BtnSelectedAt_2];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(btn2Selected:)]) {
+        [self.delegate btn2Selected:self];
+    }
 
 }
 

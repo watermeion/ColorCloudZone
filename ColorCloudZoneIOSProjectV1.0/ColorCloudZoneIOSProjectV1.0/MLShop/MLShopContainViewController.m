@@ -9,6 +9,8 @@
 #import "MLShopContainViewController.h"
 #import "ShopContentCollectionViewCell.h"
 #import "marcoHeader.h"
+#import "UIImageView+WebCache.h"
+#import "AddMemberShipViewController.h"
 
 @interface MLShopContainViewController ()
 
@@ -23,17 +25,55 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    _dataArray = [NSMutableArray new];
-    for (int i = 0; i < 9; i++) {
-        UIImage *imgObj = [UIImage imageNamed:@"placeholderForCell.jpg"];
-        [_dataArray addObject:imgObj];
-        
-    }
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, MainScreenWidth,  self.collectionView.frame.size.height);
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.hidden = YES;
+    
+    [self getProductsWithLimit:30 skip:0 block:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            _dataArray = [[NSMutableArray alloc] initWithArray:objects];
+            [self.collectionView reloadData];
+        }
+    }];
 
+}
+
+- (void)getProductsWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
+{
+    
+    AVQuery * query = [AVQuery queryWithClassName:@"Product"];
+    query.limit = limit;
+    query.skip = skip;
+    [query includeKey:@"productMainImage"];
+    [query orderByDescending:@"like"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        block(objects, error);
+    }];
+
+}
+
+- (void)getShopProductsWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
+{
+    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
+    query.limit = limit;
+    query.skip = skip;
+    [query includeKey:@"factoryProduct"];
+    [query whereKey:@"shopId" equalTo:((AVObject*)[[AVUser currentUser] objectForKey:@"shop"]).objectId];
+    [query orderByDescending:@"like"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSMutableArray * products;
+        if (!error) {
+            products = [NSMutableArray array];
+            for (AVObject * mallProduct in objects) {
+                [products addObject:mallProduct[@"factoryProduct"]];
+            }
+        }
+        block(products, error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,11 +132,17 @@
     
     
     ShopContentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShopContentCollectionViewCell" forIndexPath:indexPath];
-    
+    AVObject * product = [self.dataArray objectAtIndex:indexPath.row];
+    cell.likeNumLabel.text = [((NSNumber *)product[@"like"]).stringValue stringByAppendingString:@"人喜欢"];
+    cell.titleLabel.text = product[@"productName"];
+    cell.priceLabel.text = [@"￥" stringByAppendingString:((NSNumber *)product[@"productPrice"]).stringValue];
 //     Configure the cell
 //    cell.backgroundColor=[UIColor redColor];
-    cell.itemImageView.image = [self.dataArray objectAtIndex:indexPath.row];
-    
+//    cell.itemImageView.image = [self.dataArray objectAtIndex:indexPath.row];
+    AVFile * file = product[@"productMainImage"];
+    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:file.url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     return cell;
 //    return nil;
 }
@@ -108,6 +154,12 @@
  return YES;
  }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == 0) {
+        
+    }
+}
 
 /*
  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -124,4 +176,17 @@
  }
  */
 
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
 @end

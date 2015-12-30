@@ -8,6 +8,7 @@
 
 #import "MySettingsTableViewController.h"
 #import "MemberCenterManager.h"
+#import "UIImageView+WebCache.h"
 
 @interface MySettingsTableViewController ()
 
@@ -23,16 +24,20 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
+    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error) {
+            self.nameLabel.text = [object objectForKey:@"shopName"];
+            AVFile * avatar = [shop objectForKey:@"shopLogo"];
+            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
+            
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,7 @@
 
 @interface MLShopViewController : GBCustomViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *avatar;
 
 
 

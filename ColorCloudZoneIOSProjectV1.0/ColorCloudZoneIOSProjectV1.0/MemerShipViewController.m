@@ -9,12 +9,14 @@
 #import "MemerShipViewController.h"
 #import "MemberCommonCollectionViewCell.h"
 #import "AddMemberCollectionViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "AddMemberShipViewController.h"
 static NSString *const kAddMemberCollectonCellIdentifier = @"AddMemberCollectionViewCell";
 static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollectionViewCell";
 
 
 @interface MemerShipViewController ()
-
+@property (nonatomic, strong) NSMutableArray * dataSource;
 @end
 
 @implementation MemerShipViewController
@@ -22,6 +24,12 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self getMembersWithLimit:50 skip:0 block:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.dataSource = [NSMutableArray arrayWithArray:objects];
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +47,22 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 }
 */
 
-
+- (void)getMembersWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
+{
+    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
+    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error) {
+            AVRelation * relation = [object relationforKey:@"shopMember"];
+            AVQuery * query = [relation query];
+            query.limit = limit;
+            query.skip = skip;
+            [query orderByDescending:@"createdAt"];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                block(objects, error);
+            }];
+        }
+    }];
+}
 
 
 
@@ -48,7 +71,7 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
 
-    return 2;
+    return 1 + _dataSource.count;
 }
 
 
@@ -60,6 +83,11 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
         return cell;
     }
     MemberCommonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMemberCollectonCellIdentifier forIndexPath:indexPath];
+    AVObject * member = [_dataSource objectAtIndex:indexPath.item - 1];
+    cell.nameLabel.text = member[@"MemberName"];
+    cell.phoneLabel.text = member[@"MemberMobile"];
+    NSString * url = ((AVFile *)member[@"MemberLogoUrl"]).url;
+    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:url]];
     return cell;
 }
 
@@ -68,7 +96,13 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
     return 1;
 }
 
-
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == 0) {
+        AddMemberShipViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMemberShipViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 
 

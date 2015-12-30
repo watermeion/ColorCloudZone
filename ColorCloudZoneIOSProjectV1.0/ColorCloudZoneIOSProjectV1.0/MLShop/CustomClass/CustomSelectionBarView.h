@@ -12,6 +12,14 @@ typedef NS_ENUM(NSUInteger, BtnSelectedAt) {
     BtnSelectedAt_1 = 1,
     BtnSelectedAt_2 = 2,
 };
+@class CustomSelectionBarView;
+
+@protocol CustomSelectionBarViewDelegate <NSObject>
+
+- (void) btn1Selected:(CustomSelectionBarView*)view;
+- (void) btn2Selected:(CustomSelectionBarView*)view;
+
+@end
 
 @interface CustomSelectionBarView : UIView
 
@@ -19,6 +27,7 @@ typedef NS_ENUM(NSUInteger, BtnSelectedAt) {
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
+@property (weak, nonatomic) id<CustomSelectionBarViewDelegate> delegate;
 @property (assign, nonatomic) BtnSelectedAt selectedAt;
 
 @end

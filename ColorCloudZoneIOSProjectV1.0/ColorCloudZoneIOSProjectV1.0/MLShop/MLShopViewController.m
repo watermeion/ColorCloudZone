@@ -11,9 +11,6 @@
 static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 
-
-
-
 @implementation MLShopViewController
 
 - (void)viewDidLoad
@@ -44,18 +41,21 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 - (void)moreFeaturesLeftBarAction
 {
-    
-    
+
     
 }
 
 - (void)chatFeaturesBarAction
 {
     
-    
-    
+
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    NSLog(@"");
+    
 
+}
 
 @end

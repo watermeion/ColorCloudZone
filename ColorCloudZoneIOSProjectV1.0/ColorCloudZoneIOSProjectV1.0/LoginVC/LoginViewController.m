@@ -11,7 +11,10 @@
 #import "SVProgressHUD.h"
 #import "AVUser.h"
 #import "MemberCenterManager.h"
-
+#import "MLTabBarViewController.h"
+#import "RegisterAfterViewController.h"
+#import "LoginAndRegistNaviController.h"
+#import "AppDelegate.h"
 #import "GBMainEntranceViewController.h"
 typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
     LoginViewTextFieldPhone = 9977,
@@ -100,23 +103,28 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
                 if (user != nil) {
                     
                     MEMBERCENTERUSERTYPE userType = [[user objectForKey:@"userType"] integerValue];
+                    
+                    MLTabBarViewController *tabbar;
                     if (userType == MemberCenterUserTypeSupplier) {
                         //如果是供应商
-                        
-                        GBMainEntranceViewController *shareInstance = [GBMainEntranceViewController sharedInstance];
-                        [shareInstance changeToMainWorkFlow];
-                        
+                        tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
+                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                        delegate.window.rootViewController = tabbar;
                         
                     }else if (userType == MemberCenterUserTypeSeller){
                         //如果是店铺
-                    
+                        tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
                         
+                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                        delegate.window.rootViewController = tabbar;
+                        
+                    } else {
+                        RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
+                        LoginAndRegistNaviController * nav = [[LoginAndRegistNaviController alloc]initWithRootViewController:vc];
+                        
+                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                        delegate.window.rootViewController = nav;
                     }
-                    GBMainEntranceViewController *shareInstance = [GBMainEntranceViewController sharedInstance];
-                    [shareInstance changeToMainWorkFlow];
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        [SVProgressHUD showInfoWithStatus:@"欢迎回来"];
-                    }];
                 } else {
                     [SVProgressHUD showErrorWithStatus:@"登陆失败，请重新尝试"];
                 }

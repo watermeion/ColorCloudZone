@@ -1,3 +1,4 @@
+
 //
 //  MarketViewController.h
 //  ColorCloudZoneIOSProjectV1.0
@@ -9,10 +10,12 @@
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
 #import "GBMarketVCViewModel.h"
+#import "CustomSelectionBarView.h"
 #import "GBViewControllerViewModelProtocol.h"
 
-@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol>
+@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol,CustomSelectionBarViewDelegate>
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
 @property (nonatomic, strong) GBMarketVCViewModel *viewModel;
+@property (strong, nonatomic) IBOutlet CustomSelectionBarView *selectionBar;
 
 @end

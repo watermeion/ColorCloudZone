@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
 
-@interface MLShopContainViewController : GBCustomViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MLShopContainViewController : GBCustomViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
+@property (nonatomic) BOOL tag;
 @end

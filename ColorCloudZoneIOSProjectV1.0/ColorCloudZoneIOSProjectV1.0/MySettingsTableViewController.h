@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface MySettingsTableViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *idLabel;
+@property (strong, nonatomic) IBOutlet UILabel *shopNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 
 @end

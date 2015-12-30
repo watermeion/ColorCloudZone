@@ -204,6 +204,9 @@
 		3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */; };
 		3BD9AD401B92F02C0048A0A3 /* RequestSMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */; };
 		92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */; };
+		9662FC261C26EE21000FE951 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9662FC251C26EE21000FE951 /* VPImageCropperViewController.m */; settings = {ASSET_TAGS = (); }; };
+		968A68E01C313CBF00661497 /* DCPicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968A68DD1C313CBF00661497 /* DCPicScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		968A68E11C313CC000661497 /* DCWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 968A68DF1C313CBF00661497 /* DCWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -533,6 +536,13 @@
 		3BD9AD3E1B92F02C0048A0A3 /* RequestSMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestSMSViewController.h; sourceTree = "<group>"; };
 		3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestSMSViewController.m; sourceTree = "<group>"; };
 		6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorCloudZoneIOSProjectV1.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9662FC241C26EE21000FE951 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		9662FC251C26EE21000FE951 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
+		968A68D91C2D6A2D00661497 /* AVObjectKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVObjectKeys.h; sourceTree = "<group>"; };
+		968A68DC1C313CBF00661497 /* DCPicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCPicScrollView.h; sourceTree = "<group>"; };
+		968A68DD1C313CBF00661497 /* DCPicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCPicScrollView.m; sourceTree = "<group>"; };
+		968A68DE1C313CBF00661497 /* DCWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCWebImageManager.h; sourceTree = "<group>"; };
+		968A68DF1C313CBF00661497 /* DCWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCWebImageManager.m; sourceTree = "<group>"; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -596,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				011DBDD21BD10E7A00B19231 /* MemberCenterManager */,
+				968A68D91C2D6A2D00661497 /* AVObjectKeys.h */,
 			);
 			name = Mangers;
 			sourceTree = "<group>";
@@ -707,6 +718,8 @@
 		2A2E3D6A1BDF99050021B3FC /* CommonModule */ = {
 			isa = PBXGroup;
 			children = (
+				968A68DB1C313CBF00661497 /* DCPicscrollView */,
+				9662FC231C26EE21000FE951 /* VPImageCropper */,
 				2A2E3D6B1BDF994E0021B3FC /* ELCImagePicker */,
 				014052E21BE4694500E5C1F2 /* TableViewSelecter */,
 				2A2E3E211BDF994E0021B3FC /* GBBehavior */,
@@ -1560,6 +1573,26 @@
 			name = RequestSMSVC;
 			sourceTree = "<group>";
 		};
+		9662FC231C26EE21000FE951 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				9662FC241C26EE21000FE951 /* VPImageCropperViewController.h */,
+				9662FC251C26EE21000FE951 /* VPImageCropperViewController.m */,
+			);
+			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
+		968A68DB1C313CBF00661497 /* DCPicscrollView */ = {
+			isa = PBXGroup;
+			children = (
+				968A68DC1C313CBF00661497 /* DCPicScrollView.h */,
+				968A68DD1C313CBF00661497 /* DCPicScrollView.m */,
+				968A68DE1C313CBF00661497 /* DCWebImageManager.h */,
+				968A68DF1C313CBF00661497 /* DCWebImageManager.m */,
+			);
+			path = DCPicscrollView;
+			sourceTree = "<group>";
+		};
 		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1887,6 +1920,7 @@
 				2A2E3E5E1BDF994E0021B3FC /* PhotoItemView.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
 				01A441911BD68290003CF3FD /* GBCustomViewController.m in Sources */,
+				968A68E01C313CBF00661497 /* DCPicScrollView.m in Sources */,
 				2A2E3E281BDF994E0021B3FC /* NSString+File.m in Sources */,
 				2A2E3E651BDF994E0021B3FC /* ELCAssetTablePicker.m in Sources */,
 				2AD3E8CA1B80252300B2264B /* ViewWithBorder.m in Sources */,
@@ -1918,6 +1952,8 @@
 				2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */,
 				2A2E3E421BDF994E0021B3FC /* SDWebImageDecoder.m in Sources */,
 				2A2E3E441BDF994E0021B3FC /* SDWebImageDownloaderOperation.m in Sources */,
+				9662FC261C26EE21000FE951 /* VPImageCropperViewController.m in Sources */,
+				968A68E11C313CC000661497 /* DCWebImageManager.m in Sources */,
 				2A2E3E561BDF994E0021B3FC /* PhotoBroswerLayout.m in Sources */,
 				2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */,
 				2A2E3E291BDF994E0021B3FC /* CoreArchive.m in Sources */,
