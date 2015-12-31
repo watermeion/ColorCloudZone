@@ -13,7 +13,7 @@
 #import "CustomSelectionBarView.h"
 #import "GBViewControllerViewModelProtocol.h"
 
-@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol,CustomSelectionBarViewDelegate>
+@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol>
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
 @property (nonatomic, strong) GBMarketVCViewModel *viewModel;
 @property (strong, nonatomic) IBOutlet CustomSelectionBarView *selectionBar;

@@ -7,7 +7,8 @@
 //
 
 #import "MLShopViewController.h"
-
+#import "MLShopContainViewController.h"
+#import "UIImageView+WebCache.h"
 static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 
@@ -32,6 +33,17 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
     self.navigationItem.rightBarButtonItems = @[ moreFeaturesLeftBarItem,chatFeaturesLeftBarItem ];
     self.navigationItem.title = @"我的店铺";
 
+    self.avatar.layer.masksToBounds = YES;
+    self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
+    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
+    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error) {
+            self.nameLabel.text = [object objectForKey:@"shopName"];
+            AVFile * avatar = [shop objectForKey:@"shopLogo"];
+            [self.avatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
+            
+        }
+    }];
 }
 
 - (void)back
@@ -53,9 +65,9 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    NSLog(@"");
-    
-
+    MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
+    vc.parentVC = self;
+    self.selectionBar.delegate = vc;
 }
 
 @end

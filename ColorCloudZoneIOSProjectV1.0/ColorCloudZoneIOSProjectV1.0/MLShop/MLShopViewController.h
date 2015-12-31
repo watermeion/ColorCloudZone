@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
+#import "CustomSelectionBarView.h"
 
 @interface MLShopViewController : GBCustomViewController
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatar;
+@property (strong, nonatomic) IBOutlet CustomSelectionBarView *selectionBar;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *coverImageView;
 
 
 

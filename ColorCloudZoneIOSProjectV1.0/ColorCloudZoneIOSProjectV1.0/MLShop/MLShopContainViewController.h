@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
+#import "CustomSelectionBarView.h"
 
-@interface MLShopContainViewController : GBCustomViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
+@interface MLShopContainViewController : GBCustomViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, CustomSelectionBarViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic) BOOL tag;
+@property (strong, nonatomic) UIViewController * parentVC;
 @end

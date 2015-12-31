@@ -20,7 +20,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView *rightView;
-@property (weak, nonatomic) IBOutlet UIView *rightImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *rightImageView;
 @property (weak, nonatomic) IBOutlet UILabel *rightPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightLikeLabel;

@@ -100,6 +100,9 @@
     UIImageView *left = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,myWidth, myHeight)];
     UIImageView *center = [[UIImageView alloc] initWithFrame:CGRectMake(myWidth, 0,myWidth, myHeight)];
     UIImageView *right = [[UIImageView alloc] initWithFrame:CGRectMake(myWidth * 2, 0,myWidth, myHeight)];
+    left.contentMode = UIViewContentModeScaleAspectFill;
+    center.contentMode = UIViewContentModeScaleAspectFill;
+    right.contentMode = UIViewContentModeScaleAspectFill;
     
     center.userInteractionEnabled = YES;
     [center addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewDidTap)]];
@@ -134,6 +137,10 @@
         CGFloat w = _MaxImageCount * 17.5;
         _PageControl.frame = CGRectMake(0, 0, w, 7);
         _PageControl.center = CGPointMake(myWidth-w*0.5, myHeight-pageSize * 0.5);
+    } else if (style == PageControlAtCenter) {
+        CGFloat w = _MaxImageCount * 17.5;
+        _PageControl.frame = CGRectMake(0, 0, w, 7);
+        _PageControl.center = CGPointMake(myWidth * 0.5, myHeight-pageSize * 0.5);
     }
 }
 
@@ -190,7 +197,8 @@
 - (UIView *)creatLabelBgView {
 
     
-   UIToolbar *v = [[UIToolbar alloc] initWithFrame:CGRectMake(0, myHeight-pageSize, myWidth, pageSize)];
+   UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, myHeight-pageSize, myWidth, pageSize)];
+    v.backgroundColor = [UIColor clearColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, myWidth-_PageControl.frame.size.width,pageSize)];
     label.textAlignment = NSTextAlignmentLeft;

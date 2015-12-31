@@ -9,6 +9,7 @@
 #import "MarketViewController.h"
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
+#import "MLShopContainViewController.h"
 static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
 
 
@@ -31,15 +32,6 @@ static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)btn1Selected:(CustomSelectionBarView *)view
-{
-    
-}
-
-- (void)btn2Selected:(CustomSelectionBarView *)view
-{
-    
-}
 
 - (void)setBannerView
 {
@@ -67,9 +59,9 @@ static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
             //显示顺序和数组顺序一致
             //设置标题显示文本数组
             
+            picView.style = PageControlAtCenter;
             
-            
-            picView.titleData = titleArray;
+//            picView.titleData = titleArray;
             
             //占位图片,你可以在下载图片失败处修改占位图片
             
@@ -101,14 +93,15 @@ static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
     }];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
+    vc.parentVC = self;
+    self.selectionBar.delegate = vc;
 }
-*/
+
 
 @end
