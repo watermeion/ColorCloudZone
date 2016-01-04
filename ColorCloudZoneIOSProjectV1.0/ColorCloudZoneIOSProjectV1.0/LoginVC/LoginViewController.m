@@ -22,8 +22,8 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 };
 
 @interface LoginViewController ()<UITextFieldDelegate>
-@property (nonatomic, strong) NSString *phoneNum;
-@property (nonatomic, strong) NSString *pwd;
+//@property (nonatomic, strong) NSString *phoneNum;
+//@property (nonatomic, strong) NSString *pwd;
 
 @end
 
@@ -55,28 +55,28 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 */
 
 
-#pragma UITextFieldDelegate
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField.tag == LoginViewTextFieldPassword) {
-        self.pwd = textField.text;
-    }
-    if (textField.tag == LoginViewTextFieldPhone) {
-        self.phoneNum = textField.text;
-    }
-}
+//#pragma UITextFieldDelegate
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField{
+//    if (textField.tag == LoginViewTextFieldPassword) {
+//        self.pwd = textField.text;
+//    }
+//    if (textField.tag == LoginViewTextFieldPhone) {
+//        self.phoneNum = textField.text;
+//    }
+//}
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     return YES;
 }
 
 - (BOOL)isPhoneNumCorrect{
-    return self.phoneNum.length == 11 ? YES : NO;
+    return self.phoneNunTextField.text.length == 11 ? YES : NO;
 }
 
 
 - (BOOL)isPwdSafe{
-    return self.pwd.length >= 6 ? YES : NO;
+    return self.passwordTextField.text.length >= 6 ? YES : NO;
 }
 
 
@@ -98,22 +98,20 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 - (IBAction)loginAction:(id)sender {
     if ([self checkInputValiable]) {
         [SVProgressHUD showWithStatus:@"正在登陆"];
-        [AVUser logInWithUsernameInBackground:self.phoneNum password:self.pwd block:^(AVUser *user, NSError *error) {
+        [AVUser logInWithUsernameInBackground:self.phoneNunTextField.text password:self.passwordTextField.text block:^(AVUser *user, NSError *error) {
             [SVProgressHUD dismiss];
                 if (user != nil) {
                     
                     MEMBERCENTERUSERTYPE userType = [[user objectForKey:@"userType"] integerValue];
-                    
-                    MLTabBarViewController *tabbar;
                     if (userType == MemberCenterUserTypeSupplier) {
                         //如果是供应商
-                        tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
+                        UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
                         AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-                        delegate.window.rootViewController = tabbar;
+                        delegate.window.rootViewController = nav;
                         
                     }else if (userType == MemberCenterUserTypeSeller){
                         //如果是店铺
-                        tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+                        MLTabBarViewController *tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
                         
                         AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
                         delegate.window.rootViewController = tabbar;

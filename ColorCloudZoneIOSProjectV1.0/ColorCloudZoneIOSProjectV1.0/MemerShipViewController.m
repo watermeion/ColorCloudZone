@@ -11,6 +11,7 @@
 #import "AddMemberCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "AddMemberShipViewController.h"
+#import "MJRefresh/MJRefresh.h"
 static NSString *const kAddMemberCollectonCellIdentifier = @"AddMemberCollectionViewCell";
 static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollectionViewCell";
 
@@ -24,12 +25,9 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self getMembersWithLimit:50 skip:0 block:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.dataSource = [NSMutableArray arrayWithArray:objects];
-            [self.collectionView reloadData];
-        }
-    }];
+    [self.collectionView addHeaderWithTarget:self action:@selector(pullDown)];
+    [self.collectionView addFooterWithTarget:self action:@selector(pullUp)];
+    [self.collectionView headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +44,29 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)pullDown
+{
+    [self getMembersWithLimit:50 skip:0 block:^(NSArray *objects, NSError *error) {
+        [self.collectionView headerEndRefreshing];
+        if (!error) {
+            self.dataSource = [NSMutableArray arrayWithArray:objects];
+            [self.collectionView reloadData];
+        }
+    }];
+}
+
+- (void)pullUp
+{
+    [self getMembersWithLimit:50 skip:self.dataSource.count block:^(NSArray *objects, NSError *error) {
+        [self.collectionView footerEndRefreshing];
+        if (!error) {
+            if (!self.dataSource) self.dataSource = [NSMutableArray array];
+            [self.dataSource addObjectsFromArray:objects];
+            [self.collectionView reloadData];
+        }
+    }];
+}
 
 - (void)getMembersWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
 {

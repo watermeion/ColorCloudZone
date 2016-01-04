@@ -43,7 +43,7 @@
     if (self) {
         self.cropFrame = cropFrame;
         self.limitRatio = limitRatio;
-        self.originalImage = [self fixOrientation:originalImage];
+        self.originalImage = originalImage;
     }
     return self;
 }
@@ -60,78 +60,48 @@
 }
 
 - (void)initView {
-    self.view.backgroundColor = [UIColor blackColor];
+    self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [self.showImgView setMultipleTouchEnabled:YES];
+    [self.showImgView setUserInteractionEnabled:YES];
+    [self.showImgView setImage:self.originalImage];
+    [self.showImgView setUserInteractionEnabled:YES];
+    [self.showImgView setMultipleTouchEnabled:YES];
     
-    if((self.originalImage.size.height / self.originalImage.size.width) < 1){
-       // self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(-180, 0, 480, 480)];
-        self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(-80, 100, 480, 320)];
-        [self.showImgView setMultipleTouchEnabled:YES];
-        [self.showImgView setUserInteractionEnabled:YES];
-        [self.showImgView setImage:self.originalImage];
-        
-        NSLog(@"self.originalImage.size.width = %f,self.originalImage.size.height = %f",self.originalImage.size.width,self.originalImage.size.height);
-        NSLog(@"self.showImgView.frame.ori.x = %f, self.showImgView.frame.ori.y = %f,self.showImgView.frame.size.width = %f,self.showImgView.frame.ori = %f",self.showImgView.frame.origin.x,self.showImgView.frame.origin.y,self.showImgView.frame.size.width,self.showImgView.frame.size.height);
-        
-        CGFloat oriHeight = self.cropFrame.size.height;
-        CGFloat oriWidth = self.originalImage.size.width *(oriHeight/self.originalImage.size.height);
-        CGFloat oriX = self.cropFrame.origin.x - (oriWidth - self.cropFrame.size.width) / 2;
-        CGFloat oriY = self.cropFrame.origin.y - (self.cropFrame.size.height - oriHeight) / 2;
-        
-        self.oldFrame = CGRectMake(oriX, oriY, oriWidth, oriHeight);
-        self.latestFrame = self.oldFrame;
-        self.showImgView.frame = self.oldFrame;
-    }else if (self.originalImage.size.height / self.originalImage.size.width >= 1){
-        self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        [self.showImgView setMultipleTouchEnabled:YES];
-        [self.showImgView setUserInteractionEnabled:YES];
-        [self.showImgView setImage:self.originalImage];
-        CGFloat oriWidth = self.cropFrame.size.width;
-        
-        CGFloat oriHeight = self.originalImage.size.height * (oriWidth / self.originalImage.size.width);
-        //就相当是照片原生的高度
-        CGFloat oriX = self.cropFrame.origin.x + (self.cropFrame.size.width - oriWidth) / 2;  //这个原点不就是那个cropframe 的原点阿
-        CGFloat oriY = self.cropFrame.origin.y + (self.cropFrame.size.height - oriHeight) / 2;
-        
-        self.oldFrame = CGRectMake(oriX, oriY, oriWidth, oriHeight);
-        
-        NSLog(@"%f   %f   %f   %f",self.cropFrame.origin.x,self.cropFrame.origin.y,self.cropFrame.size.width,self.cropFrame.size.height);
-        
-        NSLog(@"oldFrame.ori.x = %f oldFrame.ori.y = %f oldFrame.size.width =  %f  oldFrame.ori.size.heigh = %f", oriX,oriY,oriWidth,oriHeight);
-        
-        
-        NSLog(@"%f   %f",self.originalImage.size.width , self.originalImage.size.height);
-        self.latestFrame = self.oldFrame;
-        self.showImgView.frame = self.oldFrame;
-    }
+    // scale to fit the screen
+    CGFloat oriWidth = self.cropFrame.size.width;
+    CGFloat oriHeight = self.originalImage.size.height * (oriWidth / self.originalImage.size.width);
+    CGFloat oriX = self.cropFrame.origin.x + (self.cropFrame.size.width - oriWidth) / 2;
+    CGFloat oriY = self.cropFrame.origin.y + (self.cropFrame.size.height - oriHeight) / 2;
+    self.oldFrame = CGRectMake(oriX, oriY, oriWidth, oriHeight);
+    self.latestFrame = self.oldFrame;
+    self.showImgView.frame = self.oldFrame;
     
     self.largeFrame = CGRectMake(0, 0, self.limitRatio * self.oldFrame.size.width, self.limitRatio * self.oldFrame.size.height);
     
     [self addGestureRecognizers];
     [self.view addSubview:self.showImgView];
     
-    self.overlayView = [[UIView alloc] initWithFrame:self.view.bounds];   //貌似就是那个全屏
+    self.overlayView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.overlayView.alpha = .5f;
     self.overlayView.backgroundColor = [UIColor blackColor];
     self.overlayView.userInteractionEnabled = NO;
-    self.overlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;//可以自动调解大小
+    self.overlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.overlayView];
     
     self.ratioView = [[UIView alloc] initWithFrame:self.cropFrame];
-    self.ratioView.layer.borderColor = [UIColor whiteColor].CGColor;  //就是那个小黄线
+    self.ratioView.layer.borderColor = [UIColor yellowColor].CGColor;
     self.ratioView.layer.borderWidth = 1.0f;
     self.ratioView.autoresizingMask = UIViewAutoresizingNone;
     [self.view addSubview:self.ratioView];
     
     [self overlayClipping];
-
-    
 }
 
 - (void)initControlBtn {
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50.0f, 100, 50)];
     cancelBtn.backgroundColor = [UIColor blackColor];
     cancelBtn.titleLabel.textColor = [UIColor whiteColor];
-    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [cancelBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [cancelBtn.titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -140,14 +110,10 @@
     [cancelBtn addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelBtn];
     
-    UIView *cropperView = [[UIView alloc] initWithFrame:CGRectMake(cancelBtn.frame.origin.x+cancelBtn.frame.size.width, self.view.frame.size.height - 50.f, self.view.frame.size.width-200, 50)];
-    cropperView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:cropperView];
-    
     UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 100.0f, self.view.frame.size.height - 50.0f, 100, 50)];
     confirmBtn.backgroundColor = [UIColor blackColor];
     confirmBtn.titleLabel.textColor = [UIColor whiteColor];
-    [confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [confirmBtn setTitle:@"OK" forState:UIControlStateNormal];
     [confirmBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [confirmBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
     confirmBtn.titleLabel.textColor = [UIColor whiteColor];
@@ -225,11 +191,8 @@
         [UIView animateWithDuration:BOUNDCE_DURATION animations:^{
             self.showImgView.frame = newFrame;
             self.latestFrame = newFrame;
-            
         }];
-        NSLog(@"newFrame.origin.x = %f,newFrame.origin.x = %f,newFrame.origin.x = %f,newFrame.origin.x = %f",newFrame.origin.x,newFrame.origin.y,newFrame.size.width,newFrame.size.height);
     }
-  
 }
 
 // pan gesture handler
@@ -286,7 +249,6 @@
         newFrame.origin.y = self.cropFrame.origin.y + (self.cropFrame.size.height - newFrame.size.height) / 2;
     }
     return newFrame;
-    
 }
 
 -(UIImage *)getSubImage{
@@ -295,7 +257,7 @@
     CGFloat x = (squareFrame.origin.x - self.latestFrame.origin.x) / scaleRatio;
     CGFloat y = (squareFrame.origin.y - self.latestFrame.origin.y) / scaleRatio;
     CGFloat w = squareFrame.size.width / scaleRatio;
-    CGFloat h = squareFrame.size.height / scaleRatio;
+    CGFloat h = squareFrame.size.width / scaleRatio;
     if (self.latestFrame.size.width < self.cropFrame.size.width) {
         CGFloat newW = self.originalImage.size.width;
         CGFloat newH = newW * (self.cropFrame.size.height / self.cropFrame.size.width);
@@ -318,80 +280,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextDrawImage(context, myImageRect, subImageRef);
     UIImage* smallImage = [UIImage imageWithCGImage:subImageRef];
-    CGImageRelease(subImageRef);
     UIGraphicsEndImageContext();
-    NSLog(@"smallimage.frame.size.width = %f, smallimage.frame.size.height = %f",smallImage.size.width,smallImage.size.height);
     return smallImage;
-}
-
-- (UIImage *)fixOrientation:(UIImage *)srcImg {
-    if (srcImg.imageOrientation == UIImageOrientationUp) return srcImg;
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    switch (srcImg.imageOrientation) {
-        case UIImageOrientationDown:
-        case UIImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, srcImg.size.height);
-            transform = CGAffineTransformRotate(transform, M_PI);
-            break;
-            
-        case UIImageOrientationLeft:
-        case UIImageOrientationLeftMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
-            transform = CGAffineTransformRotate(transform, M_PI_2);
-            break;
-            
-        case UIImageOrientationRight:
-        case UIImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, srcImg.size.height);
-            transform = CGAffineTransformRotate(transform, -M_PI_2);
-            break;
-        case UIImageOrientationUp:
-        case UIImageOrientationUpMirrored:
-            break;
-    }
-    
-    switch (srcImg.imageOrientation) {
-        case UIImageOrientationUpMirrored:
-        case UIImageOrientationDownMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.width, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-            
-        case UIImageOrientationLeftMirrored:
-        case UIImageOrientationRightMirrored:
-            transform = CGAffineTransformTranslate(transform, srcImg.size.height, 0);
-            transform = CGAffineTransformScale(transform, -1, 1);
-            break;
-        case UIImageOrientationUp:
-        case UIImageOrientationDown:
-        case UIImageOrientationLeft:
-        case UIImageOrientationRight:
-            break;
-    }
-    
-    CGContextRef ctx = CGBitmapContextCreate(NULL, srcImg.size.width, srcImg.size.height,
-                                             CGImageGetBitsPerComponent(srcImg.CGImage), 0,
-                                             CGImageGetColorSpace(srcImg.CGImage),
-                                             CGImageGetBitmapInfo(srcImg.CGImage));
-    CGContextConcatCTM(ctx, transform);
-    switch (srcImg.imageOrientation) {
-        case UIImageOrientationLeft:
-        case UIImageOrientationLeftMirrored:
-        case UIImageOrientationRight:
-        case UIImageOrientationRightMirrored:
-            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.height,srcImg.size.width), srcImg.CGImage);
-            break;
-            
-        default:
-            CGContextDrawImage(ctx, CGRectMake(0,0,srcImg.size.width,srcImg.size.height), srcImg.CGImage);
-            break;
-    }
-    
-    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
-    UIImage *img = [UIImage imageWithCGImage:cgimg];
-    CGContextRelease(ctx);
-    CGImageRelease(cgimg);
-    return img;
 }
 
 @end

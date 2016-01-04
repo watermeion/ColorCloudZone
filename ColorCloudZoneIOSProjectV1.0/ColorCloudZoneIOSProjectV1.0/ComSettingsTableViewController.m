@@ -7,6 +7,7 @@
 //
 
 #import "ComSettingsTableViewController.h"
+#import "SVProgressHud.h"
 
 @interface ComSettingsTableViewController ()
 
@@ -22,6 +23,15 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _nameLabel.text = @"";
+    [SVProgressHUD showInfoWithStatus:@"正在获取信息"];
+    AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
+    [manufacture fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error) {
+            
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

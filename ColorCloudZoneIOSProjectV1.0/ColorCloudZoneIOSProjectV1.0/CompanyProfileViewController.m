@@ -8,6 +8,7 @@
 
 #import "CompanyProfileViewController.h"
 #import "MLTabBarViewController.h"
+#import "SVProgressHud.h"
 @interface CompanyProfileViewController ()
 
 @end
@@ -36,8 +37,31 @@
 
 - (IBAction)doneAction:(id)sender {
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"  bundle:nil];
-    MLTabBarViewController *tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
-    [UIApplication sharedApplication].delegate.window.rootViewController = tabbar;
+    [SVProgressHUD showInfoWithStatus:@"正在保存"];
+    [[AVUser currentUser] setObject:_comNameTextField.text forKey:@""];
+    [[AVUser currentUser] saveInBackground];
+    AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
+    [manufacture setObject:_comNameTextField.text forKey:@"name"];
+    [manufacture setObject:_comAddressTextField.text forKey:@"address"];
+    [manufacture setObject:_cardNumTextField.text forKey:@"card"];
+    [manufacture setObject:_zfbNumTextField.text forKey:@"zhifubao"];
+    AVFile * avatar = [AVFile fileWithData:UIImageJPEGRepresentation(_avaterImageView.image, 0.8)];
+    [avatar saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [manufacture setObject:avatar forKey:@"avatar"];
+            [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+                    UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+                    [UIApplication sharedApplication].delegate.window.rootViewController = nav;
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"保存失败"];
+                }
+            }];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"保存失败"];
+        }
+    }];
+    
 }
 @end

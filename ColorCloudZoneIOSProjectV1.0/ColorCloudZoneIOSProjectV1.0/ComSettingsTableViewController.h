@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ComSettingsTableViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *idLabel;
+@property (strong, nonatomic) IBOutlet UILabel *factoryNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cardLabel;
+@property (strong, nonatomic) IBOutlet UILabel *zfbLabel;
 
 @end

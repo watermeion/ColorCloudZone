@@ -22,8 +22,19 @@
 
     if (self) {
      self.navigationBar.barTintColor = BASEBARCOLOR;
+        self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     }
 
+    return self;
+}
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+{
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        self.navigationBar.barTintColor = BASEBARCOLOR;
+        self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+
+    }
     return self;
 }
 

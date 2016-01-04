@@ -10,6 +10,7 @@
 #import "RecommendItemsCollectionViewCell.h"
 #import "MoreItemsCollectionViewCell.h"
 #import "DetailImageCollectionViewController.h"
+#import "UIImageView+WebCache.h"
 
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
@@ -49,6 +50,21 @@ static const CGFloat CellWidth = 220;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    AVFile * mainImage = [_product objectForKey:@"productMainImage"];
+    [_productMainImageView sd_setImageWithURL:[NSURL URLWithString:mainImage.url]];
+    
+//    @property (strong, nonatomic) IBOutlet UILabel *factoryName;
+//    @property (strong, nonatomic) IBOutlet UIImageView *factoryAvatar;
+//    @property (strong, nonatomic) IBOutlet UILabel *factoryPhone;
+//    @property (strong, nonatomic) IBOutlet UILabel *factoryProductCount;
+//    @property (strong, nonatomic) IBOutlet UILabel *factoryNewCount;
+    
+    _likeLabel.text = [((NSNumber *)_product[@"like"]).stringValue stringByAppendingString:@"人想要"];
+    _titleLabel.text = _product[@"productName"];
+    
+    
+    
       [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
 }
 

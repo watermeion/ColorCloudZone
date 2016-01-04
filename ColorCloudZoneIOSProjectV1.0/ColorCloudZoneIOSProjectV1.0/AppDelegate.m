@@ -45,17 +45,16 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"  bundle:nil];
     MemberCenterManager *memberManager = [MemberCenterManager singletonInstance];
     if ([memberManager currentUser]) {
-        MLTabBarViewController *tabbar;
         if (memberManager.currentUserType == MemberCenterUserTypeSupplier) {
-            tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
-            self.window.rootViewController = tabbar;
+            UINavigationController * nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+            self.window.rootViewController = nav;
         }else if(memberManager.currentUserType == MemberCenterUserTypeSeller){
-            tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+            MLTabBarViewController * tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
             self.window.rootViewController = tabbar;
         } else {
-            RegisterAfterViewController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
-            LoginAndRegistNaviController * nav = [[LoginAndRegistNaviController alloc]initWithRootViewController:vc];
-            self.window.rootViewController = nav;
+            [AVUser logOut];
+            LoginAndRegistNaviController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
+            self.window.rootViewController = vc;
         }
     }
     else {

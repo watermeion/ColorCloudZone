@@ -79,11 +79,7 @@ static GBMainEntranceViewController * shareInstance = nil;
 }
 
 - (void)loadSupplierWorkFlow{
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MLTabBarViewController *tabbar = [storyBoard instantiateViewControllerWithIdentifier:@"SuppliersTabViewController"];
-    [self.view addSubview:tabbar.view];
-    [self addChildViewController:tabbar];
-    [tabbar didMoveToParentViewController:self];
+    
 
 }
 

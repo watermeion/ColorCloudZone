@@ -10,6 +10,8 @@
 #import <AVOSCloud/AVOSCloud.h>
 #import "MemberCenterManager.h"
 #import "SVProgressHUD.h"
+#import "MLTabBarViewController.h"
+#import "AppDelegate.h"
 @interface RegisterAfterViewController ()
 @property (nonatomic) MEMBERCENTERUSERTYPE userType;
 
@@ -72,17 +74,48 @@ static NSString *const kShowShopProfileSegueIdentifier = @"ShowShopProfileSegue"
 
 - (IBAction)nextStepAction:(id)sender {
     [SVProgressHUD showWithStatus:@"第一次登陆，请稍后！"];
-    [[MemberCenterManager singletonInstance] setCurrentUserType:self.userType withCompletion:^(BOOL success, NSError *error) {
-        [SVProgressHUD showSuccessWithStatus:@"欢迎进入彩云间"];
-        if(success && !error ){
-            if (self.userType == MemberCenterUserTypeSupplier) {
-                //跳转到供应商界面 ， 补充资料
-                [self performSegueWithIdentifier:kShowSupllierSegueIdentifier sender:self];
-            }else if (self.userType == MemberCenterUserTypeSeller){
-                //跳转到店铺界面
-                [self performSegueWithIdentifier:kShowShopProfileSegueIdentifier sender:self];
+    if (self.userType == MemberCenterUserTypeSupplier) {
+        AVObject * manufacture = [AVObject objectWithClassName:@"Manufacturers"];
+        [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [[AVUser currentUser] setObject:@(self.userType) forKey:@"userType"];
+                [[AVUser currentUser] setObject:manufacture forKey:@"manufacture"];
+                [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [SVProgressHUD showErrorWithStatus:@"登陆成功"];
+                        UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                        delegate.window.rootViewController = nav;
+
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"登陆失败"];
+                    }
+                }];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"登陆失败"];
             }
-        }
-    }];
+        }];
+    }else if (self.userType == MemberCenterUserTypeSeller){
+        AVObject * shop = [AVObject objectWithClassName:@"shop"];
+        [shop saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [[AVUser currentUser] setObject:@(self.userType) forKey:@"userType"];
+                [[AVUser currentUser] setObject:shop forKey:@"shop"];
+                [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [SVProgressHUD showErrorWithStatus:@"登陆成功"];
+                        MLTabBarViewController *tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+                        
+                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                        delegate.window.rootViewController = tabbar;
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"登陆失败"];
+                    }
+                }];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"登陆失败"];
+            }
+        }];
+    }
 }
 @end

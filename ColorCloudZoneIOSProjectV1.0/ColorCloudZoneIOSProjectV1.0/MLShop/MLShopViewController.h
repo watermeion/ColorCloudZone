@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
 #import "CustomSelectionBarView.h"
+#import "VPImageCropperViewController.h"
 
-@interface MLShopViewController : GBCustomViewController
+@interface MLShopViewController : GBCustomViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *avatar;
 @property (strong, nonatomic) IBOutlet CustomSelectionBarView *selectionBar;

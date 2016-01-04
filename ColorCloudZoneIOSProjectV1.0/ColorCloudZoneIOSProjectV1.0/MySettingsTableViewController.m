@@ -9,8 +9,11 @@
 #import "MySettingsTableViewController.h"
 #import "MemberCenterManager.h"
 #import "UIImageView+WebCache.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "LoginAndRegistNaviController.h"
 
-@interface MySettingsTableViewController ()
+@interface MySettingsTableViewController () <UIActionSheetDelegate>
 
 @end
 
@@ -46,6 +49,24 @@
 }
 
 #pragma mark - Table view data source
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 3 && indexPath.row == 0) {
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定要退出吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认退出" otherButtonTitles:nil];
+        [actionSheet showInView:self.view];
+        actionSheet.tag = 10;
+    }
+}
 
-
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 10 && buttonIndex == 0) {
+        
+        LoginAndRegistNaviController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
+        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+        delegate.window.rootViewController = vc;
+        [AVUser logOut];
+    }
+}
 @end
