@@ -38,13 +38,14 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
     AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (!error) {
             self.nameLabel.text = [object objectForKey:@"shopName"];
-            AVFile * avatar = [shop objectForKey:@"shopLogo"];
-            AVFile * cover = [shop objectForKey:@"cover"];
-            [self.avatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
-            [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
+            AVFile * avatar = [object objectForKey:@"shopLogo"];
+            AVFile * cover = [object objectForKey:@"cover"];
+            if (avatar.url) [self.avatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
+            if (cover.url) [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
         }
     }];
 }
@@ -110,9 +111,10 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        [SVProgressHUD showWithStatus:@"正在添加..."];
+        [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
         AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
             if (!error) {
                 AVFile * cover = [AVFile fileWithData:UIImageJPEGRepresentation(editedImage, 0.8)];
                 [cover saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -97,7 +97,7 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 
 - (IBAction)loginAction:(id)sender {
     if ([self checkInputValiable]) {
-        [SVProgressHUD showWithStatus:@"正在登陆"];
+        [SVProgressHUD showWithStatus:@"正在登陆" maskType:SVProgressHUDMaskTypeBlack];
         [AVUser logInWithUsernameInBackground:self.phoneNunTextField.text password:self.passwordTextField.text block:^(AVUser *user, NSError *error) {
             [SVProgressHUD dismiss];
                 if (user != nil) {

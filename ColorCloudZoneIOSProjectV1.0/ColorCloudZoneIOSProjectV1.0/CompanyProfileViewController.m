@@ -9,7 +9,8 @@
 #import "CompanyProfileViewController.h"
 #import "MLTabBarViewController.h"
 #import "SVProgressHud.h"
-@interface CompanyProfileViewController ()
+#import "VPImageCropper/VPImageCropperViewController.h"
+@interface CompanyProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
 
 @end
 
@@ -37,14 +38,13 @@
 
 - (IBAction)doneAction:(id)sender {
     
-    [SVProgressHUD showInfoWithStatus:@"正在保存"];
-    [[AVUser currentUser] setObject:_comNameTextField.text forKey:@""];
-    [[AVUser currentUser] saveInBackground];
+    [SVProgressHUD showWithStatus:@"正在保存" maskType:SVProgressHUDMaskTypeBlack];
     AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
     [manufacture setObject:_comNameTextField.text forKey:@"name"];
     [manufacture setObject:_comAddressTextField.text forKey:@"address"];
     [manufacture setObject:_cardNumTextField.text forKey:@"card"];
     [manufacture setObject:_zfbNumTextField.text forKey:@"zhifubao"];
+    [manufacture setObject:_ownerTextField.text forKey:@"ownerName"];
     AVFile * avatar = [AVFile fileWithData:UIImageJPEGRepresentation(_avaterImageView.image, 0.8)];
     [avatar saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -64,4 +64,43 @@
     }];
     
 }
+- (IBAction)uploadAction:(id)sender {
+    UIImagePickerController * vc = [[UIImagePickerController alloc] init];
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    // 裁剪
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, (height - width)/2.0, width, width) limitScaleRatio:3.0];
+    imgEditorVC.delegate = self;
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self presentViewController:imgEditorVC animated:YES completion:^{
+        }];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
+{
+    self.avaterImageView.image = editedImage;
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController
+{
+    [cropperViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 @end

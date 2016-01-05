@@ -93,7 +93,7 @@
 //    var avatar = request.params.MemberLogoUrl;
 //    var shopId = request.params.shopId;
 //    var memberAddress = request.params.MemberAddress;
-    [SVProgressHUD showWithStatus:@"正在添加..."];
+    [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
     AVFile * file = [AVFile fileWithData:UIImageJPEGRepresentation(self.avatarImageView.image, 0.8)];
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -114,6 +114,7 @@
                             [SVProgressHUD showErrorWithStatus:@"添加失败"];
                         } else {
                             [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                            [self.navigationController popViewControllerAnimated:YES];
                         }
                     }];
                 }

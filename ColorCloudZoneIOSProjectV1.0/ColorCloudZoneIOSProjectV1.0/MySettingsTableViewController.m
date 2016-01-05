@@ -33,9 +33,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (!error) {
-            self.nameLabel.text = [object objectForKey:@"shopName"];
+            self.shopNameLabel.text = [object objectForKey:@"shopName"];
+            self.nameLabel.text = [object objectForKey:@"shopOwnerName"];
+            self.addressLabel.text = [object objectForKey:@"shopAddress"];
             AVFile * avatar = [shop objectForKey:@"shopLogo"];
             [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
             
@@ -52,7 +55,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 3 && indexPath.row == 0) {
+    if (indexPath.section == ([tableView numberOfSections] - 1) && indexPath.row == ([tableView numberOfRowsInSection:indexPath.section] - 1)) {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定要退出吗？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认退出" otherButtonTitles:nil];
         [actionSheet showInView:self.view];
         actionSheet.tag = 10;

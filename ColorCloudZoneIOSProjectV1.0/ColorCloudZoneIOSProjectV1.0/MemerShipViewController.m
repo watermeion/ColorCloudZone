@@ -71,7 +71,8 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 - (void)getMembersWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
 {
     AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (!error) {
             AVRelation * relation = [object relationforKey:@"shopMember"];
             AVQuery * query = [relation query];

@@ -72,7 +72,7 @@ typedef void(^GBCompletionBlock)(BOOL success, NSError *error);
         [SVProgressHUD showErrorWithStatus:@"密码必须大于6为"];
         return;
     }
-     [SVProgressHUD showWithStatus:@"正在注册..."];
+     [SVProgressHUD showWithStatus:@"正在注册..." maskType:SVProgressHUDMaskTypeBlack];
     [self DoRegistBusinessWithUserName:phone Pwd:pwd
                         withCompletion:^(BOOL success, NSError *error) {
                             

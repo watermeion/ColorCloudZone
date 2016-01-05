@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
+#import "VPImageCropperViewController.h"
 
-@interface PersonProfileViewController : GBCustomViewController
+@interface PersonProfileViewController : GBCustomViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *shopNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-
-
-
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (strong, nonatomic) UIImage * avatar;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 - (IBAction)doneAction:(id)sender;
 

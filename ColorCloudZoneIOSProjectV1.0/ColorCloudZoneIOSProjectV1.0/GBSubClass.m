@@ -7,7 +7,8 @@
 //
 
 #import "GBSubClass.h"
-#import <objc/objc-runtime.h>
+//#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
 @implementation GBSubClass
 
 @dynamic objectId;

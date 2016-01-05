@@ -40,7 +40,8 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     self.avatarImageView.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
     AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (!error) {
             self.nameLabel.text = [object objectForKey:@"shopName"];
             AVFile * avatar = [shop objectForKey:@"shopLogo"];
@@ -119,9 +120,10 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        [SVProgressHUD showWithStatus:@"正在添加..."];
+        [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
         AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
             if (!error) {
                 AVFile * cover = [AVFile fileWithData:UIImageJPEGRepresentation(editedImage, 0.8)];
                 [cover saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -153,9 +155,11 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
-    vc.parentVC = self;
-    self.selectionBar.delegate = vc;
+    if (segue.identifier == kMLSupplierContainerPushSegue) {
+        MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
+        vc.parentVC = self;
+        self.selectionBar.delegate = vc;
+    }
 }
 
 
