@@ -10,7 +10,7 @@
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
 #import "MLShopContainViewController.h"
-static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
+static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue";
 
 
 @interface MarketViewController ()
@@ -98,9 +98,12 @@ static NSString *const kMarketContainerPushSegue = @"MarketContainerPushSegue";
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
-    vc.parentVC = self;
-    self.selectionBar.delegate = vc;
+    if ([segue.identifier isEqualToString:kMLMarketContainerPushSegue]) {
+        MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
+        vc.parentVC = self;
+        self.selectionBar.delegate = vc;
+    }
+
 }
 
 

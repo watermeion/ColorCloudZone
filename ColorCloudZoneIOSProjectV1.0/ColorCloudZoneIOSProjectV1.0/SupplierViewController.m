@@ -155,7 +155,7 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if (segue.identifier == kMLSupplierContainerPushSegue) {
+    if ([segue.identifier isEqualToString:kMLSupplierContainerPushSegue]) {
         MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
         vc.parentVC = self;
         self.selectionBar.delegate = vc;

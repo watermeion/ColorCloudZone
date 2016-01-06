@@ -151,10 +151,12 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
-    vc.parentVC = self;
-    self.selectionBar.delegate = vc;
+    if ([segue.identifier isEqualToString:kMLShopContainerPushSegue]) {
+        MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
+        vc.parentVC = self;
+        self.selectionBar.delegate = vc;
+    }
+
 }
 
 @end
