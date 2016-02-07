@@ -11,14 +11,17 @@
 #import "MoreItemsCollectionViewCell.h"
 #import "DetailImageCollectionViewController.h"
 #import "UIImageView+WebCache.h"
-
+#import "MarketViewController.h"
+#import "MLShopViewController.h"
+#import "SupplierViewController.h"
+#import "KxMenu.h"
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
 }
 
-static  NSString  const *recommendCellIdentifier = @"RecommendItemsCollectionViewCell";
-static  NSString  const *moreCellIdentifier = @"MoreItemsCollectionViewCell.h";
+static  NSString *recommendCellIdentifier = @"RecommendItemsCollectionViewCell";
+static  NSString *moreCellIdentifier = @"MoreItemsCollectionViewCell";
 static const NSInteger cellNum = 4;
 
 static const CGFloat cellHeight = 130;
@@ -28,19 +31,10 @@ static const CGFloat CellWidth = 220;
 
 @interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
-
-
-
 //View Part 3
 @property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
-
+@property (strong, nonatomic) NSArray * menuItems;
 @end
-
-
-
-
-
 
 @implementation GoodDetailViewController
 
@@ -50,18 +44,62 @@ static const CGFloat CellWidth = 220;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
+        self.wantView.hidden = NO;
+        self.contactAndCollectView.hidden = YES;
+        _menuItems = @[[KxMenuItem menuItem:@"取消收藏"
+                                      image:nil
+                                     target:self
+                                     action:@selector(uncollect:)],
+                       [KxMenuItem menuItem:@"统计"
+                                      image:nil
+                                     target:nil
+                                     action:NULL]];
+    } else if ([self.parentVC isKindOfClass:[MarketViewController class]]) {
+        self.wantView.hidden = YES;
+        self.contactAndCollectView.hidden = NO;
+    } else {
+        self.wantView.hidden = YES;
+        self.contactAndCollectView.hidden = YES;
+        _menuItems = @[[KxMenuItem menuItem:@"编辑"
+                                      image:nil
+                                     target:nil
+                                     action:NULL],
+                       [KxMenuItem menuItem:@"下架"
+                                      image:nil
+                                     target:self
+                                     action:@selector(unsell:)],
+                       [KxMenuItem menuItem:@"统计"
+                                      image:nil
+                                     target:nil
+                                     action:NULL]];
+    }
+    if (_menuItems) {
+        
+        UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
+                                                    initWithImage:[UIImage imageNamed:@"moreBarIcon_black"]
+                                                    style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(moreFeaturesLeftBarAction:)];
+        moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+        self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
+    }
     
     AVFile * mainImage = [_product objectForKey:@"productMainImage"];
     [_productMainImageView sd_setImageWithURL:[NSURL URLWithString:mainImage.url]];
-    
-//    @property (strong, nonatomic) IBOutlet UILabel *factoryName;
-//    @property (strong, nonatomic) IBOutlet UIImageView *factoryAvatar;
-//    @property (strong, nonatomic) IBOutlet UILabel *factoryPhone;
-//    @property (strong, nonatomic) IBOutlet UILabel *factoryProductCount;
-//    @property (strong, nonatomic) IBOutlet UILabel *factoryNewCount;
-    
     _likeLabel.text = [((NSNumber *)_product[@"like"]).stringValue stringByAppendingString:@"人想要"];
     _titleLabel.text = _product[@"productName"];
+    AVObject * factory = [_product objectForKey:@"factory"];
+    [factory fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error) {
+            _factoryName.text = [factory objectForKey:@"name"];
+            _factoryPhone.text = [factory objectForKey:@"phoneNumber"];
+//            _factoryProductCount.text = [factory objectForKey:@""];
+//            _factoryNewCount.text = [factory objectForKey:@""];
+            AVFile * avatar = [factory objectForKey:@"avatar"];
+            [_factoryAvatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
+        }
+    }];
     
     
     
@@ -73,6 +111,30 @@ static const CGFloat CellWidth = 220;
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)moreFeaturesLeftBarAction:(id)sender
+{
+    
+    NSArray *menuItems =
+    @[
+      [KxMenuItem menuItem:@"更换背景"
+                     image:nil
+                    target:self
+                    action:@selector(changeBackground:)],
+      [KxMenuItem menuItem:@"统计"
+                     image:nil
+                    target:nil
+                    action:NULL]
+      ];
+    
+    //
+    //    KxMenuItem *first = menuItems[0];
+    //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
+    //    first.alignment = NSTextAlignmentCenter;
+    
+    [KxMenu showMenuInView:self.navigationController.view
+                  fromRect:CGRectMake(self.view.frame.size.width - 44 - 10, 0, 44, 54)
+                 menuItems:menuItems];
+}
 /*
 #pragma mark - Navigation
 
@@ -128,5 +190,43 @@ static const CGFloat CellWidth = 220;
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
+- (IBAction)collect:(id)sender
+{
+    
+    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
+    [query whereKey:@"factoryProduct" equalTo:self.product];
+    [query whereKey:@"shopId" equalTo:((AVObject *)[AVUser currentUser][@"shop"]).objectId];
+    [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (error) {
+            
+        } else {
+            
+        }
+    }];
+//    AVObject * mallProduct = [AVObject objectWithClassName:@"MallProduct"];
+//    [mallProduct setObject:self.product forKey:@"factoryProduct"];
+//    [mallProduct setObject:((AVObject *)[AVUser currentUser][@"shop"]).objectId forKey:@"shopId"];
+//    [mallProduct setObject: forKey:
+}
+
+- (IBAction)uncollect:(id)sender
+{
+    
+}
+
+- (IBAction)contactFactory:(id)sender
+{
+    
+}
+
+- (IBAction)want:(id)sender
+{
+    
+}
+
+- (IBAction)unsell:(id)sender
+{
+    
+}
 
 @end

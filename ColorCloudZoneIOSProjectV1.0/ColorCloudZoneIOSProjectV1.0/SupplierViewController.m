@@ -39,13 +39,13 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     
     self.avatarImageView.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
-    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+    AVObject * factory = [[AVUser currentUser] objectForKey:@"manufacture"];
+    [factory fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//    [factory fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (!error) {
-            self.nameLabel.text = [object objectForKey:@"shopName"];
-            AVFile * avatar = [shop objectForKey:@"shopLogo"];
-            AVFile * cover = [shop objectForKey:@"cover"];
+            self.nameLabel.text = [factory objectForKey:@"name"];
+            AVFile * avatar = [factory objectForKey:@"avatar"];
+            AVFile * cover = [factory objectForKey:@"cover"];
             [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
             [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
         }
@@ -121,15 +121,15 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
-        AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-        [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
+        [manufacture fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//        [manufacture fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
             if (!error) {
                 AVFile * cover = [AVFile fileWithData:UIImageJPEGRepresentation(editedImage, 0.8)];
                 [cover saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
-                        [shop setObject:cover forKey:@"cover"];
-                        [shop saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        [manufacture setObject:cover forKey:@"cover"];
+                        [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                             if (succeeded) {
                                 [SVProgressHUD showSuccessWithStatus:@"上传成功"];
                                 self.coverImageView.image = editedImage;

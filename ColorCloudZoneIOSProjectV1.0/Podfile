@@ -6,6 +6,7 @@ pod 'AVOSCloud'
 pod 'SVProgressHUD'
 pod 'IQKeyboardManager'
 pod 'BlocksKit'
+pod ‘AFNetworking’
 pod 'UITableView+FDTemplateLayoutCell', '~> 1.4.beta'
 end
 

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomSelectionBarView">
@@ -52,10 +53,9 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YaL-X7-hEu">
-                    <rect key="frame" x="0.0" y="40" width="189" height="4"/>
+                    <rect key="frame" x="1.5" y="40" width="187.5" height="4"/>
                     <color key="backgroundColor" red="1" green="0.7811030068" blue="0.050997170760000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="189" id="8cs-Wz-HJ6"/>
                         <constraint firstAttribute="height" constant="4" id="Yyy-PL-Moj"/>
                     </constraints>
                 </view>
@@ -67,6 +67,7 @@
                 <constraint firstAttribute="centerX" secondItem="GWI-vd-TxX" secondAttribute="centerX" constant="-1" id="3Wp-uP-xPY"/>
                 <constraint firstAttribute="bottom" secondItem="YaL-X7-hEu" secondAttribute="bottom" id="4Lr-GK-NtC"/>
                 <constraint firstItem="fXC-GU-AUf" firstAttribute="width" secondItem="Ncr-rL-hrw" secondAttribute="width" constant="-1" id="5ky-KL-uYg"/>
+                <constraint firstItem="YaL-X7-hEu" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.5" id="BGs-Cj-fHL"/>
                 <constraint firstAttribute="centerY" secondItem="GWI-vd-TxX" secondAttribute="centerY" constant="1" id="Dkl-jZ-Jzh"/>
                 <constraint firstItem="YaL-X7-hEu" firstAttribute="top" secondItem="Ncr-rL-hrw" secondAttribute="bottom" id="Ea7-T8-fDX"/>
                 <constraint firstItem="GWI-vd-TxX" firstAttribute="leading" secondItem="Ncr-rL-hrw" secondAttribute="trailing" constant="1" id="IgZ-cZ-dTk"/>

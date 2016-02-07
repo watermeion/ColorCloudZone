@@ -208,7 +208,6 @@
 }
 
 
-
 - (void)btn1Selected:(CustomSelectionBarView *)view
 {
     self.collectionView.hidden = NO;
@@ -301,6 +300,7 @@
     AVObject * product = [_hottestDataArray objectAtIndex:indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
     vc.product = product;
+    vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -359,6 +359,7 @@
     AVObject * product = currentDay[indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
     vc.product = product;
+    vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

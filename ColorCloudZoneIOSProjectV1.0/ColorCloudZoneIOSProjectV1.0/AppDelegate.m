@@ -16,6 +16,7 @@
 #import "LoginAndRegistNaviController.h"
 #import "MLTabBarViewController.h"
 #import "RegisterAfterViewController.h"
+#import "CCUser.h"
 @interface AppDelegate ()
 
 @end
@@ -63,6 +64,10 @@
         self.window.rootViewController = vc;
 
     }
+    [CCUser loginWithMobile:@"15158131300" password:@"123456" withBlock:^(CCUser *user, NSError *error) {
+        
+    }];
+    
     
     return YES;
 }

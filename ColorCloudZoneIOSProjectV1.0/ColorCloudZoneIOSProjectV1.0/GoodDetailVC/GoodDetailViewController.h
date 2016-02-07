@@ -19,11 +19,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *factoryProductCount;
 @property (strong, nonatomic) IBOutlet UILabel *factoryNewCount;
 @property (strong, nonatomic) IBOutlet UIImageView *productMainImageView;
-
+@property (strong, nonatomic) UIViewController * parentVC;
 //Constraint
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTextHeightConstraint;
 
+@property (strong, nonatomic) IBOutlet UIView *contactAndCollectView;
 
+@property (strong, nonatomic) IBOutlet UIView *wantView;
 
 
 
