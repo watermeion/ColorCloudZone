@@ -9,6 +9,8 @@
 #import "RegisterViewController.h"
 #import <AVUser.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "CCUser.h"
+#import "RequestSMSViewController.h"
 static NSString * const kPushForSMSCodeSegueIdentifier = @"PushForSMSCodeSegue";
 static NSString * const kPushSelectUserTypeVCSegueIdentifier = @"PushSelectUserTypeVCSegue";
 typedef void(^GBCompletionBlock)(BOOL success, NSError *error);
@@ -69,39 +71,27 @@ typedef void(^GBCompletionBlock)(BOOL success, NSError *error);
     
     if (pwd.length <6) {
       
-        [SVProgressHUD showErrorWithStatus:@"密码必须大于6为"];
+        [SVProgressHUD showErrorWithStatus:@"密码必须大于6位"];
         return;
     }
-     [SVProgressHUD showWithStatus:@"正在注册..." maskType:SVProgressHUDMaskTypeBlack];
-    [self DoRegistBusinessWithUserName:phone Pwd:pwd
-                        withCompletion:^(BOOL success, NSError *error) {
-                            
-                            if (success) {
-                                //注册成功
-                                  [SVProgressHUD showInfoWithStatus:@"注册成功"];
-                                [self performSegueWithIdentifier:kPushSelectUserTypeVCSegueIdentifier sender:self];
-                            }else {
-                            //注册失败
-                                [SVProgressHUD showErrorWithStatus:@"注册失败，请重新尝试"];
-                            }
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [CCUser checkMobileRegistered:phone withBlock:^(BOOL registered, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"请检查网络"];
+        } else {
+            if (registered) {
+                [SVProgressHUD showErrorWithStatus:@"该手机号已注册过。"];
+            } else {
+                RequestSMSViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RequestSMSViewController"];
+                CCUser * user = [[CCUser alloc] init];
+                user.mobile = phone;
+                user.password = pwd;
+                vc.registingUser = user;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
     }];
 }
 
-
-#pragma --mark 注册逻辑
-- (void)DoRegistBusinessWithUserName:(NSString *)username
-                                 Pwd:(NSString *)password
-                                withCompletion:(GBCompletionBlock)callback
-{
-    static BOOL isSuccess=NO;
-    NSError  *error;
-    AVUser * user = [AVUser user];
-    user.username = username;
-    user.password = password;
-    [user setObject:username forKey:@"mobilePhoneNumber"];
-    isSuccess=[user signUp:&error];
-    if (callback) {
-        callback(isSuccess,error);
-    }
-}
 @end

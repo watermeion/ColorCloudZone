@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
 #import "VPImageCropperViewController.h"
-
+#import "CCUser.h"
 @interface PersonProfileViewController : GBCustomViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (strong, nonatomic) UIImage * avatar;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
+@property (nonatomic, strong) CCUser * registingUser;
 - (IBAction)doneAction:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *uploadAvatarBtn;

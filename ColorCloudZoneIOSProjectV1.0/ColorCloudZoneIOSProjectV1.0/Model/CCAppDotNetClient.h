@@ -10,6 +10,8 @@
 #import "NetAccessAPI.h"
 
 @interface CCAppDotNetClient : AFHTTPSessionManager
+@property (nonatomic, strong) NSString * phpSession;
 + (instancetype)sharedInstance;
 + (NSDictionary*)generateParamsWithAPI:(NSString*)apiName params:(NSDictionary*)params;
++ (BOOL)isTesting;
 @end

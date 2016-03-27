@@ -37,31 +37,32 @@
 */
 
 - (IBAction)doneAction:(id)sender {
+    if (_comNameTextField.text.length * _comAddressTextField.text.length * _cardNumTextField.text.length * _zfbNumTextField.text.length * _ownerTextField.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请将信息填写完整"];
+        return;
+    }
     
-    [SVProgressHUD showWithStatus:@"正在保存" maskType:SVProgressHUDMaskTypeBlack];
-    AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
-    [manufacture setObject:_comNameTextField.text forKey:@"name"];
-    [manufacture setObject:_comAddressTextField.text forKey:@"address"];
-    [manufacture setObject:_cardNumTextField.text forKey:@"card"];
-    [manufacture setObject:_zfbNumTextField.text forKey:@"zhifubao"];
-    [manufacture setObject:_ownerTextField.text forKey:@"ownerName"];
-    AVFile * avatar = [AVFile fileWithData:UIImageJPEGRepresentation(_avaterImageView.image, 0.8)];
-    [avatar saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            [manufacture setObject:avatar forKey:@"avatar"];
-            [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    [SVProgressHUD showSuccessWithStatus:@"保存成功"];
-                    UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
-                    [UIApplication sharedApplication].delegate.window.rootViewController = nav;
-                } else {
-                    [SVProgressHUD showErrorWithStatus:@"保存失败"];
-                }
-            }];
-        } else {
-            [SVProgressHUD showErrorWithStatus:@"保存失败"];
-        }
-    }];
+    if (self.registingUser) {
+        self.registingUser.factoryName = _comNameTextField.text;
+        self.registingUser.address = _comAddressTextField.text;
+        self.registingUser.cardId = _cardNumTextField.text;
+        self.registingUser.alipayId = _zfbNumTextField.text;
+        self.registingUser.ownerName = _ownerTextField.text;
+        
+        [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeBlack];
+        [CCUser signupUser:self.registingUser withBlock:^(CCUser *user, NSError *error) {
+            if (!error) {
+                [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+                UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+                [UIApplication sharedApplication].delegate.window.rootViewController = nav;
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"注册失败"];
+            }
+
+        }];
+    } else {
+        
+    }
     
 }
 - (IBAction)uploadAction:(id)sender {

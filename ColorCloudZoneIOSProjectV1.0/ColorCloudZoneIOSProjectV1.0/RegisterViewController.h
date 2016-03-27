@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCUser.h"
 
 @interface RegisterViewController : UIViewController
 

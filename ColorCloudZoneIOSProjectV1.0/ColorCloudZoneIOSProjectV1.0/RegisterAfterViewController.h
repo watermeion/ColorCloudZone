@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCUser.h"
 
 @interface RegisterAfterViewController : UIViewController
 - (IBAction)selectSupplierAction:(id)sender;
@@ -15,5 +16,6 @@
 - (IBAction)selectedSellerAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *nextStepBtn;
 - (IBAction)nextStepAction:(id)sender;
+@property (strong, nonatomic) CCUser * registingUser;
 
 @end

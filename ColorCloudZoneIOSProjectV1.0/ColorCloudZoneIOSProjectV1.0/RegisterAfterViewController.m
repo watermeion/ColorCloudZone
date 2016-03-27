@@ -75,53 +75,20 @@ static NSString *const kShowShopProfileSegueIdentifier = @"ShowShopProfileSegue"
 
 
 - (IBAction)nextStepAction:(id)sender {
-    [SVProgressHUD showWithStatus:@"第一次登陆，请稍后！" maskType:SVProgressHUDMaskTypeBlack];
+    
     if (self.userType == MemberCenterUserTypeSupplier) {
-        AVObject * manufacture = [AVObject objectWithClassName:@"Manufacturers"];
-        [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                [[AVUser currentUser] setObject:@(self.userType) forKey:@"userType"];
-                [[AVUser currentUser] setObject:manufacture forKey:@"manufacture"];
-                [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
-                        CompanyProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyProfileViewController"];
-                        [self.navigationController pushViewController:vc animated:YES];
-//                        UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
-//                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-//                        delegate.window.rootViewController = nav;
+        self.registingUser.role = UserRoleFactory;
+        CompanyProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyProfileViewController"];
+        vc.registingUser = self.registingUser;
+        [self.navigationController pushViewController:vc animated:YES];
 
-                    } else {
-                        [SVProgressHUD showErrorWithStatus:@"登陆失败"];
-                    }
-                }];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"登陆失败"];
-            }
-        }];
     }else if (self.userType == MemberCenterUserTypeSeller){
-        AVObject * shop = [AVObject objectWithClassName:@"Shop"];
-        [shop setObject:[AVUser currentUser].objectId forKey:@"userId"];
-        [shop saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                [[AVUser currentUser] setObject:@(self.userType) forKey:@"userType"];
-                [[AVUser currentUser] setObject:shop forKey:@"shop"];
-                [[AVUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [SVProgressHUD showSuccessWithStatus:@"登陆成功"];
-                        PersonProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonProfileViewController"];
-                        [self.navigationController pushViewController:vc animated:YES];
-//                        MLTabBarViewController *tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
-//                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-//                        delegate.window.rootViewController = tabbar;
-                    } else {
-                        [SVProgressHUD showErrorWithStatus:@"登陆失败"];
-                    }
-                }];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"登陆失败"];
-            }
-        }];
+        self.registingUser.role = UserRoleMall;
+        PersonProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonProfileViewController"];
+        vc.registingUser = self.registingUser;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"请选择你的身份"];
     }
 }
 @end

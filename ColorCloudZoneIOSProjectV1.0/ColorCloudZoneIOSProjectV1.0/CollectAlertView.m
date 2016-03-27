@@ -21,18 +21,30 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(collectAlertViewCollectButtonClicked:)]) {
         [self.delegate collectAlertViewCollectButtonClicked:self];
     }
+    UIView * superView = [self superview];
+    [UIView animateWithDuration:0.05 animations:^{
+        self.frame = CGRectMake((superView.frame.size.width - 300)/2.f, (superView.frame.size.height - 300)/2.f - 20, 300, 300);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.frame = CGRectMake((superView.frame.size.width - 300)/2.f, superView.frame.size.height, 300, 300);
+            self.maskView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.maskView removeFromSuperview];
+            [self removeFromSuperview];
+        }];
+    }];
 }
 
 - (void)showInView:(UIView *)view
 {
-    self.maskView = [[UIView alloc] initWithFrame:view.frame];
-    self.maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    self.maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
     self.maskView.alpha = 0;
-    [view addSubview:self.maskView];
-    [view addSubview:self];
-    self.frame = CGRectZero;
+    [view.window addSubview:self.maskView];
+    [view.window addSubview:self];
+    self.frame = CGRectMake((view.frame.size.width - 300)/2.f, view.frame.size.height, 300, 300);
     [UIView animateWithDuration:0.2 animations:^{
-        self.frame = CGRectMake((view.frame.size.width - 320)/2.f, (view.frame.size.height - 320)/2.f, 320, 320);
+        self.frame = CGRectMake((view.frame.size.width - 300)/2.f, (view.frame.size.height - 300)/2.f - 20, 300, 300);
         self.maskView.alpha = 1;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.05 animations:^{

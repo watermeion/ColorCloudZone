@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
-
+#import "CCUser.h"
 @interface CompanyProfileViewController : GBCustomViewController
 @property (weak, nonatomic) IBOutlet UIImageView *avaterImageView;
 @property (weak, nonatomic) IBOutlet UIButton *uploadAction;
@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *zfbNumTextField;
 - (IBAction)doneAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
+@property (nonatomic, strong) CCUser * registingUser;
 
 @end

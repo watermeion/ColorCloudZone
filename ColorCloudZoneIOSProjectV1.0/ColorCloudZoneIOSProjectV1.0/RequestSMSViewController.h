@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCUser.h"
 
 @interface RequestSMSViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;
 @property (weak, nonatomic) IBOutlet UITextField *SMSCodeTextField;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepBtn;
+@property (strong, nonatomic) CCUser * registingUser;
 - (IBAction)nextStepAction:(id)sender;
 
 - (IBAction)requestFailedAction:(id)sender;

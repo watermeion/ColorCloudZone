@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *outPrice;
 @property (weak, nonatomic) id<CollectAlertViewDelegate> delegate;
 @property (strong, nonatomic) UIView * maskView;
+- (void)showInView:(UIView *)view;
 
 @end

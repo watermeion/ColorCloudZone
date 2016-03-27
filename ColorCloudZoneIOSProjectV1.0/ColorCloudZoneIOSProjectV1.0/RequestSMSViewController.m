@@ -7,6 +7,10 @@
 //
 
 #import "RequestSMSViewController.h"
+#import "RegisterAfterViewController.h"
+
+#import "SVProgressHUD.h"
+#import "CCAppDotNetClient.h"
 
 @interface RequestSMSViewController ()
 
@@ -16,8 +20,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.phoneNumLabel.text = [@"+86" stringByAppendingString:self.registingUser.mobile];
     // Do any additional setup after loading the view.
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([CCAppDotNetClient isTesting]) {
+        [SVProgressHUD showWithStatus:@"正在请求"];
+        NSURL * url = [NSURL URLWithString:[@"http://wearcloud.beyondin.com/global/test_send_vc/" stringByAppendingString:self.registingUser.mobile]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        // 设置URL
+        [request setURL:url];
+        // 设置HTTP方法
+        [request setHTTPMethod:@"GET"];
+        // 发 送同步请求, 这里得returnData就是返回得数据了
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request
+                                                   returningResponse:nil error:nil];
+        NSString * str = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        self.phoneNumLabel.text = [str substringFromIndex:str.length - 10];
+        [SVProgressHUD dismiss];
+        
+    } else {
+        [CCUser sendVerifyCodeToMobile:self.registingUser.mobile withBlock:^(BOOL succeed, NSError *error) {
+            
+        }];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +65,23 @@
 */
 
 - (IBAction)nextStepAction:(id)sender {
+    [SVProgressHUD showWithStatus:@"正在验证"];
+    [CCUser checkVerifyCode:self.SMSCodeTextField.text mobile:self.registingUser.mobile withBlock:^(BOOL succeed, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"验证失败"];
+            
+        } else {
+//            if (succeed) {
+                RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
+                self.registingUser.verifyCode = self.SMSCodeTextField.text;
+                vc.registingUser = self.registingUser;
+                [self.navigationController pushViewController:vc animated:YES];
+//            } else {
+//                [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+//            }
+        }
+    }];
 }
 
 - (IBAction)requestFailedAction:(id)sender {

@@ -45,4 +45,9 @@
     [dict setObject:[token md5HexDigest] forKey:@"token"];
     return dict;
 }
+
++ (BOOL)isTesting
+{
+    return YES;
+}
 @end

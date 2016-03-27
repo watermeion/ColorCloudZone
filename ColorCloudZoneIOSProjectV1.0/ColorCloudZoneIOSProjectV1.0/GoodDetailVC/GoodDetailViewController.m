@@ -15,6 +15,8 @@
 #import "MLShopViewController.h"
 #import "SupplierViewController.h"
 #import "KxMenu.h"
+#import "CollectAlertView.h"
+#import "WantView.h"
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
@@ -29,7 +31,7 @@ static const CGFloat CellWidth = 220;
 
 
 
-@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 //View Part 3
 @property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
@@ -116,10 +118,10 @@ static const CGFloat CellWidth = 220;
     
     NSArray *menuItems =
     @[
-      [KxMenuItem menuItem:@"更换背景"
+      [KxMenuItem menuItem:@"下架"
                      image:nil
                     target:self
-                    action:@selector(changeBackground:)],
+                    action:NULL],
       [KxMenuItem menuItem:@"统计"
                      image:nil
                     target:nil
@@ -193,20 +195,19 @@ static const CGFloat CellWidth = 220;
 - (IBAction)collect:(id)sender
 {
     
-    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
-    [query whereKey:@"factoryProduct" equalTo:self.product];
-    [query whereKey:@"shopId" equalTo:((AVObject *)[AVUser currentUser][@"shop"]).objectId];
-    [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (error) {
-            
-        } else {
-            
-        }
-    }];
-//    AVObject * mallProduct = [AVObject objectWithClassName:@"MallProduct"];
-//    [mallProduct setObject:self.product forKey:@"factoryProduct"];
-//    [mallProduct setObject:((AVObject *)[AVUser currentUser][@"shop"]).objectId forKey:@"shopId"];
-//    [mallProduct setObject: forKey:
+//    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
+//    [query whereKey:@"factoryProduct" equalTo:self.product];
+//    [query whereKey:@"shopId" equalTo:((AVObject *)[AVUser currentUser][@"shop"]).objectId];
+//    [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//        if (error) {
+//            
+//        } else {
+//            
+//        }
+//    }];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CollectAlertView" owner:self options:nil];
+    CollectAlertView *collectView = collectView = [nib objectAtIndex:0];
+    [collectView showInView:self.view];
 }
 
 - (IBAction)uncollect:(id)sender
@@ -222,6 +223,9 @@ static const CGFloat CellWidth = 220;
 - (IBAction)want:(id)sender
 {
     
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"WantView" owner:self options:nil];
+    WantView * wantView = [nib objectAtIndex:0];
+    [wantView showInView:self.view];
 }
 
 - (IBAction)unsell:(id)sender
