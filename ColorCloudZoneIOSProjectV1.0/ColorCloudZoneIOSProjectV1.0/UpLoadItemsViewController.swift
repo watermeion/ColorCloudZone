@@ -40,7 +40,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     @IBOutlet weak var materialLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
-    
+
     var newItemCategory: String?
     var newItemMaterial: String?
     var newItemSurfaceMaterial: String?
@@ -67,19 +67,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         // Dispose of any resources that can be recreated.
     }
 
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
-    
 // MARK: UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -131,6 +119,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
     
     func callSelectorAction (sender: AnyObject!) {
       selector.callSelectAction(sender)
+        
     }
     
     
@@ -334,7 +323,7 @@ class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSour
         file.saveInBackgroundWithBlock { (success, error) -> Void in
             if success {
                 self.imageFiles.append(file)
-                var productImageFileobject = AVObject.init(className: "ProductImageFile")
+                let productImageFileobject = AVObject.init(className: "ProductImageFile")
                 productImageFileobject.setObject(file, forKey: "productImageFile")
                 productImageFileobject.saveInBackground();
                 --count
