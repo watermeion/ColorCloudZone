@@ -10,4 +10,5 @@
 
 @interface CCFile : NSObject
 
++ (NSURLSessionUploadTask *) uploadImage:(UIImage *)image withProgress:(void(^)(double progress))progress completionBlock:(void(^)(NSString * url, NSError * error))block;
 @end

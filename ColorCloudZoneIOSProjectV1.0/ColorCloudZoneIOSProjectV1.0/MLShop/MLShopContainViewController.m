@@ -172,39 +172,39 @@
 - (void)getMarketProductsHottest:(BOOL)hottest withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
 {
     
-    AVQuery * query = [AVQuery queryWithClassName:@"Product"];
-    query.limit = limit;
-    query.skip = skip;
-    [query includeKey:@"productMainImage"];
-    if ([self.parentVC isKindOfClass:[SupplierViewController class]]) {
-        [query whereKey:@"userId" equalTo:[AVUser currentUser].objectId];
-    }
-    if (hottest) [query orderByDescending:@"like"];
-    else [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        block(objects, error);
-    }];
+//    AVQuery * query = [AVQuery queryWithClassName:@"Product"];
+//    query.limit = limit;
+//    query.skip = skip;
+//    [query includeKey:@"productMainImage"];
+//    if ([self.parentVC isKindOfClass:[SupplierViewController class]]) {
+//        [query whereKey:@"userId" equalTo:[AVUser currentUser].objectId];
+//    }
+//    if (hottest) [query orderByDescending:@"like"];
+//    else [query orderByDescending:@"createdAt"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        block(objects, error);
+//    }];
 }
 
 - (void)getShopProductsHottest:(BOOL)hottest withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
 {
-    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
-    query.limit = limit;
-    query.skip = skip;
-    [query includeKey:@"factoryProduct"];
-    [query whereKey:@"shopId" equalTo:((AVObject*)[[AVUser currentUser] objectForKey:@"shop"]).objectId];
-    if (hottest) [query orderByDescending:@"like"];
-    else [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSMutableArray * products;
-        if (!error) {
-            products = [NSMutableArray array];
-            for (AVObject * mallProduct in objects) {
-                [products addObject:mallProduct[@"factoryProduct"]];
-            }
-        }
-        block(products, error);
-    }];
+//    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
+//    query.limit = limit;
+//    query.skip = skip;
+//    [query includeKey:@"factoryProduct"];
+//    [query whereKey:@"shopId" equalTo:((AVObject*)[[AVUser currentUser] objectForKey:@"shop"]).objectId];
+//    if (hottest) [query orderByDescending:@"like"];
+//    else [query orderByDescending:@"createdAt"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        NSMutableArray * products;
+//        if (!error) {
+//            products = [NSMutableArray array];
+//            for (AVObject * mallProduct in objects) {
+//                [products addObject:mallProduct[@"factoryProduct"]];
+//            }
+//        }
+//        block(products, error);
+//    }];
 }
 
 

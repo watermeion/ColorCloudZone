@@ -19,5 +19,7 @@
 
 - (NSString *) ccJsonString:(NSString *)key;
 
-- (NSArray *) ccjsonArray:(NSString *)key;
+- (NSArray *) ccJsonArray:(NSString *)key;
+
+- (NSDictionary *)ccJsonDictionary:(NSString *)key;
 @end

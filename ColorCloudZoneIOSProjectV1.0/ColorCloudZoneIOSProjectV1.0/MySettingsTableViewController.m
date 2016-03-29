@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "LoginAndRegistNaviController.h"
+#import "CCUser.h"
 
 @interface MySettingsTableViewController () <UIActionSheetDelegate>
 
@@ -69,7 +70,7 @@
         LoginAndRegistNaviController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
         AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
         delegate.window.rootViewController = vc;
-        [AVUser logOut];
+        [CCUser logout];
     }
 }
 @end

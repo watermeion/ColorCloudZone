@@ -17,4 +17,9 @@
 #define CheckVerifyCodeValid @"wearcloud.user.checkVerifyCodeValid"
 #define Signup @"wearcloud.user.signup"
 #define Logout @"wearcloud.user.logout"
+
+
+#define ItemGetTypeList @"wearcloud.item.getTypeList"
+#define ItemGetItemSkuByTypeId @"wearcloud.item.getItemSkuByTypeId"
+#define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"
 #endif /* NetAccessAPI_h */

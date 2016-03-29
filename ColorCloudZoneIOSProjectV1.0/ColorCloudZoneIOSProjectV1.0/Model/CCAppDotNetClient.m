@@ -8,6 +8,7 @@
 
 #import "CCAppDotNetClient.h"
 #import "NSString+MD5.h"
+#import "CCUser.h"
 @implementation CCAppDotNetClient
 
 + (instancetype)sharedInstance
@@ -31,7 +32,7 @@
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setObject:@"1" forKey:@"appid"];
     [dict setObject:apiName forKey:@"api_name"];
-    [dict setObject:@"" forKey:@"PHPSESSID"];
+    [dict setObject:[CCUser currentUser].phpSessid forKey:@"PHPSESSID"];
     [dict addEntriesFromDictionary:params];
     NSArray * keys = [[dict allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return [obj1 compare:obj2];

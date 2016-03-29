@@ -44,8 +44,13 @@
 }
 
 
-- (NSArray *) ccjsonArray:(NSString *)key
+- (NSArray *) ccJsonArray:(NSString *)key
 {
     return (NSArray *)[self objectForKey:key];
+}
+
+- (NSDictionary *)ccJsonDictionary:(NSString *)key
+{
+    return (NSDictionary *)[self objectForKey:key];
 }
 @end

@@ -16,7 +16,8 @@
 #import "LoginAndRegistNaviController.h"
 #import "MLTabBarViewController.h"
 #import "RegisterAfterViewController.h"
-#import "CCUser.h"
+#import "CCFile.h"
+#import "CCItem.h"
 @interface AppDelegate ()
 
 @end
@@ -45,16 +46,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"  bundle:nil];
-    MemberCenterManager *memberManager = [MemberCenterManager singletonInstance];
-    if ([memberManager currentUser]) {
-        if (memberManager.currentUserType == MemberCenterUserTypeSupplier) {
+    if ([CCUser currentUser]) {
+        if ([CCUser currentUser].role == UserRoleFactory) {
             UINavigationController * nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
             self.window.rootViewController = nav;
-        }else if(memberManager.currentUserType == MemberCenterUserTypeSeller){
+        }else if([CCUser currentUser].role == UserRoleMall){
             MLTabBarViewController * tabbar = [mainStoryboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
             self.window.rootViewController = tabbar;
         } else {
-            [AVUser logOut];
+            [CCUser logout];
             LoginAndRegistNaviController * vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
             self.window.rootViewController = vc;
         }
@@ -64,11 +64,9 @@
         self.window.rootViewController = vc;
 
     }
-    [CCUser loginWithMobile:@"15158131300" password:@"123456" withBlock:^(CCUser *user, NSError *error) {
+    [CCItem getItemTypeListWithBlock:^(NSArray *typeList, NSError *error) {
         
     }];
-    
-    
     return YES;
 }
 

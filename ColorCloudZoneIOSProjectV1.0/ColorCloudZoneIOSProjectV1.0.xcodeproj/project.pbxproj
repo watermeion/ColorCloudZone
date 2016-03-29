@@ -223,7 +223,6 @@
 		969AE47E1C368FDF00136F13 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4761C368FDF00136F13 /* UIView+MJExtension.m */; };
 		969AE4821C38143500136F13 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4811C38143500136F13 /* KxMenu.m */; };
 		969AE4851C39387900136F13 /* SupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4841C39387900136F13 /* SupplierViewController.m */; };
-		96B221F41CA1272A000831CE /* CCProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221F31CA1272A000831CE /* CCProduct.m */; };
 		96B221F71CA127A5000831CE /* CCMall.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221F61CA127A5000831CE /* CCMall.m */; };
 		96B221FA1CA127B5000831CE /* CCFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221F91CA127B5000831CE /* CCFactory.m */; };
 		96B221FD1CA2B7FF000831CE /* WantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221FC1CA2B7FF000831CE /* WantView.m */; };
@@ -231,6 +230,8 @@
 		96B222031CA67A6F000831CE /* NSDictionary+CCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B222021CA67A6F000831CE /* NSDictionary+CCJson.m */; };
 		96B222061CA67C3C000831CE /* NSError+CCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B222051CA67C3C000831CE /* NSError+CCError.m */; };
 		96B222091CA6C93E000831CE /* CCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B222081CA6C93E000831CE /* CCFile.m */; };
+		96B2220B1CA953CB000831CE /* testing.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B2220A1CA953CB000831CE /* testing.png */; };
+		96B2220E1CAA592C000831CE /* CCItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B2220D1CAA592C000831CE /* CCItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -598,8 +599,6 @@
 		969AE4811C38143500136F13 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		969AE4831C39387900136F13 /* SupplierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplierViewController.h; sourceTree = "<group>"; };
 		969AE4841C39387900136F13 /* SupplierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplierViewController.m; sourceTree = "<group>"; };
-		96B221F21CA1272A000831CE /* CCProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProduct.h; sourceTree = "<group>"; };
-		96B221F31CA1272A000831CE /* CCProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCProduct.m; sourceTree = "<group>"; };
 		96B221F51CA127A5000831CE /* CCMall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMall.h; sourceTree = "<group>"; };
 		96B221F61CA127A5000831CE /* CCMall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMall.m; sourceTree = "<group>"; };
 		96B221F81CA127B5000831CE /* CCFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFactory.h; sourceTree = "<group>"; };
@@ -613,6 +612,9 @@
 		96B222051CA67C3C000831CE /* NSError+CCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+CCError.m"; sourceTree = "<group>"; };
 		96B222071CA6C93E000831CE /* CCFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile.h; sourceTree = "<group>"; };
 		96B222081CA6C93E000831CE /* CCFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFile.m; sourceTree = "<group>"; };
+		96B2220A1CA953CB000831CE /* testing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testing.png; path = ColorCloudZoneIOSProjectV1.0/testing.png; sourceTree = SOURCE_ROOT; };
+		96B2220C1CAA592C000831CE /* CCItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCItem.h; sourceTree = "<group>"; };
+		96B2220D1CAA592C000831CE /* CCItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCItem.m; sourceTree = "<group>"; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1282,6 +1284,7 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				96B2220A1CA953CB000831CE /* testing.png */,
 				9668BCB01C3BC38500C993F0 /* coverPlaceHolder.jpg */,
 				017E5F6A1BD1272700C55992 /* uialq.jpg */,
 				2ADE53881B896A0300E80AD5 /* folder@3x.png */,
@@ -1653,8 +1656,6 @@
 				967B92011C62F69500E604BE /* SubClasses */,
 				967B92121C63175A00E604BE /* NSString+MD5.h */,
 				967B92131C63175A00E604BE /* NSString+MD5.m */,
-				96B221F21CA1272A000831CE /* CCProduct.h */,
-				96B221F31CA1272A000831CE /* CCProduct.m */,
 				96B221F51CA127A5000831CE /* CCMall.h */,
 				96B221F61CA127A5000831CE /* CCMall.m */,
 				96B221F81CA127B5000831CE /* CCFactory.h */,
@@ -1665,6 +1666,8 @@
 				96B222051CA67C3C000831CE /* NSError+CCError.m */,
 				96B222071CA6C93E000831CE /* CCFile.h */,
 				96B222081CA6C93E000831CE /* CCFile.m */,
+				96B2220C1CAA592C000831CE /* CCItem.h */,
+				96B2220D1CAA592C000831CE /* CCItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1860,6 +1863,7 @@
 				2A2E3E6D1BDF994E0021B3FC /* ELCAlbumPickerController.xib in Resources */,
 				2A6BC50E1B58F5FF00401B06 /* tab2_unshoot.png in Resources */,
 				014052E01BE4686600E5C1F2 /* ic_deletephoto@3x.png in Resources */,
+				96B2220B1CA953CB000831CE /* testing.png in Resources */,
 				2A6BC5141B58F5FF00401B06 /* tab3_unshoot.png in Resources */,
 				2A6BC5071B58F5FF00401B06 /* tab1@3x.png in Resources */,
 				2ABFC8EF1B5E7AE5009D64E1 /* placeholderForCell.jpg in Resources */,
@@ -2027,6 +2031,7 @@
 				2A2E3E641BDF994E0021B3FC /* ELCAssetCell.m in Sources */,
 				2ABFC8EA1B5E7744009D64E1 /* CustomSelectionBarView.m in Sources */,
 				2A2E3E491BDF994E0021B3FC /* UIImage+MultiFormat.m in Sources */,
+				96B2220E1CAA592C000831CE /* CCItem.m in Sources */,
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
 				2A2E3E2A1BDF994E0021B3FC /* CALayer+Anim.m in Sources */,
 				01D0487F1BDC730A003C6D33 /* GBViewModel.m in Sources */,
@@ -2112,7 +2117,6 @@
 				2A2E3E561BDF994E0021B3FC /* PhotoBroswerLayout.m in Sources */,
 				2A33B63A1B665FA800535FE4 /* ShopListTableViewCell.m in Sources */,
 				2A2E3E291BDF994E0021B3FC /* CoreArchive.m in Sources */,
-				96B221F41CA1272A000831CE /* CCProduct.m in Sources */,
 				2AD3E8C61B80233500B2264B /* LoginViewController.m in Sources */,
 				2A2E3E3A1BDF994E0021B3FC /* UIView+Extend.m in Sources */,
 				01A441891BD67763003CF3FD /* LoginAndRegistNaviController.m in Sources */,

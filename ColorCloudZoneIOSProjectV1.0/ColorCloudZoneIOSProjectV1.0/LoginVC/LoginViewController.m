@@ -98,34 +98,25 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 - (IBAction)loginAction:(id)sender {
     if ([self checkInputValiable]) {
         [SVProgressHUD showWithStatus:@"正在登陆" maskType:SVProgressHUDMaskTypeBlack];
-        [AVUser logInWithUsernameInBackground:self.phoneNunTextField.text password:self.passwordTextField.text block:^(AVUser *user, NSError *error) {
+        [CCUser loginWithMobile:self.phoneNunTextField.text password:self.passwordTextField.text withBlock:^(CCUser *user, NSError *error) {
             [SVProgressHUD dismiss];
-                if (user != nil) {
-                    
-                    MEMBERCENTERUSERTYPE userType = [[user objectForKey:@"userType"] integerValue];
-                    if (userType == MemberCenterUserTypeSupplier) {
-                        //如果是供应商
-                        UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
-                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-                        delegate.window.rootViewController = nav;
-                        
-                    }else if (userType == MemberCenterUserTypeSeller){
-                        //如果是店铺
-                        MLTabBarViewController *tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
-                        
-                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-                        delegate.window.rootViewController = tabbar;
-                        
-                    } else {
-                        RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
-                        LoginAndRegistNaviController * nav = [[LoginAndRegistNaviController alloc]initWithRootViewController:vc];
-                        
-                        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-                        delegate.window.rootViewController = nav;
-                    }
+            if (user != nil && !error) {
+                if (user.role == UserRoleFactory) {
+                    //如果是供应商
+                    UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+                    AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                    delegate.window.rootViewController = nav;
                 } else {
-                    [SVProgressHUD showErrorWithStatus:@"登陆失败，请重新尝试"];
+                    
+                    //如果是店铺
+                    MLTabBarViewController *tabbar = [self.storyboard instantiateViewControllerWithIdentifier:@"SellersTabViewController"];
+                    
+                    AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+                    delegate.window.rootViewController = tabbar;
                 }
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"登陆失败，请重新尝试"];
+            }
         }];
     }
 }

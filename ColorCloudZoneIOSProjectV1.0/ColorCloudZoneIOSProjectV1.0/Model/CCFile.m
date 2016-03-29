@@ -11,37 +11,44 @@
 #import "NSString+MD5.h"
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
+static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/appid/1/submit/submit";
+static NSString * imageDomain = @"http://wearcloud.beyondin.com";
 
 @implementation CCFile
-- (void) upload
++ (NSURLSessionUploadTask *) uploadImage:(UIImage *)image withProgress:(void(^)(double progress))progress completionBlock:(void(^)(NSString * url, NSError * error))block
 {
     NSError *error = nil;
-    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [requestSerializer multipartFormRequestWithMethod:@"POST"
-                                                                           URLString:requestObj.requestUrl
-                                                                          parameters:requestObj.requestParams
-                                                           constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                                               
-                                                               //[formData appendPartWithFormData:data name:@"file"];
-                                                               [formData appendPartWithFileData:data name:@"upfile" fileName:@"boris.png" mimeType:@"image/png"];
-                                                           }
-                                                                               error:&error];
-    
     
     CCAppDotNetClient *manager = [CCAppDotNetClient sharedInstance];
-    AFHTTPResponseSerializer *responseSerializer = manager.responseSerializer;
-    NSProgress *progress = nil;
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request
-                                                                       progress:&progress
-                                                              completionHandler:^(NSURLResponse *response, id responseObject, NSError *error){
-                                                                  
-                                                                  if (error) {
-                                                                      failure(error);
-                                                                  } else {
-                                                                      success(responseObject);
-                                                                  }
-                                                              }];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:uploadURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"upfile" fileName:@"boris.png" mimeType:@"image/png"];
+    } error:&error];
+    
+    NSURLSessionUploadTask *uploadTask;
+    uploadTask = [manager
+                  uploadTaskWithStreamedRequest:request
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      // This is not called back on the main queue.
+                      // You are responsible for dispatching to the main queue for UI updates
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          progress(uploadProgress.fractionCompleted);
+                      });
+                  }
+                  completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                      if (error) {
+                          block(nil, error);
+                      } else {
+                          if ([responseObject ccCode] == 0) {
+                              NSString * url = [imageDomain stringByAppendingString:[responseObject ccJsonString:@"file_path"]];
+                              block(url, nil);
+                          } else {
+                              block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+                          }
+                      }
+                  }];
     [uploadTask resume];
+    return uploadTask;
     
 }
 @end

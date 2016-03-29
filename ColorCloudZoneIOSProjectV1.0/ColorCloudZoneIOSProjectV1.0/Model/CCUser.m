@@ -12,7 +12,78 @@
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
 
+static CCUser * currentUserSingleton;
 @implementation CCUser
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        self.userId = [dictionary ccJsonString:kUserId];
+        self.role = [dictionary ccJsonInteger:kUserRole];
+        self.phpSessid = [dictionary ccJsonString:kUserPHPSessid];
+        self.mobile = [dictionary ccJsonString:kUserMobile];
+        self.mallName = [dictionary ccJsonString:kUserMallName];
+        self.factoryName = [dictionary ccJsonString:kUserFactoryName];
+        self.ownerName = [dictionary ccJsonString:kUserOwnerName];
+        self.headImgUrl = [dictionary ccJsonString:kUserHeadImgUrl];
+        self.cardNum = [dictionary ccJsonString:kUserCardNum];
+        self.alipayNum = [dictionary ccJsonString:kUserAlipayNum];
+        self.provinceId = [dictionary ccJsonString:kUserProvinceId];
+        self.cityId = [dictionary ccJsonString:kUserCityId];
+        self.areaId = [dictionary ccJsonString:kUserAreaId];
+        self.address = [dictionary ccJsonString:kUserAddress];
+        self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
+        self.addrInMarket = [dictionary ccJsonString:kUserAddrInMarket];
+        self.remark = [dictionary ccJsonString:kUserRemark];
+    }
+    return self;
+}
+
+- (NSDictionary *)generateDictionary
+{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    if (self.userId) [dict setObject:self.userId forKey:kUserId];
+    [dict setObject:@(self.role) forKey:kUserRole];
+    if (self.phpSessid) [dict setObject:self.phpSessid forKey:kUserPHPSessid];
+    if (self.mobile) [dict setObject:self.mobile forKey:kUserMobile];
+    if (self.mallName) [dict setObject:self.mallName forKey:kUserMallName];
+    if (self.factoryName) [dict setObject:self.factoryName forKey:kUserFactoryName];
+    if (self.ownerName) [dict setObject:self.ownerName forKey:kUserOwnerName];
+    if (self.headImgUrl) [dict setObject:self.headImgUrl forKey:kUserHeadImgUrl];
+    if (self.cardNum) [dict setObject:self.cardNum forKey:kUserCardNum];
+    if (self.alipayNum) [dict setObject:self.alipayNum forKey:kUserAlipayNum];
+    if (self.provinceId) [dict setObject:self.provinceId forKey:kUserProvinceId];
+    if (self.cityId) [dict setObject:self.cityId forKey:kUserCityId];
+    if (self.areaId) [dict setObject:self.areaId forKey:kUserAreaId];
+    if (self.address) [dict setObject:self.address forKey:kUserAddress];
+    if (self.saleMarketId) [dict setObject:self.saleMarketId forKey:kUserSaleMarketId];
+    if (self.addrInMarket) [dict setObject:self.addrInMarket forKey:kUserAddrInMarket];
+    if (self.remark) [dict setObject:self.remark forKey:kUserRemark];
+    return [NSDictionary dictionaryWithDictionary:dict];
+}
+
++ (CCUser *)currentUser
+{
+    if (!currentUserSingleton) {
+        NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"];
+        if (userDict) currentUserSingleton = [[CCUser alloc] initWithDictionary:userDict];
+    }
+    return currentUserSingleton;
+}
+
++ (void)reloadCurrentAcnt
+{
+    NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"];
+    if (userDict) currentUserSingleton = [[CCUser alloc] initWithDictionary:userDict];
+}
+
++ (void)logout
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentUser"];
+}
+
+
 + (NSURLSessionDataTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password withBlock:(void(^)(CCUser * user, NSError * error))block
 {
     NSDictionary * params = @{kUserMobile : mobile,
@@ -25,6 +96,11 @@
             NSRange range = [cookie rangeOfString:@"PHPSESSID="];
             NSString * temp = [cookie substringFromIndex:range.location + range.length];
             NSString * phpsessid = [temp substringToIndex:[temp rangeOfString:@";"].location];
+            CCUser * user = [[CCUser alloc] initWithDictionary:[responseObject ccJsonDictionary:@"data"]];
+            user.phpSessid = phpsessid;
+            [[NSUserDefaults standardUserDefaults] setObject:[user generateDictionary] forKey:@"currentUser"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            block(user, nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
@@ -97,15 +173,15 @@
     [params setObject:user.ownerName forKey:kUserOwnerName];
     [params setObject:user.address forKey:kUserAddress];
     [params setObject:@"default" forKey:kUserHeadImgUrl];
-    [params setObject:@"default" forKey:kUserProvince];
-    [params setObject:@"default" forKey:kUserCity];
-    [params setObject:@"default" forKey:kUserArea];
-    [params setObject:@"default" forKey:kUserSaleMarket];
+    [params setObject:@"default" forKey:kUserProvinceId];
+    [params setObject:@"default" forKey:kUserCityId];
+    [params setObject:@"default" forKey:kUserAreaId];
+    [params setObject:@"default" forKey:kUserSaleMarketId];
     if (user.role == UserRoleMall) [params setObject:user.mallName forKey:kUserMallName];
     else {
         [params setObject:user.factoryName forKey:kUserFactoryName];
-        [params setObject:user.cardId forKey:kUserCardId];
-        [params setObject:user.alipayId forKey:kUserAlipayId];
+        [params setObject:user.cardNum forKey:kUserCardNum];
+        [params setObject:user.alipayNum forKey:kUserAlipayNum];
         [params setObject:@"default" forKey:kUserAddrInMarket];
     }
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:Signup params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -118,9 +194,11 @@
             NSString * phpsessid = [temp substringToIndex:[temp rangeOfString:@";"].location];
             user.phpSessid = phpsessid;
             user.userId = [responseObject ccJsonString:kUserId];
+            [[NSUserDefaults standardUserDefaults] setObject:[user generateDictionary] forKey:@"currentUser"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             block(user, nil);
         } else {
-            block(nil, [NSError errorDefault]);
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(nil, error);

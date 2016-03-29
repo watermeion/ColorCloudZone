@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
 #import "CCUser.h"
-@interface CompanyProfileViewController : GBCustomViewController
+@interface CompanyProfileViewController : GBCustomViewController <UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *avaterImageView;
 @property (weak, nonatomic) IBOutlet UIButton *uploadAction;
 @property (weak, nonatomic) IBOutlet UITextField *comNameTextField;

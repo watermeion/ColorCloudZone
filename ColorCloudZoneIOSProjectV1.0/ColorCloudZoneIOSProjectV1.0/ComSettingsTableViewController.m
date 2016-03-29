@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import "LoginAndRegistNaviController.h"
+#import "CCUser.h"
 @interface ComSettingsTableViewController () <UIActionSheetDelegate>
 
 @end
@@ -72,7 +73,7 @@
         LoginAndRegistNaviController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginAndRegistNaviController"];
         AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
         delegate.window.rootViewController = vc;
-        [AVUser logOut];
+        [CCUser logout];
     }
 }
 
