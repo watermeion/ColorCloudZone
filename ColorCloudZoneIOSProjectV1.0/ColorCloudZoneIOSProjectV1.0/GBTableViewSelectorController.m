@@ -40,15 +40,16 @@ static NSString* const kUITableViewCellIdentifer = @"kUITableViewCellIdentifer";
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (self.delegate) {
+        [self.delegate tableViewSelectorSelectedResults:[_selectedArray copy]];
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     if (self.datasource) {
         return 1;
     }
@@ -56,7 +57,6 @@ static NSString* const kUITableViewCellIdentifer = @"kUITableViewCellIdentifer";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     if (self.datasource.count>0) {
         return self.datasource.count;
     }

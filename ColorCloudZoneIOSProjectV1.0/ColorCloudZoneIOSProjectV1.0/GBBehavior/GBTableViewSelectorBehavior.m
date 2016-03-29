@@ -16,21 +16,12 @@
 }
 @end
 @implementation GBTableViewSelectorBehavior 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (void)callSelectAction:(id)sender{
    //自定义
     _sender = sender;
     [self pushSelector:sender];
 }
-
-#pragma mark - Internal Helpers
 
 
 - (void)pushSelector:(id)sender{
@@ -65,30 +56,6 @@
     }
 }
 
-#pragma mark - Lifecycle
-
-
-
-
-#pragma mark - View Lifecycle
-
-
-
-#pragma mark - Layout
-
-
-
-#pragma mark - Public Interface
-
-
-
-#pragma mark - User Interaction
-
-
-
-
-
-#pragma mark - Delegate
 
 - (void)tableViewSelectorSelectedResults:(NSArray *)results{
     if ([self.delegate respondsToSelector:@selector(tableViewSelectorSelectedResults:fromSender:)]) {

@@ -22,12 +22,8 @@
 
 @interface GBTableViewSelectorBehavior : GBBehavior<GBTableViewSelectorResultDelegate>
 
-
-
 @property (nonatomic, weak) IBOutlet id<GBTableViewSelectorBehaviorDelegate>  delegate;
 
 - (IBAction)callSelectAction:(id) sender;
-
-
 
 @end
