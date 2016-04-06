@@ -24,7 +24,6 @@ class UpLoadItemsViewControllerViewModel: GBViewModel {
 
 class UpLoadItemsViewController: GBCustomViewController,UICollectionViewDataSource,UICollectionViewDelegate,GBImagePickerBehaviorDataTargetDelegate,GBTableViewSelectorBehaviorDelegate {
 
-
     //IBOutlet
     @IBOutlet weak var newItemName: UITextField!
     @IBOutlet weak var newItemSerialNum: UITextField!
