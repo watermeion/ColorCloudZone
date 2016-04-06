@@ -12,7 +12,7 @@
 #import "SVProgressHud.h"
 #import "MLShopContainViewController.h"
 #import "ComSettingsTableViewController.h"
-
+#import "CCUser.h"
 @interface SupplierViewController ()
 
 @end
@@ -39,17 +39,11 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     
     self.avatarImageView.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
-    AVObject * factory = [[AVUser currentUser] objectForKey:@"manufacture"];
-    [factory fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [factory fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            self.nameLabel.text = [factory objectForKey:@"name"];
-            AVFile * avatar = [factory objectForKey:@"avatar"];
-            AVFile * cover = [factory objectForKey:@"cover"];
-            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
-            [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
-        }
-    }];
+    
+    self.nameLabel.text = [CCUser currentUser].factoryName;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+//    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
+    
 
     // Do any additional setup after loading the view.
 }

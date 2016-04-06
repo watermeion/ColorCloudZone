@@ -13,12 +13,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avaterImageView;
 @property (weak, nonatomic) IBOutlet UIButton *uploadAction;
 @property (weak, nonatomic) IBOutlet UITextField *comNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *comCity;
 @property (weak, nonatomic) IBOutlet UITextField *ownerTextField;
 @property (weak, nonatomic) IBOutlet UITextField *comAddressTextField;
 @property (weak, nonatomic) IBOutlet UITextField *cardNumTextField;
 @property (weak, nonatomic) IBOutlet UITextField *zfbNumTextField;
-- (IBAction)doneAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *remarkTextField;
+@property (strong, nonatomic) IBOutlet UILabel *saleMarketLabel;
+@property (strong, nonatomic) IBOutlet UILabel *saleMarketAddressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @property (nonatomic, strong) CCUser * registingUser;
-
+- (IBAction)doneAction:(id)sender;
 @end

@@ -13,9 +13,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *idLabel;
 @property (strong, nonatomic) IBOutlet UILabel *factoryNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *remarkLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cardLabel;
 @property (strong, nonatomic) IBOutlet UILabel *zfbLabel;
+@property (strong, nonatomic) IBOutlet UILabel *saleMarket;
+@property (strong, nonatomic) IBOutlet UILabel *saleMarketAddress;
 
 @end

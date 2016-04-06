@@ -32,7 +32,7 @@
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setObject:@"1" forKey:@"appid"];
     [dict setObject:apiName forKey:@"api_name"];
-    [dict setObject:[CCUser currentUser].phpSessid forKey:@"PHPSESSID"];
+    if ([CCUser currentUser].phpSessid) [dict setObject:[CCUser currentUser].phpSessid forKey:@"PHPSESSID"];
     [dict addEntriesFromDictionary:params];
     NSArray * keys = [[dict allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return [obj1 compare:obj2];

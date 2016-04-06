@@ -223,6 +223,10 @@
 		969AE47E1C368FDF00136F13 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4761C368FDF00136F13 /* UIView+MJExtension.m */; };
 		969AE4821C38143500136F13 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4811C38143500136F13 /* KxMenu.m */; };
 		969AE4851C39387900136F13 /* SupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969AE4841C39387900136F13 /* SupplierViewController.m */; };
+		96A593E71CAD513000082116 /* ProvinceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A593E61CAD513000082116 /* ProvinceViewController.m */; };
+		96A593EA1CAD514300082116 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A593E91CAD514300082116 /* CityViewController.m */; };
+		96A593ED1CAD514F00082116 /* AreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A593EC1CAD514F00082116 /* AreaViewController.m */; };
+		96A593F01CAD521900082116 /* SaleMarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A593EF1CAD521900082116 /* SaleMarketViewController.m */; };
 		96B221F71CA127A5000831CE /* CCMall.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221F61CA127A5000831CE /* CCMall.m */; };
 		96B221FA1CA127B5000831CE /* CCFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221F91CA127B5000831CE /* CCFactory.m */; };
 		96B221FD1CA2B7FF000831CE /* WantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B221FC1CA2B7FF000831CE /* WantView.m */; };
@@ -599,6 +603,14 @@
 		969AE4811C38143500136F13 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		969AE4831C39387900136F13 /* SupplierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplierViewController.h; sourceTree = "<group>"; };
 		969AE4841C39387900136F13 /* SupplierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplierViewController.m; sourceTree = "<group>"; };
+		96A593E51CAD513000082116 /* ProvinceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProvinceViewController.h; sourceTree = "<group>"; };
+		96A593E61CAD513000082116 /* ProvinceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProvinceViewController.m; sourceTree = "<group>"; };
+		96A593E81CAD514300082116 /* CityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityViewController.h; sourceTree = "<group>"; };
+		96A593E91CAD514300082116 /* CityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityViewController.m; sourceTree = "<group>"; };
+		96A593EB1CAD514F00082116 /* AreaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaViewController.h; sourceTree = "<group>"; };
+		96A593EC1CAD514F00082116 /* AreaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaViewController.m; sourceTree = "<group>"; };
+		96A593EE1CAD521900082116 /* SaleMarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleMarketViewController.h; sourceTree = "<group>"; };
+		96A593EF1CAD521900082116 /* SaleMarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaleMarketViewController.m; sourceTree = "<group>"; };
 		96B221F51CA127A5000831CE /* CCMall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMall.h; sourceTree = "<group>"; };
 		96B221F61CA127A5000831CE /* CCMall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMall.m; sourceTree = "<group>"; };
 		96B221F81CA127B5000831CE /* CCFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFactory.h; sourceTree = "<group>"; };
@@ -1519,6 +1531,14 @@
 			children = (
 				2AD3E8CB1B802B5500B2264B /* CompanyProfileViewController.h */,
 				2AD3E8CC1B802B5500B2264B /* CompanyProfileViewController.m */,
+				96A593E51CAD513000082116 /* ProvinceViewController.h */,
+				96A593E61CAD513000082116 /* ProvinceViewController.m */,
+				96A593E81CAD514300082116 /* CityViewController.h */,
+				96A593E91CAD514300082116 /* CityViewController.m */,
+				96A593EB1CAD514F00082116 /* AreaViewController.h */,
+				96A593EC1CAD514F00082116 /* AreaViewController.m */,
+				96A593EE1CAD521900082116 /* SaleMarketViewController.h */,
+				96A593EF1CAD521900082116 /* SaleMarketViewController.m */,
 			);
 			name = CompanyProfileVC;
 			sourceTree = "<group>";
@@ -1790,7 +1810,7 @@
 				TargetAttributes = {
 					2A85DACC1B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = SZTUWWD9Z9;
+						DevelopmentTeam = 7946C3CJS9;
 					};
 					2A85DAE51B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2007,6 +2027,7 @@
 				2A2E3E571BDF994E0021B3FC /* PhotoModel.m in Sources */,
 				2A2E3E481BDF994E0021B3FC /* UIImage+GIF.m in Sources */,
 				2A6BC4AB1B58DBC600401B06 /* MLNavigationController.m in Sources */,
+				96A593F01CAD521900082116 /* SaleMarketViewController.m in Sources */,
 				2AD3E8E21B803EBC00B2264B /* MemberCommonCollectionViewCell.m in Sources */,
 				3BD9AD401B92F02C0048A0A3 /* RequestSMSViewController.m in Sources */,
 				2A2E3E4C1BDF994E0021B3FC /* UIImageView+WebCache.m in Sources */,
@@ -2033,6 +2054,7 @@
 				2A2E3E491BDF994E0021B3FC /* UIImage+MultiFormat.m in Sources */,
 				96B2220E1CAA592C000831CE /* CCItem.m in Sources */,
 				019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */,
+				96A593E71CAD513000082116 /* ProvinceViewController.m in Sources */,
 				2A2E3E2A1BDF994E0021B3FC /* CALayer+Anim.m in Sources */,
 				01D0487F1BDC730A003C6D33 /* GBViewModel.m in Sources */,
 				01BDD5451BC7F6100061ACDA /* UpLoadPicCollectionViewCell.swift in Sources */,
@@ -2041,6 +2063,7 @@
 				96B221F71CA127A5000831CE /* CCMall.m in Sources */,
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
 				967B92141C63175A00E604BE /* NSString+MD5.m in Sources */,
+				96A593ED1CAD514F00082116 /* AreaViewController.m in Sources */,
 				967B92081C62F69500E604BE /* CCUser.m in Sources */,
 				96B221FD1CA2B7FF000831CE /* WantView.m in Sources */,
 				3BD9AD391B92E2D70048A0A3 /* RegisterAfterViewController.m in Sources */,
@@ -2073,6 +2096,7 @@
 				2ABFC8E31B5E7737009D64E1 /* MLShopContainViewController.m in Sources */,
 				2A2E3E301BDF994E0021B3FC /* NSString+Password.m in Sources */,
 				2A2E3E2F1BDF994E0021B3FC /* NSString+Extend.m in Sources */,
+				96A593EA1CAD514300082116 /* CityViewController.m in Sources */,
 				2A2E3E5E1BDF994E0021B3FC /* PhotoItemView.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
 				01A441911BD68290003CF3FD /* GBCustomViewController.m in Sources */,

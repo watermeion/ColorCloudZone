@@ -8,26 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
-#define kUserId             @"user_id"
-#define kUserMobile         @"mobile"
-#define kUserPassword       @"password"
-#define kUserPHPSessid      @"PHPSessid"
-#define kUserVerifyCode     @"verify_code"
-#define kUserMallName       @"mall_name"
-#define kUserFactoryName    @"factory_name"
-#define kUserRole           @"role_type"
-#define kUserOwnerName      @"realname"
-#define kUserHeadImgUrl     @"headimgurl"
-#define kUserCardNum        @"bank_card_number"
-#define kUserAlipayNum      @"alipay_number"
-#define kUserProvinceId     @"province_id"
-#define kUserCityId         @"city_id"
-#define kUserAreaId         @"area_id"
-#define kUserAddress        @"address"
-#define kUserVerifyCode     @"verify_code"
-#define kUserSaleMarketId   @"wholesale_market_id"
-#define kUserAddrInMarket   @"address_in_market"
-#define kUserRemark         @"remark"
+#define kUserId                 @"user_id"
+#define kUserMobile             @"mobile"
+#define kUserPassword           @"password"
+#define kUserPHPSessid          @"PHPSessid"
+#define kUserVerifyCode         @"verify_code"
+#define kUserMallName           @"mall_name"
+#define kUserFactoryName        @"factory_name"
+#define kUserRole               @"role_type"
+#define kUserOwnerName          @"realname"
+#define kUserHeadImgUrl         @"headimgurl"
+#define kUserCardNum            @"bank_card_number"
+#define kUserAlipayNum          @"alipay_number"
+#define kUserProvinceId         @"province_id"
+#define kUserCityId             @"city_id"
+#define kUserAreaId             @"area_id"
+#define kUserProvinceName       @"province_name"
+#define kUserCityName           @"city_name"
+#define kUserAreaName           @"area_name"
+#define kUserAddress            @"address"
+#define kUserVerifyCode         @"verify_code"
+#define kUserSaleMarketId       @"wholesale_market_id"
+#define kUserSaleMarketName     @"wholesale_market_name"
+#define kUserSaleMarketAddress  @"address_detail"
+#define kUserAddrInMarket       @"address_in_market"
+#define kUserRemark             @"remark"
 
 typedef NS_ENUM(NSUInteger, UserRole) {
     UserRoleUndefined   = 0,
@@ -35,6 +40,18 @@ typedef NS_ENUM(NSUInteger, UserRole) {
     UserRoleFactory     = 4,
     
 };
+
+@interface CCAddressItem : NSObject
+@property (nonatomic, strong) NSString * itemId;
+@property (nonatomic, strong) NSString * itemValue;
+@end
+
+
+@interface CCSaleMarket : NSObject
+@property (nonatomic, strong) NSString * saleMarketId;
+@property (nonatomic, strong) NSString * saleMarketName;
+@property (nonatomic, strong) NSString * saleMarketAddress;
+@end
 
 @interface CCUser : NSObject
 @property (nonatomic, strong) NSString * userId;
@@ -52,12 +69,15 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @property (nonatomic, strong) NSString * provinceId;
 @property (nonatomic, strong) NSString * cityId;
 @property (nonatomic, strong) NSString * areaId;
+@property (nonatomic, strong) NSString * provinceName;
+@property (nonatomic, strong) NSString * cityName;
+@property (nonatomic, strong) NSString * areaName;
 @property (nonatomic, strong) NSString * address;
 @property (nonatomic, strong) NSString * saleMarketId;
+@property (nonatomic, strong) NSString * saleMarketName;
+@property (nonatomic, strong) NSString * saleMarketAddress;
 @property (nonatomic, strong) NSString * addrInMarket;
 @property (nonatomic, strong) NSString * remark;
-
-
 + (CCUser *)currentUser;
 + (void)logout;
 
@@ -66,4 +86,9 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (NSURLSessionDataTask *)checkVerifyCode:(NSString *)code mobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)checkMobileRegistered:(NSString *)mobile withBlock:(void(^)(BOOL registered, NSError * error))block;
 + (NSURLSessionDataTask *)signupUser:(CCUser *)user withBlock:(void(^)(CCUser * user, NSError * error))block;
+
++ (NSURLSessionDataTask *)getSaleMarketListWithBlock:(void(^)(NSArray * saleMarketList, NSError * error))block;
++ (NSURLSessionDataTask *)getProvinceListWithBlock:(void(^)(NSArray * provinceList, NSError * error))block;
++ (NSURLSessionDataTask *)getCityListByProvinceId:(NSString *)provinceId withBlock:(void(^)(NSArray * cityList, NSError * error))block;
++ (NSURLSessionDataTask *)getAreaListByCityId:(NSString *)cityId withBlock:(void(^)(NSArray * areaList, NSError * error))block;
 @end

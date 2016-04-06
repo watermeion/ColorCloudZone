@@ -64,9 +64,6 @@
         self.window.rootViewController = vc;
 
     }
-    [CCItem getItemTypeListWithBlock:^(NSArray *typeList, NSError *error) {
-        
-    }];
     return YES;
 }
 

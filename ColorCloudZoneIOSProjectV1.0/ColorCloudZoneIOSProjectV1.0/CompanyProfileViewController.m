@@ -14,15 +14,42 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
+#import "CCFile.h"
+#import "ProvinceViewController.h"
+#import "SaleMarketViewController.h"
+#import "UIImageView+WebCache.h"
 @interface CompanyProfileViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
-
+@property (nonatomic, strong) UIImage * avatar;
 @end
 
 @implementation CompanyProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([CCUser currentUser]) {
+        
+        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+        self.comNameTextField.text = [CCUser currentUser].factoryName;
+        self.ownerTextField.text = [CCUser currentUser].ownerName;
+        self.comAddressTextField.text = [CCUser currentUser].address;
+        self.remarkTextField.text = [CCUser currentUser].remark;
+        self.zfbNumTextField.text = [CCUser currentUser].alipayNum;
+        self.cardNumTextField.text = [CCUser currentUser].cardNum;
+    }
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    CCUser * parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
+    if (parentUser) {
+//        if (self.avatar) self.avaterImageView.image = self.avatar;
+//        else [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:parentUser.headImgUrl]];
+        self.comCity.text = [[parentUser.provinceName stringByAppendingString:parentUser.cityName] stringByAppendingString:parentUser.areaName];
+        self.saleMarketLabel.text = parentUser.saleMarketName;
+        self.saleMarketAddressLabel.text = parentUser.saleMarketAddress;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,34 +68,83 @@
 */
 
 - (IBAction)doneAction:(id)sender {
-    if (_comNameTextField.text.length * _comAddressTextField.text.length * _cardNumTextField.text.length * _zfbNumTextField.text.length * _ownerTextField.text.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请将信息填写完整"];
+    if (self.registingUser && !self.avatar){
+        [SVProgressHUD showErrorWithStatus:@"请上传头像"];
+        return;
+    }
+    if (!(_ownerTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写厂长姓名"];
         return;
     }
     
+    if (self.registingUser && (self.registingUser.provinceId == nil || self.registingUser.cityId == nil ||self.registingUser.areaId == nil)) {
+        [SVProgressHUD showErrorWithStatus:@"请选择省市区"];
+        return;
+    }
+    if (!(_comAddressTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写厂家详细地址"];
+        return;
+    }
+    if (self.registingUser && self.registingUser.saleMarketId == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请选择批发市场"];
+        return;
+    }
+    if (!(_cardNumTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写银行卡号"];
+        return;
+    }
+    
+    if (!(_zfbNumTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写支付宝号"];
+        return;
+    }
     if (self.registingUser) {
         self.registingUser.factoryName = _comNameTextField.text;
         self.registingUser.address = _comAddressTextField.text;
         self.registingUser.cardNum = _cardNumTextField.text;
         self.registingUser.alipayNum = _zfbNumTextField.text;
         self.registingUser.ownerName = _ownerTextField.text;
-        
+        self.registingUser.remark = _remarkTextField.text;
         [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeBlack];
-        [CCUser signupUser:self.registingUser withBlock:^(CCUser *user, NSError *error) {
-            if (!error) {
-                [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-                UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
-                [UIApplication sharedApplication].delegate.window.rootViewController = nav;
+        
+        [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"头像上传失败"];
+                return ;
             } else {
-                [SVProgressHUD showErrorWithStatus:@"注册失败"];
+                self.registingUser.headImgUrl = url;
+                [CCUser signupUser:self.registingUser withBlock:^(CCUser *user, NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (!error) {
+                        [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+                        UINavigationController * nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierNavigationController"];
+                        [UIApplication sharedApplication].delegate.window.rootViewController = nav;
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"注册失败"];
+                    }
+                }];
             }
-
         }];
+        
+        
     } else {
         
     }
     
 }
+- (IBAction)cityClicked:(id)sender {
+    ProvinceViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProvinceViewController"];
+    vc.parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
+    vc.profileVC = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (IBAction)saleMarketClicked:(id)sender {
+    SaleMarketViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SaleMarketViewController"];
+    vc.parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 - (IBAction)uploadAction:(id)sender {
     UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"上传头像"
                                                               delegate:self
@@ -82,6 +158,20 @@
 {
     switch (buttonIndex) {
         case 0:{
+            if ([self isPhotoLibraryAvailable]) {
+                UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+                controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+                [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+                controller.mediaTypes = mediaTypes;
+                controller.delegate = self;
+                [controller.navigationBar setTranslucent:NO];
+                //                controller.view.tintColor = [UIColor whiteColor];
+                [self presentViewController:controller animated:YES completion:nil];
+            }
+            break;
+        }
+        case 1: {
             NSString *mediaType = AVMediaTypeVideo;
             AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
             if ([self isCameraAvailable] && [self doesCameraSupportTakingPhotos]) {
@@ -110,22 +200,6 @@
                                      }
                                  }];
             }
-
-            break;
-        }
-        case 1: {
-            if ([self isPhotoLibraryAvailable]) {
-                UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-                controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
-                [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
-                controller.mediaTypes = mediaTypes;
-                controller.delegate = self;
-                [controller.navigationBar setTranslucent:NO];
-//                controller.view.tintColor = [UIColor whiteColor];
-                [self presentViewController:controller animated:YES completion:nil];
-            }
-
             break;
         }
         default:
@@ -156,6 +230,8 @@
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
     self.avaterImageView.image = editedImage;
+    self.avatar = editedImage;
+    [cropperViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController

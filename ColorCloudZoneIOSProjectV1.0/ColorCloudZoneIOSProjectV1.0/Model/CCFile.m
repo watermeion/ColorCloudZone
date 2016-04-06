@@ -32,7 +32,7 @@ static NSString * imageDomain = @"http://wearcloud.beyondin.com";
                       // This is not called back on the main queue.
                       // You are responsible for dispatching to the main queue for UI updates
                       dispatch_async(dispatch_get_main_queue(), ^{
-                          progress(uploadProgress.fractionCompleted);
+                          if (progress) progress(uploadProgress.fractionCompleted);
                       });
                   }
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
@@ -50,5 +50,15 @@ static NSString * imageDomain = @"http://wearcloud.beyondin.com";
     [uploadTask resume];
     return uploadTask;
     
+}
+
++ (UIImage *)generateThumbnailOf:(UIImage *)original withSize:(CGFloat)size{
+    CGSize newSize = CGSizeMake(size, size);
+    CGRect thumbnailRect = CGRectMake(0, 0, size, size);
+    UIGraphicsBeginImageContextWithOptions(newSize, YES, 0.0);
+    [original drawInRect:thumbnailRect];
+    UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return thumbnail;
 }
 @end

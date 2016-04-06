@@ -16,10 +16,16 @@
 #define SendVerifyCode @"wearcloud.user.sendVerifyCode"
 #define CheckVerifyCodeValid @"wearcloud.user.checkVerifyCodeValid"
 #define Signup @"wearcloud.user.signup"
+#define EditUserInfo @"wearcloud.user.editUserInfo"
 #define Logout @"wearcloud.user.logout"
 
+#define GetWholeSaleMarketList @"wearcloud.wholesaleMarket.getWholesaleMarketList"
+#define GetProvinceList @"wearcloud.address.getProvinceList"
+#define GetCityList @"wearcloud.address.getCityList"
+#define GetAreaList @"wearcloud.address.getAreaList"
 
-#define ItemGetTypeList @"wearcloud.item.getTypeList"
-#define ItemGetItemSkuByTypeId @"wearcloud.item.getItemSkuByTypeId"
+
+#define ItemGetTypeList @"wearcloud.item.getItemTypeList"
+#define ItemGetItemSkuByTypeId @"wearcloud.item.getSkuInfoByTypeId"
 #define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"
 #endif /* NetAccessAPI_h */

@@ -27,27 +27,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [SVProgressHUD showWithStatus:@"正在获取信息" maskType:SVProgressHUDMaskTypeBlack];
-    AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
-    if (!manufacture) {
-        [SVProgressHUD showErrorWithStatus:@"获取失败"];
-    }
-    [manufacture fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [manufacture fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            [SVProgressHUD dismiss];
-            _nameLabel.text = manufacture[@"ownerName"];
-            AVFile * avatar = manufacture[@"avatar"];
-            [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
-            _factoryNameLabel.text = manufacture[@"name"];
-            _addressLabel.text = manufacture[@"address"];
-            _cardLabel.text = manufacture[@"card"];
-            _zfbLabel.text = manufacture[@"zhifubao"];
-            _phoneNumberLabel.text = [[AVUser currentUser]objectForKey:@"phoneNumber"];
-        } else {
-            [SVProgressHUD showErrorWithStatus:@"获取失败"];
-        }
-    }];
+    _nameLabel.text = [CCUser currentUser].ownerName;
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+    _factoryNameLabel.text = [CCUser currentUser].factoryName;
+    _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
+    _remarkLabel.text = [CCUser currentUser].remark.length?[CCUser currentUser].remark:@"无";
+    _saleMarket.text = [CCUser currentUser].saleMarketName;
+    _saleMarketAddress.text = [CCUser currentUser].saleMarketAddress;
+    _cardLabel.text = [CCUser currentUser].cardNum;
+    _zfbLabel.text = [CCUser currentUser].alipayNum;
+    _phoneNumberLabel.text = [CCUser currentUser].mobile;
     
 }
 

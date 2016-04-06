@@ -13,6 +13,36 @@
 #import "NSError+CCError.h"
 
 static CCUser * currentUserSingleton;
+
+@implementation CCAddressItem
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary idKey:(NSString *)idKey valueKey:(NSString *)valueKey
+{
+    self = [super init];
+    if (self) {
+        self.itemId = [dictionary ccJsonString:idKey];
+        self.itemValue = [dictionary ccJsonString:valueKey];
+    }
+    return self;
+}
+@end
+
+@implementation CCSaleMarket
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    
+    self = [super init];
+    if (self) {
+        self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
+        self.saleMarketName = [dictionary ccJsonString:kUserSaleMarketName];
+        self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
+    }
+    return self;
+}
+
+@end
+
 @implementation CCUser
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
@@ -32,8 +62,13 @@ static CCUser * currentUserSingleton;
         self.provinceId = [dictionary ccJsonString:kUserProvinceId];
         self.cityId = [dictionary ccJsonString:kUserCityId];
         self.areaId = [dictionary ccJsonString:kUserAreaId];
+        self.provinceName = [dictionary ccJsonString:kUserProvinceName];
+        self.cityName = [dictionary ccJsonString:kUserCityName];
+        self.areaName = [dictionary ccJsonString:kUserAreaName];
         self.address = [dictionary ccJsonString:kUserAddress];
         self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
+        self.saleMarketName = [dictionary ccJsonString:kUserSaleMarketName];
+        self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
         self.addrInMarket = [dictionary ccJsonString:kUserAddrInMarket];
         self.remark = [dictionary ccJsonString:kUserRemark];
     }
@@ -56,8 +91,13 @@ static CCUser * currentUserSingleton;
     if (self.provinceId) [dict setObject:self.provinceId forKey:kUserProvinceId];
     if (self.cityId) [dict setObject:self.cityId forKey:kUserCityId];
     if (self.areaId) [dict setObject:self.areaId forKey:kUserAreaId];
+    if (self.provinceName) [dict setObject:self.provinceName forKey:kUserProvinceName];
+    if (self.cityName) [dict setObject:self.cityName forKey:kUserCityName];
+    if (self.areaName) [dict setObject:self.areaName forKey:kUserAreaName];
     if (self.address) [dict setObject:self.address forKey:kUserAddress];
     if (self.saleMarketId) [dict setObject:self.saleMarketId forKey:kUserSaleMarketId];
+    if (self.saleMarketName) [dict setObject:self.saleMarketName forKey:kUserSaleMarketName];
+    if (self.saleMarketAddress) [dict setObject:self.saleMarketAddress forKey:kUserSaleMarketAddress];
     if (self.addrInMarket) [dict setObject:self.addrInMarket forKey:kUserAddrInMarket];
     if (self.remark) [dict setObject:self.remark forKey:kUserRemark];
     return [NSDictionary dictionaryWithDictionary:dict];
@@ -172,13 +212,14 @@ static CCUser * currentUserSingleton;
     [params setObject:@(user.role) forKey:kUserRole];
     [params setObject:user.ownerName forKey:kUserOwnerName];
     [params setObject:user.address forKey:kUserAddress];
-    [params setObject:@"default" forKey:kUserHeadImgUrl];
-    [params setObject:@"default" forKey:kUserProvinceId];
-    [params setObject:@"default" forKey:kUserCityId];
-    [params setObject:@"default" forKey:kUserAreaId];
-    [params setObject:@"default" forKey:kUserSaleMarketId];
+    [params setObject:user.headImgUrl forKey:kUserHeadImgUrl];
+    [params setObject:user.saleMarketId forKey:kUserSaleMarketId];
+    if (user.remark) [params setObject:user.remark forKey:kUserRemark];
     if (user.role == UserRoleMall) [params setObject:user.mallName forKey:kUserMallName];
     else {
+        [params setObject:user.provinceId forKey:kUserProvinceId];
+        [params setObject:user.cityId forKey:kUserCityId];
+        [params setObject:user.areaId forKey:kUserAreaId];
         [params setObject:user.factoryName forKey:kUserFactoryName];
         [params setObject:user.cardNum forKey:kUserCardNum];
         [params setObject:user.alipayNum forKey:kUserAlipayNum];
@@ -204,4 +245,88 @@ static CCUser * currentUserSingleton;
         block(nil, error);
     }];
 }
+
++ (NSURLSessionDataTask *)getSaleMarketListWithBlock:(void(^)(NSArray * saleMarketList, NSError * error))block
+{
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetWholeSaleMarketList params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCSaleMarket * market = [[CCSaleMarket alloc]initWithDictionary:dict];
+                [arr addObject:market];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getProvinceListWithBlock:(void(^)(NSArray * provinceList, NSError * error))block
+{
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetProvinceList params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCAddressItem * item = [[CCAddressItem alloc]initWithDictionary:dict idKey:kUserProvinceId valueKey:kUserProvinceName];
+                [arr addObject:item];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getCityListByProvinceId:(NSString *)provinceId withBlock:(void(^)(NSArray * cityList, NSError * error))block
+{
+    NSDictionary * params = @{kUserProvinceId : provinceId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetCityList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCAddressItem * item = [[CCAddressItem alloc]initWithDictionary:dict idKey:kUserCityId valueKey:kUserCityName];
+                [arr addObject:item];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getAreaListByCityId:(NSString *)cityId withBlock:(void(^)(NSArray * areaList, NSError * error))block
+{
+    NSDictionary * params = @{kUserCityId : cityId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetAreaList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCAddressItem * item = [[CCAddressItem alloc]initWithDictionary:dict idKey:kUserAreaId valueKey:kUserAreaName];
+                [arr addObject:item];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
 @end

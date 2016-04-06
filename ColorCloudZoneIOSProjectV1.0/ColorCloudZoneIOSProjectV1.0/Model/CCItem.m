@@ -13,6 +13,32 @@
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
 
+@implementation CCItemType
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.typeId = [dict ccJsonString:kItemTypeId];
+        self.name = [dict ccJsonString:kItemTypeName];
+        self.remark = [dict ccJsonString:@"remark"];
+    }
+    return self;
+}
+
+@end
+
+@implementation CCItemPropertyValue
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.valueId = [dict ccJsonString:kItemPropertyValueId];
+        self.value = [dict ccJsonString:kItemPropertyValue];
+    }
+    return self;
+}
+@end
 
 @implementation CCItem
 - (instancetype)initWithDictionary:(NSDictionary*)dict
@@ -90,13 +116,19 @@
     return [NSDictionary dictionaryWithDictionary:dict];
 }
 
-+ (NSURLSessionDataTask *)getItemTypeListWithBlock:(void(^)(NSArray * typeList, NSError * error))block
++ (NSURLSessionDataTask *)getTypeListWithBlock:(void(^)(NSArray * typeList, NSError * error))block
 {
     
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetTypeList params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode]==0) {
-            
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCItemType * type = [[CCItemType alloc]initWithDictionary:dict];
+                [arr addObject:type];
+            }
+            block([NSArray arrayWithArray:arr], nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
@@ -106,13 +138,24 @@
 
 }
 
-+ (NSURLSessionDataTask *)getItemSkuByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * skuList, NSError * error))block
+
++ (NSURLSessionDataTask *)getColorListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * colorList, NSError * error))block
 {
     NSDictionary * params = @{kItemTypeId : typeId};
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetItemSkuByTypeId params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode]==0) {
-            
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            for (NSDictionary * dict in listDicts)
+                if ([dict ccJsonInteger:@"serial"] == 0) {
+                    NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
+                    for (NSDictionary * dict in colorDicts) {
+                        CCItemPropertyValue * propVal = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+                        [arr addObject:propVal];
+                    }
+                } else continue;
+            block(arr, nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
@@ -120,6 +163,33 @@
         block(nil, error);
     }];
 }
+
++ (NSURLSessionDataTask *)getSizeListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * sizeList, NSError * error))block
+{
+    NSDictionary * params = @{kItemTypeId : typeId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetItemSkuByTypeId params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            for (NSDictionary * dict in listDicts)
+                if ([dict ccJsonInteger:@"serial"] == 1) {
+                    NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
+                    for (NSDictionary * dict in colorDicts) {
+                        CCItemPropertyValue * propVal = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+                        [arr addObject:propVal];
+                    }
+                } else continue;
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
+
 
 + (NSURLSessionDataTask *)getExtendPropertyListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * extendPropertyList, NSError * error))block
 {
@@ -127,7 +197,15 @@
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetExtendPropByTypeId params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode]==0) {
-            
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            NSDictionary * dict = [listDicts firstObject];
+            NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
+            for (NSDictionary * dict in colorDicts) {
+                CCItemPropertyValue * propVal = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+                [arr addObject:propVal];
+            }
+            block(arr, nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
@@ -135,4 +213,10 @@
         block(nil, error);
     }];
 }
+
++ (NSURLSessionDataTask *)uploadItem:(CCItem *)item withBlock:(void (^)(CCItem *, NSError *))block
+{
+    return nil;
+}
+
 @end
