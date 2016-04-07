@@ -10,7 +10,7 @@
 #import "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"
 #import "UpLoadPicBtnCollectionViewCell.h"
 #import "UpLoadPictureCollectionViewCell.h"
-
+#import "CCItem.h"
 static NSInteger kMaxInputWordNum = 50;
 static NSInteger kMaxPicturesNum = 5;
 static NSString *kUpLoadPicBtnCellIdentifier = @"UpLoadPictureBtnCollectionViewCell";
@@ -33,6 +33,11 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
     [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
+    
+
+    
+    
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

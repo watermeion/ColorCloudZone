@@ -22,7 +22,6 @@
 		014052EF1BE46DA800E5C1F2 /* GBTableViewSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */; };
 		014052F01BE46DA800E5C1F2 /* GBTableViewSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */; };
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; };
-		016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */; };
 		017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 017E5F6A1BD1272700C55992 /* uialq.jpg */; };
 		017E5F6F1BD1280B00C55992 /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E5F6E1BD1280B00C55992 /* MarketViewController.m */; };
 		019215961BB685E200D6D324 /* RecommendItemsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 019215951BB685E200D6D324 /* RecommendItemsCollectionViewCell.m */; };
@@ -272,7 +271,6 @@
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
-		016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpLoadItemsViewController.swift; sourceTree = "<group>"; };
 		017E5F6A1BD1272700C55992 /* uialq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uialq.jpg; sourceTree = "<group>"; };
 		017E5F6D1BD1280B00C55992 /* MarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketViewController.h; sourceTree = "<group>"; };
 		017E5F6E1BD1280B00C55992 /* MarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketViewController.m; sourceTree = "<group>"; };
@@ -719,7 +717,6 @@
 		016871BF1BB79A6E0060ADAD /* UpLoadVC */ = {
 			isa = PBXGroup;
 			children = (
-				016871C01BB79A970060ADAD /* UpLoadItemsViewController.swift */,
 				0135668B1CAAA767003D1996 /* UpLoadViewController.h */,
 				0135668C1CAAA767003D1996 /* UpLoadViewController.m */,
 				0135668E1CAAB2E6003D1996 /* UpLoadPicBtnCollectionViewCell.h */,
@@ -2093,7 +2090,6 @@
 				2A56CA021B6FAE7E00C8E3DC /* PersonProfileViewController.m in Sources */,
 				2A85DAD61B53F5CD008386B0 /* AppDelegate.m in Sources */,
 				2ADE53721B88CA1E00E80AD5 /* ForgetPwdViewController.m in Sources */,
-				016871C11BB79A970060ADAD /* UpLoadItemsViewController.swift in Sources */,
 				967B920B1C62F69500E604BE /* Product.m in Sources */,
 				2A2E3E4F1BDF994E0021B3FC /* UIImageView+SD.m in Sources */,
 				2A2E3E4D1BDF994E0021B3FC /* UIView+WebCacheOperation.m in Sources */,
