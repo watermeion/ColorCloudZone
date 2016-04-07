@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *cardNumTextField;
 @property (weak, nonatomic) IBOutlet UITextField *zfbNumTextField;
 @property (strong, nonatomic) IBOutlet UITextField *remarkTextField;
+@property (strong, nonatomic) IBOutlet UITextField *addressDetailTextField;
 @property (strong, nonatomic) IBOutlet UILabel *saleMarketLabel;
-@property (strong, nonatomic) IBOutlet UILabel *saleMarketAddressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @property (nonatomic, strong) CCUser * registingUser;
 - (IBAction)doneAction:(id)sender;

@@ -28,20 +28,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application
-    [AVOSCloud setApplicationId:@"ipyoirkh7rdk3e7e6uxu7fwib7wbteoy0bgfc0mj9upi3shi"
-                      clientKey:@"a4bid0onrnho8kfdw9qyqwxm972pbk20wbgvz6kgz16r1w8a"];
-    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
-    //
-    AVObject *launchRecordObject = [AVObject objectWithClassName:@"LaunchRecordObject"];
-    [launchRecordObject setObject:@"bar" forKey:@"foo"];
-    [launchRecordObject setObject:launchOptions forKey:@"LaunchOption"];
-    [launchRecordObject save];
     
     [IQKeyboardManager sharedManager].enable = YES;
-    
-    //
-    [GBSubClass registerSubclasses];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];

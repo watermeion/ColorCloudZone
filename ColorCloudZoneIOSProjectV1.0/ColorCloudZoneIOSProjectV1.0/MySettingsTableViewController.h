@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *shopNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addressLabel;
 @property (strong, nonatomic) IBOutlet UILabel *phoneNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *saleMarketNameLabel;
 
 @end

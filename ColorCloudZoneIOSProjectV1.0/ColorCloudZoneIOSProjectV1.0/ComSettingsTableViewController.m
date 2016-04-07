@@ -25,15 +25,15 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    // self.navigationItem.rightBarButtonItem = self.ediButtonItem;
+    _idLabel.text = [NSString stringWithFormat:@"ID: %@",[CCUser currentUser].userId];
     _nameLabel.text = [CCUser currentUser].ownerName;
     [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
     _factoryNameLabel.text = [CCUser currentUser].factoryName;
     _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
     _remarkLabel.text = [CCUser currentUser].remark.length?[CCUser currentUser].remark:@"无";
     _saleMarket.text = [CCUser currentUser].saleMarketName;
-    _saleMarketAddress.text = [CCUser currentUser].saleMarketAddress;
+    _saleMarketAddress.text = [CCUser currentUser].addrInMarket;
     _cardLabel.text = [CCUser currentUser].cardNum;
     _zfbLabel.text = [CCUser currentUser].alipayNum;
     _phoneNumberLabel.text = [CCUser currentUser].mobile;

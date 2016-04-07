@@ -120,7 +120,9 @@ static CCUser * currentUserSingleton;
 
 + (void)logout
 {
+    currentUserSingleton = nil;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentUser"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
@@ -214,16 +216,16 @@ static CCUser * currentUserSingleton;
     [params setObject:user.address forKey:kUserAddress];
     [params setObject:user.headImgUrl forKey:kUserHeadImgUrl];
     [params setObject:user.saleMarketId forKey:kUserSaleMarketId];
+    [params setObject:user.provinceId forKey:kUserProvinceId];
+    [params setObject:user.cityId forKey:kUserCityId];
+    [params setObject:user.areaId forKey:kUserAreaId];
     if (user.remark) [params setObject:user.remark forKey:kUserRemark];
     if (user.role == UserRoleMall) [params setObject:user.mallName forKey:kUserMallName];
     else {
-        [params setObject:user.provinceId forKey:kUserProvinceId];
-        [params setObject:user.cityId forKey:kUserCityId];
-        [params setObject:user.areaId forKey:kUserAreaId];
         [params setObject:user.factoryName forKey:kUserFactoryName];
         [params setObject:user.cardNum forKey:kUserCardNum];
         [params setObject:user.alipayNum forKey:kUserAlipayNum];
-        [params setObject:@"default" forKey:kUserAddrInMarket];
+        [params setObject:user.addrInMarket forKey:kUserAddrInMarket];
     }
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:Signup params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);

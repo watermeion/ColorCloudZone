@@ -21,11 +21,35 @@
     if (self) {
         self.typeId = [dict ccJsonString:kItemTypeId];
         self.name = [dict ccJsonString:kItemTypeName];
-        self.remark = [dict ccJsonString:@"remark"];
     }
     return self;
 }
 
+@end
+
+@implementation CCItemClass
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.classId = [dict ccJsonString:kItemClassId];
+        self.className = [dict ccJsonString:kItemClassName];
+        self.classIconUrl = [dict ccJsonString:kItemClassIconUrl];
+    }
+    return self;
+}
+@end
+
+@implementation CCItemSort
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.sortId = [dict ccJsonString:kItemSortId];
+        self.sortName = [dict ccJsonString:kItemSortName];
+    }
+    return self;
+}
 @end
 
 @implementation CCItemPropertyValue
@@ -114,6 +138,47 @@
     if (self.desc) [dict setObject:self.desc forKey:kItemDesc];
     [dict setObject:@(self.hasSku) forKey:kItemHasSku];
     return [NSDictionary dictionaryWithDictionary:dict];
+}
+
++ (NSURLSessionDataTask *)getClassListWithBlock:(void (^)(NSArray *, NSError *))block
+{
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetClassList params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCItemClass * class = [[CCItemClass alloc]initWithDictionary:dict];
+                [arr addObject:class];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getSortListByClassId:(NSString *)classId withBlock:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemClassId : classId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetSortList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSArray * dicts = [responseObject ccJsonArray:@"data"];
+            NSMutableArray * arr = [NSMutableArray array];
+            for (NSDictionary * dict in dicts) {
+                CCItemSort * sort = [[CCItemSort alloc]initWithDictionary:dict];
+                [arr addObject:sort];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
 }
 
 + (NSURLSessionDataTask *)getTypeListWithBlock:(void(^)(NSArray * typeList, NSError * error))block

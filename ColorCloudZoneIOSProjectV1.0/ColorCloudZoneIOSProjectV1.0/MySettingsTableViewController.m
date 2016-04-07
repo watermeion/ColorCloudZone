@@ -33,18 +33,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            self.shopNameLabel.text = [object objectForKey:@"shopName"];
-            self.nameLabel.text = [object objectForKey:@"shopOwnerName"];
-            self.addressLabel.text = [object objectForKey:@"shopAddress"];
-            AVFile * avatar = [shop objectForKey:@"shopLogo"];
-            [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
-            
-        }
-    }];
+    self.idLabel.text = [NSString stringWithFormat:@"ID: %@", [CCUser currentUser].userId];
+    self.shopNameLabel.text = [CCUser currentUser].mallName;
+    self.nameLabel.text = [CCUser currentUser].ownerName;
+    self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@", [CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
+    self.phoneNumberLabel.text = [CCUser currentUser].mobile;
+    self.saleMarketNameLabel.text = [CCUser currentUser].saleMarketName;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
 }
 
 - (void)didReceiveMemoryWarning {

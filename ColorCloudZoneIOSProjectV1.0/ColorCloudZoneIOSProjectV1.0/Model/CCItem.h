@@ -13,6 +13,10 @@
 #define kItemFactoryId          @"factory_id"
 #define kItemSN                 @"item_sn"
 #define kItemClassId            @"class_id"
+#define kItemClassName          @"class_name"
+#define kItemClassIconUrl       @"class_icon"
+#define kItemSortId             @"sort_id"
+#define kItemSortName           @"sort_name"
 #define kItemTypeId             @"item_type_id"
 #define kItemTypeName           @"item_type_name"
 #define kItemPrice              @"cost_price"
@@ -30,7 +34,15 @@
 @interface CCItemType : NSObject
 @property (nonatomic, strong) NSString * typeId;
 @property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSString * remark;
+@end
+@interface CCItemClass : NSObject
+@property (nonatomic, strong) NSString * classId;
+@property (nonatomic, strong) NSString * className;
+@property (nonatomic, strong) NSString * classIconUrl;
+@end
+@interface CCItemSort : NSObject
+@property (nonatomic, strong) NSString * sortId;
+@property (nonatomic, strong) NSString * sortName;
 @end
 
 //@interface CCItemProperty : NSObject
@@ -62,6 +74,9 @@
 @property (nonatomic, assign) BOOL hasSku;
 
 
++ (NSURLSessionDataTask *)getClassListWithBlock:(void(^)(NSArray * classList, NSError * error))block;
++ (NSURLSessionDataTask *)getSortListByClassId:(NSString *)classId withBlock:(void(^)(NSArray * sortList, NSError * error))block;
++ (NSURLSessionDataTask *)getTypeListWithBlock:(void(^)(NSArray * typeList, NSError * error))block;
 + (NSURLSessionDataTask *)getExtendPropertyListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * extendPropertyList, NSError * error))block;
 + (NSURLSessionDataTask *)getColorListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * colorList, NSError * error))block
 ;

@@ -22,8 +22,6 @@ typedef NS_ENUM(NSUInteger, MEMBERCENTERUSERTYPE) {
 + (instancetype) singletonInstance;
 + (BOOL) islogin;
 
-+ (void)startLoginAndRegistProcedure;
-
 + (void)logout;
 
 - (void)setCurrentUserType:(MEMBERCENTERUSERTYPE) userType withCompletion:(void(^)(BOOL success, NSError *error))handler;

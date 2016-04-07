@@ -18,7 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (strong, nonatomic) IBOutlet UILabel *saleMarketNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *saleMarketAddressLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (strong, nonatomic) UIImage * avatar;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;

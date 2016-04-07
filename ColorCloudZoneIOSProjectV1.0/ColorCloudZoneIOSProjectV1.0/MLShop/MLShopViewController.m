@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "KxMenu.h"
 #import "SVProgressHud.h"
+#import "CCUser.h"
 static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 
@@ -37,17 +38,8 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
-    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            self.nameLabel.text = [object objectForKey:@"shopName"];
-            AVFile * avatar = [object objectForKey:@"shopLogo"];
-            AVFile * cover = [object objectForKey:@"cover"];
-            if (avatar.url) [self.avatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
-            if (cover.url) [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
-        }
-    }];
+    self.nameLabel.text = [CCUser currentUser].mallName;
+    [self.avatar sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
 }
 
 - (void)back

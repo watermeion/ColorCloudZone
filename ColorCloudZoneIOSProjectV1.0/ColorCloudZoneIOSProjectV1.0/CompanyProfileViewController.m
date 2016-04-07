@@ -35,6 +35,7 @@
         self.remarkTextField.text = [CCUser currentUser].remark;
         self.zfbNumTextField.text = [CCUser currentUser].alipayNum;
         self.cardNumTextField.text = [CCUser currentUser].cardNum;
+        self.addressDetailTextField.text = [CCUser currentUser].addrInMarket;
     }
     // Do any additional setup after loading the view.
 }
@@ -45,10 +46,9 @@
     CCUser * parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
     if (parentUser) {
 //        if (self.avatar) self.avaterImageView.image = self.avatar;
-//        else [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:parentUser.headImgUrl]];
-        self.comCity.text = [[parentUser.provinceName stringByAppendingString:parentUser.cityName] stringByAppendingString:parentUser.areaName];
+        //        else [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:parentUser.headImgUrl]];
+        self.comCity.text = [NSString stringWithFormat:@"%@%@%@", parentUser.provinceName?parentUser.provinceName:@"", parentUser.cityName?parentUser.cityName:@"", parentUser.areaName?parentUser.areaName:@""];
         self.saleMarketLabel.text = parentUser.saleMarketName;
-        self.saleMarketAddressLabel.text = parentUser.saleMarketAddress;
     }
 }
 
@@ -89,6 +89,10 @@
         [SVProgressHUD showErrorWithStatus:@"请选择批发市场"];
         return;
     }
+    if (!(_addressDetailTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写厂家在批发市场中的具体位置"];
+        return;
+    }
     if (!(_cardNumTextField.text.length > 0)) {
         [SVProgressHUD showErrorWithStatus:@"请填写银行卡号"];
         return;
@@ -105,6 +109,7 @@
         self.registingUser.alipayNum = _zfbNumTextField.text;
         self.registingUser.ownerName = _ownerTextField.text;
         self.registingUser.remark = _remarkTextField.text;
+        self.registingUser.addrInMarket = _addressDetailTextField.text;
         [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeBlack];
         
         [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {

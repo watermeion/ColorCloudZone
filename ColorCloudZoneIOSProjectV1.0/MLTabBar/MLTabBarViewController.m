@@ -89,9 +89,6 @@ static MLTabBarViewController *sharedInstance = nil;
  }
  */
 
-- (void)presentLoginAndRegistProcedure{
-    [self performSegueWithIdentifier:kMainPresentedLoginAndRegistSegue sender:self];
-}
 
 
 @end

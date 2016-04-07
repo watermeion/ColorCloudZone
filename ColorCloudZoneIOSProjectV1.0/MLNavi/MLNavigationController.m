@@ -22,7 +22,9 @@
 
     if (self) {
      self.navigationBar.barTintColor = BASEBARCOLOR;
-        self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem.tintColor = [UIColor blackColor];
+//        self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+        self.navigationBar.tintColor = [UIColor blackColor];
     }
 
     return self;
@@ -32,7 +34,9 @@
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         self.navigationBar.barTintColor = BASEBARCOLOR;
-        self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+        self.navigationItem.backBarButtonItem.tintColor = [UIColor blackColor];
+//        self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+        self.navigationBar.tintColor = [UIColor blackColor];
 
     }
     return self;

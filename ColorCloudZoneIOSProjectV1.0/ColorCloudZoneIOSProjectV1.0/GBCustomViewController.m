@@ -44,7 +44,6 @@
 
 - (void)checkUserStatus{
     if (![MemberCenterManager islogin]) {
-        [MemberCenterManager startLoginAndRegistProcedure];
     }
 }
 

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "marcoHeader.h"
 
-static NSString *const kMainPresentedLoginAndRegistSegue = @"MainPresentedLoginAndRegistSegue";
 @interface MLTabBarViewController : UITabBarController
 
 + (instancetype)sharedInstance;
-- (void)presentLoginAndRegistProcedure;
 @end

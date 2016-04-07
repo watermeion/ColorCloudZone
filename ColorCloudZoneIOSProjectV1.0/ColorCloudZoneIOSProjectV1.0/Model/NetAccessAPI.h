@@ -24,7 +24,8 @@
 #define GetCityList @"wearcloud.address.getCityList"
 #define GetAreaList @"wearcloud.address.getAreaList"
 
-
+#define ItemGetClassList @"wearcloud.category.getClassList"
+#define ItemGetSortList @"wearcloud.category.getSortListByClassId"
 #define ItemGetTypeList @"wearcloud.item.getItemTypeList"
 #define ItemGetItemSkuByTypeId @"wearcloud.item.getSkuInfoByTypeId"
 #define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"

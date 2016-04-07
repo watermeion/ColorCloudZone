@@ -27,6 +27,7 @@
         
         [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
         self.shopNameTextField.text = [CCUser currentUser].mallName;
+        self.ownerNameTextField.text = [CCUser currentUser].ownerName;
         self.addressTextField.text = [CCUser currentUser].address;
     }
 }
@@ -37,9 +38,8 @@
     
     CCUser * parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
     if (parentUser) {
-        self.cityTextField.text = [[parentUser.provinceName stringByAppendingString:parentUser.cityName] stringByAppendingString:parentUser.areaName];
+        self.cityTextField.text = [NSString stringWithFormat:@"%@%@%@", parentUser.provinceName?parentUser.provinceName:@"", parentUser.cityName?parentUser.cityName:@"", parentUser.areaName?parentUser.areaName:@""];
         self.saleMarketNameLabel.text = parentUser.saleMarketName;
-        self.saleMarketAddressLabel.text = parentUser.saleMarketAddress;
     }
 }
 - (IBAction)cityClicked:(id)sender {
@@ -84,6 +84,7 @@
         self.registingUser.mallName = self.shopNameTextField.text;
         self.registingUser.ownerName = self.ownerNameTextField.text;
         self.registingUser.address = self.addressTextField.text;
+        [SVProgressHUD showWithStatus:@"正在注册"];
         [CCFile uploadImage:self.avatar withProgress:nil completionBlock:^(NSString *url, NSError *error) {
             if (error) {
                 [SVProgressHUD showErrorWithStatus:@"头像上传失败"];

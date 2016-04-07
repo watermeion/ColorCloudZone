@@ -37,12 +37,6 @@ static MemberCenterManager *singletonInstance;
     return currentUser?YES:NO;
 }
 
-+ (void)startLoginAndRegistProcedure{
-    MLTabBarViewController *tab = [MLTabBarViewController sharedInstance];
-    if (tab) {
-        [tab presentLoginAndRegistProcedure];
-    }
-}
 
 + (void)logout{
     [AVUser logOut];
@@ -63,7 +57,6 @@ static MemberCenterManager *singletonInstance;
             }
         }];
     }else{
-        [self.class startLoginAndRegistProcedure];
     }
 }
 
