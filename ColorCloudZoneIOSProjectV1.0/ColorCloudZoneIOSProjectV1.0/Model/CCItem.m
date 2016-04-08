@@ -65,6 +65,19 @@
 @end
 
 @implementation CCItem
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        self.assistantPics = [NSMutableArray array];
+        self.descPics = [NSMutableArray array];
+        self.colorProperty = [NSMutableArray array];
+        self.sizeProperty = [NSMutableArray array];
+    }
+    return self;
+    
+}
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
@@ -101,8 +114,8 @@
     if (self.name) [dict setObject:self.name forKey:kItemName];
     if (self.factoryId) [dict setObject:self.factoryId forKey:kItemFactoryId];
     if (self.SN) [dict setObject:self.SN forKey:kItemSN];
-    if (self.classId) [dict setObject:self.classId forKey:kItemClassId];
-    if (self.typeId) [dict setObject:self.typeId forKey:kItemTypeId];
+    if (self.itemClass.classId) [dict setObject:self.itemClass.classId forKey:kItemClassId];
+    if (self.itemType.typeId) [dict setObject:self.itemType.typeId forKey:kItemTypeId];
     [dict setObject:@(self.price) forKey:kItemPrice];
     if (self.cover) [dict setObject:self.cover forKey:kItemCover];
     if (self.assistantPics.count > 0) {
@@ -147,6 +160,10 @@
         if ([responseObject ccCode]==0) {
             NSArray * dicts = [responseObject ccJsonArray:@"data"];
             NSMutableArray * arr = [NSMutableArray array];
+            if (![dicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             for (NSDictionary * dict in dicts) {
                 CCItemClass * class = [[CCItemClass alloc]initWithDictionary:dict];
                 [arr addObject:class];
@@ -168,6 +185,10 @@
         if ([responseObject ccCode]==0) {
             NSArray * dicts = [responseObject ccJsonArray:@"data"];
             NSMutableArray * arr = [NSMutableArray array];
+            if (![dicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             for (NSDictionary * dict in dicts) {
                 CCItemSort * sort = [[CCItemSort alloc]initWithDictionary:dict];
                 [arr addObject:sort];
@@ -189,6 +210,10 @@
         if ([responseObject ccCode]==0) {
             NSArray * dicts = [responseObject ccJsonArray:@"data"];
             NSMutableArray * arr = [NSMutableArray array];
+            if (![dicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             for (NSDictionary * dict in dicts) {
                 CCItemType * type = [[CCItemType alloc]initWithDictionary:dict];
                 [arr addObject:type];
@@ -212,6 +237,10 @@
         if ([responseObject ccCode]==0) {
             NSMutableArray * arr = [NSMutableArray array];
             NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             for (NSDictionary * dict in listDicts)
                 if ([dict ccJsonInteger:@"serial"] == 0) {
                     NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
@@ -237,6 +266,10 @@
         if ([responseObject ccCode]==0) {
             NSMutableArray * arr = [NSMutableArray array];
             NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             for (NSDictionary * dict in listDicts)
                 if ([dict ccJsonInteger:@"serial"] == 1) {
                     NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
@@ -264,9 +297,17 @@
         if ([responseObject ccCode]==0) {
             NSMutableArray * arr = [NSMutableArray array];
             NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
             NSDictionary * dict = [listDicts firstObject];
-            NSArray * colorDicts = [dict ccJsonArray:@"prop_value"];
-            for (NSDictionary * dict in colorDicts) {
+            NSArray * propDicts = [dict ccJsonArray:@"prop_value"];
+            if (![propDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in propDicts) {
                 CCItemPropertyValue * propVal = [[CCItemPropertyValue alloc] initWithDictionary:dict];
                 [arr addObject:propVal];
             }

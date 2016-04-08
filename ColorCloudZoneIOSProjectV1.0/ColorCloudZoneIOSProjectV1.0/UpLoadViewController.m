@@ -11,6 +11,11 @@
 #import "UpLoadPicBtnCollectionViewCell.h"
 #import "UpLoadPictureCollectionViewCell.h"
 #import "CCItem.h"
+#import "SizeViewController.h"
+#import "ColorViewController.h"
+#import "TypeViewController.h"
+#import "ClassViewController.h"
+#import "MaterialViewController.h"
 static NSInteger kMaxInputWordNum = 50;
 static NSInteger kMaxPicturesNum = 5;
 static NSString *kUpLoadPicBtnCellIdentifier = @"UpLoadPictureBtnCollectionViewCell";
@@ -20,6 +25,7 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 @property (nonatomic, strong) NSArray *choosePictures;
 
+@property (nonatomic, strong) CCItem * parentItem;
 
 @end
 
@@ -35,7 +41,7 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
     
 
-    
+    self.parentItem = [[CCItem alloc] init];
     
     
 }
@@ -64,19 +70,40 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 
 
-
-
-
-- (IBAction)itemCategoryBtn:(id)sender {
+//尺码
+- (IBAction)chooseSizeAction:(id)sender {
+    SizeViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SizeViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
 }
+//类型
+- (IBAction)chooseTypeAction:(id)sender {
+    TypeViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TypeViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+//颜色
 - (IBAction)chooseColorAction:(id)sender {
+    ColorViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
+//面料
 - (IBAction)chooseSurfaceAction:(id)sender {
+    MaterialViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MaterialViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
-
 - (IBAction)upLoadImagesAction:(id)sender {
+    
 }
-
+//类别
 - (IBAction)chooseCategoryAction:(id)sender {
+    ClassViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ClassViewController"];
+    vc.parentItem = self.parentItem;
+    vc.uploadViewController = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
