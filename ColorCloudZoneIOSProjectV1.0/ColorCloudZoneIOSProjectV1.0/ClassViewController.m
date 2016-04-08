@@ -71,7 +71,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CCItemClass * item = [_classList objectAtIndex:indexPath.row];
-    self.parentItem.itemClass = item;
+    if (![self.parentItem.itemClass.classId isEqualToString:item.classId]) {
+        self.parentItem.itemClass = item;
+        self.parentItem.itemSort = nil;
+    }
     SortViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SortViewController"];
     vc.parentItem = self.parentItem;
     vc.uploadViewController = self.uploadViewController;

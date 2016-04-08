@@ -46,6 +46,32 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.parentItem.itemClass.className) self.categoryLabel.text = [NSString stringWithFormat:@"%@ %@", self.parentItem.itemClass.className, self.parentItem.itemSort.sortName?self.parentItem.itemSort.sortName:@""];
+    if (self.parentItem.itemType.name) self.typeLabel.text = self.parentItem.itemType.name;
+    
+    NSString * colors = @"";
+    for (CCItemPropertyValue * prop in self.parentItem.colorProperty)
+        colors = [NSString stringWithFormat:@"%@%@ ", colors, prop.value];
+    if (colors.length) self.colorLabel.text = colors;
+    else self.colorLabel.text = @"请点击选择颜色(可多选)";
+    
+    NSString * sizes = @"";
+    for (CCItemPropertyValue * prop in self.parentItem.sizeProperty)
+        sizes = [NSString stringWithFormat:@"%@%@ ", sizes, prop.value];
+    if (sizes.length) self.sizeLabel.text = sizes;
+    else self.sizeLabel.text = @"请点击选择尺码(可多选)";
+    
+    
+    NSString * extends = @"";
+    for (CCItemPropertyValue * prop in self.parentItem.extendProperty)
+        extends = [NSString stringWithFormat:@"%@%@ ", extends, prop.value];
+    if (extends.length) self.surfaceMater.text = extends;
+    else self.surfaceMater.text = @"请点击选择面料(可多选)";
+}
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {

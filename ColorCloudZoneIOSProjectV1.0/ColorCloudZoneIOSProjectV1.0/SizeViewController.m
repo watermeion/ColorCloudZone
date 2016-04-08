@@ -8,6 +8,7 @@
 
 #import "SizeViewController.h"
 #import "SVProgressHud.h"
+#import "ItemPropertyCell.h"
 
 @interface SizeViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -20,6 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [SVProgressHUD showWithStatus:@"正在获取列表"];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [CCItem getSizeListByTypeId:self.parentItem.itemType.typeId withBlock:^(NSArray *sizeList, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"获取失败"];
+        } else {
+            _sizeList = sizeList;
+            [self.tableView reloadData];
+        }
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +42,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _sizeList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ItemPropertyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PropertyCell"];
+    CCItemPropertyValue * property = [_sizeList objectAtIndex:indexPath.row];
+    cell.textLabel.text = property.value;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    for (CCItemPropertyValue * prop in self.parentItem.sizeProperty)
+        if ([prop.valueId isEqualToString:property.valueId]) {
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            break;
+        }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CCItemPropertyValue * property = [_sizeList objectAtIndex:indexPath.row];
+    for (CCItemPropertyValue * prop in self.parentItem.sizeProperty)
+        if ([prop.valueId isEqualToString:property.valueId]) return;
+    [self.parentItem.sizeProperty addObject:property];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CCItemPropertyValue * property = [_sizeList objectAtIndex:indexPath.row];
+    CCItemPropertyValue * propToDelete;
+    for (CCItemPropertyValue * prop in self.parentItem.sizeProperty)
+        if ([prop.valueId isEqualToString:property.valueId]) {
+            propToDelete = prop;
+            break;
+        }
+    if (propToDelete) [self.parentItem.sizeProperty removeObject:propToDelete];
+}
 /*
 #pragma mark - Navigation
 

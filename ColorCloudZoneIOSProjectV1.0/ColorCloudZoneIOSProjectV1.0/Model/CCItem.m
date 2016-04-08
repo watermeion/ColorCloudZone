@@ -74,6 +74,7 @@
         self.descPics = [NSMutableArray array];
         self.colorProperty = [NSMutableArray array];
         self.sizeProperty = [NSMutableArray array];
+        self.extendProperty = [NSMutableArray array];
     }
     return self;
     
@@ -147,7 +148,7 @@
         [dict setObject:ids forKey:kItemSizeProperty];
     }
     
-    if (self.extendProperty) [dict setObject:self.extendProperty forKey:kItemExtendProperty];
+//    if (self.extendProperty) [dict setObject:self.extendProperty forKey:kItemExtendProperty];
     if (self.desc) [dict setObject:self.desc forKey:kItemDesc];
     [dict setObject:@(self.hasSku) forKey:kItemHasSku];
     return [NSDictionary dictionaryWithDictionary:dict];

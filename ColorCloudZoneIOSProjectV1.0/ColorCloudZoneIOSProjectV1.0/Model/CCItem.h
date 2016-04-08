@@ -70,7 +70,7 @@
 @property (nonatomic, strong) NSMutableArray * descPics;
 @property (nonatomic, strong) NSMutableArray * colorProperty;
 @property (nonatomic, strong) NSMutableArray * sizeProperty;
-@property (nonatomic, strong) NSString * extendProperty;
+@property (nonatomic, strong) NSMutableArray * extendProperty;
 @property (nonatomic, strong) NSString * desc;
 @property (nonatomic, assign) BOOL hasSku;
 

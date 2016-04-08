@@ -72,7 +72,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CCItemType * type = [_typeList objectAtIndex:indexPath.row];
-    self.parentItem.itemType = type;
+    if (![self.parentItem.itemType.typeId isEqualToString:type.typeId]) {
+        self.parentItem.itemType = type;
+        [self.parentItem.colorProperty removeAllObjects];
+        [self.parentItem.sizeProperty removeAllObjects];
+        [self.parentItem.extendProperty removeAllObjects];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
