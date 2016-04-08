@@ -72,6 +72,10 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 //尺码
 - (IBAction)chooseSizeAction:(id)sender {
+    if (!self.parentItem.itemType.typeId) {
+        [SVProgressHUD showErrorWithStatus:@"请先选择商品类型！"];
+        return;
+    }
     SizeViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SizeViewController"];
     vc.parentItem = self.parentItem;
     [self.navigationController pushViewController:vc animated:YES];
@@ -84,6 +88,10 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 }
 //颜色
 - (IBAction)chooseColorAction:(id)sender {
+    if (!self.parentItem.itemType.typeId) {
+        [SVProgressHUD showErrorWithStatus:@"请先选择商品类型！"];
+        return;
+    }
     ColorViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ColorViewController"];
     vc.parentItem = self.parentItem;
     [self.navigationController pushViewController:vc animated:YES];
@@ -91,6 +99,10 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 }
 //面料
 - (IBAction)chooseSurfaceAction:(id)sender {
+    if (!self.parentItem.itemType.typeId) {
+        [SVProgressHUD showErrorWithStatus:@"请先选择商品类型！"];
+        return;
+    }
     MaterialViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MaterialViewController"];
     vc.parentItem = self.parentItem;
     [self.navigationController pushViewController:vc animated:YES];

@@ -56,6 +56,7 @@
     ItemPropertyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PropertyCell"];
     CCItemPropertyValue * property = [_colorList objectAtIndex:indexPath.row];
     cell.textLabel.text = property.value;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     for (CCItemPropertyValue * prop in self.parentItem.colorProperty)
         if ([prop.valueId isEqualToString:property.valueId]) {
             [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
