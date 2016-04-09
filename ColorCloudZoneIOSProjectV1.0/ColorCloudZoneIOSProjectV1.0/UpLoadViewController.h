@@ -16,17 +16,14 @@
 @property (nonatomic) IBOutlet UICollectionView *itemPicCollectionView;
 @property (nonatomic) IBOutlet UIButton *itemCategoryBtn;
 
-- (IBAction)itemCategoryBtn:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *chooseTypeAction;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
 - (IBAction)chooseColorAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *chooseSizeAction;
 
 - (IBAction)chooseSurfaceAction:(id)sender;
 

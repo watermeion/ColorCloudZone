@@ -29,4 +29,5 @@
 #define ItemGetTypeList @"wearcloud.item.getItemTypeList"
 #define ItemGetItemSkuByTypeId @"wearcloud.item.getSkuInfoByTypeId"
 #define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"
+#define ItemUpload @"wearcloud.item.addItem"
 #endif /* NetAccessAPI_h */

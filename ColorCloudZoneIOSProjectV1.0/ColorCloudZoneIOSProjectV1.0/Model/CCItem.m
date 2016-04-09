@@ -75,6 +75,7 @@
         self.colorProperty = [NSMutableArray array];
         self.sizeProperty = [NSMutableArray array];
         self.extendProperty = [NSMutableArray array];
+        self.hasSku = YES;
     }
     return self;
     
@@ -83,23 +84,6 @@
 {
     self = [super init];
     if (self) {
-        
-//        @property (nonatomic, strong) NSString * itemId;
-//        @property (nonatomic, strong) NSString * itemNam;
-//        @property (nonatomic, strong) NSString * factoryId;
-//        @property (nonatomic, strong) NSString * itemSN;
-//        @property (nonatomic, strong) NSString * classId;
-//        @property (nonatomic, strong) NSString * typeId;
-//        @property (nonatomic, assign) float price;
-//        @property (nonatomic, strong) NSString * cover;
-//        @property (nonatomic, strong) NSArray * assistantPics;
-//        @property (nonatomic, strong) NSArray * descPics;
-//        @property (nonatomic, strong) NSArray * colorProperty;
-//        @property (nonatomic, strong) NSArray * sizeProperty;
-//        @property (nonatomic, strong) NSString * extendProperty;
-//        @property (nonatomic, strong) NSString * desc;
-//        @property (nonatomic, assign) BOOL hasSku;
-        
         self.itemId = [dict ccJsonString:kItemId];
         self.name = [dict ccJsonString:kItemName];
         self.factoryId = [dict ccJsonString:kItemFactoryId];
@@ -133,22 +117,27 @@
         [dict setObject:urls forKey:kItemDescPics];
     }
     
-    
-    if (self.colorProperty.count > 0) {
-        NSString * ids = [self.colorProperty objectAtIndex:0];
-        for (NSInteger index = 1; index < self.colorProperty.count; index++)
-            ids = [ids stringByAppendingFormat:@",%@",[self.colorProperty objectAtIndex:index]];
-        [dict setObject:ids forKey:kItemColorProperty];
+    NSString * colors = @"";
+    for (CCItemPropertyValue * prop in self.colorProperty) {
+        if (colors.length > 0) colors = [colors stringByAppendingString:@","];
+        colors = [colors stringByAppendingString:prop.valueId];
     }
+    [dict setObject:colors forKey:kItemColorProperty];
     
-    if (self.sizeProperty.count > 0) {
-        NSString * ids = [self.sizeProperty objectAtIndex:0];
-        for (NSInteger index = 1; index < self.sizeProperty.count; index++)
-            ids = [ids stringByAppendingFormat:@",%@",[self.sizeProperty objectAtIndex:index]];
-        [dict setObject:ids forKey:kItemSizeProperty];
+    NSString * sizes = @"";
+    for (CCItemPropertyValue * prop in self.sizeProperty) {
+        if (sizes.length > 0) sizes = [sizes stringByAppendingString:@","];
+        sizes = [sizes stringByAppendingString:prop.valueId];
     }
+    [dict setObject:sizes forKey:kItemSizeProperty];
     
-//    if (self.extendProperty) [dict setObject:self.extendProperty forKey:kItemExtendProperty];
+    NSString * extends = @"";
+    for (CCItemPropertyValue * prop in self.extendProperty) {
+        if (extends.length > 0) extends = [extends stringByAppendingString:@","];
+        extends = [extends stringByAppendingString:prop.valueId];
+    }
+    [dict setObject:extends forKey:kItemExtendProperty];
+    
     if (self.desc) [dict setObject:self.desc forKey:kItemDesc];
     [dict setObject:@(self.hasSku) forKey:kItemHasSku];
     return [NSDictionary dictionaryWithDictionary:dict];
@@ -323,7 +312,19 @@
 
 + (NSURLSessionDataTask *)uploadItem:(CCItem *)item withBlock:(void (^)(CCItem *, NSError *))block
 {
-    return nil;
+    NSDictionary * params = [item genarateDictionary];
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemUpload params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            item.itemId = [data ccJsonString:kItemId];
+            block(item, nil);
+        } else {
+            block(item, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(item, error);
+    }];
 }
 
 @end

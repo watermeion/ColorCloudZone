@@ -1600,7 +1600,7 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="donebtnAction:" destination="wRp-Wk-WeS" eventType="touchUpInside" id="aHU-2C-Fuz"/>
+                                    <action selector="doneBtnAction:" destination="wRp-Wk-WeS" eventType="touchUpInside" id="5AZ-ZZ-ye7"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RuV-0b-9nV">
@@ -1680,7 +1680,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mc7-Nc-GsH">
                                                 <rect key="frame" x="93" y="8" width="254" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2130,7 +2130,7 @@
                                             <constraint firstAttribute="height" constant="45" id="oNk-Yz-vnK"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="我认为他去年做得很棒，”库普切克说，湖人上赛季21胜61负的战绩，但他们总计缺席了324场比赛，也创下了NBA纪录，“在如此艰难的情况下，我认为斯科特无论是在更衣室、还是在大巴、飞机上或者球场上，都把整支球队凝聚在一起。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hEI-RB-nfS">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hEI-RB-nfS">
                                         <rect key="frame" x="10" y="698" width="355" height="150"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>

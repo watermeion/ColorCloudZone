@@ -94,6 +94,69 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 
 
+- (IBAction)doneBtnAction:(id)sender {
+    if (!(_itemName.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写商品名称"];
+        return;
+    }
+    if (!(_itemSerialNum.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写商品款号"];
+        return;
+    }
+    if (!(_itemWholeSalePrice.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写商品价格"];
+        return;
+    }
+//    if (!(self.parentItem.cover.length > 0)) {
+//        [SVProgressHUD showErrorWithStatus:@"请上传商品封面图片"];
+//        return;
+//    }
+//    if (!(self.parentItem.assistantPics.count > 0)) {
+//        [SVProgressHUD showErrorWithStatus:@"请上传商品主照片"];
+//        return;
+//    }
+//    if (!(self.parentItem.descPics.count > 0)) {
+//        [SVProgressHUD showErrorWithStatus:@"请上传商品幅照片"];
+//        return;
+//    }
+    if (!self.parentItem.itemClass) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品类别"];
+        return;
+    }
+    if (!self.parentItem.itemSort) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品类别"];
+        return;
+    }
+    if (!self.parentItem.itemType) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品类型"];
+        return;
+    }
+    if (!(self.parentItem.colorProperty.count > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品颜色"];
+        return;
+    }
+    if (!(self.parentItem.sizeProperty.count > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品尺寸"];
+        return;
+    }
+    if (!(self.parentItem.extendProperty.count > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请选择商品面料"];
+        return;
+    }
+    self.parentItem.name = _itemName.text;
+    self.parentItem.SN = _itemSerialNum.text;
+    self.parentItem.price = [_itemWholeSalePrice.text floatValue];
+    self.parentItem.desc = _itemDetailInputView.text;
+    [SVProgressHUD showWithStatus:@"正在上传中"];
+    [CCItem uploadItem:self.parentItem withBlock:^(CCItem *item, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"上传失败"];
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }];
+}
 
 
 //尺码
