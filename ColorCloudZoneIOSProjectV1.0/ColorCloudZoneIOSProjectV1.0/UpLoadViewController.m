@@ -16,16 +16,21 @@
 #import "TypeViewController.h"
 #import "ClassViewController.h"
 #import "MaterialViewController.h"
+#import "GBImagePickerBehavior.h"
 static NSInteger kMaxInputWordNum = 50;
 static NSInteger kMaxPicturesNum = 5;
 static NSString *kUpLoadPicBtnCellIdentifier = @"UpLoadPictureBtnCollectionViewCell";
 static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
-@interface UpLoadViewController ()<GBTableViewSelectorBehaviorDelegate,GBTableViewSelectorResultDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface UpLoadViewController ()<GBImagePickerBehaviorDataTargetDelegate,GBTableViewSelectorBehaviorDelegate,GBTableViewSelectorResultDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
 
-@property (nonatomic, strong) NSArray *choosePictures;
+@property (nonatomic, strong) NSMutableArray *choosePictures;
 
 @property (nonatomic, strong) CCItem * parentItem;
+@property (nonatomic) NSInteger pictureNum;
+
+@property (nonatomic) NSUInteger indexWillDelete;
+
 
 @end
 
@@ -37,12 +42,12 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     self.selector.delegate = self;
     self.selector.owner = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
-    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
+//    [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
+//    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
     
 
     self.parentItem = [[CCItem alloc] init];
-    
+    self.pictureNum = 0;
     
 }
 
@@ -72,15 +77,43 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     else self.surfaceMater.text = @"请点击选择面料(可多选)";
 }
 
+
+
+
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0){
+        return ;
+    }
+    self.indexWillDelete = indexPath.row - 1;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除该照片" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 990101;
+    [alert show];
+    return;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag != 990101) {
+        return;
+    }
+    if (buttonIndex == 0) {
+        self.indexWillDelete = 0;
+    }else{
+        [self.choosePictures removeObjectAtIndex:self.indexWillDelete];
+        [self.itemPicCollectionView reloadData];
+    }
+}
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier forIndexPath:indexPath];
+        UpLoadPicBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier forIndexPath:indexPath];
         return cell;
     }
     UpLoadPictureCollectionViewCell *picCell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicCellIdentifier forIndexPath:indexPath];
     
-    //config cell
+    picCell.imageView.image = [self.choosePictures objectAtIndex:(indexPath.row - 1)];
     
     return picCell;
     
@@ -88,9 +121,9 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
     return 1 + self.choosePictures.count;
 }
+
 
 
 
@@ -203,6 +236,12 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     
 }
 - (IBAction)upLoadImagesAction:(id)sender {
+  //上传
+    
+
+    
+    
+    
     
 }
 //类别
@@ -212,4 +251,28 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     vc.uploadViewController = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
+#pragma mark - GBImagePicker
+- (void)imagePickerBehaviorSelectedImages:(NSArray *) imageArray{
+    if (imageArray.count == 0) {
+        return;
+    }
+    if (self.pictureNum == 0) {
+        self.parentItem.cover = imageArray.firstObject;
+        self.pictureNum++;
+        return;
+    }
+    if ( self.choosePictures == nil){
+        self.choosePictures = [NSMutableArray array];
+    }
+    [self.choosePictures addObjectsFromArray:imageArray];
+    self.pictureNum++;
+    [self.itemPicCollectionView reloadData];
+}
+
+- (NSUInteger)limitNumSelectionforThisImagePicker{
+    return 1;
+}
+
 @end

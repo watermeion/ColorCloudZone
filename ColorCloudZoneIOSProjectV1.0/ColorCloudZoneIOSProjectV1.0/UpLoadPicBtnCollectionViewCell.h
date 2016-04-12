@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UpLoadPicBtnCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @end
