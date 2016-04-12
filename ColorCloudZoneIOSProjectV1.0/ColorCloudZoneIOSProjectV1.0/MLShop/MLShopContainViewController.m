@@ -129,62 +129,26 @@
 - (void)tableViewPullUp
 {
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
-        [self getShopProductsHottest:NO withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *objects, NSError *error) {
+        [CCItem getItemListByHottest:NO forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *itemList, NSError *error) {
             [self.tableView footerEndRefreshing];
             if (!error) {
                 if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
-                [_newestDataArray addObjectsFromArray:objects];
+                [_newestDataArray addObjectsFromArray:itemList];
+                [self.tableView reloadData];
+            }
+        }];
+    } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
+        [CCItem getItemListByHottest:NO forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *itemList, NSError *error) {
+            [self.tableView footerEndRefreshing];
+            if (!error) {
+                if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
+                [_newestDataArray addObjectsFromArray:itemList];
                 [self.tableView reloadData];
             }
         }];
     } else {
-        [self getMarketProductsHottest:NO withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *objects, NSError *error) {
-            [self.tableView footerEndRefreshing];
-            if (!error) {
-                if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
-                [_newestDataArray addObjectsFromArray:objects];
-                [self.tableView reloadData];
-            }
-        }];
+        
     }
-}
-
-- (void)getMarketProductsHottest:(BOOL)hottest withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
-{
-    
-//    AVQuery * query = [AVQuery queryWithClassName:@"Product"];
-//    query.limit = limit;
-//    query.skip = skip;
-//    [query includeKey:@"productMainImage"];
-//    if ([self.parentVC isKindOfClass:[SupplierViewController class]]) {
-//        [query whereKey:@"userId" equalTo:[AVUser currentUser].objectId];
-//    }
-//    if (hottest) [query orderByDescending:@"like"];
-//    else [query orderByDescending:@"createdAt"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        block(objects, error);
-//    }];
-}
-
-- (void)getShopProductsHottest:(BOOL)hottest withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
-{
-//    AVQuery * query = [AVQuery queryWithClassName:@"MallProduct"];
-//    query.limit = limit;
-//    query.skip = skip;
-//    [query includeKey:@"factoryProduct"];
-//    [query whereKey:@"shopId" equalTo:((AVObject*)[[AVUser currentUser] objectForKey:@"shop"]).objectId];
-//    if (hottest) [query orderByDescending:@"like"];
-//    else [query orderByDescending:@"createdAt"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        NSMutableArray * products;
-//        if (!error) {
-//            products = [NSMutableArray array];
-//            for (AVObject * mallProduct in objects) {
-//                [products addObject:mallProduct[@"factoryProduct"]];
-//            }
-//        }
-//        block(products, error);
-//    }];
 }
 
 
@@ -281,21 +245,6 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-/*
- // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
- }
- 
- - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
- }
- 
- - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
- }
- */
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
