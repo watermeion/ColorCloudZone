@@ -12,6 +12,7 @@
 #import "NSString+MD5.h"
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
+#import "CCUser.h"
 
 @implementation CCItemType
 
@@ -84,10 +85,35 @@
 {
     self = [super init];
     if (self) {
+        
+//        @property (nonatomic, strong) CCItemClass * itemClass;
+//        @property (nonatomic, strong) CCItemSort * itemSort;
+//        @property (nonatomic, strong) CCItemType * itemType;
+//        @property (nonatomic, strong) NSMutableArray * colorProperty;
+//        @property (nonatomic, strong) NSMutableArray * sizeProperty;
+//        @property (nonatomic, strong) NSMutableArray * extendProperty;
+//        @property (nonatomic, assign) BOOL hasSku;
+        
         self.itemId = [dict ccJsonString:kItemId];
         self.name = [dict ccJsonString:kItemName];
         self.factoryId = [dict ccJsonString:kItemFactoryId];
         self.SN = [dict ccJsonString:kItemSN];
+        self.price = [dict ccJsonFloat:kItemPrice];
+        self.cover = [dict ccJsonString:kItemCover];
+        NSString * assPicsStr = [dict ccJsonString:kItemAssistantPics];
+        self.assistantPics = [NSMutableArray arrayWithArray:[assPicsStr componentsSeparatedByString:@";"]];
+        NSString * descPicsStr = [dict ccJsonString:kItemAssistantPics];
+        self.descPics = [NSMutableArray arrayWithArray:[descPicsStr componentsSeparatedByString:@";"]];
+        self.desc = [dict ccJsonString:kItemDesc];
+        self.likeNum = [dict ccJsonInteger:kItemLikeNum];
+        self.collectNum = [dict ccJsonInteger:kItemCollectNum];
+        self.newCount = [dict ccJsonInteger:kItemNewCount];
+        NSString * dateStr = [dict ccJsonString:kItemDate];
+        if (dateStr.length > 0) {
+            NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyy-MM";
+            self.date = [formatter dateFromString:dateStr];
+        }
     }
     return self;
 }
@@ -96,10 +122,12 @@
 {
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     if (self.itemId) [dict setObject:self.itemId forKey:kItemId];
+    if ([CCUser currentUser].userId) [dict setObject:[CCUser currentUser].userId forKey:kItemFactoryId];
     if (self.name) [dict setObject:self.name forKey:kItemName];
     if (self.factoryId) [dict setObject:self.factoryId forKey:kItemFactoryId];
     if (self.SN) [dict setObject:self.SN forKey:kItemSN];
     if (self.itemClass.classId) [dict setObject:self.itemClass.classId forKey:kItemClassId];
+    if (self.itemSort.sortId) [dict setObject:self.itemSort.sortId forKey:kItemSortId];
     if (self.itemType.typeId) [dict setObject:self.itemType.typeId forKey:kItemTypeId];
     [dict setObject:@(self.price) forKey:kItemPrice];
     if (self.cover) [dict setObject:self.cover forKey:kItemCover];
@@ -324,6 +352,60 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(item, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forFactory:(NSString *)factoryId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemFactoryId : factoryId,
+                              kItemLimit : @(limit),
+                              kItemSkip : @(skip)};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:hottest?ItemGetHottestItemsForFactory : ItemGetNewestItemsForFactory params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCItem * item = [[CCItem alloc] initWithDictionary:dict];
+                [arr addObject:item];
+            }
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forMall:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemMallId : mallId,
+                              kItemLimit : @(limit),
+                              kItemSkip : @(skip)};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:hottest?ItemGetHottestItemsForMall : ItemGetNewestItemsForMall params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCItem * item = [[CCItem alloc] initWithDictionary:dict];
+                [arr addObject:item];
+            }
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
     }];
 }
 

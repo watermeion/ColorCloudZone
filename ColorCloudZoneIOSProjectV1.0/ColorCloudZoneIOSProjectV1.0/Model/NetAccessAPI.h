@@ -24,6 +24,12 @@
 #define GetCityList @"wearcloud.address.getCityList"
 #define GetAreaList @"wearcloud.address.getAreaList"
 
+
+#define ItemGetHottestItemsForFactory @"wearcloud.Factory.getHotItemList"
+#define ItemGetHottestItemsForMall @"wearcloud.MallCollect.getHotItemList"
+#define ItemGetNewestItemsForFactory @"wearcloud.Factory.getNewItemList"
+#define ItemGetNewestItemsForMall @"wearcloud. MallCollect.getNewItemList"
+
 #define ItemGetClassList @"wearcloud.category.getClassList"
 #define ItemGetSortList @"wearcloud.category.getSortListByClassId"
 #define ItemGetTypeList @"wearcloud.item.getItemTypeList"

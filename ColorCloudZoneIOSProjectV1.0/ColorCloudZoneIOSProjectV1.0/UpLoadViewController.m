@@ -95,6 +95,11 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 
 - (IBAction)doneBtnAction:(id)sender {
+    self.parentItem.cover = @"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png";
+    self.parentItem.assistantPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
+    self.parentItem.descPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
+    
+    
     if (!(_itemName.text.length > 0)) {
         [SVProgressHUD showErrorWithStatus:@"请填写商品名称"];
         return;
@@ -107,18 +112,18 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
         [SVProgressHUD showErrorWithStatus:@"请填写商品价格"];
         return;
     }
-//    if (!(self.parentItem.cover.length > 0)) {
-//        [SVProgressHUD showErrorWithStatus:@"请上传商品封面图片"];
-//        return;
-//    }
-//    if (!(self.parentItem.assistantPics.count > 0)) {
-//        [SVProgressHUD showErrorWithStatus:@"请上传商品主照片"];
-//        return;
-//    }
-//    if (!(self.parentItem.descPics.count > 0)) {
-//        [SVProgressHUD showErrorWithStatus:@"请上传商品幅照片"];
-//        return;
-//    }
+    if (!(self.parentItem.cover.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请上传商品封面图片"];
+        return;
+    }
+    if (!(self.parentItem.assistantPics.count > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请上传商品主照片"];
+        return;
+    }
+    if (!(self.parentItem.descPics.count > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请上传商品幅照片"];
+        return;
+    }
     if (!self.parentItem.itemClass) {
         [SVProgressHUD showErrorWithStatus:@"请选择商品类别"];
         return;

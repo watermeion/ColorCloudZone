@@ -16,6 +16,7 @@
 + (NSInteger) ccCodeWithDictionary:(NSDictionary *)dict;
 
 - (double) ccJsonDouble:(NSString *)key;
+- (float) ccJsonFloat:(NSString *)key;
 
 - (NSString *) ccJsonString:(NSString *)key;
 

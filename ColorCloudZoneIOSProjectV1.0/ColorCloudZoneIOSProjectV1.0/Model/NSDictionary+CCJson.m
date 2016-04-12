@@ -37,6 +37,12 @@
     return number.doubleValue;
 }
 
+- (float) ccJsonFloat:(NSString *)key
+{
+    NSNumber * number = (NSNumber *)[self objectForKey:key];
+    return number.floatValue;
+}
+
 
 - (NSString *) ccJsonString:(NSString *)key
 {

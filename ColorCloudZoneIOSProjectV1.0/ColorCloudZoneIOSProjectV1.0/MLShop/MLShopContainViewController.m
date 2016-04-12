@@ -17,14 +17,15 @@
 #import "MJRefresh.h"
 #import "GoodDetailViewController.h"
 #import "SupplierViewController.h"
+#import "CCItem.h"
+#import "CCUser.h"
 
-#define QueryLimit 30
+#define QueryLimit 20
 
 @interface MLShopContainViewController ()
 
 @property (nonatomic, strong) NSMutableArray * hottestDataArray;
 @property (nonatomic, strong) NSMutableArray * newestDataArray;
-@property (nonatomic, strong) NSMutableArray * newestProducts;
 
 @end
 
@@ -53,120 +54,99 @@
 - (void)collectionViewPullDown
 {
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
-        [self getShopProductsHottest:YES withLimit:QueryLimit skip:0 block:^(NSArray *objects, NSError *error) {
+        [CCItem getItemListByHottest:YES forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
             [self.collectionView headerEndRefreshing];
             if (!error) {
-                _hottestDataArray = [[NSMutableArray alloc] initWithArray:objects];
+                _hottestDataArray = [[NSMutableArray alloc] initWithArray:itemList];
+                [self.collectionView reloadData];
+            }
+        }];
+    } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
+        [CCItem getItemListByHottest:YES forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+            [self.collectionView headerEndRefreshing];
+            if (!error) {
+                _hottestDataArray = [[NSMutableArray alloc] initWithArray:itemList];
                 [self.collectionView reloadData];
             }
         }];
     } else {
-        [self getMarketProductsHottest:YES withLimit:QueryLimit skip:0 block:^(NSArray *objects, NSError *error) {
-            [self.collectionView headerEndRefreshing];
-            if (!error) {
-                _hottestDataArray = [[NSMutableArray alloc] initWithArray:objects];
-                [self.collectionView reloadData];
-            }
-        }];
+        
     }
 }
 
 - (void)collectionViewPullUp
 {
+    if (_hottestDataArray.count < QueryLimit) {
+        [self.collectionView footerEndRefreshing];
+        return;
+    }
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
-        [self getShopProductsHottest:YES withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *objects, NSError *error) {
-            [self.collectionView footerEndRefreshing];
+        [CCItem getItemListByHottest:YES forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
+            [self.collectionView headerEndRefreshing];
             if (!error) {
                 if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
-                [_hottestDataArray addObjectsFromArray:objects];
+                [_hottestDataArray addObjectsFromArray:itemList];
+                [self.collectionView reloadData];
+            }
+        }];
+    } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
+        [CCItem getItemListByHottest:YES forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
+            [self.collectionView headerEndRefreshing];
+            if (!error) {
+                if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
+                [_hottestDataArray addObjectsFromArray:itemList];
                 [self.collectionView reloadData];
             }
         }];
     } else {
-        [self getMarketProductsHottest:YES withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *objects, NSError *error) {
-            [self.collectionView footerEndRefreshing];
-            if (!error) {
-                if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
-                [_hottestDataArray addObjectsFromArray:objects];
-                [self.collectionView reloadData];
-            }
-        }];
+        
     }
 }
 
 - (void)tableViewPullDown
 {
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
-        [self getShopProductsHottest:NO withLimit:QueryLimit skip:0 block:^(NSArray *objects, NSError *error) {
+        [CCItem getItemListByHottest:NO forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
             [self.tableView headerEndRefreshing];
             if (!error) {
-                _newestProducts = [NSMutableArray arrayWithArray:objects];
-                [self figureNewestDataArray];
+                _newestDataArray = [NSMutableArray arrayWithArray:itemList];
+                [self.tableView reloadData];
+            }
+        }];
+    } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
+        [CCItem getItemListByHottest:NO forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+            [self.tableView headerEndRefreshing];
+            if (!error) {
+                _newestDataArray = [NSMutableArray arrayWithArray:itemList];
                 [self.tableView reloadData];
             }
         }];
     } else {
-        [self getMarketProductsHottest:NO withLimit:QueryLimit skip:0 block:^(NSArray *objects, NSError *error) {
-            [self.tableView headerEndRefreshing];
-            if (!error) {
-                _newestProducts = [NSMutableArray arrayWithArray:objects];
-                [self figureNewestDataArray];
-                [self.tableView reloadData];
-            }
-        }];
+        
     }
 }
 
 - (void)tableViewPullUp
 {
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
-        [self getShopProductsHottest:NO withLimit:QueryLimit skip:_newestProducts.count block:^(NSArray *objects, NSError *error) {
+        [self getShopProductsHottest:NO withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *objects, NSError *error) {
             [self.tableView footerEndRefreshing];
             if (!error) {
-                if (!_newestProducts) _newestProducts = [NSMutableArray array];
-                [_newestProducts addObjectsFromArray:objects];
-                [self figureNewestDataArray];
+                if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
+                [_newestDataArray addObjectsFromArray:objects];
                 [self.tableView reloadData];
             }
         }];
     } else {
-        [self getMarketProductsHottest:NO withLimit:QueryLimit skip:_newestProducts.count block:^(NSArray *objects, NSError *error) {
+        [self getMarketProductsHottest:NO withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *objects, NSError *error) {
             [self.tableView footerEndRefreshing];
             if (!error) {
-                if (!_newestProducts) _newestProducts = [NSMutableArray array];
-                [_newestProducts addObjectsFromArray:objects];
-                [self figureNewestDataArray];
+                if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
+                [_newestDataArray addObjectsFromArray:objects];
                 [self.tableView reloadData];
             }
         }];
     }
-}
-
-- (void)figureNewestDataArray
-{
-    _newestDataArray = [NSMutableArray array];
-    NSMutableArray * currentDay;
-    for (NSInteger index = 0; index < _newestProducts.count; index ++) {
-        if (currentDay == nil) {
-            currentDay = [NSMutableArray array];
-        }
-        if (index == 0) {
-            [currentDay addObject:_newestProducts[index]];
-        } else {
-            AVObject * cur = _newestProducts[index];
-            AVObject * pre = _newestProducts[index - 1];
-            NSDateComponents * curDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:cur.createdAt];
-            NSDateComponents * preDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:pre.createdAt];
-            if ([curDate year] == [preDate year] && [curDate month] == [preDate month] && [curDate day] == [preDate day]) {
-                [currentDay addObject:cur];
-            } else {
-                [_newestDataArray addObject:currentDay];
-                currentDay = [NSMutableArray arrayWithObject:cur];
-            }
-            
-        }
-    }
-    if (currentDay) [_newestDataArray addObject:currentDay];
 }
 
 - (void)getMarketProductsHottest:(BOOL)hottest withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
@@ -276,14 +256,11 @@
     
     
     ShopContentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ShopContentCollectionViewCell" forIndexPath:indexPath];
-    AVObject * product = [self.hottestDataArray objectAtIndex:indexPath.row];
-    cell.likeNumLabel.text = [((NSNumber *)product[@"like"]).stringValue stringByAppendingString:@"人喜欢"];
-    cell.titleLabel.text = product[@"productName"];
-    cell.priceLabel.text = [@"￥" stringByAppendingString:((NSNumber *)product[@"productPrice"]).stringValue];
-    AVFile * file = product[@"productMainImage"];
-    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:file.url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    CCItem * item = [self.hottestDataArray objectAtIndex:indexPath.row];
+    cell.likeNumLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)item.likeNum];
+    cell.titleLabel.text = item.name;
+    cell.priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:item.price].stringValue];
+    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:item.cover]];
     return cell;
 //    return nil;
 }
@@ -297,9 +274,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AVObject * product = [_hottestDataArray objectAtIndex:indexPath.row];
+    CCItem * item = [self.hottestDataArray objectAtIndex:indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
-    vc.product = product;
+//    vc.product = product;
     vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -323,31 +300,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_newestDataArray count];
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSMutableArray * currentDay = [_newestDataArray objectAtIndex:section];
-    return currentDay.count;
+    return [_newestDataArray count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray * currentDay = _newestDataArray[indexPath.section];
-    AVObject * product = currentDay[indexPath.row];
+    CCItem * item = _newestDataArray[indexPath.row];
     ShopListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ShopListTableViewCell" forIndexPath:indexPath];
-    cell.rightPriceLabel.text = [@"￥" stringByAppendingString:((NSNumber*)product[@"productPrice"]).stringValue];
-    cell.rightTitleLabel.text = product[@"productName"];
-    cell.rightLikeLabel.text = ((NSNumber*)product[@"like"]).stringValue;
     
-    AVFile * file = product[@"productMainImage"];
-    [cell.rightImageView sd_setImageWithURL:[NSURL URLWithString:file.url]];
+    cell.rightPriceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:item.price].stringValue];
+    cell.rightTitleLabel.text = item.name;
+    cell.rightLikeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)item.likeNum];
+    [cell.rightImageView sd_setImageWithURL:[NSURL URLWithString:item.cover]];
+
+    NSDateComponents * curDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:item.date];
+    NSInteger curYear = [curDate year];
+    NSInteger curMonth = [curDate month];
     
-    if (indexPath.row == 0) {
-        NSDateComponents * preDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:product.createdAt];
+    NSDateComponents * preDate;
+    if (indexPath.row > 0) {
+        preDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:((CCItem *)_newestDataArray[indexPath.row - 1]).date];
+    }
+    
+    if (indexPath.row == 0 || (preDate && ([preDate year]!= curYear || [preDate month]!= curMonth))) {
         cell.leftView.hidden = NO;
-        cell.leftDayLabel.text = [NSNumber numberWithInteger:[preDate day]].stringValue;
-        cell.leftMonthLabel.text = [NSString stringWithFormat:@"%ld月", (long)[preDate month]];
-        cell.leftInfoLabel.text = [NSString stringWithFormat:@"上新%lu件", (unsigned long)currentDay.count];
+        cell.leftDayLabel.text = [NSNumber numberWithInteger:curYear % 100].stringValue;
+        cell.leftMonthLabel.text = [NSString stringWithFormat:@"%ld月", (long)curMonth];
+        cell.leftInfoLabel.text = [NSString stringWithFormat:@"上新%lu件", item.newCount];
     } else cell.leftView.hidden = YES;
     return cell;
 }
@@ -355,10 +337,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSMutableArray * currentDay = _newestDataArray[indexPath.section];
-    AVObject * product = currentDay[indexPath.row];
+    CCItem * item = _newestDataArray[indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
-    vc.product = product;
+//    vc.product = product;
     vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
 }

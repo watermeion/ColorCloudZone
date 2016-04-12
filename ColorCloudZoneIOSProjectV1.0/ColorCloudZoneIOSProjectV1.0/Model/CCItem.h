@@ -11,6 +11,7 @@
 #define kItemId                 @"item_id"
 #define kItemName               @"item_name"
 #define kItemFactoryId          @"factory_id"
+#define kItemMallId             @"mall_id"
 #define kItemSN                 @"item_sn"
 #define kItemClassId            @"class_id"
 #define kItemClassName          @"class_name"
@@ -30,6 +31,12 @@
 #define kItemPropertyValueId    @"property_value_id"
 #define kItemDesc               @"description"
 #define kItemHasSku             @"has_sku"
+#define kItemCollectNum         @"collect_num"
+#define kItemLikeNum            @"like_num"
+#define kItemLimit              @"fetch_num"
+#define kItemSkip               @"firstRow"
+#define kItemNewCount           @"count"
+#define kItemDate               @"date"
 
 @interface CCItemType : NSObject
 @property (nonatomic, strong) NSString * typeId;
@@ -73,7 +80,10 @@
 @property (nonatomic, strong) NSMutableArray * extendProperty;
 @property (nonatomic, strong) NSString * desc;
 @property (nonatomic, assign) BOOL hasSku;
-
+@property (nonatomic, assign) NSInteger likeNum;
+@property (nonatomic, assign) NSInteger collectNum;
+@property (nonatomic, assign) NSInteger newCount;
+@property (nonatomic, assign) NSDate * date;
 
 + (NSURLSessionDataTask *)getClassListWithBlock:(void(^)(NSArray * classList, NSError * error))block;
 + (NSURLSessionDataTask *)getSortListByClassId:(NSString *)classId withBlock:(void(^)(NSArray * sortList, NSError * error))block;
@@ -84,4 +94,7 @@
 + (NSURLSessionDataTask *)getSizeListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * sizeList, NSError * error))block
 ;
 + (NSURLSessionDataTask *)uploadItem:(CCItem *)item withBlock:(void(^)(CCItem * item, NSError * error))block;
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forFactory:(NSString *)factoryId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forMall:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
+
 @end
