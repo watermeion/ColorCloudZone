@@ -29,6 +29,7 @@
 #define ItemGetHottestItemsForMall @"wearcloud.MallCollect.getHotItemList"
 #define ItemGetNewestItemsForFactory @"wearcloud.Factory.getNewItemList"
 #define ItemGetNewestItemsForMall @"wearcloud. MallCollect.getNewItemList"
+#define ItemGetItemList @"wearcloud.item.getItemList"
 
 #define ItemGetClassList @"wearcloud.category.getClassList"
 #define ItemGetSortList @"wearcloud.category.getSortListByClassId"
@@ -36,4 +37,14 @@
 #define ItemGetItemSkuByTypeId @"wearcloud.item.getSkuInfoByTypeId"
 #define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"
 #define ItemUpload @"wearcloud.item.addItem"
+#define ItemGetItemDetailInfo @"wearcloud.item.getItemDetailInfo"
+#define ItemGetItemFactoryInfo @"wearcloud.item.getItemFactoryInfo"
+#define ItemGetItemMemberInfo @"wearcloud.item.getItemMemberInfo"
+#define ItemCollectItem @"wearcloud.MallCollect.collectItem"
+#define ItemWantItem @""
+
+#define MemberAdd @"wearcloud.member.addMember"
+#define MemberIsCollectItem @"wearcloud.MemberCollect.isCollectItem"
+#define MemberGetMemberList @"wearcloud.member.getMemberList"
+
 #endif /* NetAccessAPI_h */

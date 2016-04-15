@@ -12,6 +12,7 @@
 #import "KxMenu.h"
 #import "SVProgressHud.h"
 #import "CCUser.h"
+#import "CCFile.h"
 static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 
@@ -39,7 +40,7 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
     self.nameLabel.text = [CCUser currentUser].mallName;
-    [self.avatar sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+    [self.avatar sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
 }
 
 - (void)back

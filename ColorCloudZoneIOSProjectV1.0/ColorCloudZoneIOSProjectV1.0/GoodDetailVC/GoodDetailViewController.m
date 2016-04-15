@@ -1,3 +1,4 @@
+
 //
 //  GoodDetailViewController.m
 //  ColorCloudZoneIOSProjectV1.0
@@ -17,6 +18,9 @@
 #import "KxMenu.h"
 #import "CollectAlertView.h"
 #import "WantView.h"
+#import "SVProgressHud.h"
+#import "DCPicScrollView.h"
+#import "DCWebImageManager.h"
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
@@ -60,6 +64,7 @@ static const CGFloat CellWidth = 220;
     } else if ([self.parentVC isKindOfClass:[MarketViewController class]]) {
         self.wantView.hidden = YES;
         self.contactAndCollectView.hidden = NO;
+        [self.collectButton setTitle:self.parentItem.isCollected?@"已收藏":@"收藏" forState:UIControlStateNormal];
     } else {
         self.wantView.hidden = YES;
         self.contactAndCollectView.hidden = YES;
@@ -77,7 +82,6 @@ static const CGFloat CellWidth = 220;
                                      action:NULL]];
     }
     if (_menuItems) {
-        
         UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
                                                     initWithImage:[UIImage imageNamed:@"moreBarIcon_black"]
                                                     style:UIBarButtonItemStylePlain
@@ -87,26 +91,71 @@ static const CGFloat CellWidth = 220;
         self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
     }
     
-    AVFile * mainImage = [_product objectForKey:@"productMainImage"];
-    [_productMainImageView sd_setImageWithURL:[NSURL URLWithString:mainImage.url]];
-    _likeLabel.text = [((NSNumber *)_product[@"like"]).stringValue stringByAppendingString:@"人想要"];
-    _titleLabel.text = _product[@"productName"];
-    AVObject * factory = [_product objectForKey:@"factory"];
-    [factory fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            _factoryName.text = [factory objectForKey:@"name"];
-            _factoryPhone.text = [factory objectForKey:@"phoneNumber"];
-//            _factoryProductCount.text = [factory objectForKey:@""];
-//            _factoryNewCount.text = [factory objectForKey:@""];
-            AVFile * avatar = [factory objectForKey:@"avatar"];
-            [_factoryAvatar sd_setImageWithURL:[NSURL URLWithString:avatar.url]];
+    
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+    _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
+    _titleLabel.text = self.parentItem.name;
+    _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
+    [SVProgressHUD showWithStatus:@"正在获取信息"];
+    [CCItem getItemDetailInfo:self.parentItem withBlock:^(CCItem *item, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"获取失败"];
+        } else {
+            [self setBannerView];
+            _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value];
+            _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"无。";
         }
     }];
     
     
     
-      [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
+    [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
 }
+
+- (void)setBannerView
+{
+    NSMutableArray *UrlStringArray = [NSMutableArray array];
+//    NSMutableArray *titleArray = [NSMutableArray array];
+    for (NSString * url in self.parentItem.assistantPics) {
+        [UrlStringArray addObject:[CCFile ccURLWithString:url].absoluteString];
+    }
+    
+    DCPicScrollView  *picView = [DCPicScrollView picScrollViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 254) WithImageUrls:UrlStringArray];
+    picView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:picView];
+    
+    //显示顺序和数组顺序一致
+    //设置标题显示文本数组
+    
+    picView.style = PageControlAtCenter;
+    
+    //            picView.titleData = titleArray;
+    
+    //占位图片,你可以在下载图片失败处修改占位图片
+    picView.placeImage = [UIImage imageNamed:@"uialq.jpg"];
+    
+    //图片被点击事件,当前第几张图片被点击了,和数组顺序一致
+    [picView setImageViewDidTapAtIndex:^(NSInteger index) {
+        printf("第%zd张图片\n",index);
+    }];
+    
+    //default is 2.0f,如果小于0.5不自动播放
+    picView.AutoScrollDelay = 5.0f;
+    //    picView.textColor = [UIColor redColor];
+    //下载失败重复下载次数,默认不重复,
+    [[DCWebImageManager shareManager] setDownloadImageRepeatCount:1];
+    //图片下载失败会调用该block(如果设置了重复下载次数,则会在重复下载完后,假如还没下载成功,就会调用该block)
+    //error错误信息
+    //url下载失败的imageurl
+    [[DCWebImageManager shareManager] setDownLoadImageError:^(NSError *error, NSString *url) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -208,6 +257,7 @@ static const CGFloat CellWidth = 220;
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CollectAlertView" owner:self options:nil];
     CollectAlertView *collectView = collectView = [nib objectAtIndex:0];
     [collectView showInView:self.view];
+    
 }
 
 - (IBAction)uncollect:(id)sender

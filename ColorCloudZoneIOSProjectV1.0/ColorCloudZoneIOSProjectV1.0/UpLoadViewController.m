@@ -144,7 +144,7 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
         [SVProgressHUD showErrorWithStatus:@"请选择商品尺寸"];
         return;
     }
-    if (!(self.parentItem.extendProperty.count > 0)) {
+    if (!(self.parentItem.extendProperty.valueId.length > 0)) {
         [SVProgressHUD showErrorWithStatus:@"请选择商品面料"];
         return;
     }

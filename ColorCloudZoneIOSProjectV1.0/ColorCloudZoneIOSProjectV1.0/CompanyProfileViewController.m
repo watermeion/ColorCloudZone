@@ -28,7 +28,7 @@
     [super viewDidLoad];
     if ([CCUser currentUser]) {
         
-        [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+        [self.avaterImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
         self.comNameTextField.text = [CCUser currentUser].factoryName;
         self.ownerTextField.text = [CCUser currentUser].ownerName;
         self.comAddressTextField.text = [CCUser currentUser].address;
@@ -45,8 +45,6 @@
     [super viewWillAppear:animated];
     CCUser * parentUser = self.registingUser?self.registingUser:[CCUser currentUser];
     if (parentUser) {
-//        if (self.avatar) self.avaterImageView.image = self.avatar;
-        //        else [self.avaterImageView sd_setImageWithURL:[NSURL URLWithString:parentUser.headImgUrl]];
         self.comCity.text = [NSString stringWithFormat:@"%@%@%@", parentUser.provinceName?parentUser.provinceName:@"", parentUser.cityName?parentUser.cityName:@"", parentUser.areaName?parentUser.areaName:@""];
         self.saleMarketLabel.text = parentUser.saleMarketName;
     }

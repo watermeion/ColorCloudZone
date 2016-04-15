@@ -11,6 +11,7 @@
 #import "NSString+MD5.h"
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
+#import "CCItem.h"
 
 static CCUser * currentUserSingleton;
 
@@ -37,6 +38,23 @@ static CCUser * currentUserSingleton;
         self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
         self.saleMarketName = [dictionary ccJsonString:kUserSaleMarketName];
         self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
+    }
+    return self;
+}
+
+@end
+
+@implementation CCMember
+
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        self.mobile = [dictionary ccJsonString:kMemberMobile];
+        self.headImgUrl = [dictionary ccJsonString:kMemberHeadImgUrl];
+        self.address = [dictionary ccJsonString:kMemberAddress];
+        self.username = [dictionary ccJsonString:kMemberUsername];
     }
     return self;
 }
@@ -331,4 +349,55 @@ static CCUser * currentUserSingleton;
     }];
 }
 
++ (NSURLSessionDataTask *)addMember:(CCMember *)member withBlock:(void (^)(CCMember *, NSError *))block
+{
+    NSDictionary * params = @{kMemberMobile : member.mobile,
+                              kMemberUsername : member.username,
+                              kMemberHeadImgUrl : member.headImgUrl,
+                              kMemberAddress : member.address};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:MemberAdd params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            block(member, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getMemberListByMallId:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemMallId : mallId,
+                              kItemLimit : @(limit),
+                              kItemSkip : @(skip)};
+    
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:MemberGetMemberList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            NSArray * listDicts = [data ccJsonArray:@"list"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCMember * member = [[CCMember alloc] initWithDictionary:dict];
+                [arr addObject:member];
+            }
+            block(arr, nil);
+
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
 @end

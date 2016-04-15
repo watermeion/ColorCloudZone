@@ -9,7 +9,8 @@
 #import "AddMemberShipViewController.h"
 #import "VPImageCropperViewController.h"
 #import "SVProgressHud.h"
-#import "AVObjectKeys.h"
+#import "CCFile.h"
+#import "CCUser.h"
 @interface AddMemberShipViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate>
 
 @property (nonatomic) BOOL isActiveDoneBtn;
@@ -88,39 +89,41 @@
 }
 
 - (IBAction)doneAction:(id)sender {
-//    var realname = request.params.MemeberName;
-//    var mobile = request.params.MemberMobile;
-//    var avatar = request.params.MemberLogoUrl;
-//    var shopId = request.params.shopId;
-//    var memberAddress = request.params.MemberAddress;
+    if (!(self.nameTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写会员姓名"];
+        return;
+    }
+    
+    if (!(self.phoneNumTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写会员手机号"];
+        return;
+    }
+    
+    if (!(self.addressTextField.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写会员地址"];
+        return;
+    }
     [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
-    AVFile * file = [AVFile fileWithData:UIImageJPEGRepresentation(self.avatarImageView.image, 0.8)];
-    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            AVObject * shopMember = [AVObject objectWithClassName:@"ShopMember"];
-            [shopMember setObject:self.nameTextField.text forKey:ShopMemberNameKey];
-            [shopMember setObject:self.phoneNumTextField.text forKey:ShopMemberMobileKey];
-            [shopMember setObject:self.addressTextField.text forKey:ShopMemberAddressKey];
-            [shopMember setObject:file forKey:ShopMemberLogoUrlKey];
-            [shopMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [CCFile uploadImage:self.avatarImageView.image withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+        if (!error) {
+            CCMember * member = [[CCMember alloc] init];
+            member.username = self.nameTextField.text;
+            member.headImgUrl = url;
+            member.address = self.addressTextField.text;
+            member.mobile = self.phoneNumTextField.text;
+            [CCUser addMember:member withBlock:^(CCMember *member, NSError *error) {
+                [SVProgressHUD dismiss];
                 if (error) {
                     [SVProgressHUD showErrorWithStatus:@"添加失败"];
                 } else {
-                    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-                    AVRelation * shopMembers = [shop relationforKey:@"shopMember"];
-                    [shopMembers addObject:shopMember];
-                    [shop saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                        if (error) {
-                            [SVProgressHUD showErrorWithStatus:@"添加失败"];
-                        } else {
-                            [SVProgressHUD showSuccessWithStatus:@"添加成功"];
-                            [self.navigationController popViewControllerAnimated:YES];
-                        }
-                    }];
+                    [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }];
-        } else {
+        }else {
+            [SVProgressHUD dismiss];
             [SVProgressHUD showErrorWithStatus:@"添加失败"];
+            
         }
     }];
 }

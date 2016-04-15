@@ -12,9 +12,15 @@
 #import "UIImageView+WebCache.h"
 #import "AddMemberShipViewController.h"
 #import "MJRefresh/MJRefresh.h"
+#import "CCFile.h"
+#import "CCUser.h"
+
+
+
 static NSString *const kAddMemberCollectonCellIdentifier = @"AddMemberCollectionViewCell";
 static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollectionViewCell";
 
+static const NSInteger QueryLimit = 30;
 
 @interface MemerShipViewController ()
 @property (nonatomic, strong) NSMutableArray * dataSource;
@@ -47,10 +53,10 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 
 - (void)pullDown
 {
-    [self getMembersWithLimit:50 skip:0 block:^(NSArray *objects, NSError *error) {
+    [CCUser getMemberListByMallId:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *memberList, NSError *error) {
         [self.collectionView headerEndRefreshing];
         if (!error) {
-            self.dataSource = [NSMutableArray arrayWithArray:objects];
+            self.dataSource = [NSMutableArray arrayWithArray:memberList];
             [self.collectionView reloadData];
         }
     }];
@@ -58,30 +64,16 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 
 - (void)pullUp
 {
-    [self getMembersWithLimit:50 skip:self.dataSource.count block:^(NSArray *objects, NSError *error) {
+    if (self.dataSource.count < QueryLimit) {
+        [self.collectionView footerEndRefreshing];
+        return;
+    }
+    [CCUser getMemberListByMallId:[CCUser currentUser].userId withLimit:QueryLimit skip:self.dataSource.count block:^(NSArray *memberList, NSError *error) {
         [self.collectionView footerEndRefreshing];
         if (!error) {
             if (!self.dataSource) self.dataSource = [NSMutableArray array];
-            [self.dataSource addObjectsFromArray:objects];
+            [self.dataSource addObjectsFromArray:memberList];
             [self.collectionView reloadData];
-        }
-    }];
-}
-
-- (void)getMembersWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * objects, NSError *error)) block
-{
-    AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-    [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//    [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-        if (!error) {
-            AVRelation * relation = [object relationforKey:@"shopMember"];
-            AVQuery * query = [relation query];
-            query.limit = limit;
-            query.skip = skip;
-            [query orderByDescending:@"createdAt"];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                block(objects, error);
-            }];
         }
     }];
 }
@@ -105,11 +97,10 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
         return cell;
     }
     MemberCommonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMemberCollectonCellIdentifier forIndexPath:indexPath];
-    AVObject * member = [_dataSource objectAtIndex:indexPath.item - 1];
-    cell.nameLabel.text = member[@"MemberName"];
-    cell.phoneLabel.text = member[@"MemberMobile"];
-    NSString * url = ((AVFile *)member[@"MemberLogoUrl"]).url;
-    [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:url]];
+    CCMember * member = [_dataSource objectAtIndex:indexPath.item - 1];
+    cell.nameLabel.text = member.username;
+    cell.phoneLabel.text = member.mobile;
+    [cell.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:member.headImgUrl]];
     return cell;
 }
 
@@ -122,7 +113,10 @@ static NSString *const kMemberCollectonCellIdentifier = @"MemberCommonCollection
 {
     if (indexPath.item == 0) {
         AddMemberShipViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMemberShipViewController"];
+        
         [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CCMember * member = [_dataSource objectAtIndex:indexPath.item - 1];
     }
 }
 

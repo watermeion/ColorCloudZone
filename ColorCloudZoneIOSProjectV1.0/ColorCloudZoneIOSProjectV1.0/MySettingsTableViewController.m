@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "LoginAndRegistNaviController.h"
 #import "CCUser.h"
+#import "CCFile.h"
 
 @interface MySettingsTableViewController () <UIActionSheetDelegate>
 
@@ -39,7 +40,7 @@
     self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@", [CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
     self.phoneNumberLabel.text = [CCUser currentUser].mobile;
     self.saleMarketNameLabel.text = [CCUser currentUser].saleMarketName;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -55,34 +55,17 @@
     ItemPropertyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PropertyCell"];
     CCItemPropertyValue * property = [_materialList objectAtIndex:indexPath.row];
     cell.textLabel.text = property.value;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    for (CCItemPropertyValue * prop in self.parentItem.extendProperty)
-        if ([prop.valueId isEqualToString:property.valueId]) {
-            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            break;
-        }
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CCItemPropertyValue * property = [_materialList objectAtIndex:indexPath.row];
-    for (CCItemPropertyValue * prop in self.parentItem.extendProperty)
-        if ([prop.valueId isEqualToString:property.valueId]) return;
-    [self.parentItem.extendProperty addObject:property];
+    self.parentItem.extendProperty = property;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CCItemPropertyValue * property = [_materialList objectAtIndex:indexPath.row];
-    CCItemPropertyValue * propToDelete;
-    for (CCItemPropertyValue * prop in self.parentItem.extendProperty)
-        if ([prop.valueId isEqualToString:property.valueId]) {
-            propToDelete = prop;
-            break;
-        }
-    if (propToDelete) [self.parentItem.extendProperty removeObject:propToDelete];
-}
 /*
 #pragma mark - Navigation
 

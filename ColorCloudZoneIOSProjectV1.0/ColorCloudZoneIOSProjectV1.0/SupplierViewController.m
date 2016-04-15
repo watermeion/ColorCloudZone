@@ -13,6 +13,7 @@
 #import "MLShopContainViewController.h"
 #import "ComSettingsTableViewController.h"
 #import "CCUser.h"
+#import "CCFile.h"
 @interface SupplierViewController ()
 
 @end
@@ -41,8 +42,8 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
     
     self.nameLabel.text = [CCUser currentUser].factoryName;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
-//    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:cover.url]];
+    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
+//    [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:cover.url]];
     
 
     // Do any additional setup after loading the view.

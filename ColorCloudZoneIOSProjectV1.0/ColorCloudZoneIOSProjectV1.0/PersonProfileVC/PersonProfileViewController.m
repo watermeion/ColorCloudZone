@@ -25,7 +25,7 @@
     
     if ([CCUser currentUser]) {
         
-        [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+        [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
         self.shopNameTextField.text = [CCUser currentUser].mallName;
         self.ownerNameTextField.text = [CCUser currentUser].ownerName;
         self.addressTextField.text = [CCUser currentUser].address;
@@ -41,6 +41,12 @@
         self.cityTextField.text = [NSString stringWithFormat:@"%@%@%@", parentUser.provinceName?parentUser.provinceName:@"", parentUser.cityName?parentUser.cityName:@"", parentUser.areaName?parentUser.areaName:@""];
         self.saleMarketNameLabel.text = parentUser.saleMarketName;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSLog(@"haha");
 }
 - (IBAction)cityClicked:(id)sender {
     ProvinceViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ProvinceViewController"];

@@ -42,6 +42,7 @@
 @property (readwrite, nonatomic) SEL action;
 @property (readwrite, nonatomic, strong) UIColor *foreColor;
 @property (readwrite, nonatomic) NSTextAlignment alignment;
+@property (readwrite, nonatomic, assign) NSInteger tag;
 
 + (instancetype) menuItem:(NSString *) title
                     image:(UIImage *) image

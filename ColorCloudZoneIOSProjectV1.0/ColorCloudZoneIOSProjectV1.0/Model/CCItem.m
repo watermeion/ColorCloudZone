@@ -75,7 +75,6 @@
         self.descPics = [NSMutableArray array];
         self.colorProperty = [NSMutableArray array];
         self.sizeProperty = [NSMutableArray array];
-        self.extendProperty = [NSMutableArray array];
         self.hasSku = YES;
     }
     return self;
@@ -116,6 +115,53 @@
         }
     }
     return self;
+}
+
+- (void)getDetailFromDictionary:(NSDictionary *)dictionary
+{
+    self.isCollected = [dictionary ccJsonInteger:kItemIsCollected];
+    self.desc = [dictionary ccJsonString:kItemDesc];
+    NSArray * extendPropDicts = [dictionary ccJsonArray:@"item_extend_property"];
+    if (extendPropDicts.count > 0) {
+        NSDictionary * dict = [extendPropDicts firstObject];
+        self.extendProperty = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+    }
+    
+    NSDictionary * skuInfoDict =  [dictionary ccJsonDictionary:@"sku_info"];
+    NSDictionary * colorDict = [skuInfoDict ccJsonDictionary:@"property1"];
+    NSArray * colorValueDict = [colorDict ccJsonArray:@"value_list"];
+    self.colorProperty = [NSMutableArray array];
+    for (NSDictionary * dict in colorValueDict) {
+        CCItemPropertyValue * value = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+        [self.colorProperty addObject:value];
+    }
+    NSDictionary * sizeDict = [skuInfoDict ccJsonDictionary:@"property2"];
+    NSArray * sizeValueDict = [sizeDict ccJsonArray:@"value_list"];
+    self.sizeProperty = [NSMutableArray array];
+    for (NSDictionary * dict in sizeValueDict) {
+        CCItemPropertyValue * value = [[CCItemPropertyValue alloc] initWithDictionary:dict];
+        [self.sizeProperty addObject:value];
+    }
+    
+//    data =     {
+//        "is_collected" = 0;
+//        "item_extend_property" =         (
+//                                          {
+//                                              "property_name" = "\U9762\U6599";
+//                                              "property_value" = "\U725b\U76ae";
+//                                          },
+//                                          {
+//                                              "property_name" = "\U9762\U6599";
+//                                              "property_value" = "\U6da4\U7eb6";
+//                                          }
+//                                          );
+//        "item_info" =         {
+//            "class_id" = 10;
+//            "factory_id" = 13098;
+//            "item_type_id" = 68;
+//            "sort_id" = 15;
+//        };
+//    };
 }
 
 - (NSDictionary *)genarateDictionary
@@ -159,12 +205,7 @@
     }
     [dict setObject:sizes forKey:kItemSizeProperty];
     
-    NSString * extends = @"";
-    for (CCItemPropertyValue * prop in self.extendProperty) {
-        if (extends.length > 0) extends = [extends stringByAppendingString:@","];
-        extends = [extends stringByAppendingString:prop.valueId];
-    }
-    [dict setObject:extends forKey:kItemExtendProperty];
+    if (self.extendProperty.valueId) [dict setObject:self.extendProperty.valueId forKey:kItemExtendProperty];
     
     if (self.desc) [dict setObject:self.desc forKey:kItemDesc];
     [dict setObject:@(self.hasSku) forKey:kItemHasSku];
@@ -406,6 +447,98 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest saleMarketId:(NSString *)marketId classId:(NSString *)classId sortId:(NSString *)sortId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    NSMutableDictionary * params = [NSMutableDictionary dictionary];
+    [params setObject:@(hottest) forKey:kItemHottest];
+    if (marketId) [params setObject:marketId forKey:kUserSaleMarketId];
+    if (classId) [params setObject:classId forKey:kItemClassId];
+    if (sortId) [params setObject:sortId forKey:kItemSortId];
+    [params setObject:@(limit) forKey:kItemLimit];
+    [params setObject:@(skip) forKey:kItemSkip];
+    
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetItemList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            NSArray * listDicts = [data ccJsonArray:@"list"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCItem * item = [[CCItem alloc] initWithDictionary:dict];
+                [arr addObject:item];
+            }
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
+
++ (NSURLSessionDataTask *)getItemDetailInfo:(CCItem *)item withBlock:(void (^)(CCItem *, NSError *))block
+{
+    NSDictionary * params = @{kItemId : item.itemId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetItemDetailInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            [item getDetailFromDictionary:data];
+            block(item, nil);
+        } else {
+            block(item, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(item, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)collect:(BOOL)collect item:(CCItem *)item price:(float)price withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = @{@"isCollect" : @(collect),
+                              kItemId : item.itemId,
+                              @"item_price": @(price)};
+    
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemCollectItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(NSString *)colorId size:(NSString *)sizeId byMemberMobile:(NSString *)mobile withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = @{@"isCollect" : @(want),
+                              kItemId : item.itemId,
+                              kMemberMobile : mobile,
+                              @"property_value1" : colorId,
+                              @"property_value2" : sizeId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemCollectItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
     }];
 }
 

@@ -243,6 +243,7 @@
 		96BFE58A1CB784B900EB7FAF /* SizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE5891CB784B900EB7FAF /* SizeViewController.m */; };
 		96BFE58D1CB7851500EB7FAF /* MaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE58C1CB7851500EB7FAF /* MaterialViewController.m */; };
 		96BFE5901CB7A81600EB7FAF /* ItemPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE58F1CB7A81600EB7FAF /* ItemPropertyCell.m */; };
+		96C05D9A1CBFD48E006D3286 /* FSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -651,6 +652,8 @@
 		96BFE58C1CB7851500EB7FAF /* MaterialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialViewController.m; sourceTree = "<group>"; };
 		96BFE58E1CB7A81600EB7FAF /* ItemPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPropertyCell.h; sourceTree = "<group>"; };
 		96BFE58F1CB7A81600EB7FAF /* ItemPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPropertyCell.m; sourceTree = "<group>"; };
+		96C05D981CBFD48E006D3286 /* FSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDropDownMenu.h; sourceTree = "<group>"; };
+		96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDropDownMenu.m; sourceTree = "<group>"; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -824,6 +827,7 @@
 		2A2E3D6A1BDF99050021B3FC /* CommonModule */ = {
 			isa = PBXGroup;
 			children = (
+				96C05D971CBFD48E006D3286 /* FSDropDownMenu */,
 				969AE47F1C38143500136F13 /* KxMenu */,
 				969AE4661C368FDF00136F13 /* MJRefresh */,
 				968A68DB1C313CBF00661497 /* DCPicscrollView */,
@@ -1789,6 +1793,15 @@
 			path = KxMenu;
 			sourceTree = "<group>";
 		};
+		96C05D971CBFD48E006D3286 /* FSDropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				96C05D981CBFD48E006D3286 /* FSDropDownMenu.h */,
+				96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */,
+			);
+			path = FSDropDownMenu;
+			sourceTree = "<group>";
+		};
 		BA618B0CDACB3AC85B0582E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2181,6 +2194,7 @@
 				2A33B6371B665F7400535FE4 /* ShopLastTableViewController.m in Sources */,
 				2ABBB1161B7250C700DA2A9A /* GoodDetailViewController.m in Sources */,
 				2A2E3E421BDF994E0021B3FC /* SDWebImageDecoder.m in Sources */,
+				96C05D9A1CBFD48E006D3286 /* FSDropDownMenu.m in Sources */,
 				2A2E3E441BDF994E0021B3FC /* SDWebImageDownloaderOperation.m in Sources */,
 				9662FC261C26EE21000FE951 /* VPImageCropperViewController.m in Sources */,
 				968A68E11C313CC000661497 /* DCWebImageManager.m in Sources */,

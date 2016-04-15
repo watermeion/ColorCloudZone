@@ -10,11 +10,19 @@
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
 #import "MLShopContainViewController.h"
+#import "KxMenu.h"
+#import "SVProgressHud.h"
+#import "CCItem.h"
+#import "CCUser.h"
+#import "FSDropDownMenu.h"
 static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue";
 
 
-@interface MarketViewController ()
-
+@interface MarketViewController ()<FSDropDownMenuDataSource,FSDropDownMenuDelegate>
+@property (nonatomic, strong) NSArray * saleMarketList;
+@property(nonatomic,strong) NSArray *sortList;
+@property (nonatomic, strong) CCItemClass * selectedClass;
+@property(nonatomic,strong) NSArray *classList;
 @end
 
 @implementation MarketViewController
@@ -24,12 +32,96 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
     // Do any additional setup after loading the view.
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setBannerView];
+    UIButton *market = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    market.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    [market setTitle:@"市场" forState:UIControlStateNormal];
+    [market setImage:[UIImage imageNamed:@"arrowUpsideDown"] forState:UIControlStateNormal];
+    market.imageEdgeInsets = UIEdgeInsetsMake(11, 52, 11, 0);
+    [market setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [market setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [market addTarget:self action:@selector(marketPressed:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *classBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    classBtn.titleLabel.font = [UIFont systemFontOfSize:14.f];
+    [classBtn setTitle:@"分类" forState:UIControlStateNormal];
+    [classBtn setImage:[UIImage imageNamed:@"arrowUpsideDown"] forState:UIControlStateNormal];
+    classBtn.imageEdgeInsets = UIEdgeInsetsMake(11, 52, 11, 0);
+    [classBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [market setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [classBtn addTarget:self action:@selector(classPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:market], [[UIBarButtonItem alloc] initWithCustomView:classBtn]];
+    
+    
+    FSDropDownMenu *menu = [[FSDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:300];
+    menu.transformView = classBtn.imageView;
+    menu.tag = 1001;
+    menu.dataSource = self;
+    menu.delegate = self;
+    [self.view addSubview:menu];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)marketPressed:(id)sender
+{
+    [SVProgressHUD showWithStatus:@"正在获取列表"];
+    [CCUser getSaleMarketListWithBlock:^(NSArray *saleMarketList, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"获取失败"];
+        } else {
+            self.saleMarketList = saleMarketList;
+            NSMutableArray * menuItems = [NSMutableArray array];
+            for (CCSaleMarket * market in saleMarketList) {
+                KxMenuItem * item = [KxMenuItem menuItem:market.saleMarketName image:nil target:self action:@selector(saleMarketClicked:)];
+                item.tag = [saleMarketList indexOfObject:market];
+                [menuItems addObject:item];
+            }
+            [KxMenu showMenuInView:self.navigationController.view
+                          fromRect:CGRectMake(25, 0, 44, 54)
+                         menuItems:[NSArray arrayWithArray:menuItems]];
+        }
+    }];
+}
+
+- (IBAction)saleMarketClicked:(id)sender
+{
+    KxMenuItem * item = (KxMenuItem *)sender;
+    NSInteger tag = item.tag;
+    if (tag < self.saleMarketList.count) {
+        CCSaleMarket * market = [self.saleMarketList objectAtIndex:tag];
+        NSLog(@"marketName = %@", market.saleMarketName);
+        if (self.delegate && [self.delegate respondsToSelector:@selector(marketViewController:didSelectSaleMarket:)]) {
+            [self.delegate marketViewController:self didSelectSaleMarket:market];
+        }
+    }
+}
+
+- (IBAction)classPressed:(id)sender
+{
+    FSDropDownMenu *menu = (FSDropDownMenu*)[self.view viewWithTag:1001];
+    if (menu.isShowing) {
+        [UIView animateWithDuration:0.2 animations:^{
+            
+        } completion:^(BOOL finished) {
+            [menu menuTapped];
+        }];
+    } else {
+        [SVProgressHUD showWithStatus:@"正在获取列表"];
+        [CCItem getClassListWithBlock:^(NSArray *classList, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"获取失败"];
+            } else {
+                self.classList = classList;
+                [menu menuTapped];
+            }
+        }];
+    }
 }
 
 
@@ -94,6 +186,52 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 }
 
 
+
+#pragma mark - FSDropDown datasource & delegate
+
+- (NSInteger)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView == menu.rightTableView) {
+        return _classList.count;
+    }else{
+        return _sortList.count;
+    }
+}
+- (NSString *)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView titleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == menu.rightTableView) {
+        CCItemClass * class = _classList[indexPath.row];
+        return class.className;
+    }else{
+        CCItemSort * sort = _sortList[indexPath.row];
+        return sort.sortName;
+    }
+}
+
+
+- (void)menu:(FSDropDownMenu *)menu tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(tableView == menu.rightTableView){
+        [SVProgressHUD showWithStatus:@"正在获取列表"];
+        self.selectedClass = _classList[indexPath.row];
+        [CCItem getSortListByClassId:self.selectedClass.classId withBlock:^(NSArray *sortList, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"获取失败"];
+            } else {
+                self.sortList = sortList;
+                [menu.leftTableView reloadData];
+            }
+        }];
+    }else{
+//        [self resetItemSizeBy:_currentAreaArr[indexPath.row]];
+        CCItemSort * sort = _sortList[indexPath.row];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(marketViewController:didSelectClass:sort:)]) {
+            [self.delegate marketViewController:self didSelectClass:self.selectedClass sort:sort];
+        }
+    }
+    
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -101,6 +239,7 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
     if ([segue.identifier isEqualToString:kMLMarketContainerPushSegue]) {
         MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
         vc.parentVC = self;
+        self.delegate = vc;
         self.selectionBar.delegate = vc;
     }
 

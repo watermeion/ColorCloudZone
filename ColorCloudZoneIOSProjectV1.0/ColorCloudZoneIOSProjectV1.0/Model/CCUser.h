@@ -34,6 +34,11 @@
 #define kUserAddrInMarket       @"address_in_market"
 #define kUserRemark             @"remark"
 
+#define kMemberMobile           kUserMobile
+#define kMemberAddress          @"address_detail"
+#define kMemberUsername         @"username"
+#define kMemberHeadImgUrl       kUserHeadImgUrl
+
 typedef NS_ENUM(NSUInteger, UserRole) {
     UserRoleUndefined   = 0,
     UserRoleMall        = 3,
@@ -51,6 +56,13 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @property (nonatomic, strong) NSString * saleMarketId;
 @property (nonatomic, strong) NSString * saleMarketName;
 @property (nonatomic, strong) NSString * saleMarketAddress;
+@end
+
+@interface CCMember : NSObject
+@property (nonatomic, strong) NSString * headImgUrl;
+@property (nonatomic, strong) NSString * mobile;
+@property (nonatomic, strong) NSString * address;
+@property (nonatomic, strong) NSString * username;
 @end
 
 @interface CCUser : NSObject
@@ -91,4 +103,9 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (NSURLSessionDataTask *)getProvinceListWithBlock:(void(^)(NSArray * provinceList, NSError * error))block;
 + (NSURLSessionDataTask *)getCityListByProvinceId:(NSString *)provinceId withBlock:(void(^)(NSArray * cityList, NSError * error))block;
 + (NSURLSessionDataTask *)getAreaListByCityId:(NSString *)cityId withBlock:(void(^)(NSArray * areaList, NSError * error))block;
+
+
++ (NSURLSessionDataTask *)addMember:(CCMember *)member withBlock:(void(^)(CCMember * member, NSError * error))block;
++ (NSURLSessionDataTask *)getMemberListByMallId:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * memberList, NSError * error))block;
+
 @end

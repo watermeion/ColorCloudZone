@@ -12,13 +12,13 @@
 #import "UIImageView+WebCache.h"
 #import "AddMemberShipViewController.h"
 #import "MLShopViewController.h"
-#import "MarketViewController.h"
 #import "ShopListTableViewCell.h"
 #import "MJRefresh.h"
 #import "GoodDetailViewController.h"
 #import "SupplierViewController.h"
 #import "CCItem.h"
 #import "CCUser.h"
+#import "CCFile.h"
 
 #define QueryLimit 20
 
@@ -26,6 +26,11 @@
 
 @property (nonatomic, strong) NSMutableArray * hottestDataArray;
 @property (nonatomic, strong) NSMutableArray * newestDataArray;
+
+@property (nonatomic, strong) CCSaleMarket * selectedSaleMarket;
+@property (nonatomic, strong) CCItemClass * selectedClass;
+@property (nonatomic, strong) CCItemSort * selectedSort;
+
 
 @end
 
@@ -51,6 +56,21 @@
     [self.tableView headerBeginRefreshing];
 }
 
+- (void)marketViewController:(MarketViewController *)viewController didSelectSaleMarket:(CCSaleMarket *)saleMarket
+{
+    self.selectedSaleMarket = saleMarket;
+    [self.collectionView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
+}
+
+- (void)marketViewController:(MarketViewController *)viewController didSelectClass:(CCItemClass *)itemClass sort:(CCItemSort *)sort
+{
+    self.selectedClass = itemClass;
+    self.selectedSort = sort;
+    [self.collectionView headerBeginRefreshing];
+    [self.tableView headerBeginRefreshing];
+}
+
 - (void)collectionViewPullDown
 {
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
@@ -70,7 +90,13 @@
             }
         }];
     } else {
-        
+        [CCItem getItemListByHottest:YES saleMarketId:self.selectedSaleMarket.saleMarketId classId:self.selectedClass.classId sortId:self.selectedSort.sortId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+            [self.collectionView headerEndRefreshing];
+            if (!error) {
+                _hottestDataArray = [[NSMutableArray alloc] initWithArray:itemList];
+                [self.collectionView reloadData];
+            }
+        }];
     }
 }
 
@@ -82,7 +108,7 @@
     }
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
         [CCItem getItemListByHottest:YES forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
-            [self.collectionView headerEndRefreshing];
+            [self.collectionView footerEndRefreshing];
             if (!error) {
                 if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
                 [_hottestDataArray addObjectsFromArray:itemList];
@@ -91,7 +117,7 @@
         }];
     } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
         [CCItem getItemListByHottest:YES forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
-            [self.collectionView headerEndRefreshing];
+            [self.collectionView footerEndRefreshing];
             if (!error) {
                 if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
                 [_hottestDataArray addObjectsFromArray:itemList];
@@ -99,7 +125,14 @@
             }
         }];
     } else {
-        
+        [CCItem getItemListByHottest:YES saleMarketId:self.selectedSaleMarket.saleMarketId classId:self.selectedClass.classId sortId:self.selectedSort.sortId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
+            [self.collectionView footerEndRefreshing];
+            if (!error) {
+                if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
+                [_hottestDataArray addObjectsFromArray:itemList];
+                [self.collectionView reloadData];
+            }
+        }];
     }
 }
 
@@ -122,12 +155,22 @@
             }
         }];
     } else {
-        
+        [CCItem getItemListByHottest:NO saleMarketId:self.selectedSaleMarket.saleMarketId classId:self.selectedClass.classId sortId:self.selectedSort.sortId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+            [self.tableView headerEndRefreshing];
+            if (!error) {
+                _newestDataArray = [NSMutableArray arrayWithArray:itemList];
+                [self.tableView reloadData];
+            }
+        }];
     }
 }
 
 - (void)tableViewPullUp
 {
+    if (_newestDataArray.count < QueryLimit) {
+        [self.collectionView footerEndRefreshing];
+        return;
+    }
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
         [CCItem getItemListByHottest:NO forMall:[CCUser currentUser].userId withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *itemList, NSError *error) {
             [self.tableView footerEndRefreshing];
@@ -147,7 +190,14 @@
             }
         }];
     } else {
-        
+        [CCItem getItemListByHottest:NO saleMarketId:self.selectedSaleMarket.saleMarketId classId:self.selectedClass.classId sortId:self.selectedSort.sortId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
+            [self.tableView footerEndRefreshing];
+            if (!error) {
+                if (!_newestDataArray) _newestDataArray = [NSMutableArray array];
+                [_newestDataArray addObjectsFromArray:itemList];
+                [self.tableView reloadData];
+            }
+        }];
     }
 }
 
@@ -224,7 +274,7 @@
     cell.likeNumLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)item.likeNum];
     cell.titleLabel.text = item.name;
     cell.priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:item.price].stringValue];
-    [cell.itemImageView sd_setImageWithURL:[NSURL URLWithString:item.cover]];
+    [cell.itemImageView sd_setImageWithURL:[CCFile ccURLWithString:item.cover]];
     return cell;
 //    return nil;
 }
@@ -240,7 +290,7 @@
 {
     CCItem * item = [self.hottestDataArray objectAtIndex:indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
-//    vc.product = product;
+    vc.parentItem = item;
     vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -263,7 +313,7 @@
     cell.rightPriceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:item.price].stringValue];
     cell.rightTitleLabel.text = item.name;
     cell.rightLikeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)item.likeNum];
-    [cell.rightImageView sd_setImageWithURL:[NSURL URLWithString:item.cover]];
+    [cell.rightImageView sd_setImageWithURL:[CCFile ccURLWithString:item.cover]];
 
     NSDateComponents * curDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:item.date];
     NSInteger curYear = [curDate year];
@@ -288,7 +338,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CCItem * item = _newestDataArray[indexPath.row];
     GoodDetailViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"GoodDetailViewController"];
-//    vc.product = product;
+    vc.parentItem = item;
     vc.parentVC = self.parentVC;
     [self.navigationController pushViewController:vc animated:YES];
 }

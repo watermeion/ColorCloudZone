@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "LoginAndRegistNaviController.h"
 #import "CCUser.h"
+#import "CCFile.h"
 @interface ComSettingsTableViewController () <UIActionSheetDelegate>
 
 @end
@@ -28,7 +29,7 @@
     // self.navigationItem.rightBarButtonItem = self.ediButtonItem;
     _idLabel.text = [NSString stringWithFormat:@"ID: %@",[CCUser currentUser].userId];
     _nameLabel.text = [CCUser currentUser].ownerName;
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:[CCUser currentUser].headImgUrl]];
+    [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
     _factoryNameLabel.text = [CCUser currentUser].factoryName;
     _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
     _remarkLabel.text = [CCUser currentUser].remark.length?[CCUser currentUser].remark:@"无";

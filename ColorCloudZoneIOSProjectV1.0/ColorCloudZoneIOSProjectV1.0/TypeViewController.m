@@ -76,7 +76,7 @@
         self.parentItem.itemType = type;
         [self.parentItem.colorProperty removeAllObjects];
         [self.parentItem.sizeProperty removeAllObjects];
-        [self.parentItem.extendProperty removeAllObjects];
+        self.parentItem.extendProperty = nil;
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

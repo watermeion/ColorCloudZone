@@ -37,6 +37,8 @@
 #define kItemSkip               @"firstRow"
 #define kItemNewCount           @"count"
 #define kItemDate               @"date"
+#define kItemHottest            @"condition"
+#define kItemIsCollected        @"is_collected"
 
 @interface CCItemType : NSObject
 @property (nonatomic, strong) NSString * typeId;
@@ -77,12 +79,13 @@
 @property (nonatomic, strong) NSMutableArray * descPics;
 @property (nonatomic, strong) NSMutableArray * colorProperty;
 @property (nonatomic, strong) NSMutableArray * sizeProperty;
-@property (nonatomic, strong) NSMutableArray * extendProperty;
+@property (nonatomic, strong) CCItemPropertyValue * extendProperty;
 @property (nonatomic, strong) NSString * desc;
 @property (nonatomic, assign) BOOL hasSku;
 @property (nonatomic, assign) NSInteger likeNum;
 @property (nonatomic, assign) NSInteger collectNum;
 @property (nonatomic, assign) NSInteger newCount;
+@property (nonatomic, assign) BOOL isCollected;
 @property (nonatomic, assign) NSDate * date;
 
 + (NSURLSessionDataTask *)getClassListWithBlock:(void(^)(NSArray * classList, NSError * error))block;
@@ -96,5 +99,16 @@
 + (NSURLSessionDataTask *)uploadItem:(CCItem *)item withBlock:(void(^)(CCItem * item, NSError * error))block;
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forFactory:(NSString *)factoryId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forMall:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
++ (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest
+                                  saleMarketId:(NSString*)marketId
+                                       classId:(NSString *)classId
+                                        sortId:(NSString *)sortId
+                                     withLimit:(NSInteger)limit
+                                          skip:(NSInteger)skip
+                                         block:(void(^)(NSArray * itemList, NSError * error))block;
 
++ (NSURLSessionDataTask *)getItemDetailInfo:(CCItem *)item withBlock:(void(^)(CCItem * item, NSError * error))block;
+
++ (NSURLSessionDataTask *)collect:(BOOL)collect item:(CCItem *)item price:(float)price withBlock:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(NSString *)colorId size:(NSString *)sizeId byMemberMobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 @end

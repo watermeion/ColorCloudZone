@@ -12,7 +12,6 @@
 #import "NSDictionary+CCJson.h"
 #import "NSError+CCError.h"
 static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/appid/1/submit/submit";
-static NSString * imageDomain = @"http://wearcloud.beyondin.com";
 
 @implementation CCFile
 + (NSURLSessionUploadTask *) uploadImage:(UIImage *)image withProgress:(void(^)(double progress))progress completionBlock:(void(^)(NSString * url, NSError * error))block
@@ -40,7 +39,7 @@ static NSString * imageDomain = @"http://wearcloud.beyondin.com";
                           block(nil, error);
                       } else {
                           if ([responseObject ccCode] == 0) {
-                              NSString * url = [imageDomain stringByAppendingString:[responseObject ccJsonString:@"file_path"]];
+                              NSString * url = [responseObject ccJsonString:@"file_path"];
                               block(url, nil);
                           } else {
                               block(nil, [NSError errorWithCode:[responseObject ccCode]]);
@@ -50,6 +49,13 @@ static NSString * imageDomain = @"http://wearcloud.beyondin.com";
     [uploadTask resume];
     return uploadTask;
     
+}
+
++ (NSURL *)ccURLWithString:(NSString *)string
+{
+    NSString * wholeString = string;
+    if (![string hasPrefix:@"http://"]) wholeString = [ImageDomain stringByAppendingString:string];
+    return [NSURL URLWithString:wholeString];
 }
 
 + (UIImage *)generateThumbnailOf:(UIImage *)original withSize:(CGFloat)size{

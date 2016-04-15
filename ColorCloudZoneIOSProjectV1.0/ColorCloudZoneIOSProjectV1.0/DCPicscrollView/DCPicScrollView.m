@@ -103,6 +103,9 @@
     left.contentMode = UIViewContentModeScaleAspectFill;
     center.contentMode = UIViewContentModeScaleAspectFill;
     right.contentMode = UIViewContentModeScaleAspectFill;
+    left.clipsToBounds = YES;
+    right.clipsToBounds = YES;
+    center.clipsToBounds = YES;
     
     center.userInteractionEnabled = YES;
     [center addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewDidTap)]];

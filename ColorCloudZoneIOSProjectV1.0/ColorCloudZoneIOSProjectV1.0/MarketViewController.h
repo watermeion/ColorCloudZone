@@ -12,10 +12,18 @@
 #import "GBMarketVCViewModel.h"
 #import "CustomSelectionBarView.h"
 #import "GBViewControllerViewModelProtocol.h"
+#import "CCUser.h"
+#import "CCItem.h"
+@class MarketViewController;
+@protocol MarketViewControllerDelegate <NSObject>
+- (void)marketViewController:(MarketViewController *)viewController didSelectSaleMarket:(CCSaleMarket *)saleMarket;
+- (void)marketViewController:(MarketViewController *)viewController didSelectClass:(CCItemClass *)itemClass sort:(CCItemSort *)sort;
+@end
 
-@interface MarketViewController : GBCustomViewController <GBViewControllerViewModelProtocol>
+@interface MarketViewController : GBCustomViewController
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolBar;
 @property (nonatomic, strong) GBMarketVCViewModel *viewModel;
 @property (strong, nonatomic) IBOutlet CustomSelectionBarView *selectionBar;
+@property (weak, nonatomic) id<MarketViewControllerDelegate> delegate;
 
 @end

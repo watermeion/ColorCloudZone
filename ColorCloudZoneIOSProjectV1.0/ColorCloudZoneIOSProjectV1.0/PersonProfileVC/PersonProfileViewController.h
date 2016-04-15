@@ -12,6 +12,7 @@
 #import "CCUser.h"
 @interface PersonProfileViewController : GBCustomViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, VPImageCropperDelegate, UIActionSheetDelegate>
 
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *shopNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *cityTextField;
