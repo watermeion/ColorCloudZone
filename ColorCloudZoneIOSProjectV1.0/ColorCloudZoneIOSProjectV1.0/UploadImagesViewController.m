@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"qued" style:UIBarButtonItemStylePlain target:self action:@selector(doneSelected)];
-    self.navigationController.navigationItem.leftBarButtonItem = done;
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(doneSelected)];
+    self.navigationItem.rightBarButtonItem = done;
     self.title = self.displayTitle;
     if(self.displayImages != nil){
         self.selectedImages = [NSMutableArray arrayWithArray:self.displayImages];
@@ -30,7 +30,6 @@
 
 -(void)doneSelected{
     NSLog(@"准备上传");
-
 }
 
 
