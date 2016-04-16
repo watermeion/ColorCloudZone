@@ -44,8 +44,8 @@
 @property (nonatomic) GBTableViewSelectorBehavior *selector;
 
 //Property
-@property (nonatomic) NSInteger pictureNum;
-@property (nonatomic) NSArray *imageFiles;
+@property (nonatomic,readonly) NSInteger pictureNum;
+
 
 
 @end

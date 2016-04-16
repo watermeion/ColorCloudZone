@@ -42,6 +42,8 @@ static const NSInteger kQueryLimit = 30;
 //View Part 3
 @property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
 @property (strong, nonatomic) NSArray * menuItems;
+
+
 @end
 
 @implementation GoodDetailViewController
@@ -51,6 +53,7 @@ static const NSInteger kQueryLimit = 30;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
         self.wantView.hidden = NO;

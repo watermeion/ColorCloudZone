@@ -21,6 +21,8 @@
 		014052EB1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 014052EA1BE46A5800E5C1F2 /* GBTableViewSelectorBehavior.m */; };
 		014052EF1BE46DA800E5C1F2 /* GBTableViewSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */; };
 		014052F01BE46DA800E5C1F2 /* GBTableViewSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */; };
+		015239FA1CBD249100984B8F /* UploadImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015239F91CBD249100984B8F /* UploadImagesViewController.m */; };
+		0162492A1CC1D9F10048FACD /* UpLoadCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016249291CC1D9F10048FACD /* UpLoadCollectionViewCell.m */; };
 		016871BE1BB795C80060ADAD /* DetailImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */; };
 		017E5F6B1BD1272700C55992 /* uialq.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 017E5F6A1BD1272700C55992 /* uialq.jpg */; };
 		017E5F6F1BD1280B00C55992 /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017E5F6E1BD1280B00C55992 /* MarketViewController.m */; };
@@ -277,6 +279,10 @@
 		014052ED1BE46DA800E5C1F2 /* GBTableViewSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBTableViewSelectorController.m; sourceTree = "<group>"; };
 		014052EE1BE46DA800E5C1F2 /* GBTableViewSelectorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GBTableViewSelectorController.xib; sourceTree = "<group>"; };
 		014574391BAEB85A00EC8CD1 /* ColorCloudZoneIOSProjectV1.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		015239F81CBD249100984B8F /* UploadImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImagesViewController.h; sourceTree = "<group>"; };
+		015239F91CBD249100984B8F /* UploadImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImagesViewController.m; sourceTree = "<group>"; };
+		016249281CC1D9F10048FACD /* UpLoadCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLoadCollectionViewCell.h; sourceTree = "<group>"; };
+		016249291CC1D9F10048FACD /* UpLoadCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLoadCollectionViewCell.m; sourceTree = "<group>"; };
 		016871BC1BB795C80060ADAD /* DetailImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImageCollectionViewController.h; sourceTree = "<group>"; };
 		016871BD1BB795C80060ADAD /* DetailImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImageCollectionViewController.m; sourceTree = "<group>"; };
 		017E5F6A1BD1272700C55992 /* uialq.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uialq.jpg; sourceTree = "<group>"; };
@@ -741,12 +747,16 @@
 		016871BF1BB79A6E0060ADAD /* UpLoadVC */ = {
 			isa = PBXGroup;
 			children = (
+				015239F81CBD249100984B8F /* UploadImagesViewController.h */,
+				015239F91CBD249100984B8F /* UploadImagesViewController.m */,
 				0135668B1CAAA767003D1996 /* UpLoadViewController.h */,
 				0135668C1CAAA767003D1996 /* UpLoadViewController.m */,
 				0135668E1CAAB2E6003D1996 /* UpLoadPicBtnCollectionViewCell.h */,
 				0135668F1CAAB2E6003D1996 /* UpLoadPicBtnCollectionViewCell.m */,
 				01E55A0A1CB5367B0093E114 /* UpLoadPictureCollectionViewCell.h */,
 				01E55A0B1CB5367B0093E114 /* UpLoadPictureCollectionViewCell.m */,
+				016249281CC1D9F10048FACD /* UpLoadCollectionViewCell.h */,
+				016249291CC1D9F10048FACD /* UpLoadCollectionViewCell.m */,
 				96BFE57C1CB7840700EB7FAF /* ClassViewController.h */,
 				96BFE57D1CB7840700EB7FAF /* ClassViewController.m */,
 				96BFE57F1CB7841700EB7FAF /* SortViewController.h */,
@@ -2156,6 +2166,7 @@
 				96A593EA1CAD514300082116 /* CityViewController.m in Sources */,
 				2A2E3E5E1BDF994E0021B3FC /* PhotoItemView.m in Sources */,
 				2A6BC4B21B58DC3D00401B06 /* MLTabBarViewController.m in Sources */,
+				0162492A1CC1D9F10048FACD /* UpLoadCollectionViewCell.m in Sources */,
 				01A441911BD68290003CF3FD /* GBCustomViewController.m in Sources */,
 				968A68E01C313CBF00661497 /* DCPicScrollView.m in Sources */,
 				0135668D1CAAA767003D1996 /* UpLoadViewController.m in Sources */,
@@ -2175,6 +2186,7 @@
 				010500D31C018BB000520EFC /* GBBaseStoryboardViewController.m in Sources */,
 				2A2E3E5B1BDF994E0021B3FC /* PBSaveBtn.m in Sources */,
 				2A2E3E271BDF994E0021B3FC /* PBConst.m in Sources */,
+				015239FA1CBD249100984B8F /* UploadImagesViewController.m in Sources */,
 				2A2E3E2E1BDF994E0021B3FC /* NSObject+Extend.m in Sources */,
 				2A2E3E4B1BDF994E0021B3FC /* UIImageView+HighlightedWebCache.m in Sources */,
 				969AE47D1C368FDF00136F13 /* UIScrollView+MJRefresh.m in Sources */,

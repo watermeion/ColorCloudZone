@@ -11,5 +11,8 @@
 @interface UpLoadPictureCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)deleteAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 @end
