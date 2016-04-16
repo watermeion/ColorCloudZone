@@ -8,20 +8,23 @@
 
 #import "UpLoadViewController.h"
 #import "ColorCloudZoneIOSProjectV1.0-Bridging-Header.h"
-#import "UpLoadPicBtnCollectionViewCell.h"
-#import "UpLoadPictureCollectionViewCell.h"
 #import "CCItem.h"
+#import "CCFile.h"
 #import "SizeViewController.h"
 #import "ColorViewController.h"
 #import "TypeViewController.h"
 #import "ClassViewController.h"
 #import "MaterialViewController.h"
 #import "GBImagePickerBehavior.h"
+#import "UploadImagesViewController.h"
 static NSInteger kMaxInputWordNum = 50;
 static NSInteger kMaxPicturesNum = 5;
-static NSString *kUpLoadPicBtnCellIdentifier = @"UpLoadPictureBtnCollectionViewCell";
-static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
+
+static NSString *kUpLoadCoverIdentifier = @"kUpLoadCoverIdentifier";
+static NSString *kUpLoadAssistIdentifier = @"kUpLoadAssistIdentifier";
+static NSString *kUpLoadDscrpIdentifier = @"kUpLoadDscrpIdentifier";
+static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 @interface UpLoadViewController ()<GBImagePickerBehaviorDataTargetDelegate,GBTableViewSelectorBehaviorDelegate,GBTableViewSelectorResultDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *choosePictures;
@@ -30,6 +33,9 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 @property (nonatomic) NSInteger pictureNum;
 
 @property (nonatomic) NSUInteger indexWillDelete;
+@property (nonatomic) NSArray *identifiers;
+
+@property (nonatomic) NSDictionary *imageUploadData;
 
 
 @end
@@ -42,10 +48,10 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     self.selector.delegate = self;
     self.selector.owner = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-//    [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
-//    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
+    //    [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
+    //    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
+    self.identifiers = @[kUpLoadCoverIdentifier,kUpLoadAssistIdentifier,kUpLoadDscrpIdentifier];
     
-
     self.parentItem = [[CCItem alloc] init];
     self.pictureNum = 0;
     
@@ -79,49 +85,49 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 
 
 
-
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqual:kShowUpLoadImageVCSegue]) {
+        UploadImagesViewController *vc = segue.destinationViewController;
+        if ([sender isKindOfClass:[NSDictionary class]]) {
+            vc.displayTitle = [sender objectForKey:@"title"];
+            vc.maxImgs = [[sender objectForKey:@"Max"] integerValue];
+            NSArray *displayArray = [sender objectForKey:@"displayImage"];
+            if (displayArray.count>0) {
+                vc.displayImages = displayArray;
+            }
+        }
+    }
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0){
-        return ;
+    NSString *identifier = [self.identifiers objectAtIndex:indexPath.row];
+    NSDictionary *dict;
+    if ([identifier isEqualToString:kUpLoadCoverIdentifier]) {
+        dict = @{@"title":@"选择封面",@"Max":@1,@"displayImage":@[]};
+        
+    }else if([identifier isEqualToString:kUpLoadAssistIdentifier]){
+    
+        dict = @{@"title":@"选择背景图",@"Max":@3,@"displayImage":@[]};
+    }else if([identifier isEqualToString:kUpLoadDscrpIdentifier]){
+     dict = @{@"title":@"选择描述封面",@"Max":@5,@"displayImage":@[]};
     }
-    self.indexWillDelete = indexPath.row - 1;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除该照片" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.tag = 990101;
-    [alert show];
-    return;
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag != 990101) {
+    
+    if (dict == nil) {
         return;
     }
-    if (buttonIndex == 0) {
-        self.indexWillDelete = 0;
-    }else{
-        [self.choosePictures removeObjectAtIndex:self.indexWillDelete];
-        [self.itemPicCollectionView reloadData];
-    }
+    [self performSegueWithIdentifier:kShowUpLoadImageVCSegue sender:dict];
 }
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0) {
-        UpLoadPicBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier forIndexPath:indexPath];
-        return cell;
-    }
-    UpLoadPictureCollectionViewCell *picCell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicCellIdentifier forIndexPath:indexPath];
-    
-    picCell.imageView.image = [self.choosePictures objectAtIndex:(indexPath.row - 1)];
-    
-    return picCell;
-    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifiers objectAtIndex:indexPath.row] forIndexPath:indexPath];
+    return cell;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1 + self.choosePictures.count;
+    return self.identifiers.count;
 }
 
 
@@ -236,14 +242,29 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
     
 }
 - (IBAction)upLoadImagesAction:(id)sender {
-  //上传
-    
-
-    
-    
-    
-    
+    //上传
+    if (!self.choosePictures) {
+        return ;
+    }
+    for (NSUInteger i = 0 ; i<self.choosePictures.count; i++) {
+        [CCFile uploadImage:[self.choosePictures objectAtIndex:i] withProgress:^(double progress) {
+            
+        } completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                return ;
+            }
+            if (i == 0) {
+                self.parentItem.cover = url;
+            }
+            
+            self.parentItem.cover = @"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png";
+            self.parentItem.assistantPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
+            self.parentItem.descPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
+        }];
+    }
 }
+
+
 //类别
 - (IBAction)chooseCategoryAction:(id)sender {
     ClassViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ClassViewController"];
@@ -253,26 +274,5 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 }
 
 
-#pragma mark - GBImagePicker
-- (void)imagePickerBehaviorSelectedImages:(NSArray *) imageArray{
-    if (imageArray.count == 0) {
-        return;
-    }
-    if (self.pictureNum == 0) {
-        self.parentItem.cover = imageArray.firstObject;
-        self.pictureNum++;
-        return;
-    }
-    if ( self.choosePictures == nil){
-        self.choosePictures = [NSMutableArray array];
-    }
-    [self.choosePictures addObjectsFromArray:imageArray];
-    self.pictureNum++;
-    [self.itemPicCollectionView reloadData];
-}
-
-- (NSUInteger)limitNumSelectionforThisImagePicker{
-    return 1;
-}
 
 @end

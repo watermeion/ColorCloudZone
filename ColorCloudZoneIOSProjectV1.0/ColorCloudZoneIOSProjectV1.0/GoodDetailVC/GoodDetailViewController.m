@@ -40,6 +40,8 @@ static const CGFloat CellWidth = 220;
 //View Part 3
 @property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
 @property (strong, nonatomic) NSArray * menuItems;
+
+
 @end
 
 @implementation GoodDetailViewController
@@ -49,6 +51,7 @@ static const CGFloat CellWidth = 220;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
         self.wantView.hidden = NO;
