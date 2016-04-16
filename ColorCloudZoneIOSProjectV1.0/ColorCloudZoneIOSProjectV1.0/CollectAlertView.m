@@ -7,6 +7,7 @@
 //
 
 #import "CollectAlertView.h"
+#import "SVProgressHud.h"
 
 @implementation CollectAlertView
 
@@ -18,9 +19,19 @@
 }
 */
 - (IBAction)collectClicked:(id)sender {
+    if (!(self.outPrice.text.length > 0)) {
+        [SVProgressHUD showErrorWithStatus:@"请填写零售价"];
+        return;
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(collectAlertViewCollectButtonClicked:)]) {
         [self.delegate collectAlertViewCollectButtonClicked:self];
     }
+    [self dismissView];
+}
+
+- (void)dismissView
+{
+    
     UIView * superView = [self superview];
     [UIView animateWithDuration:0.05 animations:^{
         self.frame = CGRectMake((superView.frame.size.width - 300)/2.f, (superView.frame.size.height - 300)/2.f - 20, 300, 300);
@@ -33,12 +44,15 @@
             [self removeFromSuperview];
         }];
     }];
+
 }
 
 - (void)showInView:(UIView *)view
 {
     self.maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.maskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+    UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissView)];
+    [self.maskView addGestureRecognizer:recognizer];
     self.maskView.alpha = 0;
     [view.window addSubview:self.maskView];
     [view.window addSubview:self];

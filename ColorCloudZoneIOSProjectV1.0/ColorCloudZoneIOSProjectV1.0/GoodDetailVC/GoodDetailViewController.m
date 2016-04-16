@@ -33,6 +33,8 @@ static const NSInteger cellNum = 4;
 static const CGFloat cellHeight = 130;
 static const CGFloat CellWidth = 220;
 
+static const NSInteger kQueryLimit = 30;
+
 
 
 @interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate>
@@ -61,10 +63,30 @@ static const CGFloat CellWidth = 220;
                                       image:nil
                                      target:nil
                                      action:NULL]];
+        //厂家View不显示，想要CollectionView显示
+        [CCItem getItemLikeList:self.parentItem limit:kQueryLimit skip:0 withBlock:^(NSArray *memberList, NSError *error) {
+            if (error) {
+                
+            } else {
+                
+            }
+        }];
     } else if ([self.parentVC isKindOfClass:[MarketViewController class]]) {
         self.wantView.hidden = YES;
         self.contactAndCollectView.hidden = NO;
         [self.collectButton setTitle:self.parentItem.isCollected?@"已收藏":@"收藏" forState:UIControlStateNormal];
+        //厂家View显示，想要CollectionView不显示
+        [CCItem getItemFactory:self.parentItem withBlock:^(CCUser *factory, NSError *error) {
+            if (error) {
+                
+            } else {
+                self.factoryName.text = factory.factoryName;
+                self.factoryPhone.text = factory.mobile;
+                [self.factoryAvatar sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
+                self.factoryNewCount.text = [NSNumber numberWithInteger:factory.newNum].stringValue;
+                self.factoryProductCount.text = [NSNumber numberWithInteger:factory.totalNum].stringValue;
+            }
+        }];
     } else {
         self.wantView.hidden = YES;
         self.contactAndCollectView.hidden = YES;
@@ -80,6 +102,7 @@ static const CGFloat CellWidth = 220;
                                       image:nil
                                      target:nil
                                      action:NULL]];
+        //厂家View和想要CollectionView都不显示
     }
     if (_menuItems) {
         UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
@@ -99,7 +122,8 @@ static const CGFloat CellWidth = 220;
     _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
     _titleLabel.text = self.parentItem.name;
     _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
-    [SVProgressHUD showWithStatus:@"正在获取信息"];
+    _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
+    [SVProgressHUD showWithStatus:@"正在获取信息" maskType:SVProgressHUDMaskTypeBlack];
     [CCItem getItemDetailInfo:self.parentItem withBlock:^(CCItem *item, NSError *error) {
         [SVProgressHUD dismiss];
         if (error) {
@@ -256,8 +280,19 @@ static const CGFloat CellWidth = 220;
 //    }];
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CollectAlertView" owner:self options:nil];
     CollectAlertView *collectView = collectView = [nib objectAtIndex:0];
+    collectView.delegate = self;
+    collectView.titleLabel.text = self.parentItem.name;
+    collectView.SNLabel.text = [@"编号: " stringByAppendingString:self.parentItem.SN];
+    collectView.inPrice.text = [NSNumber numberWithFloat:self.parentItem.price].stringValue;
     [collectView showInView:self.view];
     
+}
+
+- (void)collectAlertViewCollectButtonClicked:(CollectAlertView *)view
+{
+    [CCItem collect:YES item:self.parentItem price:view.outPrice.text.floatValue withBlock:^(BOOL succeed, NSError *error) {
+        
+    }];
 }
 
 - (IBAction)uncollect:(id)sender

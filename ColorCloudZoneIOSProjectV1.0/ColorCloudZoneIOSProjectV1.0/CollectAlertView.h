@@ -16,9 +16,10 @@
 @end
 
 @interface CollectAlertView : UIView
+@property (strong, nonatomic) IBOutlet UILabel *inPrice;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *inPrice;
 @property (weak, nonatomic) IBOutlet UITextField *outPrice;
+@property (strong, nonatomic) IBOutlet UILabel *SNLabel;
 @property (weak, nonatomic) id<CollectAlertViewDelegate> delegate;
 @property (strong, nonatomic) UIView * maskView;
 - (void)showInView:(UIView *)view;

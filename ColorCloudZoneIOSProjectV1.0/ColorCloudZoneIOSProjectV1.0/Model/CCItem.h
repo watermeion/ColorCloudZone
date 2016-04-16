@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CCUser.h"
 
 #define kItemId                 @"item_id"
 #define kItemName               @"item_name"
@@ -106,6 +107,10 @@
                                      withLimit:(NSInteger)limit
                                           skip:(NSInteger)skip
                                          block:(void(^)(NSArray * itemList, NSError * error))block;
+
++ (NSURLSessionDataTask *)getItemFactory:(CCItem *)item withBlock:(void (^)(CCUser * factory, NSError * error))block;
++ (NSURLSessionDataTask *)getItemLikeList:(CCItem *)item limit:(NSInteger)limit skip:(NSInteger)skip withBlock:(void (^)(NSArray * memberList, NSError * error))block;
+
 
 + (NSURLSessionDataTask *)getItemDetailInfo:(CCItem *)item withBlock:(void(^)(CCItem * item, NSError * error))block;
 

@@ -41,7 +41,9 @@
 #define ItemGetItemFactoryInfo @"wearcloud.item.getItemFactoryInfo"
 #define ItemGetItemMemberInfo @"wearcloud.item.getItemMemberInfo"
 #define ItemCollectItem @"wearcloud.MallCollect.collectItem"
-#define ItemWantItem @""
+#define ItemWantItem @"wearcloud.MemberCollect.collectItem"
+#define ItemGetFactoryInfo @"wearcloud.item.getItemFactoryInfo"
+#define ItemGetLikeList @"wearcloud.item.getItemMemberInfo"
 
 #define MemberAdd @"wearcloud.member.addMember"
 #define MemberIsCollectItem @"wearcloud.MemberCollect.isCollectItem"

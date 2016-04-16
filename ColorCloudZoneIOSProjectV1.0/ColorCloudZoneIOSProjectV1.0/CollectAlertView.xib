@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CollectAlertView"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CollectAlertView">
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
@@ -99,9 +99,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="inPrice" destination="eNC-V4-QIl" id="xUY-Hp-rLl"/>
-                <outlet property="outPrice" destination="7mo-AO-5ro" id="Qfq-v5-mQZ"/>
-                <outlet property="titleLabel" destination="0Tk-hD-Buo" id="Qmp-4F-M9j"/>
+                <outlet property="SNLabel" destination="cTr-Ib-GYE" id="Ccd-hX-AeQ"/>
+                <outlet property="inPrice" destination="eNC-V4-QIl" id="bSX-py-2Bk"/>
+                <outlet property="outPrice" destination="7mo-AO-5ro" id="bYz-Ln-YnF"/>
+                <outlet property="titleLabel" destination="0Tk-hD-Buo" id="2ZN-kV-KWc"/>
             </connections>
             <point key="canvasLocation" x="284" y="251"/>
         </view>

@@ -89,6 +89,9 @@ static CCUser * currentUserSingleton;
         self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
         self.addrInMarket = [dictionary ccJsonString:kUserAddrInMarket];
         self.remark = [dictionary ccJsonString:kUserRemark];
+        self.isFollowed = [dictionary ccJsonInteger:kUserIsFollowed];
+        self.newNum = [dictionary ccJsonInteger:kUserNewNum];
+        self.totalNum = [dictionary ccJsonInteger:kUserTotalNum];
     }
     return self;
 }

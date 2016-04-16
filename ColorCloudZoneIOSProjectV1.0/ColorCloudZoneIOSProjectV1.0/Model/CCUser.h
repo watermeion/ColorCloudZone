@@ -33,6 +33,9 @@
 #define kUserSaleMarketAddress  @"address_detail"
 #define kUserAddrInMarket       @"address_in_market"
 #define kUserRemark             @"remark"
+#define kUserIsFollowed         @"isFollowed"
+#define kUserNewNum             @"new_num"
+#define kUserTotalNum           @"total_num"
 
 #define kMemberMobile           kUserMobile
 #define kMemberAddress          @"address_detail"
@@ -63,6 +66,7 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @property (nonatomic, strong) NSString * mobile;
 @property (nonatomic, strong) NSString * address;
 @property (nonatomic, strong) NSString * username;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
 
 @interface CCUser : NSObject
@@ -90,6 +94,11 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @property (nonatomic, strong) NSString * saleMarketAddress;
 @property (nonatomic, strong) NSString * addrInMarket;
 @property (nonatomic, strong) NSString * remark;
+@property (nonatomic, assign) BOOL isFollowed;
+@property (nonatomic, assign) NSInteger newNum;
+@property (nonatomic, assign) NSInteger totalNum;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (CCUser *)currentUser;
 + (void)logout;
 

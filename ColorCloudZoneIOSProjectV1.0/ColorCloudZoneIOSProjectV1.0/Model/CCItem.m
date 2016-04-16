@@ -121,8 +121,9 @@
 {
     self.isCollected = [dictionary ccJsonInteger:kItemIsCollected];
     self.desc = [dictionary ccJsonString:kItemDesc];
+    
     NSArray * extendPropDicts = [dictionary ccJsonArray:@"item_extend_property"];
-    if (extendPropDicts.count > 0) {
+    if ([extendPropDicts isKindOfClass:[NSArray class]] && extendPropDicts.count > 0) {
         NSDictionary * dict = [extendPropDicts firstObject];
         self.extendProperty = [[CCItemPropertyValue alloc] initWithDictionary:dict];
     }
@@ -144,17 +145,6 @@
     }
     
 //    data =     {
-//        "is_collected" = 0;
-//        "item_extend_property" =         (
-//                                          {
-//                                              "property_name" = "\U9762\U6599";
-//                                              "property_value" = "\U725b\U76ae";
-//                                          },
-//                                          {
-//                                              "property_name" = "\U9762\U6599";
-//                                              "property_value" = "\U6da4\U7eb6";
-//                                          }
-//                                          );
 //        "item_info" =         {
 //            "class_id" = 10;
 //            "factory_id" = 13098;
@@ -509,7 +499,8 @@
 {
     NSDictionary * params = @{@"isCollect" : @(collect),
                               kItemId : item.itemId,
-                              @"item_price": @(price)};
+                              @"item_price": @(price),
+                              kItemFactoryId : item.factoryId};
     
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemCollectItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
@@ -542,4 +533,50 @@
     }];
 }
 
++ (NSURLSessionDataTask *)getItemFactory:(CCItem *)item withBlock:(void (^)(CCUser *, NSError *))block
+{
+    
+    NSDictionary * params = @{kItemId : item.itemId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetFactoryInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            CCUser * factory = [[CCUser alloc] initWithDictionary:data];
+            block(factory, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+
+}
+
++ (NSURLSessionDataTask *)getItemLikeList:(CCItem *)item limit:(NSInteger)limit skip:(NSInteger)skip withBlock:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemId : item.itemId,
+                              kItemLimit : @(limit),
+                              kItemSkip : @(skip)};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemGetLikeList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCMember * member = [[CCMember alloc ] initWithDictionary:dict];
+                [arr addObject:member];
+            }
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+
+}
 @end
