@@ -9,9 +9,15 @@
 #import "UploadImagesViewController.h"
 #import "UpLoadPicBtnCollectionViewCell.h"
 #import "UpLoadPictureCollectionViewCell.h"
+#import "CCFile.h"
+#import "SVProgressHud.h"
+#import "UIImageView+WebCache.h"
 @interface UploadImagesViewController ()
-@property (nonatomic, strong) NSMutableArray *selectedImages;
+//@property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic) NSInteger indexWillDelete;
+@property (nonatomic, assign) NSInteger uploadingImageNum;
+@property (nonatomic, assign) NSInteger uploadSucceedImageNum;
+@property (nonatomic, assign) NSInteger uploadFailiedImageNum;
 @end
 
 @implementation UploadImagesViewController
@@ -19,18 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(doneSelected)];
-    self.navigationItem.rightBarButtonItem = done;
     self.title = self.displayTitle;
-    if(self.displayImages != nil){
-        self.selectedImages = [NSMutableArray arrayWithArray:self.displayImages];
-    }
 }
 
-
--(void)doneSelected{
-    NSLog(@"准备上传");
-}
 
 
 
@@ -42,7 +39,9 @@
     }
     UpLoadPictureCollectionViewCell *picCell = [collectionView dequeueReusableCellWithReuseIdentifier:kUpLoadPicCellIdentifier forIndexPath:indexPath];
     
-    picCell.imageView.image = [self.selectedImages objectAtIndex:(indexPath.row - 1)];
+//    picCell.imageView.image = [self.selectedImages objectAtIndex:(indexPath.row - 1)];
+    NSString * url = [self.currentImageArray objectAtIndex:indexPath.row - 1];
+    [picCell.imageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:url]];
     
     return picCell;
 
@@ -67,8 +66,9 @@
     if (buttonIndex == 0) {
         self.indexWillDelete = -1;
     }else{
-        if (self.indexWillDelete != -1  && self.indexWillDelete <=self.selectedImages.count) {
-            [self.selectedImages removeObjectAtIndex:self.indexWillDelete];
+        if (self.indexWillDelete != -1  && self.indexWillDelete <=self.currentImageArray.count) {
+            [self.urlPlaceholderImage removeObjectForKey:[self.currentImageArray objectAtIndex:self.indexWillDelete]];
+            [self.currentImageArray removeObjectAtIndex:self.indexWillDelete];
         }
         self.indexWillDelete = -1;
         [self.collectionView reloadData];
@@ -76,14 +76,10 @@
 }
 
 
-    
-- (NSArray *)results{
-    return [self.selectedImages copy];
-}
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 1 + self.selectedImages.count;
+    return 1 + self.currentImageArray.count;
 }
 
 
@@ -98,14 +94,35 @@
     if (imageArray.count == 0) {
         return;
     }
-    if ( self.selectedImages == nil){
-        self.selectedImages = [NSMutableArray array];
+    self.uploadingImageNum = imageArray.count;
+    self.uploadSucceedImageNum = 0;
+    self.uploadFailiedImageNum = 0;
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
+    for (UIImage * image in imageArray) {
+        [CCFile uploadImage:image withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                self.uploadFailiedImageNum ++;
+            } else {
+                self.uploadSucceedImageNum ++;
+                [self.currentImageArray addObject:url];
+                [self.urlPlaceholderImage setValue:image forKey:url];
+            }
+            [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
+            if (self.uploadSucceedImageNum + self.uploadFailiedImageNum == self.uploadingImageNum) {
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"上传成功%ld张，失败%ld张)", (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum]];
+                [self.collectionView reloadData];
+            }
+        }];
     }
-    [self.selectedImages addObjectsFromArray:imageArray];
-    [self.collectionView reloadData];
+}
+
+- (void)finishUpload
+{
+    
 }
 
 - (NSUInteger)limitNumSelectionforThisImagePicker{
-    return self.maxImgs - self.selectedImages.count;
+    return self.maxImgs - self.currentImageArray.count;
 }
 @end

@@ -19,6 +19,7 @@ static NSString *kUpLoadPicCellIdentifier = @"UpLoadPicCollectionViewCell";
 @property (nonatomic, readonly) NSArray *results;
 @property (nonatomic) NSString *displayTitle;
 @property (nonatomic) NSUInteger maxImgs;
-
+@property (nonatomic, strong) NSMutableDictionary * urlPlaceholderImage;
+@property (nonatomic, strong) NSMutableArray * currentImageArray;
 @property (nonatomic , strong) NSArray *displayImages;
 @end

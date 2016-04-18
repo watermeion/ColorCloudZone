@@ -17,6 +17,12 @@
 #import "MaterialViewController.h"
 #import "GBImagePickerBehavior.h"
 #import "UploadImagesViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import "VPImageCropperViewController.h"
+#import "UpLoadCollectionViewCell.h"
+#import "UIImageView+WebCache.h"
 static NSInteger kMaxInputWordNum = 50;
 static NSInteger kMaxPicturesNum = 5;
 
@@ -25,7 +31,7 @@ static NSString *kUpLoadCoverIdentifier = @"kUpLoadCoverIdentifier";
 static NSString *kUpLoadAssistIdentifier = @"kUpLoadAssistIdentifier";
 static NSString *kUpLoadDscrpIdentifier = @"kUpLoadDscrpIdentifier";
 static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
-@interface UpLoadViewController ()<GBImagePickerBehaviorDataTargetDelegate,GBTableViewSelectorBehaviorDelegate,GBTableViewSelectorResultDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
+@interface UpLoadViewController ()<UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate, UIActionSheetDelegate, VPImageCropperDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *choosePictures;
 
@@ -44,14 +50,11 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selector = [[GBTableViewSelectorBehavior alloc] init];
-    self.selector.delegate = self;
-    self.selector.owner = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    [self.itemPicCollectionView registerClass: [UpLoadPicBtnCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicBtnCellIdentifier];
     //    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
     self.identifiers = @[kUpLoadCoverIdentifier,kUpLoadAssistIdentifier,kUpLoadDscrpIdentifier];
-    
+    self.urlPlaceholderImage = [NSMutableDictionary dictionary];
     self.parentItem = [[CCItem alloc] init];
     self.pictureNum = 0;
     
@@ -76,10 +79,7 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     else self.sizeLabel.text = @"请点击选择尺码(可多选)";
     
     
-    NSString * extends = @"";
-    for (CCItemPropertyValue * prop in self.parentItem.extendProperty)
-        extends = [NSString stringWithFormat:@"%@%@ ", extends, prop.value];
-    if (extends.length) self.surfaceMater.text = extends;
+    if (self.parentItem.extendProperty.value.length) self.surfaceMater.text = self.parentItem.extendProperty.value;
     else self.surfaceMater.text = @"请点击选择面料(可多选)";
 }
 
@@ -95,6 +95,12 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
             if (displayArray.count>0) {
                 vc.displayImages = displayArray;
             }
+            if ([[sender objectForKey:@"title"] isEqualToString:@"选择背景图"]) {
+                vc.currentImageArray = self.parentItem.assistantPics;
+            } else {
+                vc.currentImageArray = self.parentItem.descPics;
+            }
+            vc.urlPlaceholderImage = self.urlPlaceholderImage;
         }
     }
 }
@@ -103,13 +109,18 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     NSString *identifier = [self.identifiers objectAtIndex:indexPath.row];
     NSDictionary *dict;
     if ([identifier isEqualToString:kUpLoadCoverIdentifier]) {
-        dict = @{@"title":@"选择封面",@"Max":@1,@"displayImage":@[]};
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"上传封面图片"
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"取消"
+                                                    destructiveButtonTitle:nil
+                                                         otherButtonTitles:@"从相册上传", @"拍照", nil];
+        [actionSheet showInView:self.view];
         
     }else if([identifier isEqualToString:kUpLoadAssistIdentifier]){
     
-        dict = @{@"title":@"选择背景图",@"Max":@3,@"displayImage":@[]};
+        dict = @{@"title":@"选择背景图",@"Max":@(kMaxPicturesNum),@"displayImage":@[]};
     }else if([identifier isEqualToString:kUpLoadDscrpIdentifier]){
-     dict = @{@"title":@"选择描述封面",@"Max":@5,@"displayImage":@[]};
+     dict = @{@"title":@"选择描述封面",@"Max":@(kMaxPicturesNum),@"displayImage":@[]};
     }
     
     if (dict == nil) {
@@ -121,7 +132,24 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifiers objectAtIndex:indexPath.row] forIndexPath:indexPath];
+    UpLoadCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[self.identifiers objectAtIndex:indexPath.row] forIndexPath:indexPath];
+    NSString *identifier = [self.identifiers objectAtIndex:indexPath.row];
+    if ([identifier isEqualToString:kUpLoadCoverIdentifier]) {
+        if (self.parentItem.cover)
+            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:self.parentItem.cover] placeholderImage:[self.urlPlaceholderImage objectForKey:self.parentItem.cover]];
+    }else if([identifier isEqualToString:kUpLoadAssistIdentifier]){
+        if (self.parentItem.assistantPics.count > 0) {
+            NSString * url = [self.parentItem.assistantPics firstObject];
+            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:self.parentItem.cover]];
+        }
+        
+    }else if([identifier isEqualToString:kUpLoadDscrpIdentifier]){
+        if (self.parentItem.descPics.count > 0) {
+            NSString * url = [self.parentItem.descPics firstObject];
+            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:self.parentItem.cover]];
+        }
+    }
+
     return cell;
 }
 
@@ -130,15 +158,38 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     return self.identifiers.count;
 }
 
+/* 定义每个UICollectionView 的大小 */
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(([UIScreen mainScreen].bounds.size.width - 60) / 3.0, 130);
+}
+/* 定义每个UICollectionView 的边缘 */
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(10, 10, 10, 10);//上 左 下 右
+}
 
+- (IBAction)cancelClicked:(id)sender {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"确认要取消上传吗？"
+                                                     message:@"取消后当前页的内容将不被保存。"
+                                                    delegate:self
+                                           cancelButtonTitle:@"继续上传"
+                                           otherButtonTitles:@"确认取消", nil];
+    alert.tag = 1000;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1000) {
+        if (buttonIndex == 1) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+}
 
 
 - (IBAction)doneBtnAction:(id)sender {
-    self.parentItem.cover = @"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png";
-    self.parentItem.assistantPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
-    self.parentItem.descPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
-    
-    
     if (!(_itemName.text.length > 0)) {
         [SVProgressHUD showErrorWithStatus:@"请填写商品名称"];
         return;
@@ -197,7 +248,7 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"上传失败"];
         } else {
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
@@ -241,29 +292,6 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-- (IBAction)upLoadImagesAction:(id)sender {
-    //上传
-    if (!self.choosePictures) {
-        return ;
-    }
-    for (NSUInteger i = 0 ; i<self.choosePictures.count; i++) {
-        [CCFile uploadImage:[self.choosePictures objectAtIndex:i] withProgress:^(double progress) {
-            
-        } completionBlock:^(NSString *url, NSError *error) {
-            if (error) {
-                return ;
-            }
-            if (i == 0) {
-                self.parentItem.cover = url;
-            }
-            
-            self.parentItem.cover = @"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png";
-            self.parentItem.assistantPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
-            self.parentItem.descPics = [NSMutableArray arrayWithArray:@[@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png",@"http://wearcloud.beyondin.com/Uploads/image/app/2016-04/20160406215719_22339.png"]];
-        }];
-    }
-}
-
 
 //类别
 - (IBAction)chooseCategoryAction:(id)sender {
@@ -273,6 +301,146 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:{
+            if ([self isPhotoLibraryAvailable]) {
+                UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+                controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+                [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+                controller.mediaTypes = mediaTypes;
+                controller.delegate = self;
+                [controller.navigationBar setTranslucent:NO];
+                //                controller.view.tintColor = [UIColor whiteColor];
+                [self presentViewController:controller animated:YES completion:nil];
+            }
+            break;
+        }
+        case 1: {
+            NSString *mediaType = AVMediaTypeVideo;
+            AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+            if ([self isCameraAvailable] && [self doesCameraSupportTakingPhotos]) {
+                UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+                controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+                NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+                [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+                controller.mediaTypes = mediaTypes;
+                controller.delegate = self;
+                [self presentViewController:controller
+                                   animated:YES
+                                 completion:^(void){
+                                     NSLog(@"Picker View Controller is presented");
+                                     if(status == ALAuthorizationStatusAuthorized){
+                                         [[UIApplication sharedApplication] setStatusBarHidden:YES];
+                                     }else{
+                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法使用相机"
+                                                                                         message:@"请在iPhone的“设置－隐私－相机”中允许访问相机"
+                                                                                        delegate:self
+                                                                               cancelButtonTitle:@"确定"
+                                                                               otherButtonTitles:nil, nil];
+                                         [alert show];
+                                     }
+                                 }];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    // 裁剪
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, (height - width / 0.75) / 2.0, width, width / 0.75) limitScaleRatio:3.0];
+    imgEditorVC.delegate = self;
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self presentViewController:imgEditorVC animated:YES completion:^{
+        }];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
+{
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+        [SVProgressHUD showWithStatus:@"正在上传图片" maskType:SVProgressHUDMaskTypeBlack];
+        [CCFile uploadImage:editedImage withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            } else {
+                [SVProgressHUD showSuccessWithStatus:@"上传成功"];
+                [self.urlPlaceholderImage removeObjectForKey:self.parentItem.cover];
+                self.parentItem.cover = url;
+                [self.urlPlaceholderImage setValue:editedImage forKey:url];
+                [self.itemPicCollectionView reloadData];
+            }
+        }];
+    }];
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController
+{
+    [cropperViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark camera utility
+- (BOOL) isCameraAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) isRearCameraAvailable{
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
+}
+
+- (BOOL) isFrontCameraAvailable {
+    return [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
+}
+
+
+- (BOOL) isPhotoLibraryAvailable {
+    return [UIImagePickerController isSourceTypeAvailable:
+            UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (BOOL) doesCameraSupportTakingPhotos {
+    return [self cameraSupportsMedia:(__bridge NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) canUserPickVideosFromPhotoLibrary{
+    return [self
+            cameraSupportsMedia:(__bridge NSString *)kUTTypeMovie sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+- (BOOL) canUserPickPhotosFromPhotoLibrary{
+    return [self
+            cameraSupportsMedia:(__bridge NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (BOOL) cameraSupportsMedia:(NSString *)paramMediaType sourceType:(UIImagePickerControllerSourceType)paramSourceType{
+    __block BOOL result = NO;
+    if ([paramMediaType length] == 0) {
+        return NO;
+    }
+    NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:paramSourceType];
+    [availableMediaTypes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *mediaType = (NSString *)obj;
+        if ([mediaType isEqualToString:paramMediaType]){
+            result = YES;
+            *stop= YES;
+        }
+    }];
+    return result;
+}
 
 
 @end

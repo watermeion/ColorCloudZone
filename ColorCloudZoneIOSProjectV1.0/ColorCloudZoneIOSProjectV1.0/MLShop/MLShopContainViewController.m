@@ -168,7 +168,7 @@
 - (void)tableViewPullUp
 {
     if (_newestDataArray.count < QueryLimit) {
-        [self.collectionView footerEndRefreshing];
+        [self.tableView footerEndRefreshing];
         return;
     }
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {

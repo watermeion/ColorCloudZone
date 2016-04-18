@@ -40,7 +40,9 @@ static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/ap
                       } else {
                           if ([responseObject ccCode] == 0) {
                               NSString * url = [responseObject ccJsonString:@"file_path"];
-                              block(url, nil);
+                              if ([url isKindOfClass:[NSString class]]) {
+                                  block(url, nil);
+                              } else block(nil, [NSError errorDefault]);
                           } else {
                               block(nil, [NSError errorWithCode:[responseObject ccCode]]);
                           }

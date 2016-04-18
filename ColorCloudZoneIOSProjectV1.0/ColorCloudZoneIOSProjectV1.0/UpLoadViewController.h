@@ -15,7 +15,7 @@
 @property (nonatomic) IBOutlet UITextField *itemWholeSalePrice;
 @property (nonatomic) IBOutlet UICollectionView *itemPicCollectionView;
 @property (nonatomic) IBOutlet UIButton *itemCategoryBtn;
-
+@property (nonatomic, strong) NSMutableDictionary * urlPlaceholderImage;
 
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
@@ -26,8 +26,6 @@
 - (IBAction)chooseColorAction:(id)sender;
 
 - (IBAction)chooseSurfaceAction:(id)sender;
-
-- (IBAction)upLoadImagesAction:(id)sender;
 
 
 - (IBAction)chooseCategoryAction:(id)sender;
@@ -41,7 +39,6 @@
 @property (nonatomic) NSString *itemMaterial;
 @property (nonatomic) NSString *itemSurfaceMaterial;
 @property (nonatomic) NSArray *itemImagesArray;
-@property (nonatomic) GBTableViewSelectorBehavior *selector;
 
 //Property
 @property (nonatomic,readonly) NSInteger pictureNum;

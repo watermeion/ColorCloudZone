@@ -9,6 +9,7 @@
 #import "GBImagePickerBehavior.h"
 #import "ELCImagePickerController.h"
 #import "UIActionSheet+BlocksKit.h"
+#import "SVProgressHud.h"
 
 
 @interface GBImagePickerBehavior () <UINavigationControllerDelegate,ELCImagePickerControllerDelegate,UIImagePickerControllerDelegate>
@@ -36,6 +37,18 @@
 
 //实现的button Touch 方法
 - (void)pickImageFromButton:(UIButton *)sender{
+    NSUInteger limitNum;
+    if ([self.delegate respondsToSelector:@selector(limitNumSelectionforThisImagePicker)]) {
+        limitNum = [self.delegate limitNumSelectionforThisImagePicker];
+    }
+    else {
+        limitNum = self.limitPhotoNum?:1; //Set the maximum number of images to select, defaults to 4
+    }
+    if (limitNum <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"上传图片数量已达到上限"];
+        return;
+    }
+    
     //弹出UIAction让用户选择是拍照 还是从相册中选取
     UIActionSheet *actionSheet = [UIActionSheet bk_actionSheetWithTitle:nil];
 

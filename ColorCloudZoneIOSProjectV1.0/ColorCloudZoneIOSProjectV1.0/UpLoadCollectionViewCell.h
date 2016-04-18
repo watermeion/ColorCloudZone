@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UpLoadCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *uploadedImageView;
 
 @end
