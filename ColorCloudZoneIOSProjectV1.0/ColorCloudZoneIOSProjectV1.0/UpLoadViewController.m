@@ -63,6 +63,8 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.itemPicCollectionView reloadData];
+    
     if (self.parentItem.itemClass.className) self.categoryLabel.text = [NSString stringWithFormat:@"%@ %@", self.parentItem.itemClass.className, self.parentItem.itemSort.sortName?self.parentItem.itemSort.sortName:@""];
     if (self.parentItem.itemType.name) self.typeLabel.text = self.parentItem.itemType.name;
     
@@ -140,13 +142,13 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     }else if([identifier isEqualToString:kUpLoadAssistIdentifier]){
         if (self.parentItem.assistantPics.count > 0) {
             NSString * url = [self.parentItem.assistantPics firstObject];
-            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:self.parentItem.cover]];
+            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:url]];
         }
         
     }else if([identifier isEqualToString:kUpLoadDscrpIdentifier]){
         if (self.parentItem.descPics.count > 0) {
             NSString * url = [self.parentItem.descPics firstObject];
-            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:self.parentItem.cover]];
+            [cell.uploadedImageView sd_setImageWithURL:[CCFile ccURLWithString:url] placeholderImage:[self.urlPlaceholderImage objectForKey:url]];
         }
     }
 
@@ -244,10 +246,10 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     self.parentItem.desc = _itemDetailInputView.text;
     [SVProgressHUD showWithStatus:@"正在上传中"];
     [CCItem uploadItem:self.parentItem withBlock:^(CCItem *item, NSError *error) {
-        [SVProgressHUD dismiss];
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"上传失败"];
         } else {
+            [SVProgressHUD dismiss];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
@@ -380,7 +382,9 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
                 [SVProgressHUD showErrorWithStatus:@"上传失败"];
             } else {
                 [SVProgressHUD showSuccessWithStatus:@"上传成功"];
-                [self.urlPlaceholderImage removeObjectForKey:self.parentItem.cover];
+                if (self.parentItem.cover) {
+                    [self.urlPlaceholderImage removeObjectForKey:self.parentItem.cover];
+                }
                 self.parentItem.cover = url;
                 [self.urlPlaceholderImage setValue:editedImage forKey:url];
                 [self.itemPicCollectionView reloadData];

@@ -16,7 +16,7 @@ typedef  NS_ENUM(NSUInteger, MemerShipViewControllerState){
 };
 
 
-@interface MemerShipViewController : GBCustomViewController <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface MemerShipViewController : GBCustomViewController <UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) MemerShipViewControllerState state;

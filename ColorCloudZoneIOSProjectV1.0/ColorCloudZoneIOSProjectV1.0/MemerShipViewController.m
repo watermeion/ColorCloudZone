@@ -120,7 +120,9 @@ static const NSInteger QueryLimit = 30;
     }
 }
 
-
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(([UIScreen mainScreen].bounds.size.width - 20) / 3.0, 160.f);
+}
 
 @end

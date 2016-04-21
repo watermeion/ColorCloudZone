@@ -28,7 +28,7 @@
 #define ItemGetHottestItemsForFactory @"wearcloud.Factory.getHotItemList"
 #define ItemGetHottestItemsForMall @"wearcloud.MallCollect.getHotItemList"
 #define ItemGetNewestItemsForFactory @"wearcloud.Factory.getNewItemList"
-#define ItemGetNewestItemsForMall @"wearcloud. MallCollect.getNewItemList"
+#define ItemGetNewestItemsForMall @"wearcloud.MallCollect.getNewItemList"
 #define ItemGetItemList @"wearcloud.item.getItemList"
 
 #define ItemGetClassList @"wearcloud.category.getClassList"

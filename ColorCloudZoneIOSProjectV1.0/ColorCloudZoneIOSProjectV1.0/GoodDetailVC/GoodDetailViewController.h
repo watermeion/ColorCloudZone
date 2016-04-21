@@ -28,8 +28,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *priceLabel;
 @property (strong, nonatomic) IBOutlet UIButton *collectButton;
 @property (strong, nonatomic) UIViewController * parentVC;
+@property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (weak, nonatomic) IBOutlet UIView *factoryView;
+@property (weak, nonatomic) IBOutlet UIView *descImagesView;
+@property (weak, nonatomic) IBOutlet UIView *propertyView;
 //Constraint
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailTextHeightConstraint;
 
 @property (strong, nonatomic) IBOutlet UIView *contactAndCollectView;
 

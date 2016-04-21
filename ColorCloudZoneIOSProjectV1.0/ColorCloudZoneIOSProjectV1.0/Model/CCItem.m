@@ -422,7 +422,12 @@
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode] == 0) {
             NSMutableArray * arr = [NSMutableArray array];
-            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            NSArray * listDicts = [data ccJsonArray:@"list"];
             if (![listDicts isKindOfClass:[NSArray class]]) {
                 block([NSArray array], nil);
                 return ;
@@ -499,8 +504,7 @@
 {
     NSDictionary * params = @{@"isCollect" : @(collect),
                               kItemId : item.itemId,
-                              @"item_price": @(price),
-                              kItemFactoryId : item.factoryId};
+                              @"item_price": @(price)};
     
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemCollectItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);

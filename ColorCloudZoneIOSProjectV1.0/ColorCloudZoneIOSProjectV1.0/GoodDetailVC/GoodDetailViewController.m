@@ -21,6 +21,12 @@
 #import "SVProgressHud.h"
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
+
+
+#define DescPictureOriginY 66
+#define DescPictureScale 0.75
+#define DescPictureHeight ([UIScreen mainScreen].bounds.size.width / DescPictureScale)
+#define ViewSeparatorHeight 8
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
@@ -39,8 +45,7 @@ static const NSInteger kQueryLimit = 30;
 
 @interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-//View Part 3
-@property (strong, nonatomic) IBOutlet DetailImageCollectionViewController *detailImageCollectionViewController;
+
 @property (strong, nonatomic) NSArray * menuItems;
 
 
@@ -53,6 +58,14 @@ static const NSInteger kQueryLimit = 30;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
+    _titleLabel.text = self.parentItem.name;
+    _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
+    _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
+    [self setDescImages];
     
     // Do any additional setup after loading the view.
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
@@ -67,6 +80,9 @@ static const NSInteger kQueryLimit = 30;
                                      target:nil
                                      action:NULL]];
         //厂家View不显示，想要CollectionView显示
+        self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.factoryView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height);
+        [self.factoryView removeFromSuperview];
+        
         [CCItem getItemLikeList:self.parentItem limit:kQueryLimit skip:0 withBlock:^(NSArray *memberList, NSError *error) {
             if (error) {
                 
@@ -79,6 +95,9 @@ static const NSInteger kQueryLimit = 30;
         self.contactAndCollectView.hidden = NO;
         [self.collectButton setTitle:self.parentItem.isCollected?@"已收藏":@"收藏" forState:UIControlStateNormal];
         //厂家View显示，想要CollectionView不显示
+        [self.collectionView removeFromSuperview];
+        
+        
         [CCItem getItemFactory:self.parentItem withBlock:^(CCUser *factory, NSError *error) {
             if (error) {
                 
@@ -121,11 +140,6 @@ static const NSInteger kQueryLimit = 30;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
-    _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
-    _titleLabel.text = self.parentItem.name;
-    _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
-    _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
     [SVProgressHUD showWithStatus:@"正在获取信息" maskType:SVProgressHUDMaskTypeBlack];
     [CCItem getItemDetailInfo:self.parentItem withBlock:^(CCItem *item, NSError *error) {
         [SVProgressHUD dismiss];
@@ -141,7 +155,68 @@ static const NSInteger kQueryLimit = 30;
     
     
     [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
+    
+//    self.scrollView.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.scrollView.layer.borderWidth = 1.f;
+//    self.headView.layer.borderColor = [UIColor redColor].CGColor;
+//    self.headView.layer.borderWidth = 1.f;
+//    self.titleView.layer.borderColor = [UIColor orangeColor].CGColor;
+//    self.titleView.layer.borderWidth = 1.f;
+//    self.propertyView.layer.borderColor = [UIColor yellowColor].CGColor;
+//    self.propertyView.layer.borderWidth = 1.f;
+//    self.factoryView.layer.borderColor = [UIColor greenColor].CGColor;
+//    self.factoryView.layer.borderWidth = 1.f;
+//    self.collectionView.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.collectionView.layer.borderWidth = 1.f;
+//    self.descImagesView.layer.borderColor = [UIColor purpleColor].CGColor;
+//    self.descImagesView.layer.borderWidth = 1.f;
 }
+
+- (void)setDescImages
+{
+    for (NSInteger index = 0; index < self.parentItem.descPics.count; index ++) {
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, DescPictureOriginY + index * DescPictureHeight, self.view.frame.size.width, DescPictureHeight)];
+        [imageView sd_setImageWithURL:[CCFile ccURLWithString:[self.parentItem.descPics objectAtIndex:index]]];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+        [self.descImagesView addSubview:imageView];
+    }
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.headView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.titleView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.propertyView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.factoryView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.collectionView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.descImagesView.translatesAutoresizingMaskIntoConstraints = YES;
+    CGFloat scrollViewHeight = self.view.frame.size.height - self.scrollView.frame.origin.y;
+    if (!self.wantView.hidden || !self.collectionView.hidden) {
+        scrollViewHeight = self.view.frame.size.height - self.scrollView.frame.origin.y - self.wantView.frame.size.height;
+    }
+    self.scrollView.frame = CGRectMake(0, self.scrollView.frame.origin.y, [UIScreen mainScreen].bounds.size.width, scrollViewHeight);
+    self.headView.frame = CGRectMake(0, 254, self.scrollView.frame.size.width, self.headView.frame.size.height);
+    self.titleView.frame = CGRectMake(0, self.headView.frame.origin.y + self.headView.frame.size.height + 1, self.scrollView.frame.size.width, self.titleView.frame.size.height);
+    self.propertyView.frame = CGRectMake(0, self.titleView.frame.origin.y + self.titleView.frame.size.height + ViewSeparatorHeight, self.scrollView.frame.size.width, self.propertyView.frame.size.height);
+    if (self.factoryView.superview == self.scrollView) {
+        self.factoryView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.scrollView.frame.size.width, self.factoryView.frame.size.height);
+        self.descImagesView.frame = CGRectMake(0, self.factoryView.frame.origin.y + self.factoryView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
+    } else {
+        if (self.collectionView.superview == self.scrollView) {
+            self.collectionView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, self.collectionView.frame.size.height);
+            self.descImagesView.frame = CGRectMake(0, self.collectionView.frame.origin.y + self.collectionView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
+            
+        } else {
+            self.descImagesView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
+        }
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.descImagesView.frame.origin.y + self.descImagesView.frame.size.height);
+}
+
 
 - (void)setBannerView
 {
@@ -191,27 +266,9 @@ static const NSInteger kQueryLimit = 30;
 
 - (IBAction)moreFeaturesLeftBarAction:(id)sender
 {
-    
-    NSArray *menuItems =
-    @[
-      [KxMenuItem menuItem:@"下架"
-                     image:nil
-                    target:self
-                    action:NULL],
-      [KxMenuItem menuItem:@"统计"
-                     image:nil
-                    target:nil
-                    action:NULL]
-      ];
-    
-    //
-    //    KxMenuItem *first = menuItems[0];
-    //    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-    //    first.alignment = NSTextAlignmentCenter;
-    
     [KxMenu showMenuInView:self.navigationController.view
                   fromRect:CGRectMake(self.view.frame.size.width - 44 - 10, 0, 44, 54)
-                 menuItems:menuItems];
+                 menuItems:_menuItems];
 }
 /*
 #pragma mark - Navigation
@@ -293,9 +350,20 @@ static const NSInteger kQueryLimit = 30;
 
 - (void)collectAlertViewCollectButtonClicked:(CollectAlertView *)view
 {
+    [SVProgressHUD showWithStatus:@"正在收藏" maskType:SVProgressHUDMaskTypeBlack];
     [CCItem collect:YES item:self.parentItem price:view.outPrice.text.floatValue withBlock:^(BOOL succeed, NSError *error) {
-        
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"收藏失败"];
+        } else {
+            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+        }
     }];
+}
+
+- (void)collectAlertViewDidDismiss:(CollectAlertView *)view
+{
+    
 }
 
 - (IBAction)uncollect:(id)sender

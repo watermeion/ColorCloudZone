@@ -25,6 +25,8 @@
         self.navigationItem.backBarButtonItem.tintColor = [UIColor blackColor];
 //        self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
         self.navigationBar.tintColor = [UIColor blackColor];
+        self.navigationBar.translucent = YES;
+        self.navigationBar.barStyle = UIBarStyleDefault;
     }
 
     return self;
@@ -37,7 +39,8 @@
         self.navigationItem.backBarButtonItem.tintColor = [UIColor blackColor];
 //        self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
         self.navigationBar.tintColor = [UIColor blackColor];
-
+        self.navigationBar.translucent = YES;
+        self.navigationBar.barStyle = UIBarStyleDefault;
     }
     return self;
 }
