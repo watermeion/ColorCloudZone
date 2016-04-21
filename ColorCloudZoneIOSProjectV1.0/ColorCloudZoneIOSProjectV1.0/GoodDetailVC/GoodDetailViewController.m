@@ -27,6 +27,11 @@
 #define DescPictureScale 0.75
 #define DescPictureHeight ([UIScreen mainScreen].bounds.size.width / DescPictureScale)
 #define ViewSeparatorHeight 8
+#define TagsPadding 15
+#define HeightOfLine 35
+#define Space 10
+#define TagHorizontalPadding 4
+#define TagVerticalPadding 2
 //计算大小
 static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     return CGSizeMake(size.width * scale, size.height * scale);
@@ -43,8 +48,7 @@ static const NSInteger kQueryLimit = 30;
 
 
 
-@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate, WantViewDelegate>
 
 @property (strong, nonatomic) NSArray * menuItems;
 
@@ -60,6 +64,15 @@ static const NSInteger kQueryLimit = 30;
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.headView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.titleView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.propertyView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.factoryView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.likeListView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.descImagesView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.scrollView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
     
     _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
     _titleLabel.text = self.parentItem.name;
@@ -80,7 +93,6 @@ static const NSInteger kQueryLimit = 30;
                                      target:nil
                                      action:NULL]];
         //厂家View不显示，想要CollectionView显示
-        self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.factoryView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height);
         [self.factoryView removeFromSuperview];
         
         [CCItem getItemLikeList:self.parentItem limit:kQueryLimit skip:0 withBlock:^(NSArray *memberList, NSError *error) {
@@ -95,8 +107,7 @@ static const NSInteger kQueryLimit = 30;
         self.contactAndCollectView.hidden = NO;
         [self.collectButton setTitle:self.parentItem.isCollected?@"已收藏":@"收藏" forState:UIControlStateNormal];
         //厂家View显示，想要CollectionView不显示
-        [self.collectionView removeFromSuperview];
-        
+        [self.likeListView removeFromSuperview];
         
         [CCItem getItemFactory:self.parentItem withBlock:^(CCUser *factory, NSError *error) {
             if (error) {
@@ -125,6 +136,8 @@ static const NSInteger kQueryLimit = 30;
                                      target:nil
                                      action:NULL]];
         //厂家View和想要CollectionView都不显示
+        [self.factoryView removeFromSuperview];
+        [self.likeListView removeFromSuperview];
     }
     if (_menuItems) {
         UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
@@ -148,13 +161,12 @@ static const NSInteger kQueryLimit = 30;
         } else {
             [self setBannerView];
             _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value];
-            _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"无。";
+            _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。";
+            [self setPropertyViewContent];
         }
     }];
     
     
-    
-    [self.collectionView registerClass:[MoreItemsCollectionViewCell class] forCellWithReuseIdentifier:moreCellIdentifier];
     
 //    self.scrollView.layer.borderColor = [UIColor blackColor].CGColor;
 //    self.scrollView.layer.borderWidth = 1.f;
@@ -166,8 +178,8 @@ static const NSInteger kQueryLimit = 30;
 //    self.propertyView.layer.borderWidth = 1.f;
 //    self.factoryView.layer.borderColor = [UIColor greenColor].CGColor;
 //    self.factoryView.layer.borderWidth = 1.f;
-//    self.collectionView.layer.borderColor = [UIColor blueColor].CGColor;
-//    self.collectionView.layer.borderWidth = 1.f;
+//    self.likeListView.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.likeListView.layer.borderWidth = 1.f;
 //    self.descImagesView.layer.borderColor = [UIColor purpleColor].CGColor;
 //    self.descImagesView.layer.borderWidth = 1.f;
 }
@@ -183,18 +195,87 @@ static const NSInteger kQueryLimit = 30;
     }
 }
 
+- (void)setPropertyViewContent
+{
+    UILabel * colorTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 14, 132, 38)];
+    colorTitle.backgroundColor = [UIColor colorWithRed:1 green:191.f/255.f blue:0 alpha:1];
+    colorTitle.font = [UIFont systemFontOfSize:18];
+    colorTitle.textColor = [UIColor blackColor];
+    colorTitle.text = @"  可选择的颜色";
+    [self.propertyView addSubview:colorTitle];
+    
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width - TagsPadding;
+    NSInteger line = 0;
+    CGFloat curX = width;
+    CGFloat orginY = colorTitle.frame.origin.y + colorTitle.frame.size.height + 14;
+    for (CCItemPropertyValue * property in self.parentItem.colorProperty) {
+        NSString * name = property.value;
+        NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0]};
+        CGRect rect = [name boundingRectWithSize:CGSizeMake(width, HeightOfLine) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+        CGRect frame;
+        if (curX + Space + TagHorizontalPadding * 2 + rect.size.width <= width) {
+            frame = CGRectMake(curX + Space, orginY + (line - 1) * HeightOfLine + (HeightOfLine - rect.size.height - TagVerticalPadding * 2) / 2.0, rect.size.width + TagHorizontalPadding * 2, rect.size.height + TagVerticalPadding * 2);
+            curX += (Space + TagHorizontalPadding * 2 + rect.size.width);
+        }
+        else {
+            line ++;
+            frame = CGRectMake(TagsPadding, orginY + (line - 1) * HeightOfLine + (HeightOfLine - rect.size.height - TagVerticalPadding * 2) / 2.0, rect.size.width + TagHorizontalPadding * 2, rect.size.height + TagVerticalPadding * 2);
+            curX = TagsPadding  + TagHorizontalPadding * 2 + rect.size.width;
+        }
+        UILabel * label = [[UILabel alloc] initWithFrame:frame];
+        label.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+        label.text = name;
+        label.font = [UIFont systemFontOfSize:18.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.layer.cornerRadius = 6.f;
+        label.layer.masksToBounds = YES;
+        [self.propertyView addSubview:label];
+    }
+    
+    
+    UILabel * sizeTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, orginY + line * HeightOfLine + 14, 132, 38)];
+    sizeTitle.backgroundColor = [UIColor colorWithRed:1 green:191.f/255.f blue:0 alpha:1];
+    sizeTitle.font = [UIFont systemFontOfSize:18];
+    sizeTitle.textColor = [UIColor blackColor];
+    sizeTitle.text = @"  可选择的尺寸";
+    [self.propertyView addSubview:sizeTitle];
+    
+    line = 0;
+    curX = width;
+    orginY = sizeTitle.frame.origin.y + sizeTitle.frame.size.height + 14;
+    for (CCItemPropertyValue * property in self.parentItem.sizeProperty) {
+        NSString * name = property.value;
+        NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0]};
+        CGRect rect = [name boundingRectWithSize:CGSizeMake(width, HeightOfLine) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+        CGRect frame;
+        if (curX + Space + TagHorizontalPadding * 2 + rect.size.width <= width) {
+            frame = CGRectMake(curX + Space, orginY + (line - 1) * HeightOfLine + (HeightOfLine - rect.size.height - TagVerticalPadding * 2) / 2.0, rect.size.width + TagHorizontalPadding * 2, rect.size.height + TagVerticalPadding * 2);
+            curX += (Space + TagHorizontalPadding * 2 + rect.size.width);
+        }
+        else {
+            line ++;
+            frame = CGRectMake(TagsPadding, orginY + (line - 1) * HeightOfLine + (HeightOfLine - rect.size.height - TagVerticalPadding * 2) / 2.0, rect.size.width + TagHorizontalPadding * 2, rect.size.height + TagVerticalPadding * 2);
+            curX = TagsPadding  + TagHorizontalPadding * 2 + rect.size.width;
+        }
+        UILabel * label = [[UILabel alloc] initWithFrame:frame];
+        label.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+        label.text = name;
+        label.font = [UIFont systemFontOfSize:18.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.layer.cornerRadius = 6.f;
+        label.layer.masksToBounds = YES;
+        [self.propertyView addSubview:label];
+    }
+    self.propertyView.frame = CGRectMake(0, self.titleView.frame.origin.y + self.titleView.frame.size.height + ViewSeparatorHeight, self.scrollView.frame.size.width, orginY + line * HeightOfLine + 14);
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    self.scrollView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.headView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.titleView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.propertyView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.factoryView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.collectionView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.descImagesView.translatesAutoresizingMaskIntoConstraints = YES;
     CGFloat scrollViewHeight = self.view.frame.size.height - self.scrollView.frame.origin.y;
-    if (!self.wantView.hidden || !self.collectionView.hidden) {
+    if (!self.wantView.hidden || !self.contactAndCollectView.hidden) {
         scrollViewHeight = self.view.frame.size.height - self.scrollView.frame.origin.y - self.wantView.frame.size.height;
     }
     self.scrollView.frame = CGRectMake(0, self.scrollView.frame.origin.y, [UIScreen mainScreen].bounds.size.width, scrollViewHeight);
@@ -205,9 +286,9 @@ static const NSInteger kQueryLimit = 30;
         self.factoryView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.scrollView.frame.size.width, self.factoryView.frame.size.height);
         self.descImagesView.frame = CGRectMake(0, self.factoryView.frame.origin.y + self.factoryView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
     } else {
-        if (self.collectionView.superview == self.scrollView) {
-            self.collectionView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, self.collectionView.frame.size.height);
-            self.descImagesView.frame = CGRectMake(0, self.collectionView.frame.origin.y + self.collectionView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
+        if (self.likeListView.superview == self.scrollView) {
+            self.likeListView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, self.likeListView.frame.size.height);
+            self.descImagesView.frame = CGRectMake(0, self.likeListView.frame.origin.y + self.likeListView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
             
         } else {
             self.descImagesView.frame = CGRectMake(0, self.propertyView.frame.origin.y + self.propertyView.frame.size.height + ViewSeparatorHeight, self.view.frame.size.width, DescPictureOriginY + self.parentItem.descPics.count * DescPictureHeight);
@@ -322,7 +403,7 @@ static const NSInteger kQueryLimit = 30;
 
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
   //当sizeclasses 改变之后的做法
-    [self.collectionView.collectionViewLayout invalidateLayout];
+//    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (IBAction)collect:(id)sender
@@ -378,10 +459,29 @@ static const NSInteger kQueryLimit = 30;
 
 - (IBAction)want:(id)sender
 {
-    
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"WantView" owner:self options:nil];
     WantView * wantView = [nib objectAtIndex:0];
+    wantView.parentItem = self.parentItem;
+    wantView.title.text = self.parentItem.name;
+    wantView.price.text = [NSNumber numberWithFloat:self.parentItem.price].stringValue;
+    wantView.idLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
+    [wantView.thumbnail sd_setImageWithURL:[CCFile ccURLWithString:self.parentItem.cover]];
+    wantView.delegate = self;
     [wantView showInView:self.view];
+}
+
+- (void)wantViewOKButtonClicked:(WantView *)view
+{
+    [SVProgressHUD showWithStatus:@"正在处理" maskType:SVProgressHUDMaskTypeBlack];
+    [CCItem want:YES item:self.parentItem color:view.selectedColor size:view.selectedSize byMemberMobile:view.userIdLabel.text withBlock:^(BOOL succeed, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"网络错误、想要处理失败"];
+        } else {
+            if (succeed) [SVProgressHUD showSuccessWithStatus:@"处理成功"];
+            else [SVProgressHUD showErrorWithStatus:@"想要处理失败"];
+        }
+    }];
 }
 
 - (IBAction)unsell:(id)sender

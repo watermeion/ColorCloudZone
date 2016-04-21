@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIView *factoryView;
 @property (weak, nonatomic) IBOutlet UIView *descImagesView;
 @property (weak, nonatomic) IBOutlet UIView *propertyView;
+@property (weak, nonatomic) IBOutlet UIView *likeListView;
 //Constraint
 
 @property (strong, nonatomic) IBOutlet UIView *contactAndCollectView;

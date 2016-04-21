@@ -74,6 +74,10 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ssy-8E-KX8">
                             <rect key="frame" x="0.0" y="146" width="320" height="204"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="33V-XR-mhP" id="Hbi-v9-W28"/>
+                                <outlet property="delegate" destination="33V-XR-mhP" id="9TH-OX-Vp2"/>
+                            </connections>
                         </tableView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号/会员卡号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-zY-CPS">
                             <rect key="frame" x="61" y="106" width="251" height="30"/>

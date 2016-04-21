@@ -518,14 +518,14 @@
     }];
 }
 
-+ (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(NSString *)colorId size:(NSString *)sizeId byMemberMobile:(NSString *)mobile withBlock:(void (^)(BOOL, NSError *))block
++ (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(CCItemPropertyValue *)color size:(CCItemPropertyValue *)size byMemberMobile:(NSString *)mobile withBlock:(void (^)(BOOL, NSError *))block
 {
     NSDictionary * params = @{@"isCollect" : @(want),
                               kItemId : item.itemId,
                               kMemberMobile : mobile,
-                              @"property_value1" : colorId,
-                              @"property_value2" : sizeId};
-    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemCollectItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                              @"property_value1" : color.valueId,
+                              @"property_value2" : size.valueId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemWantItem params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode] == 0) {
             block(YES, nil);
