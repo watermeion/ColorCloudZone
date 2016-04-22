@@ -36,6 +36,7 @@
 #define kUserIsFollowed         @"isFollowed"
 #define kUserNewNum             @"new_num"
 #define kUserTotalNum           @"total_num"
+#define kUserCoverUrl           @"background_pic"
 
 #define kMemberMobile           kUserMobile
 #define kMemberAddress          @"address_detail"
@@ -97,6 +98,7 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @property (nonatomic, assign) BOOL isFollowed;
 @property (nonatomic, assign) NSInteger newNum;
 @property (nonatomic, assign) NSInteger totalNum;
+@property (nonatomic, strong) NSString * coverUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (CCUser *)currentUser;
@@ -116,5 +118,12 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 
 + (NSURLSessionDataTask *)addMember:(CCMember *)member withBlock:(void(^)(CCMember * member, NSError * error))block;
 + (NSURLSessionDataTask *)getMemberListByMallId:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * memberList, NSError * error))block;
+
++ (NSURLSessionDataTask *)follow:(BOOL)follow factory:(NSString *)factoryId withBlock:(void(^)(BOOL success, NSError * error))block;
++ (NSURLSessionDataTask *)getFollowedFactoryListWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * followList, NSError * error))block;
+
++ (NSURLSessionDataTask *)editUserInfo:(CCUser*)user withBlock:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)setUserCover:(NSString *)url withBlock:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)getBannerWithBlock:(void(^)(NSArray * banner, NSError *error))block;
 
 @end

@@ -15,6 +15,7 @@
 #import "CCItem.h"
 #import "CCUser.h"
 #import "FSDropDownMenu.h"
+#import "CCFile.h"
 static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue";
 
 
@@ -52,6 +53,9 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
     
     self.navigationItem.leftBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:market], [[UIBarButtonItem alloc] initWithCustomView:classBtn]];
     
+    UIBarButtonItem * rightButton = [[UIBarButtonItem alloc] initWithTitle:@"我的关注" style:UIBarButtonItemStyleBordered target:self action:@selector(myFollowClicked:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     
     FSDropDownMenu *menu = [[FSDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:300];
     menu.transformView = classBtn.imageView;
@@ -64,6 +68,12 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)myFollowClicked:(id)sender
+{
+    UIViewController * vc= [self.storyboard instantiateViewControllerWithIdentifier:@"MyFolloweeViewController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)marketPressed:(id)sender
@@ -127,21 +137,13 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 
 - (void)setBannerView
 {
-    AVQuery * query = [AVQuery queryWithClassName:@"HomeBanner"];
-    [query whereKey:@"activity" notEqualTo:@(NO)];
-    query.cachePolicy = kAVCachePolicyNetworkElseCache;
-    [query orderByAscending:@"order"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [CCUser getBannerWithBlock:^(NSArray *banner, NSError *error) {
         if (!error) {
             
             NSMutableArray *UrlStringArray = [NSMutableArray array];
-            NSMutableArray *titleArray = [NSMutableArray array];
-            for (AVObject * banner in objects) {
-                AVFile * image = [banner objectForKey:@"homeBannerImage"];
-                [UrlStringArray addObject:image.url];
-                [titleArray addObject:[banner objectForKey:@"homeBannerContent"]];
+            for (NSString * url in banner) {
+                [UrlStringArray addObject:[CCFile ccURLWithString:url].absoluteString];
             }
-            
             
             //显示顺序和数组顺序一致
             //设置图片url数组,和滚动视图位置
@@ -173,7 +175,6 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
             
             //下载失败重复下载次数,默认不重复,
             [[DCWebImageManager shareManager] setDownloadImageRepeatCount:1];
-            
             //图片下载失败会调用该block(如果设置了重复下载次数,则会在重复下载完后,假如还没下载成功,就会调用该block)
             //error错误信息
             //url下载失败的imageurl

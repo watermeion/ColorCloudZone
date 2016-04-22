@@ -41,6 +41,7 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
     self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
     self.nameLabel.text = [CCUser currentUser].mallName;
     [self.avatar sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
+    if ([CCUser currentUser].coverUrl) [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].coverUrl]];
 }
 
 - (void)back
@@ -62,11 +63,6 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
                     target:nil
                     action:NULL]
       ];
-    
-//    
-//    KxMenuItem *first = menuItems[0];
-//    first.foreColor = [UIColor colorWithRed:47/255.0f green:112/255.0f blue:225/255.0f alpha:1.0];
-//    first.alignment = NSTextAlignmentCenter;
     
     [KxMenu showMenuInView:self.navigationController.view
                   fromRect:CGRectMake(self.view.frame.size.width - 44 - 10, 0, 44, 54)
@@ -105,28 +101,20 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
-        AVObject * shop = [[AVUser currentUser] objectForKey:@"shop"];
-        [shop fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//        [shop fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-            if (!error) {
-                AVFile * cover = [AVFile fileWithData:UIImageJPEGRepresentation(editedImage, 0.8)];
-                [cover saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [shop setObject:cover forKey:@"cover"];
-                        [shop saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (succeeded) {
-                                [SVProgressHUD showSuccessWithStatus:@"上传成功"];
-                                self.coverImageView.image = editedImage;
-                            } else {
-                                [SVProgressHUD showErrorWithStatus:@"上传失败"];
-                            }
-                        }];
+        [CCFile uploadImage:editedImage withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            } else {
+                [CCUser setUserCover:url withBlock:^(BOOL succeed, NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (succeed) {
+                        [SVProgressHUD showSuccessWithStatus:@"上传成功"];
+                        self.coverImageView.image = editedImage;
                     } else {
                         [SVProgressHUD showErrorWithStatus:@"上传失败"];
                     }
                 }];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"上传失败"];
             }
         }];
     }];

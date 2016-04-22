@@ -18,6 +18,11 @@
 #define Signup @"wearcloud.user.signup"
 #define EditUserInfo @"wearcloud.user.editUserInfo"
 #define Logout @"wearcloud.user.logout"
+#define FollowFactory   @"wearcloud.mall.followFactory"
+#define GetFollowedFactoryList @"wearcloud.mall.getFollowFactoryList"
+#define EditUserInfo @"wearcloud.user.editUserInfo"
+#define GetBanner @"wearcloud.mall.getBanner"
+
 
 #define GetWholeSaleMarketList @"wearcloud.wholesaleMarket.getWholesaleMarketList"
 #define GetProvinceList @"wearcloud.address.getProvinceList"
@@ -37,6 +42,8 @@
 #define ItemGetItemSkuByTypeId @"wearcloud.item.getSkuInfoByTypeId"
 #define ItemGetExtendPropByTypeId @"wearcloud.item.getExtendPropByTypeId"
 #define ItemUpload @"wearcloud.item.addItem"
+#define ItemUnsell @"wearcloud.item.moveStroage"
+#define ItemEditInfo @"wearcloud.item.editItem"
 #define ItemGetItemDetailInfo @"wearcloud.item.getItemDetailInfo"
 #define ItemGetItemFactoryInfo @"wearcloud.item.getItemFactoryInfo"
 #define ItemGetItemMemberInfo @"wearcloud.item.getItemMemberInfo"

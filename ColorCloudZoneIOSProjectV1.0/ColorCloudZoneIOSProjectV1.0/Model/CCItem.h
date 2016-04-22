@@ -116,4 +116,5 @@
 
 + (NSURLSessionDataTask *)collect:(BOOL)collect item:(CCItem *)item price:(float)price withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(CCItemPropertyValue *)color size:(CCItemPropertyValue *)size byMemberMobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)unsellItem:(CCItem *)item withBlock:(void(^)(BOOL succeed, NSError *error))block;
 @end

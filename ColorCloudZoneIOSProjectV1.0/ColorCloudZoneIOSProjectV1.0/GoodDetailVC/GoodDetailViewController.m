@@ -48,7 +48,7 @@ static const NSInteger kQueryLimit = 30;
 
 
 
-@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate, WantViewDelegate>
+@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate, WantViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSArray * menuItems;
 
@@ -79,6 +79,7 @@ static const NSInteger kQueryLimit = 30;
     _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
     _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
     [self setDescImages];
+    [self setBannerView];
     
     // Do any additional setup after loading the view.
     if ([self.parentVC isKindOfClass:[MLShopViewController class]]) {
@@ -159,7 +160,6 @@ static const NSInteger kQueryLimit = 30;
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"获取失败"];
         } else {
-            [self setBannerView];
             _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value];
             _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。";
             [self setPropertyViewContent];
@@ -361,6 +361,27 @@ static const NSInteger kQueryLimit = 30;
 }
 */
 
+- (IBAction)followClicked:(id)sender {
+    [SVProgressHUD showWithStatus:@"正在关注" maskType:SVProgressHUDMaskTypeBlack];
+    [CCUser follow:YES factory:self.parentItem.factoryId withBlock:^(BOOL success, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+        } else {
+            if (success) {
+                [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            }
+        }
+    }];
+}
+- (IBAction)enterFactoryClicked:(id)sender {
+}
+- (IBAction)callFactoryClicked:(id)sender {
+    NSString * str=[NSString stringWithFormat:@"telprompt://%@",self.factoryPhone.text];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
 
 #pragma --mark UICollectionViewDataSourceDelegate
 
@@ -442,20 +463,12 @@ static const NSInteger kQueryLimit = 30;
     }];
 }
 
-- (void)collectAlertViewDidDismiss:(CollectAlertView *)view
-{
-    
-}
 
 - (IBAction)uncollect:(id)sender
 {
     
 }
 
-- (IBAction)contactFactory:(id)sender
-{
-    
-}
 
 - (IBAction)want:(id)sender
 {
@@ -486,7 +499,31 @@ static const NSInteger kQueryLimit = 30;
 
 - (IBAction)unsell:(id)sender
 {
-    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"确认要下架吗？"
+                                                     message:@"下架后将无法恢复"
+                                                    delegate:self
+                                           cancelButtonTitle:@"取消"
+                                           otherButtonTitles:@"确认", nil];
+    alert.tag = 1001;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1001) {
+        if (buttonIndex == 1) {
+            [SVProgressHUD showWithStatus:@"正在操作" maskType:SVProgressHUDMaskTypeBlack];
+            [CCItem unsellItem:self.parentItem withBlock:^(BOOL succeed, NSError *error) {
+                [SVProgressHUD dismiss];
+                if (succeed) {
+                    [SVProgressHUD showSuccessWithStatus:@"下架成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"操作失败"];
+                }
+            }];
+        }
+    }
 }
 
 @end

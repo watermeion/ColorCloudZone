@@ -581,6 +581,21 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(nil, error);
     }];
+}
 
++ (NSURLSessionDataTask *)unsellItem:(CCItem *)item withBlock:(void (^)(BOOL, NSError *))block
+{
+    
+    NSDictionary * params = @{kItemId : item.itemId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemUnsell params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
 }
 @end

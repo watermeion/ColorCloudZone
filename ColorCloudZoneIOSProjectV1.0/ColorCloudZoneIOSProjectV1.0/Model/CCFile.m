@@ -55,6 +55,7 @@ static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/ap
 
 + (NSURL *)ccURLWithString:(NSString *)string
 {
+    if (!string) return nil;
     NSString * wholeString = string;
     if (![string hasPrefix:@"http://"]) wholeString = [ImageDomain stringByAppendingString:string];
     return [NSURL URLWithString:wholeString];

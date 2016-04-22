@@ -92,6 +92,7 @@ static CCUser * currentUserSingleton;
         self.isFollowed = [dictionary ccJsonInteger:kUserIsFollowed];
         self.newNum = [dictionary ccJsonInteger:kUserNewNum];
         self.totalNum = [dictionary ccJsonInteger:kUserTotalNum];
+        self.coverUrl = [dictionary ccJsonString:kUserCoverUrl];
     }
     return self;
 }
@@ -121,6 +122,7 @@ static CCUser * currentUserSingleton;
     if (self.saleMarketAddress) [dict setObject:self.saleMarketAddress forKey:kUserSaleMarketAddress];
     if (self.addrInMarket) [dict setObject:self.addrInMarket forKey:kUserAddrInMarket];
     if (self.remark) [dict setObject:self.remark forKey:kUserRemark];
+    if (self.coverUrl) [dict setObject:self.coverUrl forKey:kUserCoverUrl];
     return [NSDictionary dictionaryWithDictionary:dict];
 }
 
@@ -402,5 +404,106 @@ static CCUser * currentUserSingleton;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(nil, error);
     }];
+}
+
++ (NSURLSessionDataTask *)follow:(BOOL)follow factory:(NSString *)factoryId withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = @{@"isFollow" : @(follow),
+                              kItemFactoryId : factoryId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:FollowFactory params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getFollowedFactoryListWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    
+    NSDictionary * params = @{kItemMallId : [CCUser currentUser].userId,
+                              kItemLimit : @(limit),
+                              kItemSkip : @(skip)};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetFollowedFactoryList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            NSArray * listDicts = [data ccJsonArray:@"list"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCUser * factory = [[CCUser alloc] initWithDictionary:dict];
+                [arr addObject:factory];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)editUserInfo:(CCUser *)user withBlock:(void (^)(BOOL, NSError *))block
+{
+    return nil;
+}
+
++ (NSURLSessionDataTask *)setUserCover:(NSString *)url withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = @{kUserCoverUrl : url};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:EditUserInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            block(YES, nil);
+            [CCUser currentUser].coverUrl = url;
+            [[NSUserDefaults standardUserDefaults] setObject:[[CCUser currentUser] generateDictionary] forKey:@"currentUser"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getBannerWithBlock:(void (^)(NSArray *, NSError *))block
+{
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetBanner params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            NSArray * urlDicts = [data ccJsonArray:@"list"];
+            if (![urlDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSString * url in urlDicts) {
+                [arr addObject:url];
+            }
+            block([NSArray arrayWithArray:arr], nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+
 }
 @end
