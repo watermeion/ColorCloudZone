@@ -55,5 +55,6 @@
 #define MemberAdd @"wearcloud.member.addMember"
 #define MemberIsCollectItem @"wearcloud.MemberCollect.isCollectItem"
 #define MemberGetMemberList @"wearcloud.member.getMemberList"
+#define MemberGetLikeList @"wearcloud.MemberCollect.getItemListByDate"
 
 #endif /* NetAccessAPI_h */

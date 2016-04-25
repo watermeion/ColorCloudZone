@@ -125,5 +125,6 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (NSURLSessionDataTask *)editUserInfo:(CCUser*)user withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)setUserCover:(NSString *)url withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)getBannerWithBlock:(void(^)(NSArray * banner, NSError *error))block;
++ (NSURLSessionDataTask *)getLikeListOfMember:(CCMember *)member withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * likeList, NSError * error))block;
 
 @end

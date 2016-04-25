@@ -61,6 +61,7 @@ static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/ap
     return [NSURL URLWithString:wholeString];
 }
 
+
 + (UIImage *)generateThumbnailOf:(UIImage *)original withSize:(CGFloat)size{
     CGSize newSize = CGSizeMake(size, size);
     CGRect thumbnailRect = CGRectMake(0, 0, size, size);

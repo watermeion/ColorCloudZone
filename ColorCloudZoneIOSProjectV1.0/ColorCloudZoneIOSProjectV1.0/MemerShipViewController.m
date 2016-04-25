@@ -14,6 +14,7 @@
 #import "MJRefresh/MJRefresh.h"
 #import "CCFile.h"
 #import "CCUser.h"
+#import "MemberProfileViewController.h"
 
 
 
@@ -117,6 +118,9 @@ static const NSInteger QueryLimit = 30;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         CCMember * member = [_dataSource objectAtIndex:indexPath.item - 1];
+        MemberProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MemberProfileViewController"];
+        vc.parentMember = member;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

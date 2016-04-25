@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *factoryNewCount;
 @property (strong, nonatomic) IBOutlet UILabel *materialLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likeListTitle;
 @property (strong, nonatomic) IBOutlet UILabel *priceLabel;
 @property (strong, nonatomic) IBOutlet UIButton *collectButton;
 @property (strong, nonatomic) UIViewController * parentVC;
@@ -40,6 +41,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *wantView;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 

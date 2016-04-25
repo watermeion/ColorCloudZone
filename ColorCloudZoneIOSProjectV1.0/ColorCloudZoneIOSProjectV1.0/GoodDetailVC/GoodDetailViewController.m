@@ -21,6 +21,7 @@
 #import "SVProgressHud.h"
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
+#import "LikeListCell.h"
 
 
 #define DescPictureOriginY 66
@@ -32,25 +33,18 @@
 #define Space 10
 #define TagHorizontalPadding 4
 #define TagVerticalPadding 2
-//计算大小
-static CGSize CGSizeScale(CGSize size, CGFloat scale) {
-    return CGSizeMake(size.width * scale, size.height * scale);
-}
 
 static  NSString *recommendCellIdentifier = @"RecommendItemsCollectionViewCell";
 static  NSString *moreCellIdentifier = @"MoreItemsCollectionViewCell";
-static const NSInteger cellNum = 4;
 
-static const CGFloat cellHeight = 130;
-static const CGFloat CellWidth = 220;
-
-static const NSInteger kQueryLimit = 30;
+static const NSInteger kQueryLimit = 50;
 
 
 
-@interface GoodDetailViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, CollectAlertViewDelegate, WantViewDelegate, UIAlertViewDelegate>
+@interface GoodDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CollectAlertViewDelegate, WantViewDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSArray * menuItems;
+@property (strong, nonatomic) NSMutableArray * likeList;
 
 
 @end
@@ -74,7 +68,8 @@ static const NSInteger kQueryLimit = 30;
     self.descImagesView.translatesAutoresizingMaskIntoConstraints = YES;
     self.scrollView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0);
     
-    _likeLabel.text = [NSString stringWithFormat:@"%ld人想要", (long)self.parentItem.likeNum];
+    
+    _likeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)self.parentItem.likeNum];
     _titleLabel.text = self.parentItem.name;
     _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
     _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
@@ -95,12 +90,13 @@ static const NSInteger kQueryLimit = 30;
                                      action:NULL]];
         //厂家View不显示，想要CollectionView显示
         [self.factoryView removeFromSuperview];
-        
+        _likeListTitle.text = [NSString stringWithFormat:@"  %ld人喜欢", (long)self.parentItem.likeNum];
         [CCItem getItemLikeList:self.parentItem limit:kQueryLimit skip:0 withBlock:^(NSArray *memberList, NSError *error) {
             if (error) {
                 
             } else {
-                
+                self.likeList = [NSMutableArray arrayWithArray:memberList];
+                [self.collectionView reloadData];
             }
         }];
     } else if ([self.parentVC isKindOfClass:[MarketViewController class]]) {
@@ -301,6 +297,14 @@ static const NSInteger kQueryLimit = 30;
 
 - (void)setBannerView
 {
+    if (self.parentItem.assistantPics.count < 2) {
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 254)];
+        [imageView sd_setImageWithURL:[CCFile ccURLWithString:[self.parentItem.assistantPics firstObject]]];
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [imageView setClipsToBounds:YES];
+        [self.scrollView addSubview:imageView];
+        return;
+    }
     NSMutableArray *UrlStringArray = [NSMutableArray array];
 //    NSMutableArray *titleArray = [NSMutableArray array];
     for (NSString * url in self.parentItem.assistantPics) {
@@ -386,7 +390,7 @@ static const NSInteger kQueryLimit = 30;
 #pragma --mark UICollectionViewDataSourceDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return cellNum;
+    return self.likeList.count;
 }
 
 
@@ -396,36 +400,20 @@ static const NSInteger kQueryLimit = 30;
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-
-    if (indexPath.item == cellNum -1) {
-        MoreItemsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:moreCellIdentifier forIndexPath:indexPath];
-        return  cell;
-        
-    }
-    RecommendItemsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:recommendCellIdentifier forIndexPath:indexPath];
-    
+    LikeListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LikeListCell" forIndexPath:indexPath];
+    CCMember * member = [self.likeList objectAtIndex:indexPath.item];
+    [cell.avatar sd_setImageWithURL:[CCFile ccURLWithString:member.headImgUrl]];
+    cell.nameLabel.text = member.username;
     return cell;
 }
 
-
-#pragma --mark UICollectionViewDelegate
-
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout {
-
-    //动态计算不同设备下 UIEdgeInsets 的值
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    CGFloat itemsMargins = (CGRectGetWidth(self.view.frame) - CellWidth * 2)/3;
-//    CGFloat linesMargins =  itemsMargins*1.5;
-    
-    return UIEdgeInsetsMake(0, itemsMargins, 0, itemsMargins);
 }
 
 
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-  //当sizeclasses 改变之后的做法
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-}
+
 
 - (IBAction)collect:(id)sender
 {
@@ -463,6 +451,9 @@ static const NSInteger kQueryLimit = 30;
     }];
 }
 
+- (void)collectAlertViewDidDismiss:(CollectAlertView *)view
+{
+}
 
 - (IBAction)uncollect:(id)sender
 {
@@ -495,6 +486,9 @@ static const NSInteger kQueryLimit = 30;
             else [SVProgressHUD showErrorWithStatus:@"想要处理失败"];
         }
     }];
+}
+- (void)wantViewDidDismiss:(WantView *)view
+{
 }
 
 - (IBAction)unsell:(id)sender

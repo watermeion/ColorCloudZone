@@ -457,7 +457,19 @@ static CCUser * currentUserSingleton;
 
 + (NSURLSessionDataTask *)editUserInfo:(CCUser *)user withBlock:(void (^)(BOOL, NSError *))block
 {
-    return nil;
+    NSDictionary * params = [user generateDictionary];
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:EditUserInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            block(YES, nil);
+            [[NSUserDefaults standardUserDefaults] setObject:[[CCUser currentUser] generateDictionary] forKey:@"currentUser"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
 }
 
 + (NSURLSessionDataTask *)setUserCover:(NSString *)url withBlock:(void (^)(BOOL, NSError *))block
@@ -505,5 +517,34 @@ static CCUser * currentUserSingleton;
         block(nil, error);
     }];
 
+}
+
+
++ (NSURLSessionDataTask *)getLikeListOfMember:(CCMember *)member withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{@"member_id" : member.mobile,
+                              kItemLimit : @(limit),
+//                              kItemSkip : @(skip),
+                              @"FirstRow" : @(skip)};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:MemberGetLikeList params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSMutableArray * arr = [NSMutableArray array];
+            NSArray * listDicts = [responseObject ccJsonArray:@"data"];
+            if (![listDicts isKindOfClass:[NSArray class]]) {
+                block([NSArray array], nil);
+                return ;
+            }
+            for (NSDictionary * dict in listDicts) {
+                CCItem * item = [[CCItem alloc] initWithDictionary:dict];
+                [arr addObject:item];
+            }
+            block(arr, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
 }
 @end

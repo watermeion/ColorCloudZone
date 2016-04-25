@@ -246,6 +246,8 @@
 		96BFE58D1CB7851500EB7FAF /* MaterialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE58C1CB7851500EB7FAF /* MaterialViewController.m */; };
 		96BFE5901CB7A81600EB7FAF /* ItemPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFE58F1CB7A81600EB7FAF /* ItemPropertyCell.m */; };
 		96C05D9A1CBFD48E006D3286 /* FSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */; };
+		96D094951CCB901F00066770 /* LikeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D094941CCB901F00066770 /* LikeListCell.m */; };
+		96D094981CCCB9CC00066770 /* MemberProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D094971CCCB9CC00066770 /* MemberProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -660,6 +662,10 @@
 		96BFE58F1CB7A81600EB7FAF /* ItemPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPropertyCell.m; sourceTree = "<group>"; };
 		96C05D981CBFD48E006D3286 /* FSDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDropDownMenu.h; sourceTree = "<group>"; };
 		96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSDropDownMenu.m; sourceTree = "<group>"; };
+		96D094931CCB901F00066770 /* LikeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeListCell.h; sourceTree = "<group>"; };
+		96D094941CCB901F00066770 /* LikeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeListCell.m; sourceTree = "<group>"; };
+		96D094961CCCB9CC00066770 /* MemberProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberProfileViewController.h; sourceTree = "<group>"; };
+		96D094971CCCB9CC00066770 /* MemberProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberProfileViewController.m; sourceTree = "<group>"; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1520,6 +1526,8 @@
 				96B221FB1CA2B7FF000831CE /* WantView.h */,
 				96B221FC1CA2B7FF000831CE /* WantView.m */,
 				96B221FE1CA2B80E000831CE /* WantView.xib */,
+				96D094931CCB901F00066770 /* LikeListCell.h */,
+				96D094941CCB901F00066770 /* LikeListCell.m */,
 			);
 			name = SubViewClass;
 			sourceTree = "<group>";
@@ -1603,6 +1611,8 @@
 			children = (
 				2AD3E8D91B80313E00B2264B /* AddMemberShipViewController.h */,
 				2AD3E8DA1B80313E00B2264B /* AddMemberShipViewController.m */,
+				96D094961CCCB9CC00066770 /* MemberProfileViewController.h */,
+				96D094971CCCB9CC00066770 /* MemberProfileViewController.m */,
 			);
 			name = AddMemberVC;
 			sourceTree = "<group>";
@@ -2147,6 +2157,7 @@
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
 				96BFE57E1CB7840700EB7FAF /* ClassViewController.m in Sources */,
+				96D094981CCCB9CC00066770 /* MemberProfileViewController.m in Sources */,
 				2A2E3E601BDF994E0021B3FC /* PhotoBroswerVC.m in Sources */,
 				01187BD41BF2277900CF8FB9 /* GBMainEntranceViewController.m in Sources */,
 				2A2E3E731BDF994E0021B3FC /* GBImagePickerBehavior.m in Sources */,
@@ -2201,6 +2212,7 @@
 				01E55A0C1CB5367B0093E114 /* UpLoadPictureCollectionViewCell.m in Sources */,
 				969AE4791C368FDF00136F13 /* MJRefreshConst.m in Sources */,
 				2A2E3E631BDF994E0021B3FC /* ELCAsset.m in Sources */,
+				96D094951CCB901F00066770 /* LikeListCell.m in Sources */,
 				2A2E3E661BDF994E0021B3FC /* ELCConsole.m in Sources */,
 				2ADE53811B8968F000E80AD5 /* ComSettingsTableViewController.m in Sources */,
 				2A33B6371B665F7400535FE4 /* ShopLastTableViewController.m in Sources */,

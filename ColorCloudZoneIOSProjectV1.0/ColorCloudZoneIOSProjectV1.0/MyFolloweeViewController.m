@@ -28,6 +28,7 @@ static NSString * CellRusedIdentifier = @"FolloweeTableViewCell";
     [super viewDidLoad];
     // Do any t setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets  = NO;
+    self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView addHeaderWithTarget:self action:@selector(tableViewPullDown)];
     [self.tableView addFooterWithTarget:self action:@selector(tableViewPullUp)];

@@ -89,6 +89,7 @@
 @property (nonatomic, assign) BOOL isCollected;
 @property (nonatomic, assign) NSDate * date;
 
+- (instancetype)initWithDictionary:(NSDictionary*)dict;
 + (NSURLSessionDataTask *)getClassListWithBlock:(void(^)(NSArray * classList, NSError * error))block;
 + (NSURLSessionDataTask *)getSortListByClassId:(NSString *)classId withBlock:(void(^)(NSArray * sortList, NSError * error))block;
 + (NSURLSessionDataTask *)getTypeListWithBlock:(void(^)(NSArray * typeList, NSError * error))block;
