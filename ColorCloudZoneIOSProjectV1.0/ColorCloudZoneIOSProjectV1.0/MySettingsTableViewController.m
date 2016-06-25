@@ -14,7 +14,7 @@
 #import "LoginAndRegistNaviController.h"
 #import "CCUser.h"
 #import "CCFile.h"
-
+#import "PersonProfileViewController.h"
 @interface MySettingsTableViewController () <UIActionSheetDelegate>
 
 @end
@@ -29,6 +29,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClicked:)];
+    self.navigationItem.rightBarButtonItem = item;
 
 }
 
@@ -41,6 +44,12 @@
     self.phoneNumberLabel.text = [CCUser currentUser].mobile;
     self.saleMarketNameLabel.text = [CCUser currentUser].saleMarketName;
     [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
+}
+
+- (IBAction)editClicked:(id)sender
+{
+    PersonProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PersonProfileViewController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

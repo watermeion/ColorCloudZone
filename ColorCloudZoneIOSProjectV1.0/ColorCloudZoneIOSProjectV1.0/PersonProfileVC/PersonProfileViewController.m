@@ -110,7 +110,44 @@
             }
         }];
     } else {
-        
+        [SVProgressHUD showWithStatus:@"正在提交" maskType:SVProgressHUDMaskTypeBlack];
+        if (self.avatar) {
+            [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+                if (error) {
+                    [SVProgressHUD showErrorWithStatus:@"头像上传失败"];
+                    return ;
+                } else {
+                    [CCUser currentUser].headImgUrl = url;
+                    
+                    [CCUser currentUser].mallName = self.shopNameTextField.text;
+                    [CCUser currentUser].ownerName = self.ownerNameTextField.text;
+                    [CCUser currentUser].address = self.addressTextField.text;
+                    [CCUser editUserInfoWithBlock:^(BOOL succeed, NSError *error) {
+                        [SVProgressHUD dismiss];
+                        if (!error) {
+                            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else {
+                            [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                        }
+                    }];
+                }
+            }];
+        } else {
+            [CCUser currentUser].mallName = self.shopNameTextField.text;
+            [CCUser currentUser].ownerName = self.ownerNameTextField.text;
+            [CCUser currentUser].address = self.addressTextField.text;
+            [CCUser editUserInfoWithBlock:^(BOOL succeed, NSError *error) {
+                [SVProgressHUD dismiss];
+                if (!error) {
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                }
+            }];
+        }
+
     }
     
 }

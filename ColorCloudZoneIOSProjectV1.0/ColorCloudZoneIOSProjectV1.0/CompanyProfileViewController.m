@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([CCUser currentUser]) {
-        
         [self.avaterImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
         self.comNameTextField.text = [CCUser currentUser].factoryName;
         self.ownerTextField.text = [CCUser currentUser].ownerName;
@@ -128,10 +127,52 @@
                 }];
             }
         }];
-        
-        
     } else {
-        
+        [SVProgressHUD showWithStatus:@"正在提交" maskType:SVProgressHUDMaskTypeBlack];
+        if (self.avatar) {
+            [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+                if (error) {
+                    [SVProgressHUD showErrorWithStatus:@"头像上传失败"];
+                    return ;
+                } else {
+                    [CCUser currentUser].headImgUrl = url;
+                    
+                    [CCUser currentUser].factoryName = _comNameTextField.text;
+                    [CCUser currentUser].address = _comAddressTextField.text;
+                    [CCUser currentUser].cardNum = _cardNumTextField.text;
+                    [CCUser currentUser].alipayNum = _zfbNumTextField.text;
+                    [CCUser currentUser].ownerName = _ownerTextField.text;
+                    [CCUser currentUser].remark = _remarkTextField.text;
+                    [CCUser currentUser].addrInMarket = _addressDetailTextField.text;
+                    [CCUser editUserInfoWithBlock:^(BOOL succeed, NSError *error) {
+                        [SVProgressHUD dismiss];
+                        if (!error) {
+                            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else {
+                            [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                        }
+                    }];
+                }
+            }];
+        } else {
+            [CCUser currentUser].factoryName = _comNameTextField.text;
+            [CCUser currentUser].address = _comAddressTextField.text;
+            [CCUser currentUser].cardNum = _cardNumTextField.text;
+            [CCUser currentUser].alipayNum = _zfbNumTextField.text;
+            [CCUser currentUser].ownerName = _ownerTextField.text;
+            [CCUser currentUser].remark = _remarkTextField.text;
+            [CCUser currentUser].addrInMarket = _addressDetailTextField.text;
+            [CCUser editUserInfoWithBlock:^(BOOL succeed, NSError *error) {
+                [SVProgressHUD dismiss];
+                if (!error) {
+                    [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [SVProgressHUD showErrorWithStatus:@"修改失败"];
+                }
+            }];
+        }
     }
     
 }

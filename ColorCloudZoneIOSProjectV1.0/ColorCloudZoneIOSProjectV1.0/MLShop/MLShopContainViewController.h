@@ -10,9 +10,11 @@
 #import "GBCustomViewController.h"
 #import "CustomSelectionBarView.h"
 #import "MarketViewController.h"
+#import "CCUser.h"
 
 @interface MLShopContainViewController : GBCustomViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, CustomSelectionBarViewDelegate, MarketViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UIViewController * parentVC;
+@property (strong, nonatomic) CCUser * parentUser;
 @end

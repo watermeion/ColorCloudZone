@@ -96,7 +96,7 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"正在上传..." maskType:SVProgressHUDMaskTypeBlack];
         [CCFile uploadImage:editedImage withProgress:nil completionBlock:^(NSString *url, NSError *error) {
             if (error) {
                 [SVProgressHUD dismiss];

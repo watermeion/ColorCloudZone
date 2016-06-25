@@ -82,7 +82,7 @@
             }
         }];
     } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
-        [CCItem getItemListByHottest:YES forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+        [CCItem getItemListByHottest:YES forFactory:(self.parentUser?self.parentUser:[CCUser currentUser]).userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
             [self.collectionView headerEndRefreshing];
             if (!error) {
                 _hottestDataArray = [[NSMutableArray alloc] initWithArray:itemList];
@@ -116,7 +116,7 @@
             }
         }];
     } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
-        [CCItem getItemListByHottest:YES forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
+        [CCItem getItemListByHottest:YES forFactory:(self.parentUser?self.parentUser:[CCUser currentUser]).userId withLimit:QueryLimit skip:_hottestDataArray.count block:^(NSArray *itemList, NSError *error) {
             [self.collectionView footerEndRefreshing];
             if (!error) {
                 if (!_hottestDataArray) _hottestDataArray = [NSMutableArray array];
@@ -147,7 +147,7 @@
             }
         }];
     } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
-        [CCItem getItemListByHottest:NO forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
+        [CCItem getItemListByHottest:NO forFactory:(self.parentUser?self.parentUser:[CCUser currentUser]).userId withLimit:QueryLimit skip:0 block:^(NSArray *itemList, NSError *error) {
             [self.tableView headerEndRefreshing];
             if (!error) {
                 _newestDataArray = [NSMutableArray arrayWithArray:itemList];
@@ -181,7 +181,7 @@
             }
         }];
     } else if ([self. parentVC isKindOfClass:[SupplierViewController class]]) {
-        [CCItem getItemListByHottest:NO forFactory:[CCUser currentUser].userId withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *itemList, NSError *error) {
+        [CCItem getItemListByHottest:NO forFactory:(self.parentUser?self.parentUser:[CCUser currentUser]).userId withLimit:QueryLimit skip:_newestDataArray.count block:^(NSArray *itemList, NSError *error) {
             [self.tableView footerEndRefreshing];
             if (!error) {
                 if (!_newestDataArray) _newestDataArray = [NSMutableArray array];

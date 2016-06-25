@@ -47,6 +47,7 @@ static const NSInteger kQueryLimit = 50;
 
 @property (strong, nonatomic) NSArray * menuItems;
 @property (strong, nonatomic) NSMutableArray * likeList;
+@property (strong, nonatomic) CCUser * factory;
 
 
 @end
@@ -112,6 +113,7 @@ static const NSInteger kQueryLimit = 50;
             if (error) {
                 
             } else {
+                self.factory = factory;
                 self.factoryName.text = factory.factoryName;
                 self.factoryPhone.text = factory.mobile;
                 [self.factoryAvatar sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
@@ -382,8 +384,15 @@ static const NSInteger kQueryLimit = 50;
         }
     }];
 }
+
+
 - (IBAction)enterFactoryClicked:(id)sender {
+    SupplierViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"SupplierViewController"];
+    vc.parentUser = self.factory;
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 - (IBAction)callFactoryClicked:(id)sender {
     NSString * str=[NSString stringWithFormat:@"telprompt://%@",self.factoryPhone.text];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];

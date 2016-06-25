@@ -24,26 +24,29 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //设置NavigationBar
-    UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
-                                                initWithImage:[UIImage imageNamed:@"moreBarIcon_black.png"]
-                                                style:UIBarButtonItemStylePlain
-                                                target:self
-                                                action:@selector(moreFeaturesLeftBarAction:)];
-    
-    moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
-    
-    
-    self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
-    self.navigationItem.title = @"我的市场";
+    CCUser * factory = [CCUser currentUser];
+    if (self.parentUser) {
+        factory = self.parentUser;
+        self.navigationItem.title = [factory.factoryName stringByAppendingString:@"的市场"];
+        [self.uploadButton removeFromSuperview];
+    } else {
+        //设置NavigationBar
+        UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
+                                                    initWithImage:[UIImage imageNamed:@"moreBarIcon_black.png"]
+                                                    style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(moreFeaturesLeftBarAction:)];
+        moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+        self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
+        self.navigationItem.title = @"我的市场";
+    }
     
     self.avatarImageView.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
     
-    self.nameLabel.text = [CCUser currentUser].factoryName;
-    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
-//    [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:cover.url]];
+    self.nameLabel.text = factory.factoryName;
+    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
+    [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.coverUrl]];
     
 
     // Do any additional setup after loading the view.
@@ -112,28 +115,20 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         [SVProgressHUD showWithStatus:@"正在上传..." maskType:SVProgressHUDMaskTypeBlack];
-        AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
-        [manufacture fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-//        [manufacture fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-            if (!error) {
-                AVFile * cover = [AVFile fileWithData:UIImageJPEGRepresentation(editedImage, 0.8)];
-                [cover saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [manufacture setObject:cover forKey:@"cover"];
-                        [manufacture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            if (succeeded) {
-                                [SVProgressHUD showSuccessWithStatus:@"上传成功"];
-                                self.coverImageView.image = editedImage;
-                            } else {
-                                [SVProgressHUD showErrorWithStatus:@"上传失败"];
-                            }
-                        }];
+        [CCFile uploadImage:editedImage withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            if (error) {
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            } else {
+                [CCUser setUserCover:url withBlock:^(BOOL succeed, NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (succeed) {
+                        [SVProgressHUD showSuccessWithStatus:@"上传成功"];
+                        self.coverImageView.image = editedImage;
                     } else {
                         [SVProgressHUD showErrorWithStatus:@"上传失败"];
                     }
                 }];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"上传失败"];
             }
         }];
     }];
@@ -149,6 +144,7 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     if ([segue.identifier isEqualToString:kMLSupplierContainerPushSegue]) {
         MLShopContainViewController * vc = (MLShopContainViewController*)segue.destinationViewController;
         vc.parentVC = self;
+        vc.parentUser = self.parentUser;
         self.selectionBar.delegate = vc;
     }
 }

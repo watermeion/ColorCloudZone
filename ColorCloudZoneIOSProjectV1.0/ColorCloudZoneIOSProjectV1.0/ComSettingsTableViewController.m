@@ -13,6 +13,7 @@
 #import "LoginAndRegistNaviController.h"
 #import "CCUser.h"
 #import "CCFile.h"
+#import "CompanyProfileViewController.h"
 @interface ComSettingsTableViewController () <UIActionSheetDelegate>
 
 @end
@@ -26,7 +27,9 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.ediButtonItem;
+    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClicked:)];
+    self.navigationItem.rightBarButtonItem = item;
+    
     _idLabel.text = [NSString stringWithFormat:@"ID: %@",[CCUser currentUser].userId];
     _nameLabel.text = [CCUser currentUser].ownerName;
     [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
@@ -39,6 +42,12 @@
     _zfbLabel.text = [CCUser currentUser].alipayNum;
     _phoneNumberLabel.text = [CCUser currentUser].mobile;
     
+}
+
+- (IBAction)editClicked:(id)sender
+{
+    CompanyProfileViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"CompanyProfileViewController"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
