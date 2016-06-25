@@ -64,6 +64,50 @@
     return self;
 }
 @end
+@implementation CCItemStatisticsProp
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    
+    self = [super init];
+    if (self) {
+        self.name1 = [dict ccJsonString:kItemStatisticsPropName1];
+        self.name2 = [dict ccJsonString:kItemStatisticsPropName2];
+        self.value1 = [dict ccJsonString:kItemStatisticsPropValue1];
+        self.value2 = [dict ccJsonString:kItemStatisticsPropValue2];
+        self.count = [dict ccJsonInteger:kItemStatisticsPropCount];
+    }
+    return self;
+}
+
+@end
+
+@implementation CCItemFactoryStatisticsProp
+
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    
+    self = [super init];
+    if (self) {
+        self.name = [dict ccJsonString:@"value"];
+        self.value = [dict ccJsonString:kItemStatisticsPropValue1];
+        if (!self.value) self.value = [dict ccJsonString:kItemStatisticsPropValue2];
+        self.count = [dict ccJsonInteger:kItemStatisticsPropCount];
+        NSArray * skus = [dict ccJsonArray:@"sku"];
+        if (skus && [skus isKindOfClass:[NSArray class]]) {
+            NSMutableArray * skuTemp = [NSMutableArray array];
+            for (NSDictionary * skuDict in skus) {
+                CCItemFactoryStatisticsProp * prop = [[CCItemFactoryStatisticsProp alloc] initWithDictionary:skuDict];
+                [skuTemp addObject:prop];
+            }
+            if (skuTemp.count > 0) {
+                self.sku = [NSArray arrayWithArray:skuTemp];
+            }
+        }
+    }
+    return self;
+}
+@end
 
 @implementation CCItem
 - (instancetype)init
@@ -386,6 +430,21 @@
     }];
 }
 
++ (NSURLSessionDataTask *)editItemInfo:(CCItem *)item withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = [item genarateDictionary];
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemEditInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+}
+
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forFactory:(NSString *)factoryId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
 {
     NSDictionary * params = @{kItemFactoryId : factoryId,
@@ -596,6 +655,68 @@
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(NO, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getMallItemStatistics:(CCItem *)item withBlock:(void (^)(NSInteger, NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemId : item.itemId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemMallItemStatistics params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block(0, nil, nil);
+                return ;
+            }
+            NSDictionary * itemInfo = [data ccJsonDictionary:@"item_info"];
+            item.factoryName = [itemInfo ccJsonString:@"factory_name"];
+            NSDictionary * statistics = [data ccJsonDictionary:@"statistics"];
+            if ([statistics isKindOfClass:[NSDictionary class]]) {
+                NSInteger totalCount = [statistics ccJsonInteger:@"totalCount"];
+                NSArray * skuInfo = [statistics ccJsonArray:@"sku_info"];
+                NSMutableArray * skuInfos = [NSMutableArray array];
+                if ([skuInfo isKindOfClass:[NSArray class]]) {
+                    for (NSDictionary * dict in skuInfo) {
+                        CCItemStatisticsProp * prop = [[CCItemStatisticsProp alloc] initWithDictionary:dict];
+                        [skuInfos addObject:prop];
+                    }
+                }
+                block(totalCount, skuInfos, nil);
+            } else block(0, nil, nil);
+        } else {
+            block(0, nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(0, nil, error);
+    }];
+}
+
++ (NSURLSessionDataTask *)getFactoryItemStatistics:(CCItem *)item withBlock:(void (^)(NSArray *, NSError *))block
+{
+    NSDictionary * params = @{kItemId : item.itemId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ItemFactoryItemStatistics params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block(nil, nil);
+                return ;
+            }
+            NSDictionary * statistics = [data ccJsonDictionary:@"member_like_info"];
+            if ([statistics isKindOfClass:[NSArray class]]) {
+                NSMutableArray * skuInfos = [NSMutableArray array];
+                for (NSDictionary * skuDict in statistics) {
+                    CCItemFactoryStatisticsProp * prop = [[CCItemFactoryStatisticsProp alloc] initWithDictionary:skuDict];
+                    [skuInfos addObject:prop];
+                }
+                block(skuInfos, nil);
+            } else block(nil, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
     }];
 }
 

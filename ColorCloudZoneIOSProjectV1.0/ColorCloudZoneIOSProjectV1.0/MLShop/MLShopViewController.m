@@ -57,11 +57,7 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
       [KxMenuItem menuItem:@"更换背景"
                      image:nil
                     target:self
-                    action:@selector(changeBackground:)],
-      [KxMenuItem menuItem:@"统计"
-                     image:nil
-                    target:nil
-                    action:NULL]
+                    action:@selector(changeBackground:)]
       ];
     
     [KxMenu showMenuInView:self.navigationController.view

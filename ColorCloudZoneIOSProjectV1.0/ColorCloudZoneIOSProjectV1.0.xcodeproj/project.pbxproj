@@ -203,6 +203,9 @@
 		3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3C1B92EA640048A0A3 /* CALayer+GYBAddtion.m */; };
 		3BD9AD401B92F02C0048A0A3 /* RequestSMSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */; };
 		92019E41A28FB4A37AE5890A /* libPods-ColorCloudZoneIOSProjectV1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */; };
+		96081C011D1BC9CB008C717F /* MallItemStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081C001D1BC9CB008C717F /* MallItemStatisticsViewController.m */; };
+		96081C041D1BC9DD008C717F /* FactoryItemStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081C031D1BC9DD008C717F /* FactoryItemStatisticsViewController.m */; };
+		96081C071D1CDBD4008C717F /* MallItemPropCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96081C061D1CDBD4008C717F /* MallItemPropCell.m */; };
 		9616E5BB1C3F9407008521AB /* CollectAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9616E5BA1C3F9407008521AB /* CollectAlertView.xib */; };
 		9616E5BE1C3F941F008521AB /* CollectAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9616E5BD1C3F941F008521AB /* CollectAlertView.m */; };
 		9662FC261C26EE21000FE951 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9662FC251C26EE21000FE951 /* VPImageCropperViewController.m */; };
@@ -578,6 +581,12 @@
 		3BD9AD3E1B92F02C0048A0A3 /* RequestSMSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestSMSViewController.h; sourceTree = "<group>"; };
 		3BD9AD3F1B92F02C0048A0A3 /* RequestSMSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestSMSViewController.m; sourceTree = "<group>"; };
 		6171E3128D8486A6B1B72696 /* libPods-ColorCloudZoneIOSProjectV1.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorCloudZoneIOSProjectV1.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96081BFF1D1BC9CB008C717F /* MallItemStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallItemStatisticsViewController.h; sourceTree = "<group>"; };
+		96081C001D1BC9CB008C717F /* MallItemStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallItemStatisticsViewController.m; sourceTree = "<group>"; };
+		96081C021D1BC9DD008C717F /* FactoryItemStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactoryItemStatisticsViewController.h; sourceTree = "<group>"; };
+		96081C031D1BC9DD008C717F /* FactoryItemStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FactoryItemStatisticsViewController.m; sourceTree = "<group>"; };
+		96081C051D1CDBD4008C717F /* MallItemPropCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallItemPropCell.h; sourceTree = "<group>"; };
+		96081C061D1CDBD4008C717F /* MallItemPropCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallItemPropCell.m; sourceTree = "<group>"; };
 		9616E5BA1C3F9407008521AB /* CollectAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectAlertView.xib; sourceTree = "<group>"; };
 		9616E5BC1C3F941F008521AB /* CollectAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectAlertView.h; sourceTree = "<group>"; };
 		9616E5BD1C3F941F008521AB /* CollectAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectAlertView.m; sourceTree = "<group>"; };
@@ -1538,6 +1547,12 @@
 				2AACC6F51B7640A30065216C /* SubViewClass */,
 				2ABBB1141B7250C700DA2A9A /* GoodDetailViewController.h */,
 				2ABBB1151B7250C700DA2A9A /* GoodDetailViewController.m */,
+				96081BFF1D1BC9CB008C717F /* MallItemStatisticsViewController.h */,
+				96081C001D1BC9CB008C717F /* MallItemStatisticsViewController.m */,
+				96081C051D1CDBD4008C717F /* MallItemPropCell.h */,
+				96081C061D1CDBD4008C717F /* MallItemPropCell.m */,
+				96081C021D1BC9DD008C717F /* FactoryItemStatisticsViewController.h */,
+				96081C031D1BC9DD008C717F /* FactoryItemStatisticsViewController.m */,
 			);
 			name = GoodDetailVC;
 			sourceTree = "<group>";
@@ -1884,7 +1899,6 @@
 				TargetAttributes = {
 					2A85DACC1B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7946C3CJS9;
 					};
 					2A85DAE51B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2084,6 +2098,7 @@
 				014052EF1BE46DA800E5C1F2 /* GBTableViewSelectorController.m in Sources */,
 				2A2E3E2D1BDF994E0021B3FC /* NSDate+Extend.m in Sources */,
 				967B920A1C62F69500E604BE /* GBSubClass.m in Sources */,
+				96081C071D1CDBD4008C717F /* MallItemPropCell.m in Sources */,
 				96BFE5811CB7841700EB7FAF /* SortViewController.m in Sources */,
 				2A2E3E2C1BDF994E0021B3FC /* NSArray+Extend.m in Sources */,
 				96B221FA1CA127B5000831CE /* CCFactory.m in Sources */,
@@ -2138,6 +2153,7 @@
 				3BD9AD351B92D5E10048A0A3 /* RegisterViewController.m in Sources */,
 				967B92141C63175A00E604BE /* NSString+MD5.m in Sources */,
 				96A593ED1CAD514F00082116 /* AreaViewController.m in Sources */,
+				96081C041D1BC9DD008C717F /* FactoryItemStatisticsViewController.m in Sources */,
 				967B92081C62F69500E604BE /* CCUser.m in Sources */,
 				96B221FD1CA2B7FF000831CE /* WantView.m in Sources */,
 				96BFE58D1CB7851500EB7FAF /* MaterialViewController.m in Sources */,
@@ -2157,6 +2173,7 @@
 				2ADE53901B896D7C00E80AD5 /* FolloweeTableViewCell.m in Sources */,
 				3BD9AD3D1B92EA640048A0A3 /* CALayer+GYBAddtion.m in Sources */,
 				96BFE57E1CB7840700EB7FAF /* ClassViewController.m in Sources */,
+				96081C011D1BC9CB008C717F /* MallItemStatisticsViewController.m in Sources */,
 				96D094981CCCB9CC00066770 /* MemberProfileViewController.m in Sources */,
 				2A2E3E601BDF994E0021B3FC /* PhotoBroswerVC.m in Sources */,
 				01187BD41BF2277900CF8FB9 /* GBMainEntranceViewController.m in Sources */,

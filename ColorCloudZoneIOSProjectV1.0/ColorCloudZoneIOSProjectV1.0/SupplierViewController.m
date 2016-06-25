@@ -63,10 +63,6 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
                      image:nil
                     target:self
                     action:@selector(changeBackground:)],
-      [KxMenuItem menuItem:@"统计"
-                     image:nil
-                    target:nil
-                    action:NULL],
       [KxMenuItem menuItem:@"我的设置"
                      image:nil
                     target:self
@@ -115,7 +111,7 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        [SVProgressHUD showWithStatus:@"正在添加..." maskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"正在上传..." maskType:SVProgressHUDMaskTypeBlack];
         AVObject * manufacture = [[AVUser currentUser] objectForKey:@"manufacture"];
         [manufacture fetchInBackgroundWithBlock:^(AVObject *object, NSError *error) {
 //        [manufacture fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {

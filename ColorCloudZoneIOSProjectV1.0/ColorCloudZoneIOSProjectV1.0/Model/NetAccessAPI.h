@@ -51,10 +51,13 @@
 #define ItemWantItem @"wearcloud.MemberCollect.collectItem"
 #define ItemGetFactoryInfo @"wearcloud.item.getItemFactoryInfo"
 #define ItemGetLikeList @"wearcloud.item.getItemMemberInfo"
+#define ItemMallItemStatistics @"wearcloud.statistics.getMallItemStatistics"
+#define ItemFactoryItemStatistics @"wearcloud.statistics.getStatisticsByItemId"
 
 #define MemberAdd @"wearcloud.member.addMember"
 #define MemberIsCollectItem @"wearcloud.MemberCollect.isCollectItem"
 #define MemberGetMemberList @"wearcloud.member.getMemberList"
 #define MemberGetLikeList @"wearcloud.MemberCollect.getItemListByDate"
+#define MemberCheckRegister @"wearcloud.member.checkMemberRegister"
 
 #endif /* NetAccessAPI_h */

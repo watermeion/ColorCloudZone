@@ -40,6 +40,14 @@
 #define kItemDate               @"date"
 #define kItemHottest            @"condition"
 #define kItemIsCollected        @"is_collected"
+#define kItemStatisticsPropName1    @"property_name1"
+#define kItemStatisticsPropName2    @"property_name2"
+#define kItemStatisticsPropValue1   @"property_value1"
+#define kItemStatisticsPropValue2   @"property_value2"
+#define kItemStatisticsPropCount    @"count"
+
+#define kItemStatisticsProp
+
 
 @interface CCItemType : NSObject
 @property (nonatomic, strong) NSString * typeId;
@@ -66,10 +74,26 @@
 @property (nonatomic, strong) NSString * value;
 @end
 
+@interface CCItemStatisticsProp : NSObject
+@property (nonatomic, strong) NSString * name1;
+@property (nonatomic, strong) NSString * value1;
+@property (nonatomic, strong) NSString * name2;
+@property (nonatomic, strong) NSString * value2;
+@property (nonatomic, assign) NSInteger count;
+@end
+
+@interface CCItemFactoryStatisticsProp : NSObject
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * value;
+@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSArray * sku;
+@end
+
 @interface CCItem : NSObject
 @property (nonatomic, strong) NSString * itemId;
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * factoryId;
+@property (nonatomic, strong) NSString * factoryName;
 @property (nonatomic, strong) NSString * SN;
 @property (nonatomic, strong) CCItemClass * itemClass;
 @property (nonatomic, strong) CCItemSort * itemSort;
@@ -99,6 +123,7 @@
 + (NSURLSessionDataTask *)getSizeListByTypeId:(NSString *)typeId withBlock:(void(^)(NSArray * sizeList, NSError * error))block
 ;
 + (NSURLSessionDataTask *)uploadItem:(CCItem *)item withBlock:(void(^)(CCItem * item, NSError * error))block;
++ (NSURLSessionDataTask *)editItemInfo:(CCItem *)item withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forFactory:(NSString *)factoryId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest forMall:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * itemList, NSError * error))block;
 + (NSURLSessionDataTask *)getItemListByHottest:(BOOL)hottest
@@ -118,4 +143,6 @@
 + (NSURLSessionDataTask *)collect:(BOOL)collect item:(CCItem *)item price:(float)price withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)want:(BOOL)want item:(CCItem *)item color:(CCItemPropertyValue *)color size:(CCItemPropertyValue *)size byMemberMobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)unsellItem:(CCItem *)item withBlock:(void(^)(BOOL succeed, NSError *error))block;
++ (NSURLSessionDataTask *)getMallItemStatistics:(CCItem *)item withBlock:(void(^)(NSInteger totalCount, NSArray * skuInfos, NSError *error))block;
++ (NSURLSessionDataTask *)getFactoryItemStatistics:(CCItem *)item withBlock:(void(^)(NSArray * skuInfos, NSError *error))block;
 @end

@@ -197,7 +197,7 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
         return;
     }
     if (!(_itemSerialNum.text.length > 0)) {
-        [SVProgressHUD showErrorWithStatus:@"请填写商品款号"];
+        [SVProgressHUD showErrorWithStatus:@"请填写商品货号"];
         return;
     }
     if (!(_itemWholeSalePrice.text.length > 0)) {

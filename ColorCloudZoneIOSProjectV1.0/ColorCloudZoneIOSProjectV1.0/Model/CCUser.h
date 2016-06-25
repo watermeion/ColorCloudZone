@@ -38,6 +38,7 @@
 #define kUserTotalNum           @"total_num"
 #define kUserCoverUrl           @"background_pic"
 
+#define kMemberId               kUserId
 #define kMemberMobile           kUserMobile
 #define kMemberAddress          @"address_detail"
 #define kMemberUsername         @"username"
@@ -63,6 +64,7 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 @end
 
 @interface CCMember : NSObject
+@property (nonatomic, strong) NSString * memberId;
 @property (nonatomic, strong) NSString * headImgUrl;
 @property (nonatomic, strong) NSString * mobile;
 @property (nonatomic, strong) NSString * address;
@@ -122,9 +124,11 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (NSURLSessionDataTask *)follow:(BOOL)follow factory:(NSString *)factoryId withBlock:(void(^)(BOOL success, NSError * error))block;
 + (NSURLSessionDataTask *)getFollowedFactoryListWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * followList, NSError * error))block;
 
-+ (NSURLSessionDataTask *)editUserInfo:(CCUser*)user withBlock:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)editUserInfoWithBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)setUserCover:(NSString *)url withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)getBannerWithBlock:(void(^)(NSArray * banner, NSError *error))block;
 + (NSURLSessionDataTask *)getLikeListOfMember:(CCMember *)member withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * likeList, NSError * error))block;
+
++ (NSURLSessionDataTask *)checkMemberRegisteredByMobile:(NSString *)mobile withBlock:(void(^)(BOOL registered, NSError * error))block;
 
 @end

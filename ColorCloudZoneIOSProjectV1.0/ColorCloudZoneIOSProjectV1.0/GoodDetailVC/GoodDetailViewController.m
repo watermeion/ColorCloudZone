@@ -22,6 +22,8 @@
 #import "DCPicScrollView.h"
 #import "DCWebImageManager.h"
 #import "LikeListCell.h"
+#import "MallItemStatisticsViewController.h"
+#import "FactoryItemStatisticsViewController.h"
 
 
 #define DescPictureOriginY 66
@@ -71,7 +73,7 @@ static const NSInteger kQueryLimit = 50;
     
     _likeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)self.parentItem.likeNum];
     _titleLabel.text = self.parentItem.name;
-    _itemSNLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
+    _itemSNLabel.text = [@"货号:" stringByAppendingString:self.parentItem.SN];
     _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
     [self setDescImages];
     [self setBannerView];
@@ -86,8 +88,8 @@ static const NSInteger kQueryLimit = 50;
                                      action:@selector(uncollect:)],
                        [KxMenuItem menuItem:@"统计"
                                       image:nil
-                                     target:nil
-                                     action:NULL]];
+                                     target:self
+                                     action:@selector(mallItemStatistics:)]];
         //厂家View不显示，想要CollectionView显示
         [self.factoryView removeFromSuperview];
         _likeListTitle.text = [NSString stringWithFormat:@"  %ld人喜欢", (long)self.parentItem.likeNum];
@@ -130,8 +132,8 @@ static const NSInteger kQueryLimit = 50;
                                      action:@selector(unsell:)],
                        [KxMenuItem menuItem:@"统计"
                                       image:nil
-                                     target:nil
-                                     action:NULL]];
+                                     target:self
+                                     action:@selector(factoryItemStatistics:)]];
         //厂家View和想要CollectionView都不显示
         [self.factoryView removeFromSuperview];
         [self.likeListView removeFromSuperview];
@@ -432,7 +434,7 @@ static const NSInteger kQueryLimit = 50;
     CollectAlertView *collectView = collectView = [nib objectAtIndex:0];
     collectView.delegate = self;
     collectView.titleLabel.text = self.parentItem.name;
-    collectView.SNLabel.text = [@"编号: " stringByAppendingString:self.parentItem.SN];
+    collectView.SNLabel.text = [@"货号: " stringByAppendingString:self.parentItem.SN];
     collectView.inPrice.text = [NSNumber numberWithFloat:self.parentItem.price].stringValue;
     [collectView showInView:self.view];
     
@@ -460,6 +462,20 @@ static const NSInteger kQueryLimit = 50;
     
 }
 
+- (IBAction)mallItemStatistics:(id)sender
+{
+    MallItemStatisticsViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MallItemStatisticsViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)factoryItemStatistics:(id)sender
+{
+    FactoryItemStatisticsViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"FactoryItemStatisticsViewController"];
+    vc.parentItem = self.parentItem;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 - (IBAction)want:(id)sender
 {
@@ -468,7 +484,7 @@ static const NSInteger kQueryLimit = 50;
     wantView.parentItem = self.parentItem;
     wantView.title.text = self.parentItem.name;
     wantView.price.text = [NSNumber numberWithFloat:self.parentItem.price].stringValue;
-    wantView.idLabel.text = [@"编号:" stringByAppendingString:self.parentItem.SN];
+    wantView.idLabel.text = [@"货号:" stringByAppendingString:self.parentItem.SN];
     [wantView.thumbnail sd_setImageWithURL:[CCFile ccURLWithString:self.parentItem.cover]];
     wantView.delegate = self;
     [wantView showInView:self.view];

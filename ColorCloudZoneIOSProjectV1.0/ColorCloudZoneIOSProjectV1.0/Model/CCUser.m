@@ -51,6 +51,7 @@ static CCUser * currentUserSingleton;
 {
     self = [super init];
     if (self) {
+        self.memberId = [dictionary ccJsonString:kMemberId];
         self.mobile = [dictionary ccJsonString:kMemberMobile];
         self.headImgUrl = [dictionary ccJsonString:kMemberHeadImgUrl];
         self.address = [dictionary ccJsonString:kMemberAddress];
@@ -135,7 +136,7 @@ static CCUser * currentUserSingleton;
     return currentUserSingleton;
 }
 
-+ (void)reloadCurrentAcnt
++ (void)reloadCurrentUser
 {
     NSDictionary * userDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUser"];
     if (userDict) currentUserSingleton = [[CCUser alloc] initWithDictionary:userDict];
@@ -455,9 +456,11 @@ static CCUser * currentUserSingleton;
     }];
 }
 
-+ (NSURLSessionDataTask *)editUserInfo:(CCUser *)user withBlock:(void (^)(BOOL, NSError *))block
+
+
++ (NSURLSessionDataTask *)editUserInfoWithBlock:(void (^)(BOOL, NSError *))block
 {
-    NSDictionary * params = [user generateDictionary];
+    NSDictionary * params = [[CCUser currentUser] generateDictionary];
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:EditUserInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode]==0) {
@@ -465,9 +468,11 @@ static CCUser * currentUserSingleton;
             [[NSUserDefaults standardUserDefaults] setObject:[[CCUser currentUser] generateDictionary] forKey:@"currentUser"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         } else {
+            [CCUser reloadCurrentUser];
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [CCUser reloadCurrentUser];
         block(nil, error);
     }];
 }
@@ -522,7 +527,7 @@ static CCUser * currentUserSingleton;
 
 + (NSURLSessionDataTask *)getLikeListOfMember:(CCMember *)member withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void (^)(NSArray *, NSError *))block
 {
-    NSDictionary * params = @{@"member_id" : member.mobile,
+    NSDictionary * params = @{@"member_id" : member.memberId,
                               kItemLimit : @(limit),
 //                              kItemSkip : @(skip),
                               @"FirstRow" : @(skip)};
@@ -546,5 +551,22 @@ static CCUser * currentUserSingleton;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(nil, error);
     }];
+}
+
++ (NSURLSessionDataTask *)checkMemberRegisteredByMobile:(NSString *)mobile withBlock:(void (^)(BOOL, NSError *))block
+{
+    NSDictionary * params = @{kMemberMobile : mobile};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:MemberCheckRegister params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            NSInteger data = [responseObject ccJsonInteger:@"data"];
+            block(data?YES : NO, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+
 }
 @end
