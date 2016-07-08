@@ -7,6 +7,8 @@
 //
 
 #import "ForgetPwdViewController.h"
+#import "SVProgressHud.h"
+#import "CCUser.h"
 
 @interface ForgetPwdViewController ()
 
@@ -17,13 +19,35 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked:)];
+    moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+    self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
+    self.navigationItem.title = @"重置密码";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (IBAction)doneClicked:(id)sender
+{
+    if (self.passwordTextField.text.length < 6) {
+        [SVProgressHUD showErrorWithStatus:@"请输入6位以上密码"];
+        return;
+    }
+    [CCUser findPwdWithMobile:self.mobile verifyCode:self.smsCode newPwd:self.passwordTextField.text block:^(BOOL succeed, NSError *error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"重置失败"];
+        } else {
+            if (succeed) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"重置失败"];
+            }
+        }
+    }];
+}
 /*
 #pragma mark - Navigation
 

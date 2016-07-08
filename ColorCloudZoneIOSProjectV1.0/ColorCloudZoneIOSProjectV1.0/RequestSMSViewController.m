@@ -11,7 +11,7 @@
 
 #import "SVProgressHUD.h"
 #import "CCAppDotNetClient.h"
-
+#import "ForgetPwdViewController.h"
 @interface RequestSMSViewController ()
 
 @end
@@ -72,14 +72,21 @@
             [SVProgressHUD showErrorWithStatus:@"验证失败"];
             
         } else {
-//            if (succeed) {
-                RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
-                self.registingUser.verifyCode = self.SMSCodeTextField.text;
-                vc.registingUser = self.registingUser;
-                [self.navigationController pushViewController:vc animated:YES];
-//            } else {
-//                [SVProgressHUD showErrorWithStatus:@"验证码错误"];
-//            }
+            if (succeed) {
+                if (self.registingUser.password) {
+                    RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
+                    self.registingUser.verifyCode = self.SMSCodeTextField.text;
+                    vc.registingUser = self.registingUser;
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    ForgetPwdViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ForgetPwdViewController"];
+                    vc.smsCode = self.SMSCodeTextField.text;
+                    vc.mobile = self.registingUser.mobile;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+            }
         }
     }];
 }

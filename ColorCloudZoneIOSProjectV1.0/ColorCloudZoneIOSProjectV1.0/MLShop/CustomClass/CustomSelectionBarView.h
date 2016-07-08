@@ -18,6 +18,9 @@ typedef NS_ENUM(NSUInteger, BtnSelectedAt) {
 
 - (void) btn1Selected:(CustomSelectionBarView*)view;
 - (void) btn2Selected:(CustomSelectionBarView*)view;
+@optional
+- (NSString *)button1Title;
+- (NSString *)button2Title;
 
 @end
 

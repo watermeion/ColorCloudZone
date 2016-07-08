@@ -24,6 +24,7 @@
 #import "LikeListCell.h"
 #import "MallItemStatisticsViewController.h"
 #import "FactoryItemStatisticsViewController.h"
+#import "UpLoadViewController.h"
 
 
 #define DescPictureOriginY 66
@@ -124,18 +125,20 @@ static const NSInteger kQueryLimit = 50;
     } else {
         self.wantView.hidden = YES;
         self.contactAndCollectView.hidden = YES;
-        _menuItems = @[[KxMenuItem menuItem:@"编辑"
-                                      image:nil
-                                     target:nil
-                                     action:NULL],
-                       [KxMenuItem menuItem:@"下架"
-                                      image:nil
-                                     target:self
-                                     action:@selector(unsell:)],
-                       [KxMenuItem menuItem:@"统计"
-                                      image:nil
-                                     target:self
-                                     action:@selector(factoryItemStatistics:)]];
+        if ([CCUser currentUser].role == UserRoleFactory) {
+            _menuItems = @[[KxMenuItem menuItem:@"编辑"
+                                          image:nil
+                                         target:self
+                                         action:@selector(editClicked:)],
+                           [KxMenuItem menuItem:@"下架"
+                                          image:nil
+                                         target:self
+                                         action:@selector(unsell:)],
+                           [KxMenuItem menuItem:@"统计"
+                                          image:nil
+                                         target:self
+                                         action:@selector(factoryItemStatistics:)]];
+        }
         //厂家View和想要CollectionView都不显示
         [self.factoryView removeFromSuperview];
         [self.likeListView removeFromSuperview];
@@ -464,6 +467,15 @@ static const NSInteger kQueryLimit = 50;
 
 - (void)collectAlertViewDidDismiss:(CollectAlertView *)view
 {
+}
+
+- (IBAction)editClicked:(id)sender
+{
+    UpLoadViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadViewController"];
+    
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)uncollect:(id)sender

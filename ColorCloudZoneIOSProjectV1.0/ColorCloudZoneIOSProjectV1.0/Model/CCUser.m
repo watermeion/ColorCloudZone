@@ -272,6 +272,39 @@ static CCUser * currentUserSingleton;
     }];
 }
 
++ (NSURLSessionDataTask *)modifyPwdWithOldPwd:(NSString *)oldPwd newPwd:(NSString *)newPwd block:(void(^)(BOOL succeed, NSError * error))block
+{
+    NSDictionary * params = @{@"old_password" : [oldPwd md5HexDigest],
+                              @"new_password" : [newPwd md5HexDigest]};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:ModifyPassword params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+}
++ (NSURLSessionDataTask *)findPwdWithMobile:(NSString *)mobile verifyCode:(NSString *)verifyCode newPwd:(NSString *)newPwd block:(void(^)(BOOL succeed, NSError * error))block
+{
+    NSDictionary * params = @{kUserMobile : mobile,
+                              kUserVerifyCode : verifyCode,
+                              @"new_password" : [newPwd md5HexDigest]};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:FindPassword params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode] == 0) {
+            block(YES, nil);
+        } else {
+            block(NO, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(NO, error);
+    }];
+}
+
+
 + (NSURLSessionDataTask *)getSaleMarketListWithBlock:(void(^)(NSArray * saleMarketList, NSError * error))block
 {
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetWholeSaleMarketList params:nil] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

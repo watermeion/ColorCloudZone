@@ -97,7 +97,7 @@
     self.uploadingImageNum = imageArray.count;
     self.uploadSucceedImageNum = 0;
     self.uploadFailiedImageNum = 0;
-    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张\n(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
     for (UIImage * image in imageArray) {
         [CCFile uploadImage:image withProgress:nil completionBlock:^(NSString *url, NSError *error) {
             if (error) {
@@ -107,10 +107,10 @@
                 [self.currentImageArray addObject:url];
                 [self.urlPlaceholderImage setValue:image forKey:url];
             }
-            [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
+            [SVProgressHUD showWithStatus:[NSString stringWithFormat:@"正在上传..共%ld张\n(成功%ld张/失败%ld张)", (long)self.uploadingImageNum, (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum] maskType:SVProgressHUDMaskTypeBlack];
             if (self.uploadSucceedImageNum + self.uploadFailiedImageNum == self.uploadingImageNum) {
                 [SVProgressHUD dismiss];
-                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"上传成功%ld张，失败%ld张)", (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum]];
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"上传成功%ld张，失败%ld张", (long)self.uploadSucceedImageNum, self.uploadFailiedImageNum]];
                 [self.collectionView reloadData];
             }
         }];

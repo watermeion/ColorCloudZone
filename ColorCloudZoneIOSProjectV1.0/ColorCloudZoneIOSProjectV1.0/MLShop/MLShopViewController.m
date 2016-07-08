@@ -30,18 +30,25 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
     moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
 
-    UIBarButtonItem *chatFeaturesLeftBarItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"chatIcon_black.png"] style:UIBarButtonItemStylePlain target:self action:@selector(chatFeaturesBarAction)];
+//    UIBarButtonItem *chatFeaturesLeftBarItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"chatIcon_black.png"] style:UIBarButtonItemStylePlain target:self action:@selector(chatFeaturesBarAction)];
+//
+//    chatFeaturesLeftBarItem.tintColor = [UIColor blackColor];
 
-    chatFeaturesLeftBarItem.tintColor = [UIColor blackColor];
-
-    self.navigationItem.rightBarButtonItems = @[ moreFeaturesLeftBarItem,chatFeaturesLeftBarItem ];
+//    self.navigationItem.rightBarButtonItems = @[ moreFeaturesLeftBarItem,chatFeaturesLeftBarItem ];
+    self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
     self.navigationItem.title = @"我的店铺";
 
     self.avatar.layer.masksToBounds = YES;
     self.avatar.layer.cornerRadius = self.avatar.bounds.size.width / 2.0;
+    if ([CCUser currentUser].coverUrl) [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].coverUrl]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     self.nameLabel.text = [CCUser currentUser].mallName;
     [self.avatar sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
-    if ([CCUser currentUser].coverUrl) [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].coverUrl]];
 }
 
 - (void)back

@@ -16,6 +16,7 @@
 #import "LoginAndRegistNaviController.h"
 #import "AppDelegate.h"
 #import "GBMainEntranceViewController.h"
+#import "RequestSMSViewController.h"
 typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
     LoginViewTextFieldPhone = 9977,
     LoginViewTextFieldPassword,
@@ -122,8 +123,16 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 }
 
 - (IBAction)forgetPwdAction:(id)sender {
+    if (![self isPhoneNumCorrect] ) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确手机号"];
+        return;
+    }
     
-    
+    RequestSMSViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RequestSMSViewController"];
+    CCUser * user = [[CCUser alloc] init];
+    user.mobile = self.phoneNunTextField.text;
+    vc.registingUser = user;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 @end

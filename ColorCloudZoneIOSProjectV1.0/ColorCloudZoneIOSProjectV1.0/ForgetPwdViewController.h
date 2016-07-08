@@ -10,8 +10,7 @@
 
 
 @interface ForgetPwdViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *idLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordComfirmLabel;
-
+@property (nonatomic, strong) NSString * mobile;
+@property (nonatomic, strong) NSString * smsCode;
 @end

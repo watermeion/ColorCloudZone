@@ -16,6 +16,8 @@
 #define SendVerifyCode @"wearcloud.user.sendVerifyCode"
 #define CheckVerifyCodeValid @"wearcloud.user.checkVerifyCodeValid"
 #define Signup @"wearcloud.user.signup"
+#define ModifyPassword @"wearcloud.user.setPassword"
+#define FindPassword @"wearcloud.user.findPassword"
 #define EditUserInfo @"wearcloud.user.editUserInfo"
 #define Logout @"wearcloud.user.logout"
 #define FollowFactory   @"wearcloud.mall.followFactory"

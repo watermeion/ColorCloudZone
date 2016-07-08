@@ -35,7 +35,6 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 
 @property (nonatomic, strong) NSMutableArray *choosePictures;
 
-@property (nonatomic, strong) CCItem * parentItem;
 @property (nonatomic) NSInteger pictureNum;
 
 @property (nonatomic) NSUInteger indexWillDelete;

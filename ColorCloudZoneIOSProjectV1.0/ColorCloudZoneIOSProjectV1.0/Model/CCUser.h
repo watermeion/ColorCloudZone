@@ -111,6 +111,8 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (NSURLSessionDataTask *)checkVerifyCode:(NSString *)code mobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)checkMobileRegistered:(NSString *)mobile withBlock:(void(^)(BOOL registered, NSError * error))block;
 + (NSURLSessionDataTask *)signupUser:(CCUser *)user withBlock:(void(^)(CCUser * user, NSError * error))block;
++ (NSURLSessionDataTask *)modifyPwdWithOldPwd:(NSString *)oldPwd newPwd:(NSString *)newPwd block:(void(^)(BOOL succeed, NSError * error))block;
++ (NSURLSessionDataTask *)findPwdWithMobile:(NSString *)mobile verifyCode:(NSString *)verifyCode newPwd:(NSString *)newPwd block:(void(^)(BOOL succeed, NSError * error))block;
 
 + (NSURLSessionDataTask *)getSaleMarketListWithBlock:(void(^)(NSArray * saleMarketList, NSError * error))block;
 + (NSURLSessionDataTask *)getProvinceListWithBlock:(void(^)(NSArray * provinceList, NSError * error))block;

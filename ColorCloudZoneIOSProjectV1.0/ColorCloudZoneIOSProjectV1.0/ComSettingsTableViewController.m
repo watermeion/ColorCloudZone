@@ -30,6 +30,11 @@
     UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClicked:)];
     self.navigationItem.rightBarButtonItem = item;
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
     _idLabel.text = [NSString stringWithFormat:@"ID: %@",[CCUser currentUser].userId];
     _nameLabel.text = [CCUser currentUser].ownerName;
     [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
@@ -41,7 +46,6 @@
     _cardLabel.text = [CCUser currentUser].cardNum;
     _zfbLabel.text = [CCUser currentUser].alipayNum;
     _phoneNumberLabel.text = [CCUser currentUser].mobile;
-    
 }
 
 - (IBAction)editClicked:(id)sender

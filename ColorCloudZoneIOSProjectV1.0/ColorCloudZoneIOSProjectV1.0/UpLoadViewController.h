@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GBTableViewSelectorBehavior.h"
+#import "CCItem.h"
 @interface UpLoadViewController : UIViewController
 
 @property (nonatomic) IBOutlet UITextField *itemName;
@@ -43,6 +44,6 @@
 //Property
 @property (nonatomic,readonly) NSInteger pictureNum;
 
-
+@property (nonatomic, strong) CCItem * parentItem;
 
 @end

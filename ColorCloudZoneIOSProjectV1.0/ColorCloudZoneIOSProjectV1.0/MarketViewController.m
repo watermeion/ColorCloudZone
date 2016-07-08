@@ -55,6 +55,7 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
     
     UIBarButtonItem * rightButton = [[UIBarButtonItem alloc] initWithTitle:@"我的关注" style:UIBarButtonItemStyleBordered target:self action:@selector(myFollowClicked:)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.title = @"";
     
     
     FSDropDownMenu *menu = [[FSDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:300];
@@ -100,6 +101,15 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 
 - (IBAction)saleMarketClicked:(id)sender
 {
+    FSDropDownMenu *menu = (FSDropDownMenu*)[self.view viewWithTag:1001];
+    if (menu.isShowing) {
+        [UIView animateWithDuration:0.1 animations:^{
+            
+        } completion:^(BOOL finished) {
+            [menu menuTapped];
+        }];
+    }
+    
     KxMenuItem * item = (KxMenuItem *)sender;
     NSInteger tag = item.tag;
     if (tag < self.saleMarketList.count) {

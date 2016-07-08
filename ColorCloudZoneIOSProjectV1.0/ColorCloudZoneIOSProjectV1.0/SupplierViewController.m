@@ -27,8 +27,10 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     CCUser * factory = [CCUser currentUser];
     if (self.parentUser) {
         factory = self.parentUser;
-        self.navigationItem.title = [factory.factoryName stringByAppendingString:@"的市场"];
-        [self.uploadButton removeFromSuperview];
+        self.navigationItem.title = factory.factoryName;
+        self.uploadButton.translatesAutoresizingMaskIntoConstraints = YES;
+        self.uploadButton.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 0);
+        self.uploadButton.hidden = YES;
     } else {
         //设置NavigationBar
         UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
@@ -44,12 +46,19 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     self.avatarImageView.layer.masksToBounds = YES;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.size.width / 2.0;
     
-    self.nameLabel.text = factory.factoryName;
-    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
-    [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.coverUrl]];
     
+    [self.coverImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.coverUrl]];
 
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    CCUser * factory = [CCUser currentUser];
+    self.nameLabel.text = factory.factoryName;
+    [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
 }
 
 - (void)didReceiveMemoryWarning {
