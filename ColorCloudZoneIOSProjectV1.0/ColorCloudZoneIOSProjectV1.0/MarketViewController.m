@@ -30,6 +30,10 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self setBannerView];
@@ -79,6 +83,14 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 
 - (IBAction)marketPressed:(id)sender
 {
+    FSDropDownMenu *menu = (FSDropDownMenu*)[self.view viewWithTag:1001];
+    if (menu.isShowing) {
+        [UIView animateWithDuration:0.1 animations:^{
+            
+        } completion:^(BOOL finished) {
+            [menu menuTapped];
+        }];
+    }
     [SVProgressHUD showWithStatus:@"正在获取列表"];
     [CCUser getSaleMarketListWithBlock:^(NSArray *saleMarketList, NSError *error) {
         [SVProgressHUD dismiss];
@@ -101,14 +113,7 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
 
 - (IBAction)saleMarketClicked:(id)sender
 {
-    FSDropDownMenu *menu = (FSDropDownMenu*)[self.view viewWithTag:1001];
-    if (menu.isShowing) {
-        [UIView animateWithDuration:0.1 animations:^{
-            
-        } completion:^(BOOL finished) {
-            [menu menuTapped];
-        }];
-    }
+    
     
     KxMenuItem * item = (KxMenuItem *)sender;
     NSInteger tag = item.tag;
@@ -169,7 +174,7 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
             
             //占位图片,你可以在下载图片失败处修改占位图片
             
-            picView.placeImage = [UIImage imageNamed:@"uialq.jpg"];
+            picView.placeImage = [UIImage imageNamed:@"bannerDefault"];
             
             //图片被点击事件,当前第几张图片被点击了,和数组顺序一致
             

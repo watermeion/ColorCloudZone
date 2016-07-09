@@ -7,6 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCUser.h"
+@class FolloweeTableViewCell;
+@protocol FolloweeTableViewCellDelegate <NSObject>
+
+- (void)followeeTableViewCellPhoneCallClicked:(FolloweeTableViewCell *)cell;
+- (void)followeeTableViewCellUnfollowClicked:(FolloweeTableViewCell *)cell;
+- (void)followeeTableViewCellEnterClicked:(FolloweeTableViewCell *)cell;
+
+@end
 
 @interface FolloweeTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *portraitImageView;
@@ -16,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastestNumLabel;
+@property (nonatomic, strong) CCUser * parentFactory;
+@property (weak, nonatomic) id<FolloweeTableViewCellDelegate> delegate;
 
 - (IBAction)cancelFollowingActon:(id)sender;
 

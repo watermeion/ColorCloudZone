@@ -173,15 +173,15 @@
     }
     
     NSDictionary * skuInfoDict =  [dictionary ccJsonDictionary:@"sku_info"];
-    NSDictionary * colorDict = [skuInfoDict ccJsonDictionary:@"property1"];
-    NSArray * colorValueDict = [colorDict ccJsonArray:@"value_list"];
+    NSDictionary * colorDict = [skuInfoDict isKindOfClass:[NSDictionary class]]?[skuInfoDict ccJsonDictionary:@"property1"] : nil;
+    NSArray * colorValueDict = [colorDict isKindOfClass:[NSDictionary class]]?[colorDict ccJsonArray:@"value_list"] : nil;
     self.colorProperty = [NSMutableArray array];
     for (NSDictionary * dict in colorValueDict) {
         CCItemPropertyValue * value = [[CCItemPropertyValue alloc] initWithDictionary:dict];
         [self.colorProperty addObject:value];
     }
-    NSDictionary * sizeDict = [skuInfoDict ccJsonDictionary:@"property2"];
-    NSArray * sizeValueDict = [sizeDict ccJsonArray:@"value_list"];
+    NSDictionary * sizeDict = [skuInfoDict isKindOfClass:[NSDictionary class]]?[skuInfoDict ccJsonDictionary:@"property2"]:nil;
+    NSArray * sizeValueDict = [sizeDict isKindOfClass:[NSDictionary class]]?[sizeDict ccJsonArray:@"value_list"] :nil;
     self.sizeProperty = [NSMutableArray array];
     for (NSDictionary * dict in sizeValueDict) {
         CCItemPropertyValue * value = [[CCItemPropertyValue alloc] initWithDictionary:dict];

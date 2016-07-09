@@ -32,6 +32,10 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     self.phoneNunTextField.delegate = self;
     self.phoneNunTextField.tag = LoginViewTextFieldPhone;

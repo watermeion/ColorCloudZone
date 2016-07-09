@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *factoryPhone;
 @property (strong, nonatomic) IBOutlet UILabel *factoryProductCount;
 @property (strong, nonatomic) IBOutlet UILabel *factoryNewCount;
+@property (weak, nonatomic) IBOutlet UIButton *factoryFollowButton;
 @property (strong, nonatomic) IBOutlet UILabel *materialLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeListTitle;

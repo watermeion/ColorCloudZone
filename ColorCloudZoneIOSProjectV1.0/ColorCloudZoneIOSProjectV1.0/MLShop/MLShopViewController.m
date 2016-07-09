@@ -20,7 +20,11 @@ static NSString *const kMLShopContainerPushSegue = @"MLShopContainerPushSegue";
 
 - (void)viewDidLoad
 {
-
+    [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     //设置NavigationBar
     UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
                                                 initWithImage:[UIImage imageNamed:@"moreBarIcon_black.png"]

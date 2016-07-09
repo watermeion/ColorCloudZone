@@ -21,6 +21,10 @@ static MLTabBarViewController *sharedInstance = nil;
 - (void)viewDidLoad {
     sharedInstance = self;
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     
     [self.tabBar setTintColor:BASEBARCOLOR];

@@ -39,6 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     
     self.collectionView.dataSource = self;
@@ -54,6 +58,19 @@
     [self.tableView addHeaderWithTarget:self action:@selector(tableViewPullDown)];
     [self.tableView addFooterWithTarget:self action:@selector(tableViewPullUp)];
     [self.tableView headerBeginRefreshing];
+    
+}
+
+- (NSString *)button1Title
+{
+    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"热卖榜";
+    else return @"最热";
+}
+
+- (NSString *)button2Title
+{
+    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"最新潮";
+    else return @"最新";
 }
 
 - (void)marketViewController:(MarketViewController *)viewController didSelectSaleMarket:(CCSaleMarket *)saleMarket

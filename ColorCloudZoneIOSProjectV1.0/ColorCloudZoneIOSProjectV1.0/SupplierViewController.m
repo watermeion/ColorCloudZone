@@ -24,6 +24,15 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
+    
+    
     CCUser * factory = [CCUser currentUser];
     if (self.parentUser) {
         factory = self.parentUser;
@@ -31,6 +40,13 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
         self.uploadButton.translatesAutoresizingMaskIntoConstraints = YES;
         self.uploadButton.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 0);
         self.uploadButton.hidden = YES;
+        
+        UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc] initWithTitle:@"资料"
+                                                                                    style:UIBarButtonItemStylePlain
+                                                                                   target:self
+                                                                                   action:@selector(profileClicked:)];
+        moreFeaturesLeftBarItem.tintColor = [UIColor blackColor];
+        self.navigationItem.rightBarButtonItem = moreFeaturesLeftBarItem;
     } else {
         //设置NavigationBar
         UIBarButtonItem *moreFeaturesLeftBarItem = [[UIBarButtonItem alloc]
@@ -57,6 +73,9 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     [super viewWillAppear:animated];
     
     CCUser * factory = [CCUser currentUser];
+    if (self.parentUser) {
+        factory = self.parentUser;
+    }
     self.nameLabel.text = factory.factoryName;
     [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
 }
@@ -64,6 +83,13 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)profileClicked:(id)sender
+{
+    ComSettingsTableViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ComSettingsTableViewController"];
+    vc.parentUser = self.parentUser;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)moreFeaturesLeftBarAction:(id)sender

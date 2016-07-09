@@ -24,6 +24,7 @@
 #define GetFollowedFactoryList @"wearcloud.mall.getFollowFactoryList"
 #define EditUserInfo @"wearcloud.user.editUserInfo"
 #define GetBanner @"wearcloud.mall.getBanner"
+#define GetUserInfo @"wearcloud.user.getUserInfo"
 
 
 #define GetWholeSaleMarketList @"wearcloud.wholesaleMarket.getWholesaleMarketList"
@@ -59,6 +60,7 @@
 #define MemberAdd @"wearcloud.member.addMember"
 #define MemberIsCollectItem @"wearcloud.MemberCollect.isCollectItem"
 #define MemberGetMemberList @"wearcloud.member.getMemberList"
+#define MemberGetMemberInfo @"wearcloud.member.getMemberInfo"
 #define MemberGetLikeList @"wearcloud.MemberCollect.getItemListByDate"
 #define MemberCheckRegister @"wearcloud.member.checkMemberRegister"
 

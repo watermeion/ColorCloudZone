@@ -15,6 +15,7 @@
 #import "CCFile.h"
 #import "CompanyProfileViewController.h"
 @interface ComSettingsTableViewController () <UIActionSheetDelegate>
+@property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
 
 @end
 
@@ -22,30 +23,59 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClicked:)];
-    self.navigationItem.rightBarButtonItem = item;
+    if (self.parentUser) {
+        self.logoutCell.hidden = YES;
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        [CCUser getUserInfo:self.parentUser withBlock:^(CCUser *user, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"获取信息失败"];
+            }else {
+                _idLabel.text = [NSString stringWithFormat:@"ID: %@",user.userId?user.userId:@""];
+                _nameLabel.text = user.ownerName;
+                [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:user.headImgUrl]];
+                _factoryNameLabel.text = user.factoryName;
+                _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",user.provinceName?user.provinceName:@"", user.cityName?user.cityName:@"", user.areaName?user.areaName:@"", user.address?user.address:@""];
+                _remarkLabel.text = user.remark.length?user.remark:@"无";
+                _saleMarket.text = user.saleMarketName;
+                _saleMarketAddress.text = user.addrInMarket;
+                _cardLabel.text = user.cardNum;
+                _zfbLabel.text = user.alipayNum;
+                _phoneNumberLabel.text = user.mobile;
+            }
+        }];
+    } else {
+        
+        UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClicked:)];
+        self.navigationItem.rightBarButtonItem = item;
+    }
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
-    _idLabel.text = [NSString stringWithFormat:@"ID: %@",[CCUser currentUser].userId];
-    _nameLabel.text = [CCUser currentUser].ownerName;
-    [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:[CCUser currentUser].headImgUrl]];
-    _factoryNameLabel.text = [CCUser currentUser].factoryName;
-    _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",[CCUser currentUser].provinceName, [CCUser currentUser].cityName, [CCUser currentUser].areaName, [CCUser currentUser].address];
-    _remarkLabel.text = [CCUser currentUser].remark.length?[CCUser currentUser].remark:@"无";
-    _saleMarket.text = [CCUser currentUser].saleMarketName;
-    _saleMarketAddress.text = [CCUser currentUser].addrInMarket;
-    _cardLabel.text = [CCUser currentUser].cardNum;
-    _zfbLabel.text = [CCUser currentUser].alipayNum;
-    _phoneNumberLabel.text = [CCUser currentUser].mobile;
+    [super viewWillAppear:animated];
+    CCUser * user = self.parentUser?self.parentUser:[CCUser currentUser];
+    _idLabel.text = [NSString stringWithFormat:@"ID: %@",user.userId?user.userId:@""];
+    _nameLabel.text = user.ownerName;
+    [_avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:user.headImgUrl]];
+    _factoryNameLabel.text = user.factoryName;
+    _addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",user.provinceName?user.provinceName:@"", user.cityName?user.cityName:@"", user.areaName?user.areaName:@"", user.address?user.address:@""];
+    _remarkLabel.text = user.remark.length?user.remark:@"无";
+    _saleMarket.text = user.saleMarketName;
+    _saleMarketAddress.text = user.addrInMarket;
+    _cardLabel.text = user.cardNum;
+    _zfbLabel.text = user.alipayNum;
+    _phoneNumberLabel.text = user.mobile;
 }
 
 - (IBAction)editClicked:(id)sender

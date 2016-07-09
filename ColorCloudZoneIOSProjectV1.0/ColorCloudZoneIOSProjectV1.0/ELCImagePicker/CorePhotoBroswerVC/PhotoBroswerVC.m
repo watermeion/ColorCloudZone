@@ -223,6 +223,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     
     //控制器准备
     [self vcPrepare];

@@ -23,17 +23,23 @@
 
 - (IBAction)phoneCallAction:(id)sender
 {
-
+    if (self.delegate && [self.delegate respondsToSelector:@selector(followeeTableViewCellPhoneCallClicked:)]) {
+        [self.delegate followeeTableViewCellPhoneCallClicked:self];
+    }
 }
 
 - (IBAction)enterAction:(id)sender
 {
-
+    if (self.delegate && [self.delegate respondsToSelector:@selector(followeeTableViewCellEnterClicked:)]) {
+        [self.delegate followeeTableViewCellEnterClicked:self];
+    }
 }
 
 - (IBAction)cancelFollowingActon:(id)sender
 {
-
+    if (self.delegate && [self.delegate respondsToSelector:@selector(followeeTableViewCellUnfollowClicked:)]) {
+        [self.delegate followeeTableViewCellUnfollowClicked:self];
+    }
 }
 
 @end

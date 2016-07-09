@@ -25,6 +25,7 @@
 #import "MallItemStatisticsViewController.h"
 #import "FactoryItemStatisticsViewController.h"
 #import "UpLoadViewController.h"
+#import "ComSettingsTableViewController.h"
 
 
 #define DescPictureOriginY 66
@@ -60,7 +61,14 @@ static const NSInteger kQueryLimit = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     self.scrollView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -91,9 +99,16 @@ static const NSInteger kQueryLimit = 50;
                        [KxMenuItem menuItem:@"统计"
                                       image:nil
                                      target:self
-                                     action:@selector(mallItemStatistics:)]];
+                                     action:@selector(mallItemStatistics:)],
+                       [KxMenuItem menuItem:@"查看厂家资料"
+                                      image:nil
+                                     target:self
+                                     action:@selector(viewFactoryProfile:)]];
         //厂家View不显示，想要CollectionView显示
         [self.factoryView removeFromSuperview];
+        self.factory = [[CCUser alloc] init];
+        self.factory.userId = self.parentItem.factoryId;
+        self.factory.factoryName = self.parentItem.factoryName;
         _likeListTitle.text = [NSString stringWithFormat:@"  %ld人喜欢", (long)self.parentItem.likeNum];
         [CCItem getItemLikeList:self.parentItem limit:kQueryLimit skip:0 withBlock:^(NSArray *memberList, NSError *error) {
             if (error) {
@@ -114,6 +129,7 @@ static const NSInteger kQueryLimit = 50;
             if (error) {
                 
             } else {
+                [self.factoryFollowButton setTitle:factory.isFollowed?@"取消关注":@"关注" forState:UIControlStateNormal];
                 self.factory = factory;
                 self.factoryName.text = factory.factoryName;
                 self.factoryPhone.text = factory.mobile;
@@ -163,7 +179,7 @@ static const NSInteger kQueryLimit = 50;
         if (error) {
             [SVProgressHUD showErrorWithStatus:@"获取失败"];
         } else {
-            _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value];
+            _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value?self.parentItem.extendProperty.value:@""];
             _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。没有填写详细描述。";
             [self setPropertyViewContent];
         }
@@ -185,6 +201,13 @@ static const NSInteger kQueryLimit = 50;
 //    self.likeListView.layer.borderWidth = 1.f;
 //    self.descImagesView.layer.borderColor = [UIColor purpleColor].CGColor;
 //    self.descImagesView.layer.borderWidth = 1.f;
+}
+
+- (IBAction)viewFactoryProfile:(id)sender
+{
+    ComSettingsTableViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ComSettingsTableViewController"];
+    vc.parentUser = self.factory;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)setDescImages
@@ -330,7 +353,7 @@ static const NSInteger kQueryLimit = 50;
     //            picView.titleData = titleArray;
     
     //占位图片,你可以在下载图片失败处修改占位图片
-    picView.placeImage = [UIImage imageNamed:@"uialq.jpg"];
+    picView.placeImage = [UIImage imageNamed:@"bannerDefault"];
     
     //图片被点击事件,当前第几张图片被点击了,和数组顺序一致
     [picView setImageViewDidTapAtIndex:^(NSInteger index) {
@@ -373,16 +396,20 @@ static const NSInteger kQueryLimit = 50;
 */
 
 - (IBAction)followClicked:(id)sender {
-    [SVProgressHUD showWithStatus:@"正在关注" maskType:SVProgressHUDMaskTypeBlack];
-    [CCUser follow:YES factory:self.parentItem.factoryId withBlock:^(BOOL success, NSError *error) {
+    BOOL follow = !self.factory.isFollowed;
+    [SVProgressHUD showWithStatus:follow?@"正在关注":@"正在取消关注" maskType:SVProgressHUDMaskTypeBlack];
+    [CCUser follow:follow factory:self.parentItem.factoryId withBlock:^(BOOL success, NSError *error) {
         [SVProgressHUD dismiss];
         if (error) {
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            [SVProgressHUD showErrorWithStatus:follow?@"关注失败":@"取消关注失败"];
         } else {
             if (success) {
-                [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+                [SVProgressHUD showSuccessWithStatus:follow?@"关注成功":@"取消关注成功"];
+                self.factory.isFollowed = follow;
+                [self.factoryFollowButton setTitle:self.factory.isFollowed?@"取消关注":@"关注" forState:UIControlStateNormal];
+                
             } else {
-                [SVProgressHUD showErrorWithStatus:@"关注失败"];
+                [SVProgressHUD showErrorWithStatus:follow?@"关注失败":@"取消关注失败"];
             }
         }
     }];
@@ -454,13 +481,21 @@ static const NSInteger kQueryLimit = 50;
 
 - (void)collectAlertViewCollectButtonClicked:(CollectAlertView *)view
 {
-    [SVProgressHUD showWithStatus:@"正在收藏" maskType:SVProgressHUDMaskTypeBlack];
-    [CCItem collect:YES item:self.parentItem price:view.outPrice.text.floatValue withBlock:^(BOOL succeed, NSError *error) {
+    BOOL collect = !self.parentItem.isCollected;
+    [SVProgressHUD showWithStatus:collect?@"正在收藏":@"正在取消收藏" maskType:SVProgressHUDMaskTypeBlack];
+    [CCItem collect:collect item:self.parentItem price:view.outPrice.text.floatValue withBlock:^(BOOL succeed, NSError *error) {
         [SVProgressHUD dismiss];
         if (error) {
-            [SVProgressHUD showErrorWithStatus:@"收藏失败"];
+            [SVProgressHUD showErrorWithStatus:collect?@"收藏失败":@"取消收藏失败"];
         } else {
-            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+            if (succeed) {
+                [SVProgressHUD showSuccessWithStatus:collect?@"收藏成功":@"取消收藏成功"];
+                self.parentItem.isCollected = collect;
+                [self.collectButton setTitle:self.parentItem.isCollected?@"取消收藏":@"收藏" forState:UIControlStateNormal];
+                
+            } else {
+                [SVProgressHUD showErrorWithStatus:collect?@"收藏失败":@"取消收藏失败"];
+            }
         }
     }];
 }

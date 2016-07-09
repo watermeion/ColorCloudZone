@@ -31,6 +31,10 @@ static const NSInteger QueryLimit = 30;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     [self.collectionView addHeaderWithTarget:self action:@selector(pullDown)];
     [self.collectionView addFooterWithTarget:self action:@selector(pullUp)];

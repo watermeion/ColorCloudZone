@@ -20,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     self.phoneNumLabel.text = [@"+86" stringByAppendingString:self.registingUser.mobile];
     // Do any additional setup after loading the view.
     self.edgesForExtendedLayout = UIRectEdgeNone;

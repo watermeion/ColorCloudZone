@@ -68,34 +68,40 @@ static CCUser * currentUserSingleton;
 {
     self = [super init];
     if (self) {
-        self.userId = [dictionary ccJsonString:kUserId];
-        self.role = [dictionary ccJsonInteger:kUserRole];
-        self.phpSessid = [dictionary ccJsonString:kUserPHPSessid];
-        self.mobile = [dictionary ccJsonString:kUserMobile];
-        self.mallName = [dictionary ccJsonString:kUserMallName];
-        self.factoryName = [dictionary ccJsonString:kUserFactoryName];
-        self.ownerName = [dictionary ccJsonString:kUserOwnerName];
-        self.headImgUrl = [dictionary ccJsonString:kUserHeadImgUrl];
-        self.cardNum = [dictionary ccJsonString:kUserCardNum];
-        self.alipayNum = [dictionary ccJsonString:kUserAlipayNum];
-        self.provinceId = [dictionary ccJsonString:kUserProvinceId];
-        self.cityId = [dictionary ccJsonString:kUserCityId];
-        self.areaId = [dictionary ccJsonString:kUserAreaId];
-        self.provinceName = [dictionary ccJsonString:kUserProvinceName];
-        self.cityName = [dictionary ccJsonString:kUserCityName];
-        self.areaName = [dictionary ccJsonString:kUserAreaName];
-        self.address = [dictionary ccJsonString:kUserAddress];
-        self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
-        self.saleMarketName = [dictionary ccJsonString:kUserSaleMarketName];
-        self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
-        self.addrInMarket = [dictionary ccJsonString:kUserAddrInMarket];
-        self.remark = [dictionary ccJsonString:kUserRemark];
-        self.isFollowed = [dictionary ccJsonInteger:kUserIsFollowed];
-        self.newNum = [dictionary ccJsonInteger:kUserNewNum];
-        self.totalNum = [dictionary ccJsonInteger:kUserTotalNum];
-        self.coverUrl = [dictionary ccJsonString:kUserCoverUrl];
+        [self fillWithDictionary:dictionary];
     }
     return self;
+}
+
+- (void)fillWithDictionary:(NSDictionary *)dictionary
+{
+    self.userId = [dictionary ccJsonString:kUserId];
+    self.role = [dictionary ccJsonInteger:kUserRole];
+    self.phpSessid = [dictionary ccJsonString:kUserPHPSessid];
+    self.mobile = [dictionary ccJsonString:kUserMobile];
+    self.mallName = [dictionary ccJsonString:kUserMallName];
+    self.factoryName = [dictionary ccJsonString:kUserFactoryName];
+    self.ownerName = [dictionary ccJsonString:kUserOwnerName];
+    self.headImgUrl = [dictionary ccJsonString:kUserHeadImgUrl];
+    self.cardNum = [dictionary ccJsonString:kUserCardNum];
+    self.alipayNum = [dictionary ccJsonString:kUserAlipayNum];
+    self.provinceId = [dictionary ccJsonString:kUserProvinceId];
+    self.cityId = [dictionary ccJsonString:kUserCityId];
+    self.areaId = [dictionary ccJsonString:kUserAreaId];
+    self.provinceName = [dictionary ccJsonString:kUserProvinceName];
+    self.cityName = [dictionary ccJsonString:kUserCityName];
+    self.areaName = [dictionary ccJsonString:kUserAreaName];
+    self.address = [dictionary ccJsonString:kUserAddress];
+    self.saleMarketId = [dictionary ccJsonString:kUserSaleMarketId];
+    self.saleMarketName = [dictionary ccJsonString:kUserSaleMarketName];
+    self.saleMarketAddress = [dictionary ccJsonString:kUserSaleMarketAddress];
+    self.addrInMarket = [dictionary ccJsonString:kUserAddrInMarket];
+    self.remark = [dictionary ccJsonString:kUserRemark];
+    self.isFollowed = [dictionary ccJsonInteger:kUserIsFollowed];
+    self.newNum = [dictionary ccJsonInteger:kUserNewNum];
+    self.totalNum = [dictionary ccJsonInteger:kUserTotalNum];
+    self.coverUrl = [dictionary ccJsonString:kUserCoverUrl];
+
 }
 
 - (NSDictionary *)generateDictionary
@@ -166,6 +172,21 @@ static CCUser * currentUserSingleton;
             user.phpSessid = phpsessid;
             [[NSUserDefaults standardUserDefaults] setObject:[user generateDictionary] forKey:@"currentUser"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            block(user, nil);
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
++ (NSURLSessionDataTask *)getUserInfo:(CCUser *)user withBlock:(void(^)(CCUser * user, NSError * error))block
+{
+    NSDictionary * params = @{kUserId : user.userId};
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:GetUserInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            [user fillWithDictionary:[responseObject ccJsonDictionary:@"data"]];
             block(user, nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
@@ -432,6 +453,29 @@ static CCUser * currentUserSingleton;
             }
             block(arr, nil);
 
+        } else {
+            block(nil, [NSError errorWithCode:[responseObject ccCode]]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+}
++ (NSURLSessionDataTask *)getMemberInfo:(CCMember *)member block:(void (^)(CCMember * member, NSError *error))block
+{
+    NSDictionary * params = @{@"member_id" : member.memberId};
+    
+    return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:MemberGetMemberInfo params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject ccCode]==0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
+            if (![data isKindOfClass:[NSDictionary class]]) {
+                block(member, nil);
+                return ;
+            }
+            member.mobile = [data ccJsonString:kMemberUsername];
+            member.address = [data ccJsonString:kMemberAddress];
+            member.headImgUrl = [data ccJsonString:kMemberHeadImgUrl];
+            block(member, nil);
         } else {
             block(nil, [NSError errorWithCode:[responseObject ccCode]]);
         }

@@ -23,6 +23,10 @@ typedef void(^GBCompletionBlock)(BOOL success, NSError *error);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     
     self.passwordTextField.delegate = self;

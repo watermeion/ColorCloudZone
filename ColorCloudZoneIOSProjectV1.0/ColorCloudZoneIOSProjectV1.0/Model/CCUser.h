@@ -107,6 +107,7 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 + (void)logout;
 
 + (NSURLSessionDataTask *)loginWithMobile:(NSString *)mobile password:(NSString *)password withBlock:(void(^)(CCUser * user, NSError * error))block;
++ (NSURLSessionDataTask *)getUserInfo:(CCUser *)user withBlock:(void(^)(CCUser * user, NSError * error))block;
 + (NSURLSessionDataTask *)sendVerifyCodeToMobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)checkVerifyCode:(NSString *)code mobile:(NSString *)mobile withBlock:(void(^)(BOOL succeed, NSError * error))block;
 + (NSURLSessionDataTask *)checkMobileRegistered:(NSString *)mobile withBlock:(void(^)(BOOL registered, NSError * error))block;
@@ -122,6 +123,7 @@ typedef NS_ENUM(NSUInteger, UserRole) {
 
 + (NSURLSessionDataTask *)addMember:(CCMember *)member withBlock:(void(^)(CCMember * member, NSError * error))block;
 + (NSURLSessionDataTask *)getMemberListByMallId:(NSString *)mallId withLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * memberList, NSError * error))block;
++ (NSURLSessionDataTask *)getMemberInfo:(CCMember *)member block:(void (^)(CCMember * member, NSError *error))block;
 
 + (NSURLSessionDataTask *)follow:(BOOL)follow factory:(NSString *)factoryId withBlock:(void(^)(BOOL success, NSError * error))block;
 + (NSURLSessionDataTask *)getFollowedFactoryListWithLimit:(NSInteger)limit skip:(NSInteger)skip block:(void(^)(NSArray * followList, NSError * error))block;

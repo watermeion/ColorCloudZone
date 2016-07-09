@@ -57,7 +57,7 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pam-cM-J9b">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="pam-cM-J9b">
                             <rect key="frame" x="20" y="104" width="33" height="33"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="PZB-Zz-RIJ"/>
@@ -79,7 +79,7 @@
                                 <outlet property="delegate" destination="33V-XR-mhP" id="9TH-OX-Vp2"/>
                             </connections>
                         </tableView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号/会员卡号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-zY-CPS">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-zY-CPS">
                             <rect key="frame" x="61" y="106" width="251" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="aQE-cQ-vIT"/>
@@ -129,7 +129,7 @@
                         <constraint firstAttribute="height" constant="110" id="epN-9f-toH"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manModel.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="rdc-7k-uCg">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="itemDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="rdc-7k-uCg">
                     <rect key="frame" x="25" y="0.0" width="100" height="120"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="B3J-Y4-UcP"/>
@@ -178,6 +178,7 @@
         </view>
     </objects>
     <resources>
-        <image name="manModel.jpg" width="683" height="1024"/>
+        <image name="itemDefault.png" width="360" height="255"/>
+        <image name="phone.png" width="40" height="40"/>
     </resources>
 </document>

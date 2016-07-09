@@ -23,6 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     // Do any additional setup after loading the view.
     self.nameLabel.text = self.parentMember.username;
     self.phoneNumberLabel.text = self.parentMember.mobile;
@@ -33,6 +37,11 @@
     [self.tableView addHeaderWithTarget:self action:@selector(pullDown)];
     [self.tableView addFooterWithTarget:self action:@selector(pullUp)];
     [self.tableView headerBeginRefreshing];
+    [CCUser getMemberInfo:self.parentMember block:^(CCMember *member, NSError *error) {
+        if (!error) {
+            self.addressLabel.text = self.parentMember.address;
+        }
+    }];
 }
 
 - (void)pullDown
@@ -83,7 +92,6 @@
     
     cell.rightPriceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:item.price].stringValue];
     cell.rightTitleLabel.text = item.name;
-    cell.rightLikeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)item.likeNum];
     [cell.rightImageView sd_setImageWithURL:[CCFile ccURLWithString:item.cover]];
     
     NSDateComponents * curDate = [[NSCalendar currentCalendar] components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:item.date];
@@ -101,8 +109,7 @@
         cell.leftMonthLabel.text = [NSString stringWithFormat:@"%ld月", (long)curMonth];
         cell.leftInfoLabel.text = [NSString stringWithFormat:@"上新%lu件", item.newCount];
     } else cell.leftView.hidden = YES;
-    return cell;
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

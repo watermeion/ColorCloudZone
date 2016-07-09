@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCUser.h"
 
 @interface ComSettingsTableViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -20,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *zfbLabel;
 @property (strong, nonatomic) IBOutlet UILabel *saleMarket;
 @property (strong, nonatomic) IBOutlet UILabel *saleMarketAddress;
+@property (strong, nonatomic) CCUser * parentUser;
 
 @end
