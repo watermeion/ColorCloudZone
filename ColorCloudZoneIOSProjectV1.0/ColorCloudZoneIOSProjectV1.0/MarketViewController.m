@@ -257,6 +257,7 @@ static NSString *const kMLMarketContainerPushSegue = @"MarketContainerPushSegue"
         vc.parentVC = self;
         self.delegate = vc;
         self.selectionBar.delegate = vc;
+        [self.selectionBar reloadTitle];
     }
 
 }

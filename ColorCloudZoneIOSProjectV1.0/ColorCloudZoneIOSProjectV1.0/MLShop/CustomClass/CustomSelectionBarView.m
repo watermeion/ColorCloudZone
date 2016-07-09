@@ -29,10 +29,10 @@
 
 }
 
-- (void)awakeFromNib
+
+- (void)reloadTitle
 {
-    [[NSBundle mainBundle] loadNibNamed:@"CustomSelectionBarView" owner:self options:nil];
-    [self addSubview:self.view];
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(button1Title)]) {
         [self.button1 setTitle:[self.delegate button1Title] forState:UIControlStateNormal];
     }
@@ -40,6 +40,12 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(button2Title)]) {
         [self.button2 setTitle:[self.delegate button2Title] forState:UIControlStateNormal];
     }
+}
+
+- (void)awakeFromNib
+{
+    [[NSBundle mainBundle] loadNibNamed:@"CustomSelectionBarView" owner:self options:nil];
+    [self addSubview:self.view];
 
 }
 /*

@@ -33,4 +33,5 @@ typedef NS_ENUM(NSUInteger, BtnSelectedAt) {
 @property (weak, nonatomic) id<CustomSelectionBarViewDelegate> delegate;
 @property (assign, nonatomic) BtnSelectedAt selectedAt;
 
+- (void)reloadTitle;
 @end
