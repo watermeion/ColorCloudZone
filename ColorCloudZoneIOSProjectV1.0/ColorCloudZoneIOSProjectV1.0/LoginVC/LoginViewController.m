@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
     // Do any additional setup after loading the view.
     self.phoneNunTextField.delegate = self;
     self.phoneNunTextField.tag = LoginViewTextFieldPhone;
+    self.phoneNunTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CachedPhoneNum"];
     self.passwordTextField.delegate = self;
     self.passwordTextField.tag = LoginViewTextFieldPassword;
 }
@@ -102,6 +103,8 @@ typedef NS_ENUM(NSUInteger, LoginViewTextFieldTag) {
 
 - (IBAction)loginAction:(id)sender {
     if ([self checkInputValiable]) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.phoneNunTextField.text forKey:@"CachedPhoneNum"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [SVProgressHUD showWithStatus:@"正在登陆" maskType:SVProgressHUDMaskTypeBlack];
         [CCUser loginWithMobile:self.phoneNunTextField.text password:self.passwordTextField.text withBlock:^(CCUser *user, NSError *error) {
             [SVProgressHUD dismiss];

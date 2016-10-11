@@ -284,6 +284,8 @@
 		96C05D9A1CBFD48E006D3286 /* FSDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C05D991CBFD48E006D3286 /* FSDropDownMenu.m */; };
 		96D094951CCB901F00066770 /* LikeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D094941CCB901F00066770 /* LikeListCell.m */; };
 		96D094981CCCB9CC00066770 /* MemberProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D094971CCCB9CC00066770 /* MemberProfileViewController.m */; };
+		96F3092D1D9FBB090099E77B /* launchImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F3092B1D9FBB090099E77B /* launchImage@2x.png */; };
+		96F3092E1D9FBB090099E77B /* launchImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F3092C1D9FBB090099E77B /* launchImage@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -741,6 +743,8 @@
 		96D094941CCB901F00066770 /* LikeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeListCell.m; sourceTree = "<group>"; };
 		96D094961CCCB9CC00066770 /* MemberProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberProfileViewController.h; sourceTree = "<group>"; };
 		96D094971CCCB9CC00066770 /* MemberProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberProfileViewController.m; sourceTree = "<group>"; };
+		96F3092B1D9FBB090099E77B /* launchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage@2x.png"; sourceTree = "<group>"; };
+		96F3092C1D9FBB090099E77B /* launchImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launchImage@3x.png"; sourceTree = "<group>"; };
 		E49B1B5A42650622ED1B2A61 /* Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCloudZoneIOSProjectV1.0/Pods-ColorCloudZoneIOSProjectV1.0.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1432,6 +1436,8 @@
 		2A6BC4EB1B58F5FF00401B06 /* IconImage */ = {
 			isa = PBXGroup;
 			children = (
+				96F3092B1D9FBB090099E77B /* launchImage@2x.png */,
+				96F3092C1D9FBB090099E77B /* launchImage@3x.png */,
 				96327D731D2BF5ED008D99F8 /* bannerDefault.png */,
 				96327D741D2BF5ED008D99F8 /* bannerDefault@2x.png */,
 				96327D751D2BF5ED008D99F8 /* bannerDefault@3x.png */,
@@ -2034,6 +2040,7 @@
 				2A2E3E6A1BDF994E0021B3FC /* GBALbumPickerCollectionViewCell.xib in Resources */,
 				2AACC6FF1B7641640065216C /* SelectedColorAndSizeViewController.xib in Resources */,
 				9616E5BB1C3F9407008521AB /* CollectAlertView.xib in Resources */,
+				96F3092D1D9FBB090099E77B /* launchImage@2x.png in Resources */,
 				2AACC7011B7645A70065216C /* arrowUpsideDown@3x.png in Resources */,
 				96327D9F1D2BF5ED008D99F8 /* icon_log_off@3x.png in Resources */,
 				2AD3E8D41B802C6100B2264B /* pwdIcon.png in Resources */,
@@ -2117,6 +2124,7 @@
 				2A6BC5181B58F5FF00401B06 /* tab4@2x.png in Resources */,
 				2ADE53851B8969E300E80AD5 /* folder@2x.png in Resources */,
 				2ADE53871B8969F100E80AD5 /* shoppingcart@3x.png in Resources */,
+				96F3092E1D9FBB090099E77B /* launchImage@3x.png in Resources */,
 				2A56CA111B6FB27400C8E3DC /* home@2x.png in Resources */,
 				2A6BC5051B58F5FF00401B06 /* tab1.png in Resources */,
 				2A33B63C1B66639A00535FE4 /* manModel.jpg in Resources */,
