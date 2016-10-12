@@ -80,6 +80,11 @@ static NSString * kMLSupplierContainerPushSegue = @"MLSupplierContainerPushSegue
     [self.avatarImageView sd_setImageWithURL:[CCFile ccURLWithString:factory.headImgUrl]];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

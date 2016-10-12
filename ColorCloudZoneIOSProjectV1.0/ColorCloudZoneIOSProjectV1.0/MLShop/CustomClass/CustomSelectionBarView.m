@@ -10,6 +10,7 @@
 
 @interface CustomSelectionBarView ()
 @property (weak, nonatomic) IBOutlet UIView *buttomView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 - (IBAction)btn1Action:(id)sender;
 - (IBAction)btn2Action:(id)sender;
 
@@ -44,10 +45,21 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [[NSBundle mainBundle] loadNibNamed:@"CustomSelectionBarView" owner:self options:nil];
     [self addSubview:self.view];
 
 }
+
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    self.button1.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width / 2.0, 40);
+//    self.button2.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2.0, 0, [UIScreen mainScreen].bounds.size.width / 2.0, 40);
+//    self.buttomView.frame = CGRectMake(self.buttomView.frame.origin.x, self.buttomView.frame.origin.y, [UIScreen mainScreen].bounds.size.width, 4);
+//    self.lineView.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2.0, self.lineView.frame.origin.y, 0.5, self.lineView.frame.size.height);
+//    
+//}
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.
@@ -59,7 +71,7 @@
 ///**
 // *  overrided selectAt setter Method
 // *
-// *  @param status <#status description#>
+// *  @param status
 // */
 //- (void)selectedAt:(BtnSelectedAt) status
 //{

@@ -113,7 +113,7 @@
         self.registingUser.addrInMarket = _addressDetailTextField.text;
         [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeBlack];
         
-        [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+        [CCFile uploadImage:self.avatar withProgress:nil completionBlock:^(NSString *url, NSError *error) {
             if (error) {
                 [SVProgressHUD showErrorWithStatus:@"头像上传失败"];
                 return ;
@@ -134,7 +134,7 @@
     } else {
         [SVProgressHUD showWithStatus:@"正在提交" maskType:SVProgressHUDMaskTypeBlack];
         if (self.avatar) {
-            [CCFile uploadImage:[CCFile generateThumbnailOf:self.avatar withSize:320] withProgress:nil completionBlock:^(NSString *url, NSError *error) {
+            [CCFile uploadImage:self.avatar withProgress:nil completionBlock:^(NSString *url, NSError *error) {
                 if (error) {
                     [SVProgressHUD showErrorWithStatus:@"头像上传失败"];
                     return ;

@@ -17,11 +17,11 @@ static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/ap
 + (NSURLSessionUploadTask *) uploadImage:(UIImage *)image withProgress:(void(^)(double progress))progress completionBlock:(void(^)(NSString * url, NSError * error))block
 {
     NSError *error = nil;
-    
+    UIImage * imageToUpload = [self generateThumbnailOf:image withSize:750];
     CCAppDotNetClient *manager = [CCAppDotNetClient sharedInstance];
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:uploadURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"upfile" fileName:@"boris.png" mimeType:@"image/png"];
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(imageToUpload, 0.8) name:@"upfile" fileName:@"boris.png" mimeType:@"image/jpeg"];
     } error:&error];
     
     NSURLSessionUploadTask *uploadTask;
@@ -63,6 +63,9 @@ static NSString * uploadURL = @"http://wearcloud.beyondin.com/api/uploadImage/ap
 
 
 + (UIImage *)generateThumbnailOf:(UIImage *)original withSize:(CGFloat)size{
+    if (original.size.width < size || original.size.height < size) {
+        return original;
+    }
     CGSize newSize = CGSizeMake(size, size);
     CGRect thumbnailRect = CGRectMake(0, 0, size, size);
     UIGraphicsBeginImageContextWithOptions(newSize, YES, 0.0);

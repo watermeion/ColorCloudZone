@@ -275,13 +275,14 @@ static CCUser * currentUserSingleton;
     return [[CCAppDotNetClient sharedInstance] POST:@"" parameters:[CCAppDotNetClient generateParamsWithAPI:Signup params:params] progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@", responseObject);
         if ([responseObject ccCode] == 0) {
+            NSDictionary * data = [responseObject ccJsonDictionary:@"data"];
             NSHTTPURLResponse * response = (NSHTTPURLResponse *)task.response;
             NSString * cookie = [response.allHeaderFields objectForKey:@"Set-Cookie"];
             NSRange range = [cookie rangeOfString:@"PHPSESSID="];
             NSString * temp = [cookie substringFromIndex:range.location + range.length];
             NSString * phpsessid = [temp substringToIndex:[temp rangeOfString:@";"].location];
             user.phpSessid = phpsessid;
-            user.userId = [responseObject ccJsonString:kUserId];
+            user.userId = [data ccJsonString:kUserId];
             [[NSUserDefaults standardUserDefaults] setObject:[user generateDictionary] forKey:@"currentUser"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             block(user, nil);

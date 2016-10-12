@@ -76,7 +76,7 @@
             [SVProgressHUD showErrorWithStatus:@"验证失败"];
             
         } else {
-            if (succeed) {
+//            if (succeed) {
                 if (self.registingUser.password) {
                     RegisterAfterViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RegisterAfterViewController"];
                     self.registingUser.verifyCode = self.SMSCodeTextField.text;
@@ -88,9 +88,9 @@
                     vc.mobile = self.registingUser.mobile;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"验证码错误"];
-            }
+//            } else {
+//                [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+//            }
         }
     }];
 }
