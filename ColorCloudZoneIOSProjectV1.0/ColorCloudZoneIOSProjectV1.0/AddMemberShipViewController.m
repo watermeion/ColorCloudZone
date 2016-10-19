@@ -121,6 +121,7 @@
                     [SVProgressHUD showErrorWithStatus:@"添加失败"];
                 } else {
                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                    [self.membershipVC pullDown];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
             }];

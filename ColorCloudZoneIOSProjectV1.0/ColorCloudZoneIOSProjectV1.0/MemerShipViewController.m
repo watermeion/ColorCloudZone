@@ -41,6 +41,7 @@ static const NSInteger QueryLimit = 30;
     [self.collectionView headerBeginRefreshing];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -118,7 +119,7 @@ static const NSInteger QueryLimit = 30;
 {
     if (indexPath.item == 0) {
         AddMemberShipViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddMemberShipViewController"];
-        
+        vc.membershipVC = self;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         CCMember * member = [_dataSource objectAtIndex:indexPath.item - 1];

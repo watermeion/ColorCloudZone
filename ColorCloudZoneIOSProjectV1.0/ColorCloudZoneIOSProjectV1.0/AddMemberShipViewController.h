@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GBCustomViewController.h"
+#import "MemerShipViewController.h"
 
 @interface AddMemberShipViewController : GBCustomViewController
 @property (weak, nonatomic) IBOutlet UIButton *uploadAvatarBtn;
@@ -20,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 
-
+@property (nonatomic, strong) MemerShipViewController * membershipVC;
 
 - (IBAction)doneAction:(id)sender;
 

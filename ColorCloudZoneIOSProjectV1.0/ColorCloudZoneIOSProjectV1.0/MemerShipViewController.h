@@ -20,5 +20,6 @@ typedef  NS_ENUM(NSUInteger, MemerShipViewControllerState){
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) MemerShipViewControllerState state;
+- (void)pullDown;
 
 @end
