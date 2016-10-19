@@ -2004,7 +2004,7 @@
 				TargetAttributes = {
 					2A85DACC1B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = VF57W22ZED;
+						DevelopmentTeam = X6XHZ2X9MN;
 					};
 					2A85DAE51B53F5CD008386B0 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2522,6 +2522,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X6XHZ2X9MN;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2546,6 +2547,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = X6XHZ2X9MN;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

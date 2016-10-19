@@ -63,13 +63,13 @@
 
 - (NSString *)button1Title
 {
-    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"热卖榜";
+    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"买手推荐";
     else return @"最热";
 }
 
 - (NSString *)button2Title
 {
-    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"最新潮";
+    if ([self.parentVC isKindOfClass:[MarketViewController class]]) return @"最新潮流";
     else return @"最新";
 }
 
