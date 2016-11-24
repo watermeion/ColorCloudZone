@@ -58,7 +58,8 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     //    [self.itemPicCollectionView registerClass:[UpLoadPictureCollectionViewCell class] forCellWithReuseIdentifier:kUpLoadPicCellIdentifier];
     self.identifiers = @[kUpLoadCoverIdentifier,kUpLoadAssistIdentifier,kUpLoadDscrpIdentifier];
     self.urlPlaceholderImage = [NSMutableDictionary dictionary];
-    self.parentItem = [[CCItem alloc] init];
+    if (!self.parentItem) self.parentItem = [[CCItem alloc] init];
+    else self.navigationItem.title = @"编辑商品";
     self.pictureNum = 0;
     
 }
@@ -67,6 +68,10 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
 {
     [super viewWillAppear:animated];
     [self.itemPicCollectionView reloadData];
+    
+    if (self.parentItem.name) self.itemName.text = self.parentItem.name;
+    if (self.parentItem.SN) self.itemSerialNum.text = self.parentItem.SN;
+    if (self.parentItem.price > 0) self.itemWholeSalePrice.text = [NSNumber numberWithFloat: self.parentItem.price].stringValue;
     
     if (self.parentItem.itemClass.className) self.categoryLabel.text = [NSString stringWithFormat:@"%@ %@", self.parentItem.itemClass.className, self.parentItem.itemSort.sortName?self.parentItem.itemSort.sortName:@""];
     if (self.parentItem.itemType.name) self.typeLabel.text = self.parentItem.itemType.name;
@@ -86,6 +91,8 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     
     if (self.parentItem.extendProperty.value.length) self.surfaceMater.text = self.parentItem.extendProperty.value;
     else self.surfaceMater.text = @"请点击选择面料(可多选)";
+    
+    if (self.parentItem.desc) self.itemDetailInputView.text = self.parentItem.desc;
 }
 
 
@@ -247,15 +254,30 @@ static NSString *kShowUpLoadImageVCSegue = @"showUpLoadImageVC";
     self.parentItem.SN = _itemSerialNum.text;
     self.parentItem.price = [_itemWholeSalePrice.text floatValue];
     self.parentItem.desc = _itemDetailInputView.text;
-    [SVProgressHUD showWithStatus:@"正在上传中"];
-    [CCItem uploadItem:self.parentItem withBlock:^(CCItem *item, NSError *error) {
-        if (error) {
-            [SVProgressHUD showErrorWithStatus:@"上传失败"];
-        } else {
-            [SVProgressHUD dismiss];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+    if (self.parentItem.itemId) {
+        [SVProgressHUD showWithStatus:@"正在保存中"];
+        [CCItem editItemInfo:self.parentItem withBlock:^(BOOL succeed, NSError *error) {
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"保存失败"];
+            } else {
+                [SVProgressHUD dismiss];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UploadSucceedNotification" object:nil];
+            }
+        }];
+    } else {
+        [SVProgressHUD showWithStatus:@"正在上传中"];
+        [CCItem uploadItem:self.parentItem withBlock:^(CCItem *item, NSError *error) {
+            if (error) {
+                [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            } else {
+                [SVProgressHUD dismiss];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"UploadSucceedNotification" object:nil];
+            }
+        }];
+    }
+    
 }
 
 

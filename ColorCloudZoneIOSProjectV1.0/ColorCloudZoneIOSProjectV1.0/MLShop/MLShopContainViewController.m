@@ -39,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadSucceed) name:@"UploadSucceedNotification" object:nil];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:nil
@@ -59,6 +60,17 @@
     [self.tableView addFooterWithTarget:self action:@selector(tableViewPullUp)];
     [self.tableView headerBeginRefreshing];
     
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)uploadSucceed
+{
+    [self tableViewPullDown];
+    [self collectionViewPullDown];
 }
 
 - (NSString *)button1Title

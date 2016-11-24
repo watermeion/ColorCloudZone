@@ -2013,7 +2013,7 @@
         <!--上传新品-->
         <scene sceneID="vco-3G-cHN">
             <objects>
-                <viewController id="wRp-Wk-WeS" customClass="UpLoadViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpLoadViewController" id="wRp-Wk-WeS" customClass="UpLoadViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRs-nI-IiM"/>
                         <viewControllerLayoutGuide type="bottom" id="aqf-G4-gSZ"/>
@@ -2421,11 +2421,11 @@
                                                                 <constraint firstAttribute="height" constant="40" id="3HS-FN-GPx"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djd-8y-n6R">
-                                                            <rect key="frame" x="20" y="67" width="60" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djd-8y-n6R">
+                                                            <rect key="frame" x="0.0" y="67" width="100" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="696-9t-diS"/>
-                                                                <constraint firstAttribute="width" constant="60" id="VbS-Qp-CTY"/>
+                                                                <constraint firstAttribute="width" constant="100" id="VbS-Qp-CTY"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2492,11 +2492,11 @@
                                                                 <constraint firstAttribute="height" constant="40" id="jWd-xx-lxu"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USW-l1-vPA">
-                                                            <rect key="frame" x="20" y="67" width="60" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USW-l1-vPA">
+                                                            <rect key="frame" x="0.0" y="67" width="100" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="SHr-S3-pFJ"/>
-                                                                <constraint firstAttribute="width" constant="60" id="zER-4F-wsI"/>
+                                                                <constraint firstAttribute="width" constant="100" id="zER-4F-wsI"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2563,10 +2563,10 @@
                                                                 <constraint firstAttribute="height" constant="40" id="X8F-db-4ov"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQP-At-641">
-                                                            <rect key="frame" x="20" y="67" width="60" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQP-At-641">
+                                                            <rect key="frame" x="0.0" y="67" width="100" height="21"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="bqQ-NG-vz8"/>
+                                                                <constraint firstAttribute="width" constant="100" id="bqQ-NG-vz8"/>
                                                                 <constraint firstAttribute="height" constant="21" id="vdY-7K-wxE"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2793,7 +2793,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oj4-dV-4Rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3565" y="-1780"/>
+            <point key="canvasLocation" x="4964" y="-1873"/>
         </scene>
         <!--Sort View Controller-->
         <scene sceneID="MqX-V2-Rj1">
@@ -3022,7 +3022,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Rhu-G0-wgu">
             <objects>
-                <navigationController id="eKC-bh-46p" customClass="MLNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UploadNavigation" id="eKC-bh-46p" customClass="MLNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xFh-O5-X0y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3033,7 +3033,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDW-AA-42G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2713" y="-1911"/>
+            <point key="canvasLocation" x="2527" y="-2180"/>
         </scene>
         <!--Delegate-->
         <scene sceneID="nLR-Iv-yd8">
@@ -3083,10 +3083,10 @@
                                                         <constraint firstAttribute="height" constant="40" id="yfu-1i-TxZ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4s5-DE-aNL">
-                                                    <rect key="frame" x="40" y="105" width="60" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传照片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4s5-DE-aNL">
+                                                    <rect key="frame" x="20" y="105" width="100" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="D0D-K8-SeT"/>
+                                                        <constraint firstAttribute="width" constant="100" id="D0D-K8-SeT"/>
                                                         <constraint firstAttribute="height" constant="21" id="lZD-9K-zzJ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>

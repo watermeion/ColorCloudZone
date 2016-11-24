@@ -26,7 +26,7 @@
 #import "FactoryItemStatisticsViewController.h"
 #import "UpLoadViewController.h"
 #import "ComSettingsTableViewController.h"
-
+#import "MLNavigationController.h"
 
 #define DescPictureOriginY 66
 #define DescPictureScale 0.75
@@ -61,6 +61,8 @@ static const NSInteger kQueryLimit = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadSucceed) name:@"UploadSucceedNotification" object:nil];
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回"
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:nil
@@ -100,7 +102,7 @@ static const NSInteger kQueryLimit = 50;
                                       image:nil
                                      target:self
                                      action:@selector(mallItemStatistics:)],
-                       [KxMenuItem menuItem:@"查看厂家资料"
+                       [KxMenuItem menuItem:@"厂家资料"
                                       image:nil
                                      target:self
                                      action:@selector(viewFactoryProfile:)]];
@@ -201,6 +203,24 @@ static const NSInteger kQueryLimit = 50;
 //    self.likeListView.layer.borderWidth = 1.f;
 //    self.descImagesView.layer.borderColor = [UIColor purpleColor].CGColor;
 //    self.descImagesView.layer.borderWidth = 1.f;
+}
+
+- (void)initInfo
+{
+    _likeLabel.text = [NSString stringWithFormat:@"%ld人喜欢", (long)self.parentItem.likeNum];
+    _titleLabel.text = self.parentItem.name;
+    _itemSNLabel.text = [@"货号:" stringByAppendingString:self.parentItem.SN];
+    _priceLabel.text = [@"￥" stringByAppendingString:[NSNumber numberWithFloat:self.parentItem.price].stringValue];
+    [self setDescImages];
+    [self setBannerView];
+    _materialLabel.text = [@"面料: " stringByAppendingString:self.parentItem.extendProperty.value?self.parentItem.extendProperty.value:@""];
+    _descLabel.text = (self.parentItem.desc.length > 0)?self.parentItem.desc:@"没有填写详细描述。";
+    [self setPropertyViewContent];
+}
+
+- (void)uploadSucceed
+{
+    [self initInfo];
 }
 
 - (IBAction)viewFactoryProfile:(id)sender
@@ -508,7 +528,9 @@ static const NSInteger kQueryLimit = 50;
 {
     UpLoadViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"UpLoadViewController"];
     
-    [self presentViewController:vc animated:YES completion:^{
+    vc.parentItem = self.parentItem;
+    MLNavigationController * nav = [[MLNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:^{
         
     }];
 }
