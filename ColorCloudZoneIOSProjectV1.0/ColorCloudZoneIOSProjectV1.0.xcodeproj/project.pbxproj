@@ -2455,6 +2455,7 @@
 				INFOPLIST_FILE = ColorCloudZoneIOSProjectV1.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpicyHotStudio.ColorCloudZoneIOSProject;
 				PRODUCT_MODULE_NAME = ColorCloudZone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2480,6 +2481,7 @@
 				INFOPLIST_FILE = ColorCloudZoneIOSProjectV1.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SpicyHotStudio.ColorCloudZoneIOSProject;
 				PRODUCT_MODULE_NAME = ColorCloudZone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
